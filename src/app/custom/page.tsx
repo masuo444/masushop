@@ -291,8 +291,8 @@ export default function CustomPage() {
                 {/* 名入れ方法 radio */}
                 <div>
                   <p className={labelClass}>名入れ方法</p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {['焼印', 'レーザー', 'シルクプリント', '相談したい'].map((method) => (
+                  <div className="grid grid-cols-3 gap-3">
+                    {['焼印', 'レーザー', '相談したい'].map((method) => (
                       <label
                         key={method}
                         className="flex items-center gap-2 p-3 rounded-sm cursor-pointer text-sm transition-colors"

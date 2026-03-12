@@ -335,7 +335,6 @@ export default function GuidePage() {
                   <th className="text-left py-4 px-4 font-medium" style={{ color: 'var(--color-muted)' }} />
                   <th className="text-left py-4 px-4 font-medium">焼印</th>
                   <th className="text-left py-4 px-4 font-medium">レーザー刻印</th>
-                  <th className="text-left py-4 px-4 font-medium">シルクプリント</th>
                 </tr>
               </thead>
               <tbody>
@@ -345,7 +344,6 @@ export default function GuidePage() {
                   </td>
                   <td className="py-3 px-4">焦げ茶色の味わいある印字</td>
                   <td className="py-3 px-4">繊細で高精度な彫刻</td>
-                  <td className="py-3 px-4">鮮やかなカラー印刷</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
                   <td className="py-3 px-4 font-medium" style={{ color: 'var(--color-muted)' }}>
@@ -353,7 +351,6 @@ export default function GuidePage() {
                   </td>
                   <td className="py-3 px-4">白黒（焦げ茶）のみ</td>
                   <td className="py-3 px-4">白黒（濃淡表現可能）</td>
-                  <td className="py-3 px-4">フルカラー対応</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
                   <td className="py-3 px-4 font-medium" style={{ color: 'var(--color-muted)' }}>
@@ -361,7 +358,6 @@ export default function GuidePage() {
                   </td>
                   <td className="py-3 px-4">文字・シンプルなロゴ向き</td>
                   <td className="py-3 px-4">写真・細密デザインも可</td>
-                  <td className="py-3 px-4">ロゴ・イラスト向き</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
                   <td className="py-3 px-4 font-medium" style={{ color: 'var(--color-muted)' }}>
@@ -369,7 +365,6 @@ export default function GuidePage() {
                   </td>
                   <td className="py-3 px-4">向いている</td>
                   <td className="py-3 px-4">少量〜中量向き</td>
-                  <td className="py-3 px-4">中量〜大量向き</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid var(--color-border)' }}>
                   <td className="py-3 px-4 font-medium" style={{ color: 'var(--color-muted)' }}>
@@ -377,7 +372,6 @@ export default function GuidePage() {
                   </td>
                   <td className="py-3 px-4">高い（木自体に焼きつけ）</td>
                   <td className="py-3 px-4">高い（木自体を彫刻）</td>
-                  <td className="py-3 px-4">普通（インク印刷）</td>
                 </tr>
               </tbody>
             </table>
@@ -393,10 +387,6 @@ export default function GuidePage() {
               {
                 name: 'レーザー刻印',
                 desc: '繊細で高精度な彫刻が可能。濃淡・写真表現にも対応。少量〜中量向き。白黒のみ。',
-              },
-              {
-                name: 'シルクプリント',
-                desc: '唯一フルカラーに対応。鮮やかなロゴやイラストを表現可能。中量〜大量向き。',
               },
             ].map((method) => (
               <div
@@ -414,7 +404,7 @@ export default function GuidePage() {
 
           {/* 用途別おすすめ */}
           <h3 className="text-lg font-medium mb-6">用途別おすすめ加工方法</h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             <div
               className="p-6 rounded-sm"
               style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
@@ -437,18 +427,6 @@ export default function GuidePage() {
               <p className="text-sm font-medium mb-2">レーザーがおすすめ</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                 細密なイラスト、写真、QRコードなどの精密デザインに対応可能です。
-              </p>
-            </div>
-            <div
-              className="p-6 rounded-sm"
-              style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
-            >
-              <p className="font-medium mb-2" style={{ color: 'var(--color-accent)' }}>
-                カラーデザイン
-              </p>
-              <p className="text-sm font-medium mb-2">シルクプリントがおすすめ</p>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                唯一のフルカラー対応。企業カラーやカラフルなロゴの再現に最適です。
               </p>
             </div>
           </div>

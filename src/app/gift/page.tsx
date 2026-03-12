@@ -89,7 +89,7 @@ const giftReasons = [
   },
   {
     title: '名入れでオンリーワン',
-    desc: '焼印・レーザー刻印・シルクプリントの3つの方法で、名前・日付・メッセージ・ロゴなどを刻印できます。名入れをすることで世界にひとつだけの特別なギフトに仕上がります。手書きのイラストやオリジナルデザインにも対応可能です。',
+    desc: '焼印・レーザー刻印の2つの方法で、名前・日付・メッセージ・ロゴなどを刻印できます。名入れをすることで世界にひとつだけの特別なギフトに仕上がります。手書きのイラストやオリジナルデザインにも対応可能です。',
   },
   {
     title: '日本の伝統工芸品としての価値',
@@ -347,9 +347,9 @@ export default function GiftPage() {
             名入れ方法の選び方
           </h2>
           <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--color-muted)' }}>
-            枡の名入れには3つの方法があり、それぞれ仕上がりや特徴が異なります。ギフトの用途に合わせてお選びください。
+            枡の名入れには2つの方法があり、それぞれ仕上がりや特徴が異なります。ギフトの用途に合わせてお選びください。
           </p>
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div
               className="p-6 rounded-sm"
               style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
@@ -372,18 +372,6 @@ export default function GiftPage() {
               <p className="text-sm font-medium mb-2">繊細で高精度</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                 細密なデザインや写真、QRコードも再現可能。濃淡表現ができるため、似顔絵やイラストを刻みたいギフトに最適。少量〜中量向き。
-              </p>
-            </div>
-            <div
-              className="p-6 rounded-sm"
-              style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
-            >
-              <p className="font-medium mb-2" style={{ color: 'var(--color-accent)' }}>
-                シルクプリント
-              </p>
-              <p className="text-sm font-medium mb-2">唯一のカラー対応</p>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                フルカラーで鮮やかなデザインを表現可能。企業ロゴのカラー再現や、カラフルなイラストを入れたいギフトに。中量〜大量向き。
               </p>
             </div>
           </div>

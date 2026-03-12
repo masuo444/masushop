@@ -25,7 +25,6 @@ export async function POST(request: Request) {
       const printLabels: Record<string, string> = {
         branding: '焼印',
         laser: 'レーザー刻印',
-        silk: 'シルクプリント',
         undecided: '相談したい',
       }
 

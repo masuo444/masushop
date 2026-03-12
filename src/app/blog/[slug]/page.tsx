@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import siteConfig from '@/lib/site-config'
@@ -35,6 +36,9 @@ export function generateMetadata({
       modifiedTime: article.updatedAt,
       siteName: siteConfig.name,
       locale: 'ja_JP',
+      ...(article.heroImage && {
+        images: [{ url: `${baseUrl}${article.heroImage}`, width: 1200, height: 600 }],
+      }),
     },
     twitter: { card: 'summary_large_image' },
     alternates: { canonical: `${baseUrl}/blog/${article.slug}` },
@@ -239,6 +243,7 @@ export default function BlogArticlePage({
     '@type': 'Article',
     headline: article.title,
     description: article.description,
+    ...(article.heroImage && { image: `${baseUrl}${article.heroImage}` }),
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
     author: { '@type': 'Organization', name: siteConfig.name },
@@ -307,6 +312,22 @@ export default function BlogArticlePage({
           <span>{article.readingTime}で読めます</span>
         </div>
       </section>
+
+      {/* Hero Image */}
+      {article.heroImage && (
+        <div className="mx-auto max-w-4xl px-6 pb-12">
+          <div className="relative aspect-[2/1] w-full overflow-hidden rounded-lg">
+            <Image
+              src={article.heroImage}
+              alt={article.title}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 896px) 100vw, 896px"
+            />
+          </div>
+        </div>
+      )}
 
       <div className="divider" />
 

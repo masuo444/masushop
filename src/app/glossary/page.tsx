@@ -161,7 +161,7 @@ const glossaryTerms: GlossaryTerm[] = [
     category: 'techniques',
     definition:
       '約400度に熱した銅版を木の表面に押し付けて文字やデザインを焼き付ける伝統的な名入れ技法。焦げ茶色の味わいある仕上がりが特徴で、白黒（単色）のみだが温かみのある風合いが人気。大量生産に向いており、一度版を作れば高速に加工できるため、企業ノベルティや記念品に広く使われる。',
-    related: ['laser', 'silk', 'masu'],
+    related: ['laser', 'masu'],
   },
   {
     id: 'laser',
@@ -170,16 +170,7 @@ const glossaryTerms: GlossaryTerm[] = [
     category: 'techniques',
     definition:
       'レーザー光線で木の表面を彫刻する名入れ方法。焼印では表現できない細密なデザイン、濃淡表現、写真、QRコードなどの高精度な刻印が可能。白黒のみだが繊細なグラデーション表現ができる。少量〜中量の製作に向いており、1個からのオーダーにも対応しやすい。',
-    related: ['yakiin', 'silk', 'masu'],
-  },
-  {
-    id: 'silk',
-    term: 'シルクプリント',
-    reading: 'しるくぷりんと',
-    category: 'techniques',
-    definition:
-      '枡の3つの名入れ方法のうち、唯一フルカラーに対応した印刷技法。シルクスクリーンを通してインクを木の表面に転写し、企業ロゴのカラー再現やカラフルなイラストを鮮やかに表現できる。中量〜大量向き。インク印刷のため、焼印やレーザーに比べると耐久性はやや劣る。',
-    related: ['yakiin', 'laser', 'masu'],
+    related: ['yakiin', 'masu'],
   },
   {
     id: 'moruder',

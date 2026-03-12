@@ -10,7 +10,7 @@ const baseUrl = siteConfig.url
 export const metadata: Metadata = {
   title: '法人のお客様 — 枡のノベルティ・記念品・OEM | 大口注文対応',
   description:
-    '法人向け枡のノベルティ・記念品・OEM製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー・シルクプリント加工。1個からのサンプル、100個以上の大口注文に対応。',
+    '法人向け枡のノベルティ・記念品・OEM製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー刻印加工。1個からのサンプル、100個以上の大口注文に対応。',
   keywords:
     '枡 ノベルティ,枡 OEM,枡 企業ギフト,枡 記念品 法人,枡 卸,枡 名入れ 法人,枡 周年記念,枡 株主優待',
   alternates: { canonical: `${baseUrl}/business` },
@@ -153,7 +153,7 @@ export default function BusinessPage() {
             }}
           >
             <p className="text-sm leading-relaxed">
-              当店では法人向け枡のノベルティ・記念品・OEMを承っています。全7サイズの国産ヒノキ枡に焼印・レーザー・シルクプリントで企業ロゴを入れることが可能。1個からのサンプル作成、100個以上の大口注文に対応。
+              当店では法人向け枡のノベルティ・記念品・OEMを承っています。全7サイズの国産ヒノキ枡に焼印・レーザー刻印で企業ロゴを入れることが可能。1個からのサンプル作成、100個以上の大口注文に対応。
             </p>
           </div>
         </div>
@@ -190,12 +190,12 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* 名入れ加工3種の詳細比較 */}
+      {/* 名入れ加工2種の詳細比較 */}
       <section className="py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
-          <h2 className="section-title mb-12">名入れ加工3種の詳細比較</h2>
+          <h2 className="section-title mb-12">名入れ加工2種の詳細比較</h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* 焼印 */}
             <div
               className="p-6 rounded-sm"
@@ -276,40 +276,6 @@ export default function BusinessPage() {
                     向いている用途
                   </p>
                   <p>細かいデザイン、写真入り、QRコード、個別名入れ</p>
-                </div>
-              </div>
-            </div>
-
-            {/* シルクプリント */}
-            <div
-              className="p-6 rounded-sm"
-              style={{ border: '1px solid var(--color-border)' }}
-            >
-              <h3 className="text-lg font-medium mb-4">シルクプリント</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <p className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    特徴
-                  </p>
-                  <p>唯一フルカラーに対応。鮮やかなインクで木肌にプリント。</p>
-                </div>
-                <div>
-                  <p className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    仕上がり
-                  </p>
-                  <p>フルカラー対応。企業カラーやカラフルなロゴを忠実に再現。</p>
-                </div>
-                <div>
-                  <p className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    最小ロット
-                  </p>
-                  <p>1個〜（版代別途）</p>
-                </div>
-                <div>
-                  <p className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    向いている用途
-                  </p>
-                  <p>カラーロゴ、ブランドカラー再現、イラスト入り記念品</p>
                 </div>
               </div>
             </div>
