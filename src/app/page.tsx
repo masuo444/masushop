@@ -437,14 +437,11 @@ export default function HomePage() {
               >
                 無垢の枡
               </h3>
-              <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '0.5rem' }}>
-                法人・団体・まとめ買い
-              </p>
               <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
-                10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー刻印）にも対応。まとめ買いほどお得に。企業ノベルティ、記念品、イベント用途に最適です。
+                10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー刻印）にも対応。まとめ買いほどお得です。100個以上のご注文やお見積りはお問い合わせフォームからご相談ください。
               </p>
-              <Link href="/business" className="btn-primary">
-                法人・大口注文
+              <Link href="/custom" className="btn-primary">
+                お見積り・ご相談
               </Link>
             </div>
 
