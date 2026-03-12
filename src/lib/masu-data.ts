@@ -1,12 +1,127 @@
 // ===== サイズデータ =====
-export const masuSizes = [
-  { id: 'sanjaku', name: '三勺枡', reading: 'さんしゃくます', size: '56×56×39mm', capacity: '54ml', capacityNote: 'おちょこ約1杯分', use: 'インテリア・飾り枡・アクセサリー入れ・ミニギフト', priceFrom: 500 },
-  { id: 'goshaku', name: '五勺枡', reading: 'ごしゃくます', size: '67×67×47mm', capacity: '100ml', capacityNote: 'ワイングラス約半分', use: '日本酒・お祝い・プチギフト・名入れ記念品', priceFrom: 600 },
-  { id: 'hasshaku', name: '八勺枡', reading: 'はっしゃくます', size: '76×76×51mm', capacity: '144ml', capacityNote: '湯のみ約1杯分', use: '日本酒・乾杯枡・記念品・飲食店・もっきり', priceFrom: 700 },
-  { id: 'ichigo', name: '一合枡', reading: 'いちごうます', size: '85×85×56mm', capacity: '180ml', capacityNote: '牛乳瓶1本分', use: '日本酒の定番・名入れ・ギフト・節分', priceFrom: 800 },
-  { id: 'nigohan', name: '二合半枡', reading: 'にごうはんます', size: '117×117×75mm', capacity: '450ml', capacityNote: 'ペットボトル約半分', use: '小物入れ・ディスプレイ・節分の豆入れ', priceFrom: 1200 },
-  { id: 'gogo', name: '五合枡', reading: 'ごごうます', size: '135×135×92mm', capacity: '900ml', capacityNote: '一升瓶の半分', use: '節分・豆まき・インテリア・鏡開き', priceFrom: 1800 },
-  { id: 'issho', name: '一升枡', reading: 'いっしょうます', size: '170×170×92mm', capacity: '1800ml', capacityNote: '一升瓶1本分', use: '鏡開き・イベント・大型ディスプレイ', priceFrom: 2500 },
+export type MasuSize = {
+  id: string
+  name: string
+  reading: string
+  size: string
+  capacity: string
+  capacityNote: string
+  use: string
+  priceFrom: number
+  hasLidOption: boolean
+  description: string
+  features: string[]
+}
+
+export const masuSizes: MasuSize[] = [
+  {
+    id: 'sanjaku',
+    name: '三勺枡',
+    reading: 'さんしゃくます',
+    size: '56×56×39mm',
+    capacity: '54ml',
+    capacityNote: 'おちょこ約1杯分',
+    use: 'インテリア・飾り枡・アクセサリー入れ・ミニギフト',
+    priceFrom: 500,
+    hasLidOption: true,
+    description: '最も小さな枡。おちょこ約1杯分の容量で、飾り枡やアクセサリー入れ、ミニギフトとして人気。ヒノキの香りが楽しめるコンパクトサイズです。',
+    features: ['アクセサリー入れに最適', 'ミニギフトとして人気', '蓋付きオプションあり'],
+  },
+  {
+    id: 'goshaku',
+    name: '五勺枡',
+    reading: 'ごしゃくます',
+    size: '67×67×47mm',
+    capacity: '100ml',
+    capacityNote: 'ワイングラス約半分',
+    use: '日本酒・お祝い・プチギフト・名入れ記念品',
+    priceFrom: 600,
+    hasLidOption: false,
+    description: '少量の日本酒をゆっくり味わうのに最適なサイズ。結婚祝いのペアギフトや名入れ記念品としても人気が高く、上品なサイズ感が特徴です。',
+    features: ['少量の日本酒をゆっくり楽しめる', '結婚祝いのペアギフトに人気', '名入れ記念品に最適なサイズ'],
+  },
+  {
+    id: 'hasshaku',
+    name: '八勺枡',
+    reading: 'はっしゃくます',
+    size: '76×76×51mm',
+    capacity: '144ml',
+    capacityNote: '湯のみ約1杯分',
+    use: '日本酒・乾杯枡・記念品・飲食店・もっきり',
+    priceFrom: 700,
+    hasLidOption: false,
+    description: '居酒屋の「もっきり」スタイルで使われる定番サイズ。グラスの下に敷いて溢れた日本酒を受ける枡としても親しまれています。飲食店での業務用にも最適です。',
+    features: ['もっきりスタイルの定番', '飲食店での業務用に最適', '乾杯枡・記念品にも人気'],
+  },
+  {
+    id: 'ichigo',
+    name: '一合枡',
+    reading: 'いちごうます',
+    size: '85×85×56mm',
+    capacity: '180ml',
+    capacityNote: '牛乳瓶1本分',
+    use: '日本酒の定番・名入れ・ギフト・節分',
+    priceFrom: 800,
+    hasLidOption: true,
+    description: '日本酒一合分がぴったり入る最も定番の枡。名入れギフトや企業ノベルティとして圧倒的な人気を誇ります。手のひらに収まるちょうど良いサイズ感で、蓋付きオプションも選べます。',
+    features: ['日本酒の定番サイズ', '名入れギフト・ノベルティに最適', '蓋付きオプションあり'],
+  },
+  {
+    id: 'nigohan',
+    name: '二合半枡',
+    reading: 'にごうはんます',
+    size: '117×117×75mm',
+    capacity: '450ml',
+    capacityNote: 'ペットボトル約半分',
+    use: '小物入れ・ディスプレイ・節分の豆入れ',
+    priceFrom: 1200,
+    hasLidOption: false,
+    description: '小物入れやディスプレイ用として使い勝手の良い中間サイズ。ペン立てや名刺入れとしてデスク周りに置いても映えます。節分の豆入れとしてもちょうど良い大きさです。',
+    features: ['小物入れ・ペン立てに便利', 'デスク周りのインテリアに', '節分の豆入れにちょうど良い'],
+  },
+  {
+    id: 'gogo',
+    name: '五合枡',
+    reading: 'ごごうます',
+    size: '135×135×92mm',
+    capacity: '900ml',
+    capacityNote: '一升瓶の半分',
+    use: '節分・豆まき・インテリア・鏡開き',
+    priceFrom: 1800,
+    hasLidOption: false,
+    description: '節分の豆まきに最も一般的に使われるサイズ。家族分の豆がしっかり入り、手で持って撒きやすい大きさです。インテリアとしても存在感があります。',
+    features: ['節分の豆まきに最も人気', '手で持ちやすい大きさ', 'インテリアとしても映える'],
+  },
+  {
+    id: 'issho',
+    name: '一升枡',
+    reading: 'いっしょうます',
+    size: '170×170×92mm',
+    capacity: '1800ml',
+    capacityNote: '一升瓶1本分',
+    use: '鏡開き・イベント・大型ディスプレイ',
+    priceFrom: 2500,
+    hasLidOption: false,
+    description: '一升瓶1本分が入る最大サイズの枡。式典や祝い事の鏡開きに欠かせません。イベント会場や店舗の大型ディスプレイとしても迫力のある存在感を発揮します。',
+    features: ['鏡開き・式典に欠かせない', '圧倒的な存在感', 'イベント・店舗ディスプレイに'],
+  },
+]
+
+// ===== オプション価格データ =====
+export const optionPrices = {
+  engraving: {
+    none: 0,
+    yakiin: 300,
+    laser: 500,
+  },
+  coating: 200,
+  lid: 400,
+}
+
+export const engravingMethods = [
+  { id: 'none', name: 'なし', price: 0, description: '' },
+  { id: 'yakiin', name: '焼印', price: 300, description: '約400度の銅版で押す伝統技法。味わいある焦げ茶色の仕上がり。' },
+  { id: 'laser', name: 'レーザー刻印', price: 500, description: '高精度な彫刻。濃淡表現・写真・QRコードにも対応。' },
 ]
 
 // ===== 用途別選び方 =====

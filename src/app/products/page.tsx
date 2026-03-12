@@ -149,9 +149,10 @@ export default async function ProductsPage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {masuSizes.map((m) => (
-            <div
+            <Link
               key={m.id}
-              className="flex flex-col justify-between rounded-sm p-6"
+              href={`/products/${m.id}`}
+              className="group flex flex-col justify-between rounded-sm p-6 transition-all duration-300"
               style={{
                 border: '1px solid var(--color-border)',
                 background: 'var(--background)',
@@ -185,21 +186,29 @@ export default async function ProductsPage() {
                 </p>
               </div>
 
-              <div className="flex items-center justify-between">
-                <span className="text-base font-medium" style={{ color: 'var(--color-accent)' }}>
-                  &yen;{m.priceFrom.toLocaleString()}〜 / 個
-                </span>
-                <span
-                  className="rounded-sm px-2 py-0.5 text-[10px] tracking-wider"
-                  style={{
-                    background: 'var(--color-accent-light)',
-                    color: 'var(--color-accent)',
-                  }}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-base font-medium" style={{ color: 'var(--color-accent)' }}>
+                    &yen;{m.priceFrom.toLocaleString()}〜 / 個
+                  </span>
+                  <span
+                    className="rounded-sm px-2 py-0.5 text-[10px] tracking-wider"
+                    style={{
+                      background: 'var(--color-accent-light)',
+                      color: 'var(--color-accent)',
+                    }}
+                  >
+                    名入れ対応
+                  </span>
+                </div>
+                <p
+                  className="text-xs group-hover:text-[var(--color-accent)] transition-colors"
+                  style={{ color: 'var(--color-muted)' }}
                 >
-                  名入れ対応
-                </span>
+                  詳細を見る &rarr;
+                </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

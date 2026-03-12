@@ -1,8 +1,16 @@
 import type { MetadataRoute } from 'next'
 import siteConfig from '@/lib/site-config'
+import { masuSizes } from '@/lib/masu-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url
+
+  const productDetailPages: MetadataRoute.Sitemap = masuSizes.map((m) => ({
+    url: `${baseUrl}/products/${m.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.9,
+  }))
 
   return [
     {
@@ -41,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    ...productDetailPages,
     {
       url: `${baseUrl}/business`,
       lastModified: new Date(),
