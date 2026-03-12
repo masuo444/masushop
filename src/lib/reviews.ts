@@ -15,7 +15,7 @@ const reviews: Review[] = [
   // 1-3: 日本酒用（一合枡、八勺枡）
   {
     id: 'r01',
-    author: '田中 健一',
+    author: 'T.K.',
     rating: 5,
     date: '2025-11-15',
     product: '一合枡',
@@ -27,7 +27,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r02',
-    author: '鈴木 美咲',
+    author: 'S.M.',
     rating: 5,
     date: '2025-10-22',
     product: '八勺枡',
@@ -39,7 +39,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r03',
-    author: '山本 大輔',
+    author: 'Y.D.',
     rating: 4,
     date: '2025-09-08',
     product: '一合枡',
@@ -52,7 +52,7 @@ const reviews: Review[] = [
   // 4-6: ギフト用（五勺枡、一合枡）
   {
     id: 'r04',
-    author: '佐藤 由美',
+    author: 'S.Y.',
     rating: 5,
     date: '2025-08-30',
     product: '五勺枡',
@@ -64,7 +64,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r05',
-    author: '高橋 正',
+    author: 'T.T.',
     rating: 5,
     date: '2025-06-14',
     product: '一合枡',
@@ -76,7 +76,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r06',
-    author: 'M. Johnson',
+    author: 'M.J.',
     rating: 5,
     date: '2025-07-20',
     product: '五勺枡',
@@ -89,7 +89,7 @@ const reviews: Review[] = [
   // 7-9: 企業ノベルティ（一合枡）
   {
     id: 'r07',
-    author: '中村（株式会社テクノス）',
+    author: 'N.様（株式会社テクノス）',
     rating: 5,
     date: '2025-05-10',
     product: '一合枡（焼印入り）',
@@ -101,7 +101,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r08',
-    author: '渡辺（合同会社クラフトラボ）',
+    author: 'W.様（合同会社クラフトラボ）',
     rating: 4,
     date: '2025-04-18',
     product: '一合枡（レーザー刻印）',
@@ -113,7 +113,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r09',
-    author: '小林（NPO法人まちづくり協議会）',
+    author: 'K.様（NPO法人まちづくり協議会）',
     rating: 5,
     date: '2025-03-25',
     product: '一合枡（シルクプリント）',
@@ -126,7 +126,7 @@ const reviews: Review[] = [
   // 10-11: 節分・行事（五合枡、一升枡）
   {
     id: 'r10',
-    author: '伊藤 恵子',
+    author: 'I.K.',
     rating: 5,
     date: '2025-02-03',
     product: '五合枡',
@@ -138,7 +138,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r11',
-    author: '松本 浩二',
+    author: 'M.K.',
     rating: 4,
     date: '2025-01-15',
     product: '一升枡',
@@ -151,7 +151,7 @@ const reviews: Review[] = [
   // 12-13: インテリア（三勺枡、二合半枡）
   {
     id: 'r12',
-    author: '木村 あかり',
+    author: 'K.A.',
     rating: 5,
     date: '2024-12-10',
     product: '三勺枡',
@@ -163,7 +163,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r13',
-    author: '吉田 隆',
+    author: 'Y.T.',
     rating: 4,
     date: '2024-11-28',
     product: '二合半枡',
@@ -176,7 +176,7 @@ const reviews: Review[] = [
   // 14-15: 名入れ（焼印、レーザー）
   {
     id: 'r14',
-    author: '加藤 真理',
+    author: 'K.M.',
     rating: 5,
     date: '2024-10-05',
     product: '一合枡（焼印入り）',
@@ -188,7 +188,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r15',
-    author: '斎藤 翔太',
+    author: 'S.S.',
     rating: 5,
     date: '2024-09-12',
     product: '一合枡（レーザー刻印）',
