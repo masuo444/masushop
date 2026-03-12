@@ -23,49 +23,49 @@ const originalProducts = [
     name: 'FOMUSロゴ入り枡',
     description: 'FOMUSオリジナルロゴ入りのヒノキ枡',
     sub: '焼印でロゴを刻んだ定番モデル',
-    price: 'お問い合わせ',
+
     image: '/images/original/fomus-masu.jpg',
   },
   {
     name: '枡の首飾り（MASU NECKLACE）',
     description: '三勺枡をベースにしたウェアラブル枡',
     sub: 'ヒノキの香りを身につける新しいアクセサリー',
-    price: 'お問い合わせ',
+
     image: '/images/original/masu-necklace.jpg',
   },
   {
     name: '枡バッジ（MASU BADGE）',
     description: 'ミニチュア枡のピンバッジ',
     sub: 'スーツの襟元や帽子に',
-    price: 'お問い合わせ',
+
     image: '/images/original/masu-badge.jpg',
   },
   {
     name: 'SILVA — カードゲーム × 枡',
     description: 'FOMUSオリジナルカードゲームと枡のセット',
     sub: '枡をカードケースとして使う新しい遊び方',
-    price: 'お問い合わせ',
+
     image: '/images/original/silva.jpg',
   },
   {
     name: '七宝焼コラボ枡',
     description: '伝統工芸・七宝焼とヒノキ枡のコラボレーション',
     sub: '枡 × ジュエリーの融合',
-    price: 'お問い合わせ',
+
     image: '/images/original/shippo-collab.jpg',
   },
   {
     name: 'MASUKAME',
     description: 'ヒノキで作った枡の亀',
     sub: '枡の技術を活かしたオブジェ',
-    price: 'お問い合わせ',
+
     image: '/images/original/masukame.jpg',
   },
   {
     name: '枡タワー',
     description: '枡を積み上げたディスプレイ・オブジェ',
     sub: 'イベント・展示会の演出に',
-    price: 'お問い合わせ',
+
     image: '/images/original/masu-tower.jpg',
   },
 ]
@@ -285,9 +285,6 @@ export default async function ProductsPage() {
                     {p.sub}
                   </p>
                 </div>
-                <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>
-                  価格：{p.price}
-                </p>
               </div>
             </div>
           ))}
