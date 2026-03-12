@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { masuSizes, engravingMethods, optionPrices } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
@@ -130,18 +129,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         <div className="grid gap-12 lg:grid-cols-[1fr_380px]">
           {/* 左カラム：商品情報 */}
           <div>
-            {/* 商品画像 */}
-            <div className="mb-8">
-              <Image
-                src="/images/masu-angle.jpg"
-                alt={`${product.name} — 国産ヒノキ枡`}
-                width={600}
-                height={600}
-                priority
-                style={{ width: '100%', height: 'auto' }}
-              />
-            </div>
-
             {/* 商品名 */}
             <h1 className="section-title mb-1">{product.name}</h1>
             <p className="mb-6 text-sm" style={{ color: 'var(--color-muted)' }}>
