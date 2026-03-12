@@ -96,14 +96,12 @@ export default async function ProductsPage() {
         style={{ borderBottom: '1px solid var(--color-border)' }}
       >
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="section-label">Products</p>
           <h1 className="section-title">商品一覧</h1>
         </div>
       </section>
 
       {/* ===== オンラインで購入可能な枡 ===== */}
       <section id="online" className="mx-auto max-w-5xl px-6 py-20">
-        <p className="section-label">Online Shop</p>
         <h2 className="section-title mb-4">オンラインで購入可能な枡</h2>
         <p
           className="mb-10 text-sm leading-relaxed"
@@ -140,7 +138,6 @@ export default async function ProductsPage() {
 
       {/* ===== 無垢の枡 ===== */}
       <section id="standard" className="mx-auto max-w-5xl px-6 py-20">
-        <p className="section-label">Standard Masu</p>
         <h2 className="section-title mb-4">無垢の枡 — 無地・名入れ対応</h2>
         <p
           className="mb-10 text-sm leading-relaxed"
@@ -217,7 +214,6 @@ export default async function ProductsPage() {
 
       {/* ===== FOMUS オリジナル枡 ===== */}
       <section id="original" className="mx-auto max-w-5xl px-6 py-20">
-        <p className="section-label">FOMUS Original</p>
         <h2 className="section-title mb-4">
           FOMUSロゴ入り・オリジナルデザイン枡 — 1個から購入可能
         </h2>
@@ -285,7 +281,6 @@ export default async function ProductsPage() {
 
       {/* ===== CTA: カスタム ===== */}
       <section className="mx-auto max-w-5xl px-6 py-20 text-center">
-        <p className="section-label">Custom Order</p>
         <h2 className="section-title mb-4">オリジナル枡を作りませんか？</h2>
         <p className="mb-8 text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
           名入れ・焼印・レーザー刻印・オリジナルデザインなど、あなただけの枡をお作りします。

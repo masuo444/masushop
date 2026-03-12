@@ -85,7 +85,6 @@ export default function SakePage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-        <p className="section-label">Masu &amp; Sake</p>
         <h1 className="section-title mt-4">枡と日本酒 — ヒノキの香りで味わう一杯</h1>
         <p className="mt-6 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
           ヒノキの枡に注がれた日本酒は、グラスでは味わえない特別な美味しさを持っています。<br />
@@ -107,7 +106,7 @@ export default function SakePage() {
 
       {/* なぜ美味しいのか — 科学的根拠 */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-light mb-8" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+        <h2 className="serif text-2xl font-light mb-8">
           なぜ枡で飲むと美味しいのか
         </h2>
         <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -133,7 +132,7 @@ export default function SakePage() {
 
       {/* もっきりの文化 */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-light mb-8" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+        <h2 className="serif text-2xl font-light mb-8">
           もっきり（盛り切り）の文化
         </h2>
         <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -192,7 +191,7 @@ export default function SakePage() {
 
       {/* 枡酒の歴史 */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-light mb-8" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+        <h2 className="serif text-2xl font-light mb-8">
           枡酒の歴史
         </h2>
         <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -215,7 +214,7 @@ export default function SakePage() {
 
       {/* サイズ別おすすめ */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-light mb-8" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+        <h2 className="serif text-2xl font-light mb-8">
           日本酒用途のサイズ別おすすめ
         </h2>
         <p className="text-sm leading-[2.2] text-[var(--foreground)] mb-8">
@@ -224,7 +223,7 @@ export default function SakePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {sakeSizes.map((size) => (
             <div key={size.id} className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
-              <p className="text-lg font-light mb-1" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+              <p className="serif text-lg font-light mb-1">
                 {size.name}
               </p>
               <p className="text-[10px] tracking-wide text-[var(--color-muted)] mb-4">
@@ -247,7 +246,7 @@ export default function SakePage() {
 
       {/* 枡で日本酒を飲む手順 */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-light mb-8" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+        <h2 className="serif text-2xl font-light mb-8">
           枡で日本酒を飲む手順
         </h2>
         <div className="space-y-8">
@@ -286,8 +285,7 @@ export default function SakePage() {
       {/* FAQ */}
       {sakeFaqItems.length > 0 && (
         <section className="max-w-3xl mx-auto px-6 py-20">
-          <p className="section-label">FAQ</p>
-          <h2 className="text-2xl font-light mt-4 mb-10" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mt-4 mb-10">
             枡と日本酒に関するよくある質問
           </h2>
           <div className="space-y-6">

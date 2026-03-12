@@ -70,7 +70,6 @@ export default function HistoryPage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-        <p className="section-label">History of Masu</p>
         <h1 className="section-title mt-4">枡の歴史 — 1300年の物語</h1>
         <p className="mt-6 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
           穀物を量る素朴な木の器から、天下統一の道具へ、そして縁起物・酒器として愛される現代へ。<br />
@@ -96,7 +95,7 @@ export default function HistoryPage() {
         {/* 飛鳥〜奈良時代 */}
         <section>
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-muted)] mb-3">7世紀 — 8世紀</p>
-          <h2 className="text-2xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mb-6">
             飛鳥〜奈良時代 — 日本最古の枡
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -118,7 +117,7 @@ export default function HistoryPage() {
         {/* 平安〜室町時代 */}
         <section>
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-muted)] mb-3">9世紀 — 16世紀</p>
-          <h2 className="text-2xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mb-6">
             平安〜室町時代 — 暮らしに根づいた計量器
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -140,7 +139,7 @@ export default function HistoryPage() {
         {/* 安土桃山時代 */}
         <section>
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-muted)] mb-3">16世紀後半</p>
-          <h2 className="text-2xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mb-6">
             安土桃山時代 — 太閤検地と京枡の全国統一
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -165,7 +164,7 @@ export default function HistoryPage() {
         {/* 江戸時代 */}
         <section>
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-muted)] mb-3">17世紀 — 19世紀</p>
-          <h2 className="text-2xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mb-6">
             江戸時代 — 枡座と「百万石」の時代
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -190,7 +189,7 @@ export default function HistoryPage() {
         {/* 明治〜昭和 */}
         <section>
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-muted)] mb-3">19世紀後半 — 20世紀</p>
-          <h2 className="text-2xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mb-6">
             明治〜昭和 — 計量器から酒器へ
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -215,7 +214,7 @@ export default function HistoryPage() {
         {/* 現代 */}
         <section>
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-muted)] mb-3">21世紀</p>
-          <h2 className="text-2xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mb-6">
             現代 — 縁起物・ギフト・文化の器
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -242,7 +241,7 @@ export default function HistoryPage() {
 
       {/* 漢字解説 */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-light mb-8" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+        <h2 className="serif text-2xl font-light mb-8">
           「升・枡・桝」— 3つの漢字の違い
         </h2>
         <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -251,19 +250,19 @@ export default function HistoryPage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
             <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
-              <p className="text-3xl font-light mb-3 text-center" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>升</p>
+              <p className="serif text-3xl font-light mb-3 text-center">升</p>
               <p className="text-xs leading-[2] text-[var(--color-muted)]">
                 最も古い漢字。中国から伝来した文字で、「一升」「一合」などの体積単位として現在も広く使われています。元来は「すくい上げる」ことを意味する象形文字です。
               </p>
             </div>
             <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
-              <p className="text-3xl font-light mb-3 text-center" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>枡</p>
+              <p className="serif text-3xl font-light mb-3 text-center">枡</p>
               <p className="text-xs leading-[2] text-[var(--color-muted)]">
                 日本で作られた国字（和製漢字）。「木」と「升」を組み合わせ、木製の計量器そのものを表します。木でできた器としての「ます」を指す最も一般的な表記です。
               </p>
             </div>
             <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
-              <p className="text-3xl font-light mb-3 text-center" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>桝</p>
+              <p className="serif text-3xl font-light mb-3 text-center">桝</p>
               <p className="text-xs leading-[2] text-[var(--color-muted)]">
                 同じく「木」と「升」の組み合わせによる異体字。「排水桝」「側溝桝」など建築・土木用語で使われることが多く、人名（桝田、桝本など）にも見られます。
               </p>
@@ -279,7 +278,7 @@ export default function HistoryPage() {
 
       {/* 大垣市 */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-2xl font-light mb-8" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+        <h2 className="serif text-2xl font-light mb-8">
           枡の産地・岐阜県大垣市
         </h2>
         <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">

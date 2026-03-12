@@ -93,7 +93,6 @@ export default function ReviewsPage() {
         style={{ borderBottom: '1px solid var(--color-border)' }}
       >
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="section-label">Reviews</p>
           <h1 className="section-title">お客様の声</h1>
         </div>
       </section>
@@ -111,12 +110,12 @@ export default function ReviewsPage() {
         >
           <div style={{ textAlign: 'center', minWidth: 120 }}>
             <p
+              className="serif"
               style={{
                 fontSize: '2.5rem',
                 fontWeight: 300,
                 lineHeight: 1,
                 marginBottom: '0.25rem',
-                fontFamily: 'var(--font-serif-jp), Georgia, serif',
               }}
             >
               {avgRatingValue}
@@ -210,10 +209,9 @@ export default function ReviewsPage() {
 
         return (
           <section key={group.purpose} className="mx-auto max-w-5xl px-6 py-12">
-            <p className="section-label">{group.label}</p>
             <h2
+              className="serif"
               style={{
-                fontFamily: 'var(--font-serif-jp), Georgia, serif',
                 fontSize: '1.25rem',
                 fontWeight: 400,
                 marginBottom: '1.5rem',
@@ -240,11 +238,9 @@ export default function ReviewsPage() {
 
       {/* CTA */}
       <section className="mx-auto max-w-5xl px-6 py-20 text-center">
-        <p className="section-label">NEXT STEP</p>
         <h2
-          className="section-title"
+          className="serif section-title"
           style={{
-            fontFamily: 'var(--font-serif-jp), Georgia, serif',
             marginBottom: '1rem',
           }}
         >

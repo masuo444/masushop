@@ -1,59 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAF8F5;
-  --foreground: #1A1A1A;
-  --color-muted: #888888;
-  --color-border: #E5E0DA;
-  --color-subtle: #F3F0EB;
-  --color-accent: #8B6914;
-  --color-accent-light: #F5F0E0;
+  --background: #FAFAF7;
+  --foreground: #2C2420;
+  --color-muted: #8C8378;
+  --color-border: #E8E3DC;
+  --color-subtle: #F4F1EC;
+  --color-accent: #7B5B2A;
+  --color-accent-light: #F5EFE3;
+  --color-warm: #3D3330;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  font-feature-settings: "palt";
 }
 
-/* Utility classes */
+/* Serif headings */
+.serif {
+  font-family: var(--font-serif-jp), 'Hiragino Mincho ProN', Georgia, serif;
+}
+
+/* Links */
+a { color: inherit; }
+
+/* Buttons — elegant, not template-y */
 .btn-primary {
   display: inline-block;
-  padding: 14px 32px;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  padding: 15px 36px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
   background: var(--foreground);
   color: var(--background);
   border: none;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: background 0.4s;
   text-decoration: none;
   text-align: center;
 }
 .btn-primary:hover {
-  opacity: 0.8;
+  background: var(--color-warm);
 }
 
 .btn-outline {
   display: inline-block;
-  padding: 14px 32px;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  padding: 14px 36px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
   background: transparent;
   color: var(--foreground);
   border: 1px solid var(--color-border);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: border-color 0.4s;
   text-decoration: none;
   text-align: center;
 }
@@ -63,38 +71,47 @@ body {
 
 .btn-accent {
   display: inline-block;
-  padding: 14px 32px;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  padding: 15px 36px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
   background: var(--color-accent);
   color: #fff;
   border: none;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: background 0.4s;
   text-decoration: none;
   text-align: center;
 }
 .btn-accent:hover {
-  opacity: 0.85;
+  background: #6B4E24;
 }
 
+/* Divider — only for intentional use */
 .divider {
   height: 1px;
   background: var(--color-border);
 }
 
+/* Remove the old section-label class entirely — hidden so existing references don't break */
 .section-label {
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: 1.5rem;
+  display: none;
 }
 
+/* Section title — refined serif */
 .section-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 300;
+  font-family: var(--font-serif-jp), 'Hiragino Mincho ProN', Georgia, serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 400;
   color: var(--foreground);
-  line-height: 1.4;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+/* Selection marker for lists */
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary::marker {
+  display: none;
+  content: '';
 }

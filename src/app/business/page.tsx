@@ -153,7 +153,6 @@ export default function BusinessPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-5xl mx-auto px-6">
-          <p className="section-label">Use Cases</p>
           <h2 className="section-title mb-12">用途別ご提案</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {useCases.map((uc) => (
@@ -181,7 +180,6 @@ export default function BusinessPage() {
       {/* 名入れ加工3種の詳細比較 */}
       <section className="py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="section-label">Customization Methods</p>
           <h2 className="section-title mb-12">名入れ加工3種の詳細比較</h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -297,7 +295,6 @@ export default function BusinessPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">OEM &amp; Bulk Orders</p>
           <h2 className="section-title mb-12">OEM・大口注文</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div
@@ -355,7 +352,6 @@ export default function BusinessPage() {
       {/* ご注文の流れ */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">Order Flow</p>
           <h2 className="section-title mb-12">ご注文の流れ</h2>
           <div className="space-y-0">
             {orderSteps.map((s, i) => (
@@ -399,7 +395,6 @@ export default function BusinessPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">Payment</p>
           <h2 className="section-title mb-6">JPYC（暗号資産）決済対応</h2>
           <div
             className="p-8 rounded-sm"
@@ -420,7 +415,6 @@ export default function BusinessPage() {
       {/* よくある質問 */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">FAQ</p>
           <h2 className="section-title mb-12">よくある質問（法人向け）</h2>
           <div className="space-y-0">
             {businessFaq.map((item, i) => (

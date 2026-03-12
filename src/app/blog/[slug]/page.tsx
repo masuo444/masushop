@@ -46,8 +46,8 @@ export function generateMetadata({
 function SectionHeading({ section }: { section: ArticleSection }) {
   return (
     <h2
-      className="mt-12 mb-4 text-xl font-medium leading-relaxed"
-      style={{ fontFamily: 'var(--font-serif-jp), serif', color: 'var(--foreground)' }}
+      className="serif mt-12 mb-4 text-xl font-medium leading-relaxed"
+      style={{ color: 'var(--foreground)' }}
     >
       {section.heading}
     </h2>
@@ -295,7 +295,6 @@ export default function BlogArticlePage({
 
       {/* Hero */}
       <section className="mx-auto max-w-4xl px-6 pt-16 pb-12 text-center">
-        <p className="section-label">{article.category}</p>
         <h1 className="section-title mt-4">{article.title}</h1>
         <div
           className="mt-6 flex items-center justify-center gap-4 text-xs"
@@ -320,7 +319,6 @@ export default function BlogArticlePage({
 
       {/* Related Articles */}
       <section className="mx-auto max-w-3xl px-6 py-16">
-        <p className="section-label text-center">Related Articles</p>
         <h2
           className="mb-10 text-center text-xl font-light"
           style={{ color: 'var(--foreground)' }}
@@ -360,7 +358,6 @@ export default function BlogArticlePage({
 
       {/* CTA */}
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <p className="section-label">Products & Custom</p>
         <h2
           className="mb-4 text-xl font-light"
           style={{ color: 'var(--foreground)' }}

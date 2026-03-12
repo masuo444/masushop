@@ -144,7 +144,6 @@ export default function CustomPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">Order &amp; Inquiry</p>
           <h1 className="section-title mb-4">名入れ・オーダーメイド枡</h1>
           <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
             お見積り・ご相談フォーム

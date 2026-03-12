@@ -79,7 +79,6 @@ export default function CarePage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-        <p className="section-label">Care Guide</p>
         <h1 className="section-title mt-4">枡のお手入れ方法</h1>
         <p className="mt-6 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
           ヒノキの枡は正しくお手入れすれば、何年も美しく使い続けることができます。<br />
@@ -111,7 +110,7 @@ export default function CarePage() {
 
         {/* ご使用前 */}
         <section>
-          <h2 className="text-xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-xl font-light mb-6">
             ご使用前
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -129,7 +128,7 @@ export default function CarePage() {
 
         {/* ご使用後 */}
         <section>
-          <h2 className="text-xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-xl font-light mb-6">
             ご使用後 — すぐ水洗い、すぐ自然乾燥
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -168,7 +167,7 @@ export default function CarePage() {
 
         {/* 保管方法 */}
         <section>
-          <h2 className="text-xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-xl font-light mb-6">
             保管方法
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -189,7 +188,7 @@ export default function CarePage() {
 
         {/* 洗剤について */}
         <section>
-          <h2 className="text-xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-xl font-light mb-6">
             洗剤について
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -215,7 +214,7 @@ export default function CarePage() {
 
         {/* ヤニ対処 */}
         <section>
-          <h2 className="text-xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-xl font-light mb-6">
             ヤニ（ベタつき）の対処法
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -236,7 +235,7 @@ export default function CarePage() {
 
         {/* 注意事項 */}
         <section>
-          <h2 className="text-xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-xl font-light mb-6">
             注意事項
           </h2>
           <ul className="space-y-3">
@@ -263,7 +262,7 @@ export default function CarePage() {
 
         {/* ヒノキ削り節の活用法 */}
         <section>
-          <h2 className="text-xl font-light mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-xl font-light mb-6">
             ヒノキ削り節の活用法
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
@@ -299,8 +298,7 @@ export default function CarePage() {
       {/* FAQ */}
       {careFaqItems.length > 0 && (
         <section className="max-w-3xl mx-auto px-6 py-20">
-          <p className="section-label">FAQ</p>
-          <h2 className="text-2xl font-light mt-4 mb-10" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif text-2xl font-light mt-4 mb-10">
             お手入れに関するよくある質問
           </h2>
           <div className="space-y-6">

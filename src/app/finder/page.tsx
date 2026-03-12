@@ -30,7 +30,6 @@ export default function FinderPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">MASU FINDER</p>
           <h1 className="section-title mb-6">枡診断</h1>
           <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
             3つの質問に答えるだけで、あなたにぴったりの枡が見つかります

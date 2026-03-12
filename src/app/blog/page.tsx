@@ -86,7 +86,6 @@ export default function BlogPage() {
         style={{ borderBottom: '1px solid var(--color-border)' }}
       >
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="section-label">Column</p>
           <h1 className="section-title">枡コラム</h1>
         </div>
       </section>

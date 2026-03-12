@@ -5,13 +5,11 @@ import { useState, useEffect } from 'react'
 
 const navLinks = [
   { href: '/finder', label: '枡診断' },
-  { href: '/guide', label: '枡の選び方' },
-  { href: '/history', label: '枡の歴史' },
-  { href: '/care', label: 'お手入れ' },
-  { href: '/sake', label: '枡と日本酒' },
+  { href: '/guide', label: '選び方' },
   { href: '/products', label: '商品一覧' },
-  { href: '/business', label: '法人のお客様' },
-  { href: '/custom', label: 'オーダーメイド' },
+  { href: '/business', label: '法人の方' },
+  { href: '/blog', label: '読みもの' },
+  { href: '/custom', label: 'ご相談' },
 ]
 
 export default function Header() {
@@ -24,6 +22,16 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-500 ${
@@ -35,11 +43,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <span className="text-xl tracking-[0.2em] font-light text-[var(--foreground)]" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <Link href="/" className="flex items-center gap-2">
+            <span className="serif text-2xl font-light text-[var(--foreground)]">
               枡
             </span>
-            <span className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-muted)] hidden sm:inline">
+            <span className="text-[9px] tracking-[0.12em] text-[var(--foreground)]/40 hidden sm:inline mt-1">
               MASU-STORE
             </span>
           </Link>
@@ -50,53 +58,77 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[11px] tracking-[0.05em] text-[var(--color-muted)] hover:text-[var(--foreground)] transition-colors"
+                className="text-xs text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-colors"
               >
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/custom"
+              className="text-xs text-[var(--color-accent)] hover:text-[var(--color-accent)]/70 transition-colors ml-2"
+            >
+              お見積り・ご相談
+            </Link>
           </nav>
 
-          {/* CTA + Mobile menu */}
-          <div className="flex items-center gap-4">
-            <Link href="/custom" className="hidden md:inline-block text-[10px] tracking-[0.1em] uppercase px-5 py-2.5 bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity">
-              お見積り相談
-            </Link>
-
-            <button
-              className="lg:hidden p-1 text-[var(--color-muted)]"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="メニュー"
-            >
-              {menuOpen ? (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" /></svg>
-              )}
-            </button>
-          </div>
+          {/* Mobile menu button */}
+          <button
+            className="lg:hidden p-2 text-[var(--foreground)]/50"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="メニュー"
+          >
+            {menuOpen ? (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+              </svg>
+            )}
+          </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        {menuOpen && (
-          <div className="lg:hidden border-t border-[var(--color-border)] py-6 space-y-4">
+      {/* Mobile Navigation — slide-in panel */}
+      <div
+        className={`fixed inset-0 top-16 md:top-20 z-40 lg:hidden transition-opacity duration-300 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 bg-black/20"
+          onClick={() => setMenuOpen(false)}
+        />
+        {/* Panel */}
+        <div
+          className={`absolute top-0 right-0 w-full max-w-xs h-full bg-[var(--background)] shadow-xl transition-transform duration-300 ${
+            menuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <nav className="px-8 py-8 flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-sm text-[var(--color-muted)] hover:text-[var(--foreground)]"
+                className="block py-3 text-sm text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors border-b border-[var(--color-border)]/50"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4 border-t border-[var(--color-border)]">
-              <Link href="/custom" className="btn-primary block text-center" onClick={() => setMenuOpen(false)}>
-                お見積り相談
+            <div className="pt-6">
+              <Link
+                href="/custom"
+                className="text-sm text-[var(--color-accent)]"
+                onClick={() => setMenuOpen(false)}
+              >
+                お見積り・ご相談
               </Link>
             </div>
-          </div>
-        )}
+          </nav>
+        </div>
       </div>
     </header>
   )

@@ -320,7 +320,6 @@ export default function GlossaryPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">GLOSSARY</p>
           <h1 className="section-title mb-6">枡用語辞典</h1>
           <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
             枡に関する用語・単位・文化を網羅的に解説します
@@ -331,10 +330,8 @@ export default function GlossaryPage() {
       {/* ===== QUICK NAVIGATION ===== */}
       <section className="py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="section-label">CATEGORIES</p>
           <h2
-            className="text-lg font-medium mb-6"
-            style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}
+            className="serif text-lg font-medium mb-6"
           >
             カテゴリから探す
           </h2>
@@ -386,10 +383,8 @@ export default function GlossaryPage() {
             }}
           >
             <div className="max-w-4xl mx-auto px-6">
-              <p className="section-label">{cat.labelEn}</p>
               <h2
-                className="section-title mb-12"
-                style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}
+                className="serif section-title mb-12"
               >
                 {cat.label}
               </h2>
@@ -428,8 +423,8 @@ export default function GlossaryPage() {
                       </span>
                     </div>
                     <h3
+                      className="serif"
                       style={{
-                        fontFamily: 'var(--font-serif-jp), Georgia, serif',
                         fontWeight: 500,
                         fontSize: '1.15rem',
                         marginBottom: '0.75rem',
@@ -493,8 +488,7 @@ export default function GlossaryPage() {
       <section className="py-20 md:py-28 text-center">
         <div className="max-w-2xl mx-auto px-6">
           <h2
-            className="section-title mb-6"
-            style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}
+            className="serif section-title mb-6"
           >
             枡について詳しく知る
           </h2>

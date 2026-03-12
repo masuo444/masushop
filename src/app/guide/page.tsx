@@ -40,7 +40,6 @@ export default function GuidePage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">Selection Guide</p>
           <h1 className="section-title mb-6">枡の選び方ガイド</h1>
           <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
             用途・サイズ別に、最適な枡をご提案します
@@ -68,7 +67,6 @@ export default function GuidePage() {
       {/* Selection Guide Table */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-5xl mx-auto px-6">
-          <p className="section-label">Purpose &amp; Recommendation</p>
           <h2 className="section-title mb-12">用途別おすすめ枡</h2>
 
           {/* Desktop table */}
@@ -127,7 +125,6 @@ export default function GuidePage() {
       {/* Size Chart */}
       <section className="py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="section-label">Size Chart</p>
           <h2 className="section-title mb-12">全7サイズ一覧</h2>
 
           {/* Desktop table */}
@@ -223,7 +220,6 @@ export default function GuidePage() {
       {/* 初めて枡を購入する方へ */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">For Beginners</p>
           <h2 className="section-title mb-12">初めて枡を購入する方へ</h2>
 
           {/* 単位解説 */}
@@ -316,7 +312,6 @@ export default function GuidePage() {
       {/* 名入れ加工の選び方 */}
       <section className="py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="section-label">Customization</p>
           <h2 className="section-title mb-12">名入れ加工の選び方</h2>
 
           {/* 比較表 */}
@@ -450,7 +445,6 @@ export default function GuidePage() {
       {/* FAQ */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">FAQ</p>
           <h2 className="section-title mb-12">よくある質問</h2>
           <div className="space-y-0">
             {guideFaqItems.map((item, i) => (

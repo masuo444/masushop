@@ -142,7 +142,6 @@ export default function GiftPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">GIFT GUIDE</p>
           <h1 className="section-title mb-6">枡ギフトガイド</h1>
           <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
             お祝い・記念品にぴったりの枡の選び方を、シーン別にご紹介します
@@ -170,8 +169,7 @@ export default function GiftPage() {
       {/* ===== なぜ枡がギフトに最適なのか ===== */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-4xl mx-auto px-6">
-          <p className="section-label">WHY MASU?</p>
-          <h2 className="section-title mb-12" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif section-title mb-12">
             なぜ枡がギフトに最適なのか — 5つの理由
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -197,8 +195,8 @@ export default function GiftPage() {
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <h3
+                    className="serif"
                     style={{
-                      fontFamily: 'var(--font-serif-jp), Georgia, serif',
                       fontWeight: 500,
                       fontSize: '1.1rem',
                     }}
@@ -218,8 +216,7 @@ export default function GiftPage() {
       {/* ===== シーン別おすすめ枡ギフト ===== */}
       <section className="py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="section-label">GIFT SCENES</p>
-          <h2 className="section-title mb-12" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif section-title mb-12">
             シーン別おすすめ枡ギフト
           </h2>
 
@@ -296,8 +293,8 @@ export default function GiftPage() {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.5rem' }}>
                   <h3
+                    className="serif"
                     style={{
-                      fontFamily: 'var(--font-serif-jp), Georgia, serif',
                       fontWeight: 500,
                       fontSize: '1.05rem',
                     }}
@@ -323,8 +320,7 @@ export default function GiftPage() {
       {/* ===== 名入れ方法の選び方 ===== */}
       <section className="py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="section-label">ENGRAVING</p>
-          <h2 className="section-title mb-12" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif section-title mb-12">
             名入れ方法の選び方
           </h2>
           <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--color-muted)' }}>
@@ -379,8 +375,7 @@ export default function GiftPage() {
       {/* ===== FAQ ===== */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <p className="section-label">FAQ</p>
-          <h2 className="section-title mb-12" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif section-title mb-12">
             枡ギフトに関するよくある質問
           </h2>
           <div className="space-y-0">
@@ -414,7 +409,7 @@ export default function GiftPage() {
       {/* ===== CTA ===== */}
       <section className="py-20 md:py-28 text-center">
         <div className="max-w-2xl mx-auto px-6">
-          <h2 className="section-title mb-6" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif' }}>
+          <h2 className="serif section-title mb-6">
             枡ギフトのご相談はお気軽に
           </h2>
           <p className="text-sm mb-10 leading-relaxed" style={{ color: 'var(--color-muted)' }}>

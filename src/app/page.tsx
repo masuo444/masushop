@@ -70,87 +70,119 @@ export default function HomePage() {
       {/* ===== HERO ===== */}
       <section
         style={{
-          background: '#1A1A1A',
-          color: '#FAF8F5',
-          padding: 'clamp(4rem, 10vw, 8rem) 1.5rem',
+          background: '#2C2420',
+          color: '#FAFAF7',
         }}
       >
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <p className="section-label" style={{ color: 'var(--color-muted)' }}>
-            JAPANESE WOODEN MASU
-          </p>
-          <h1
+        <div
+          style={{
+            maxWidth: 900,
+            margin: '0 auto',
+            padding: 'clamp(5rem, 12vw, 10rem) 1.5rem',
+            textAlign: 'center',
+          }}
+        >
+          <p
+            className="serif"
             style={{
-              fontFamily: 'var(--font-serif-jp), Georgia, serif',
-              fontSize: 'clamp(2rem, 5vw, 3.25rem)',
-              fontWeight: 300,
-              lineHeight: 1.4,
+              fontSize: 'clamp(5rem, 12vw, 8rem)',
+              lineHeight: 1,
               marginBottom: '1.5rem',
+              letterSpacing: '0.08em',
+              color: '#FAFAF7',
             }}
           >
-            枡（ます）— 国産ヒノキ枡の専門店
+            枡
+          </p>
+          <h1
+            className="serif"
+            style={{
+              fontSize: 'clamp(1.2rem, 3vw, 1.75rem)',
+              fontWeight: 300,
+              lineHeight: 1.6,
+              marginBottom: '1.25rem',
+              letterSpacing: '0.1em',
+            }}
+          >
+            国産ヒノキ枡の専門店
           </h1>
           <p
             style={{
-              fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-              lineHeight: 1.9,
-              color: '#B0ADA8',
-              maxWidth: 640,
-              marginBottom: '2.5rem',
+              fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
+              lineHeight: 2,
+              color: '#A09A92',
+              maxWidth: 540,
+              margin: '0 auto 3rem',
             }}
           >
-            1300年の歴史を持つ日本の伝統工芸品。岐阜県大垣市の職人が国産ヒノキで仕上げる枡を、全7サイズ取り揃え。名入れ（焼印・レーザー・シルク）、法人ノベルティ、オーダーメイドに対応しています。
+            約1300年の歴史を持つ日本の木の器。
+            <br />
+            岐阜県大垣市の職人が、国産ヒノキで一つひとつ仕上げます。
           </p>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/guide" className="btn-primary">
-              枡の選び方ガイド
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/products" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
+              商品を見る
             </Link>
             <Link
-              href="/products"
+              href="/guide"
               className="btn-outline"
-              style={{ color: '#FAF8F5', borderColor: '#555' }}
+              style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
             >
-              商品を見る
+              選び方ガイド
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ===== QUICK ANSWER (AIO) ===== */}
-      <section style={{ padding: '4rem 1.5rem' }}>
+      {/* ===== 枡とは (AIO) ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div
           style={{
-            maxWidth: 720,
+            maxWidth: 860,
             margin: '0 auto',
-            background: 'var(--color-subtle)',
-            border: '1px solid var(--color-border)',
-            padding: 'clamp(1.5rem, 3vw, 2.5rem)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 2fr',
+            gap: 'clamp(2rem, 4vw, 4rem)',
+            alignItems: 'start',
           }}
+          className="max-md:!grid-cols-1"
         >
-          <p className="section-label">WHAT IS MASU?</p>
           <h2
+            className="serif"
             style={{
-              fontFamily: 'var(--font-serif-jp), Georgia, serif',
-              fontSize: '1.25rem',
+              fontSize: 'clamp(1.5rem, 3vw, 2rem)',
               fontWeight: 400,
-              marginBottom: '0.75rem',
+              letterSpacing: '0.08em',
+              lineHeight: 1.5,
             }}
           >
-            枡（ます）とは？
+            枡とは
           </h2>
-          <p style={{ lineHeight: 1.9, color: 'var(--foreground)' }}>
-            枡（ます）は、国産ヒノキ（檜）で作られる日本の伝統的な木製の器です。漢字では「枡」「升」「桝」と表記されますが、いずれも同じものを指します。約1300年前から穀物や液体の計量器として使われ、現在では日本酒の酒器、ギフト、インテリア、企業ノベルティとして幅広く親しまれています。「益す」に通じる縁起物としても知られています。
-          </p>
+          <div
+            style={{
+              borderLeft: '4px solid var(--color-accent)',
+              paddingLeft: 'clamp(1.25rem, 2vw, 2rem)',
+            }}
+          >
+            <p style={{ lineHeight: 2, color: 'var(--foreground)' }}>
+              枡（ます）は、国産ヒノキ（檜）で作られる日本の伝統的な木製の器です。漢字では「枡」「升」「桝」と表記されますが、いずれも同じものを指します。約1300年前から穀物や液体の計量器として使われ、現在では日本酒の酒器、ギフト、インテリア、企業ノベルティとして幅広く親しまれています。「益す」に通じる縁起物としても知られています。
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ===== SIZE OVERVIEW ===== */}
-      <section style={{ padding: '3rem 1.5rem 4rem' }}>
+      {/* ===== サイズ一覧 ===== */}
+      <section style={{ padding: 'clamp(3rem, 6vw, 5rem) 1.5rem' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <p className="section-label">ALL 7 SIZES</p>
-          <h2 className="section-title" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', marginBottom: '2rem' }}>
+          <h2
+            className="serif section-title"
+            style={{ marginBottom: '0.75rem' }}
+          >
             枡の全サイズ一覧
           </h2>
+          <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', marginBottom: '2.5rem', lineHeight: 1.8 }}>
+            三勺から一升まで、全7サイズを取り揃えています。
+          </p>
 
           {/* Desktop table */}
           <div className="hidden md:block" style={{ overflowX: 'auto' }}>
@@ -163,9 +195,8 @@ export default function HomePage() {
                       style={{
                         textAlign: 'left',
                         padding: '0.75rem 0.5rem',
-                        fontSize: '10px',
-                        letterSpacing: '0.15em',
-                        textTransform: 'uppercase',
+                        fontSize: '0.75rem',
+                        letterSpacing: '0.08em',
                         color: 'var(--color-muted)',
                         fontWeight: 400,
                       }}
@@ -176,14 +207,20 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody>
-                {masuSizes.map((s) => (
-                  <tr key={s.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td style={{ padding: '0.75rem 0.5rem', fontWeight: 500 }}>{s.name}</td>
-                    <td style={{ padding: '0.75rem 0.5rem', color: 'var(--color-muted)' }}>{s.reading}</td>
-                    <td style={{ padding: '0.75rem 0.5rem' }}>{s.size}</td>
-                    <td style={{ padding: '0.75rem 0.5rem' }}>{s.capacity}</td>
-                    <td style={{ padding: '0.75rem 0.5rem', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{s.capacityNote}</td>
-                    <td style={{ padding: '0.75rem 0.5rem', fontSize: '0.85rem' }}>{s.use}</td>
+                {masuSizes.map((s, i) => (
+                  <tr
+                    key={s.id}
+                    style={{
+                      borderBottom: '1px solid var(--color-border)',
+                      background: i % 2 === 1 ? 'var(--color-subtle)' : 'transparent',
+                    }}
+                  >
+                    <td className="serif" style={{ padding: '0.85rem 0.5rem', fontWeight: 500 }}>{s.name}</td>
+                    <td style={{ padding: '0.85rem 0.5rem', color: 'var(--color-muted)' }}>{s.reading}</td>
+                    <td style={{ padding: '0.85rem 0.5rem' }}>{s.size}</td>
+                    <td style={{ padding: '0.85rem 0.5rem' }}>{s.capacity}</td>
+                    <td style={{ padding: '0.85rem 0.5rem', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{s.capacityNote}</td>
+                    <td style={{ padding: '0.85rem 0.5rem', fontSize: '0.85rem' }}>{s.use}</td>
                   </tr>
                 ))}
               </tbody>
@@ -196,13 +233,12 @@ export default function HomePage() {
               <div
                 key={s.id}
                 style={{
-                  border: '1px solid var(--color-border)',
-                  padding: '1.25rem',
-                  background: 'var(--color-subtle)',
+                  borderBottom: '1px solid var(--color-border)',
+                  paddingBottom: '1.25rem',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.5rem' }}>
-                  <h3 style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', fontWeight: 500, fontSize: '1.1rem' }}>
+                  <h3 className="serif" style={{ fontWeight: 500, fontSize: '1.1rem' }}>
                     {s.name}
                   </h3>
                   <span style={{ color: 'var(--color-muted)', fontSize: '0.8rem' }}>{s.reading}</span>
@@ -220,234 +256,259 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== USE CASE CARDS ===== */}
-      <section style={{ padding: '4rem 1.5rem' }}>
+      {/* ===== 枡の用途 ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <p className="section-label">USE CASES</p>
-          <h2 className="section-title" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', marginBottom: '2rem' }}>
+          <h2
+            className="serif section-title"
+            style={{ marginBottom: '2.5rem' }}
+          >
             枡の用途
           </h2>
+
+          {/* Featured item */}
+          <Link
+            href={useCases[0].href}
+            style={{
+              display: 'block',
+              background: 'var(--color-subtle)',
+              padding: 'clamp(2rem, 4vw, 3rem)',
+              marginBottom: '2rem',
+              textDecoration: 'none',
+              color: 'inherit',
+              transition: 'background 0.4s',
+            }}
+          >
+            <h3
+              className="serif"
+              style={{
+                fontWeight: 500,
+                fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
+                marginBottom: '0.75rem',
+              }}
+            >
+              {useCases[0].title}
+            </h3>
+            <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', maxWidth: 640 }}>
+              {useCases[0].desc}
+            </p>
+            <span style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.85rem', color: 'var(--color-accent)' }}>
+              詳しく見る →
+            </span>
+          </Link>
+
+          {/* Remaining items in 2-col grid */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(2, 1fr)',
               gap: '1.5rem',
             }}
+            className="max-sm:!grid-cols-1"
           >
-            {useCases.map((uc) => (
+            {useCases.slice(1).map((uc) => (
               <Link
                 key={uc.title}
                 href={uc.href}
-                className="block border border-[var(--color-border)] p-8 no-underline text-inherit transition-colors hover:border-[var(--color-accent)]"
+                style={{
+                  display: 'block',
+                  padding: '1.5rem 0',
+                  borderBottom: '1px solid var(--color-border)',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
               >
                 <h3
+                  className="serif"
                   style={{
-                    fontFamily: 'var(--font-serif-jp), Georgia, serif',
                     fontWeight: 500,
-                    fontSize: '1.1rem',
-                    marginBottom: '0.75rem',
+                    fontSize: '1.05rem',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   {uc.title}
                 </h3>
-                <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
+                <p style={{ fontSize: '0.85rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
                   {uc.desc}
                 </p>
+                <span style={{ display: 'inline-block', marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--color-accent)' }}>
+                  →
+                </span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== SELECTION GUIDE PREVIEW ===== */}
-      <section style={{ padding: '4rem 1.5rem' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <p className="section-label">SELECTION GUIDE</p>
-          <h2 className="section-title" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', marginBottom: '2rem' }}>
+      {/* ===== 選び方ガイド ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
+        <div style={{ maxWidth: 860, margin: '0 auto' }}>
+          <h2
+            className="serif section-title"
+            style={{ marginBottom: '2.5rem' }}
+          >
             用途別・選び方ガイド
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             {selectionGuide.slice(0, 4).map((item) => (
               <div
                 key={item.purpose}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '1rem',
-                  padding: '1.5rem',
-                  background: 'var(--color-subtle)',
-                  border: '1px solid var(--color-border)',
+                  gridTemplateColumns: '1fr 1.5fr',
+                  gap: '2rem',
+                  padding: '1.5rem 0',
+                  borderBottom: '1px solid var(--color-border)',
+                  alignItems: 'start',
                 }}
-                className="max-sm:!grid-cols-1"
+                className="max-sm:!grid-cols-1 max-sm:!gap-2"
               >
+                <p style={{ fontWeight: 500, fontSize: '0.95rem' }}>{item.purpose}</p>
                 <div>
-                  <p style={{ fontSize: '0.75rem', letterSpacing: '0.1em', color: 'var(--color-muted)', marginBottom: '0.25rem', textTransform: 'uppercase' }}>
-                    用途
+                  <p style={{ fontWeight: 500, color: 'var(--color-accent)', marginBottom: '0.25rem', fontSize: '0.95rem' }}>
+                    {item.recommended}
                   </p>
-                  <p style={{ fontWeight: 500 }}>{item.purpose}</p>
-                </div>
-                <div>
-                  <p style={{ fontSize: '0.75rem', letterSpacing: '0.1em', color: 'var(--color-muted)', marginBottom: '0.25rem', textTransform: 'uppercase' }}>
-                    おすすめ
+                  <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: 1.8 }}>
+                    {item.reason}
                   </p>
-                  <p style={{ fontWeight: 500, color: 'var(--color-accent)', marginBottom: '0.25rem' }}>{item.recommended}</p>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: 1.7 }}>{item.reason}</p>
                 </div>
               </div>
             ))}
           </div>
-          <Link href="/guide" className="btn-outline">
-            選び方ガイドをすべて見る
-          </Link>
+          <div style={{ marginTop: '2.5rem' }}>
+            <Link href="/guide" className="btn-outline">
+              選び方ガイドをすべて見る
+            </Link>
+          </div>
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== WHY BUY FROM US ===== */}
-      <section style={{ padding: '4rem 1.5rem' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <p className="section-label">FEATURES</p>
-          <h2 className="section-title" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', marginBottom: '2rem' }}>
+      {/* ===== 当店の特長 ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <h2
+            className="serif section-title"
+            style={{ marginBottom: '3rem' }}
+          >
             当店の特長
           </h2>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {features.map((f) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+            {features.map((f, i) => (
               <div
                 key={f.title}
                 style={{
-                  padding: '1.5rem',
-                  border: '1px solid var(--color-border)',
+                  display: 'grid',
+                  gridTemplateColumns: '3rem 1fr',
+                  gap: '1.5rem',
+                  alignItems: 'start',
                 }}
               >
-                <h3
+                <span
+                  className="serif"
                   style={{
-                    fontFamily: 'var(--font-serif-jp), Georgia, serif',
-                    fontWeight: 500,
-                    fontSize: '1rem',
-                    marginBottom: '0.75rem',
+                    fontSize: '1.75rem',
+                    fontWeight: 300,
+                    color: 'var(--color-accent)',
+                    lineHeight: 1.3,
                   }}
                 >
-                  {f.title}
-                </h3>
-                <p style={{ fontSize: '0.85rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
-                  {f.desc}
-                </p>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3
+                    className="serif"
+                    style={{
+                      fontWeight: 500,
+                      fontSize: '1.05rem',
+                      marginBottom: '0.5rem',
+                    }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)' }}>
+                    {f.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== REVIEWS ===== */}
+      {/* ===== お客様の声 ===== */}
       <ReviewSection />
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== PURCHASE CATEGORIES ===== */}
-      <section style={{ padding: '4rem 1.5rem' }}>
+      {/* ===== ご購入について ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <p className="section-label">PURCHASE</p>
-          <h2 className="section-title" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', marginBottom: '2rem' }}>
+          <h2
+            className="serif section-title"
+            style={{ marginBottom: '3rem' }}
+          >
             ご購入について
           </h2>
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-              gap: '1.5rem',
+              gridTemplateColumns: '1fr 1px 1fr',
+              gap: '3rem',
             }}
+            className="max-md:!grid-cols-1 max-md:!gap-8"
           >
-            {/* Standard masu */}
-            <div
-              style={{
-                padding: '2rem',
-                border: '1px solid var(--color-border)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <p
-                  style={{
-                    fontSize: '10px',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-muted)',
-                    marginBottom: '0.75rem',
-                  }}
-                >
-                  FOR BUSINESS
-                </p>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-serif-jp), Georgia, serif',
-                    fontWeight: 500,
-                    fontSize: '1.15rem',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  無垢の枡（法人・団体・まとめ買い）
-                </h3>
-                <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--color-muted)', marginBottom: '1.5rem' }}>
-                  10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー・シルク）にも対応。まとめ買いほどお得に。企業ノベルティ、記念品、イベント用途に最適です。
-                </p>
-              </div>
-              <Link href="/business" className="btn-primary" style={{ alignSelf: 'flex-start' }}>
+            {/* 無垢の枡 */}
+            <div>
+              <h3
+                className="serif"
+                style={{
+                  fontWeight: 500,
+                  fontSize: '1.15rem',
+                  marginBottom: '1rem',
+                }}
+              >
+                無垢の枡
+              </h3>
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '0.5rem' }}>
+                法人・団体・まとめ買い
+              </p>
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
+                10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー・シルク）にも対応。まとめ買いほどお得に。企業ノベルティ、記念品、イベント用途に最適です。
+              </p>
+              <Link href="/business" className="btn-primary">
                 法人・大口注文
               </Link>
             </div>
 
-            {/* FOMUS original */}
+            {/* Vertical separator */}
             <div
-              style={{
-                padding: '2rem',
-                border: '1px solid var(--color-border)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <p
-                  style={{
-                    fontSize: '10px',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-muted)',
-                    marginBottom: '0.75rem',
-                  }}
-                >
-                  FOR INDIVIDUALS
-                </p>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-serif-jp), Georgia, serif',
-                    fontWeight: 500,
-                    fontSize: '1.15rem',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  FOMUS オリジナル枡
-                </h3>
-                <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--color-muted)', marginBottom: '1.5rem' }}>
-                  FOMUSロゴ入り枡・オリジナルデザイン枡は1個から購入可能。首飾り枡、枡バッジ、アート枡など、ユニークな製品を取り揃え。個人のお客様もお気軽にどうぞ。
-                </p>
-              </div>
-              <Link href="/products" className="btn-accent" style={{ alignSelf: 'flex-start' }}>
+              style={{ background: 'var(--color-border)' }}
+              className="max-md:!hidden"
+            />
+
+            {/* Horizontal separator for mobile */}
+            <div
+              className="md:!hidden"
+              style={{ height: 1, background: 'var(--color-border)' }}
+            />
+
+            {/* FOMUSオリジナル枡 */}
+            <div>
+              <h3
+                className="serif"
+                style={{
+                  fontWeight: 500,
+                  fontSize: '1.15rem',
+                  marginBottom: '1rem',
+                }}
+              >
+                FOMUSオリジナル枡
+              </h3>
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '0.5rem' }}>
+                個人のお客様・1個から購入可能
+              </p>
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
+                FOMUSロゴ入り枡・オリジナルデザイン枡は1個から購入可能。首飾り枡、枡バッジ、アート枡など、ユニークな製品を取り揃え。個人のお客様もお気軽にどうぞ。
+              </p>
+              <Link href="/products" className="btn-accent">
                 商品を見る
               </Link>
             </div>
@@ -455,47 +516,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== KNOWLEDGE HUB ===== */}
-      <section style={{ padding: '4rem 1.5rem' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <p className="section-label">KNOWLEDGE</p>
-          <h2 className="section-title" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', marginBottom: '2rem' }}>
+      {/* ===== 枡を知る ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
+        <div style={{ maxWidth: 860, margin: '0 auto' }}>
+          <h2
+            className="serif section-title"
+            style={{ marginBottom: '2.5rem' }}
+          >
             枡を知る
           </h2>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {knowledgeLinks.map((kl) => (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {knowledgeLinks.map((kl, i) => (
               <Link
                 key={kl.title}
                 href={kl.href}
                 style={{
-                  display: 'block',
-                  padding: '1.5rem',
-                  background: 'var(--color-subtle)',
-                  border: '1px solid var(--color-border)',
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 2fr',
+                  gap: '2rem',
+                  padding: '1.5rem 0',
+                  borderBottom: i < knowledgeLinks.length - 1 ? '1px solid var(--color-border)' : 'none',
                   textDecoration: 'none',
                   color: 'inherit',
-                  transition: 'border-color 0.3s',
+                  alignItems: 'baseline',
+                  transition: 'color 0.3s',
                 }}
+                className="max-sm:!grid-cols-1 max-sm:!gap-1"
               >
                 <h3
+                  className="serif"
                   style={{
-                    fontFamily: 'var(--font-serif-jp), Georgia, serif',
                     fontWeight: 500,
                     fontSize: '1rem',
-                    marginBottom: '0.5rem',
                   }}
                 >
                   {kl.title}
                 </h3>
-                <p style={{ fontSize: '0.85rem', lineHeight: 1.7, color: 'var(--color-muted)' }}>
+                <p style={{ fontSize: '0.85rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
                   {kl.desc}
                 </p>
               </Link>
@@ -504,27 +561,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== AI MASU FINDER ===== */}
-      <section style={{ padding: '4rem 1.5rem', background: 'var(--color-subtle)' }}>
-        <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-          <p className="section-label">AI MASU FINDER</p>
+      {/* ===== 枡診断 ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem', background: 'var(--color-accent-light)' }}>
+        <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
           <h2
-            className="section-title"
-            style={{
-              fontFamily: 'var(--font-serif-jp), Georgia, serif',
-              marginBottom: '1rem',
-            }}
+            className="serif section-title"
+            style={{ marginBottom: '1rem' }}
           >
-            あなたにぴったりの枡は？
+            あなたに合う枡を見つける
           </h2>
           <p
             style={{
               fontSize: '0.9rem',
-              lineHeight: 1.8,
+              lineHeight: 1.9,
               color: 'var(--color-muted)',
-              marginBottom: '2rem',
+              marginBottom: '2.5rem',
             }}
           >
             用途やこだわりに合わせて、最適な枡サイズを診断します。3つの質問に答えるだけで、あなたにぴったりの枡が見つかります。
@@ -535,13 +586,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== FAQ PREVIEW ===== */}
-      <section style={{ padding: '4rem 1.5rem' }}>
+      {/* ===== よくあるご質問 ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
-          <p className="section-label">FAQ</p>
-          <h2 className="section-title" style={{ fontFamily: 'var(--font-serif-jp), Georgia, serif', marginBottom: '2rem' }}>
+          <h2
+            className="serif section-title"
+            style={{ marginBottom: '2.5rem' }}
+          >
             よくあるご質問
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -558,7 +609,7 @@ export default function HomePage() {
                     cursor: 'pointer',
                     fontWeight: 500,
                     fontSize: '0.95rem',
-                    lineHeight: 1.6,
+                    lineHeight: 1.7,
                     listStyle: 'none',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -566,13 +617,13 @@ export default function HomePage() {
                   }}
                 >
                   {item.q}
-                  <span style={{ color: 'var(--color-muted)', fontSize: '1.25rem', marginLeft: '1rem', flexShrink: 0 }}>+</span>
+                  <span style={{ color: 'var(--color-muted)', fontSize: '1.1rem', marginLeft: '1rem', flexShrink: 0 }}>+</span>
                 </summary>
                 <p
                   style={{
                     marginTop: '0.75rem',
                     fontSize: '0.9rem',
-                    lineHeight: 1.9,
+                    lineHeight: 2,
                     color: 'var(--color-muted)',
                   }}
                 >
@@ -581,39 +632,43 @@ export default function HomePage() {
               </details>
             ))}
           </div>
-          <div style={{ marginTop: '2rem' }}>
+          <div style={{ marginTop: '2.5rem' }}>
             <Link href="/guide#faq" className="btn-outline">
-              FAQをすべて見る
+              質問をすべて見る
             </Link>
           </div>
         </div>
       </section>
 
-      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
-
-      {/* ===== CTA ===== */}
+      {/* ===== CTA お問い合わせ ===== */}
       <section
         style={{
-          padding: '5rem 1.5rem',
+          padding: 'clamp(4rem, 10vw, 7rem) 1.5rem',
+          background: '#2C2420',
+          color: '#FAFAF7',
           textAlign: 'center',
         }}
       >
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
-          <p className="section-label">CONTACT</p>
           <h2
+            className="serif"
             style={{
-              fontFamily: 'var(--font-serif-jp), Georgia, serif',
               fontSize: 'clamp(1.5rem, 3.5vw, 2rem)',
-              fontWeight: 300,
+              fontWeight: 400,
               marginBottom: '1rem',
+              letterSpacing: '0.06em',
             }}
           >
             お見積り・ご相談
           </h2>
-          <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--color-muted)', marginBottom: '2rem' }}>
+          <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: '#A09A92', marginBottom: '2.5rem' }}>
             名入れ枡、法人向け大口注文、オーダーメイドなど、お気軽にご相談ください。
           </p>
-          <Link href="/custom" className="btn-accent">
+          <Link
+            href="/custom"
+            className="btn-primary"
+            style={{ background: '#FAFAF7', color: '#2C2420' }}
+          >
             お問い合わせ
           </Link>
         </div>
