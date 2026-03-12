@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { masuSizes, selectionGuide, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
@@ -76,60 +77,81 @@ export default function HomePage() {
       >
         <div
           style={{
-            maxWidth: 900,
+            maxWidth: 1100,
             margin: '0 auto',
-            padding: 'clamp(5rem, 12vw, 10rem) 1.5rem',
-            textAlign: 'center',
+            padding: 'clamp(4rem, 10vw, 8rem) 1.5rem',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'clamp(2rem, 5vw, 5rem)',
+            alignItems: 'center',
           }}
+          className="max-md:!grid-cols-1 max-md:!text-center"
         >
-          <p
-            className="serif"
-            style={{
-              fontSize: 'clamp(5rem, 12vw, 8rem)',
-              lineHeight: 1,
-              marginBottom: '1.5rem',
-              letterSpacing: '0.08em',
-              color: '#FAFAF7',
-            }}
-          >
-            枡
-          </p>
-          <h1
-            className="serif"
-            style={{
-              fontSize: 'clamp(1.2rem, 3vw, 1.75rem)',
-              fontWeight: 300,
-              lineHeight: 1.6,
-              marginBottom: '1.25rem',
-              letterSpacing: '0.1em',
-            }}
-          >
-            国産ヒノキ枡の専門店
-          </h1>
-          <p
-            style={{
-              fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
-              lineHeight: 2,
-              color: '#A09A92',
-              maxWidth: 540,
-              margin: '0 auto 3rem',
-            }}
-          >
-            約1300年の歴史を持つ日本の木の器。
-            <br />
-            岐阜県大垣市の職人が、国産ヒノキで一つひとつ仕上げます。
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/products" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
-              商品を見る
-            </Link>
-            <Link
-              href="/guide"
-              className="btn-outline"
-              style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
+          <div>
+            <p
+              className="serif"
+              style={{
+                fontSize: 'clamp(4rem, 10vw, 6rem)',
+                lineHeight: 1,
+                marginBottom: '1.25rem',
+                letterSpacing: '0.08em',
+                color: '#FAFAF7',
+              }}
             >
-              選び方ガイド
-            </Link>
+              枡
+            </p>
+            <h1
+              className="serif"
+              style={{
+                fontSize: 'clamp(1.2rem, 3vw, 1.75rem)',
+                fontWeight: 300,
+                lineHeight: 1.6,
+                marginBottom: '1.25rem',
+                letterSpacing: '0.1em',
+              }}
+            >
+              国産ヒノキ枡の専門店
+            </h1>
+            <p
+              style={{
+                fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
+                lineHeight: 2,
+                color: '#A09A92',
+                maxWidth: 440,
+                marginBottom: '2.5rem',
+              }}
+            >
+              約1300年の歴史を持つ日本の木の器。
+              <br />
+              岐阜県大垣市の職人が、国産ヒノキで一つひとつ仕上げます。
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="max-md:!justify-center">
+              <Link href="/products" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
+                商品を見る
+              </Link>
+              <Link
+                href="/guide"
+                className="btn-outline"
+                style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
+              >
+                選び方ガイド
+              </Link>
+            </div>
+          </div>
+          <div className="max-md:!order-first">
+            <Image
+              src="/images/masu-crest.jpg"
+              alt="国産ヒノキ枡 — 枡の専門店 MASU-STORE"
+              width={600}
+              height={600}
+              priority
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxWidth: 480,
+                margin: '0 auto',
+              }}
+            />
           </div>
         </div>
       </section>
@@ -168,6 +190,35 @@ export default function HomePage() {
               枡（ます）は、国産ヒノキ（檜）で作られる日本の伝統的な木製の器です。漢字では「枡」「升」「桝」と表記されますが、いずれも同じものを指します。約1300年前から穀物や液体の計量器として使われ、現在では日本酒の酒器、ギフト、インテリア、企業ノベルティとして幅広く親しまれています。「益す」に通じる縁起物としても知られています。
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* ===== フォトギャラリー ===== */}
+      <section style={{ padding: '0 1.5rem' }}>
+        <div
+          style={{
+            maxWidth: 960,
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '0.5rem',
+          }}
+          className="max-sm:!grid-cols-2"
+        >
+          {[
+            { src: '/images/masu-front.jpg', alt: '国産ヒノキ枡 正面' },
+            { src: '/images/masu-angle.jpg', alt: '国産ヒノキ枡 斜め' },
+            { src: '/images/masu-top.jpg', alt: '国産ヒノキ枡 上から' },
+          ].map((img) => (
+            <Image
+              key={img.src}
+              src={img.src}
+              alt={img.alt}
+              width={400}
+              height={400}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          ))}
         </div>
       </section>
 

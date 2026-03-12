@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
@@ -159,6 +160,13 @@ export default async function ProductsPage() {
               }}
             >
               <div>
+                <Image
+                  src="/images/masu-angle.jpg"
+                  alt={`${m.name} — 国産ヒノキ枡`}
+                  width={300}
+                  height={300}
+                  style={{ width: '100%', height: 'auto', marginBottom: '1rem' }}
+                />
                 <h3 className="mb-1 text-lg font-medium" style={{ color: 'var(--foreground)' }}>
                   {m.name}
                 </h3>
