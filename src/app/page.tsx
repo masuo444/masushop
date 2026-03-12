@@ -41,7 +41,7 @@ const useCases = [
 
 const features = [
   { title: '全7サイズ取り揃え', desc: '三勺枡（54ml）から一升枡（1800ml）まで、用途に合った枡が必ず見つかります。' },
-  { title: '名入れ3種対応', desc: '焼印（伝統技法）・レーザー刻印（写真表現可）・シルクプリント（カラー対応）。' },
+  { title: '名入れ2種対応', desc: '焼印（伝統技法・味わいある焦げ茶の仕上がり）・レーザー刻印（写真・QRコード対応）。' },
   { title: '法人・大口注文対応', desc: '無垢枡10個から、オリジナル枡1個から注文可能。まとめ買いほどお得に。100個以上は数量割引をご案内。' },
   { title: 'JPYC暗号資産決済対応', desc: 'クレジットカードに加え、JPYC（日本円ステーブルコイン）でのお支払いが可能です。' },
 ]
@@ -178,80 +178,50 @@ export default function HomePage() {
             className="serif section-title"
             style={{ marginBottom: '0.75rem' }}
           >
-            枡の全サイズ一覧
+            全7サイズ取り揃え
           </h2>
           <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', marginBottom: '2.5rem', lineHeight: 1.8 }}>
-            三勺から一升まで、全7サイズを取り揃えています。
+            三勺（54ml）から一升（1800ml）まで、用途に合った枡をお選びいただけます。
           </p>
 
-          {/* Desktop table */}
-          <div className="hidden md:block" style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
-                  {['サイズ名', '読み方', '外寸', '容量', '目安', 'おすすめ用途'].map((h) => (
-                    <th
-                      key={h}
-                      style={{
-                        textAlign: 'left',
-                        padding: '0.75rem 0.5rem',
-                        fontSize: '0.75rem',
-                        letterSpacing: '0.08em',
-                        color: 'var(--color-muted)',
-                        fontWeight: 400,
-                      }}
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {masuSizes.map((s, i) => (
-                  <tr
-                    key={s.id}
-                    style={{
-                      borderBottom: '1px solid var(--color-border)',
-                      background: i % 2 === 1 ? 'var(--color-subtle)' : 'transparent',
-                    }}
-                  >
-                    <td className="serif" style={{ padding: '0.85rem 0.5rem', fontWeight: 500 }}>{s.name}</td>
-                    <td style={{ padding: '0.85rem 0.5rem', color: 'var(--color-muted)' }}>{s.reading}</td>
-                    <td style={{ padding: '0.85rem 0.5rem' }}>{s.size}</td>
-                    <td style={{ padding: '0.85rem 0.5rem' }}>{s.capacity}</td>
-                    <td style={{ padding: '0.85rem 0.5rem', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{s.capacityNote}</td>
-                    <td style={{ padding: '0.85rem 0.5rem', fontSize: '0.85rem' }}>{s.use}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Mobile cards */}
-          <div className="md:hidden" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.75rem',
+            }}
+          >
             {masuSizes.map((s) => (
-              <div
+              <Link
                 key={s.id}
+                href={`/products/${s.id}`}
+                className="serif"
                 style={{
-                  borderBottom: '1px solid var(--color-border)',
-                  paddingBottom: '1.25rem',
+                  padding: '0.75rem 1.5rem',
+                  border: '1px solid var(--color-border)',
+                  textDecoration: 'none',
+                  color: 'var(--foreground)',
+                  fontSize: '1rem',
+                  fontWeight: 500,
+                  transition: 'all 0.3s',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.5rem' }}>
-                  <h3 className="serif" style={{ fontWeight: 500, fontSize: '1.1rem' }}>
-                    {s.name}
-                  </h3>
-                  <span style={{ color: 'var(--color-muted)', fontSize: '0.8rem' }}>{s.reading}</span>
-                </div>
-                <p style={{ fontSize: '0.85rem', marginBottom: '0.25rem' }}>
-                  <span style={{ color: 'var(--color-muted)' }}>外寸</span> {s.size}
-                </p>
-                <p style={{ fontSize: '0.85rem', marginBottom: '0.25rem' }}>
-                  <span style={{ color: 'var(--color-muted)' }}>容量</span> {s.capacity}（{s.capacityNote}）
-                </p>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)' }}>{s.use}</p>
-              </div>
+                {s.name}
+              </Link>
             ))}
+          </div>
+
+          <div style={{ marginTop: '2rem' }}>
+            <Link
+              href="/products#standard"
+              style={{
+                fontSize: '0.85rem',
+                color: 'var(--color-accent)',
+                textDecoration: 'none',
+              }}
+            >
+              サイズ比較・詳細を見る →
+            </Link>
           </div>
         </div>
       </section>
@@ -471,7 +441,7 @@ export default function HomePage() {
                 法人・団体・まとめ買い
               </p>
               <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
-                10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー・シルク）にも対応。まとめ買いほどお得に。企業ノベルティ、記念品、イベント用途に最適です。
+                10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー刻印）にも対応。まとめ買いほどお得に。企業ノベルティ、記念品、イベント用途に最適です。
               </p>
               <Link href="/business" className="btn-primary">
                 法人・大口注文
