@@ -50,7 +50,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       name: `${product.name}（${method.name}）`,
       offers: {
         '@type': 'Offer',
-        price: product.priceFrom + method.price,
+        price: product.priceFrom + method.pricePerUnit,
         priceCurrency: 'JPY',
         availability: 'https://schema.org/InStock',
       },
@@ -62,7 +62,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       name: `${product.name}（蓋付き）`,
       offers: {
         '@type': 'Offer',
-        price: product.priceFrom + optionPrices.lid,
+        price: product.priceFrom + (product.id === 'sanjaku' ? optionPrices.lid.sanjaku : optionPrices.lid.ichigo),
         priceCurrency: 'JPY',
         availability: 'https://schema.org/InStock',
       },

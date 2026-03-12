@@ -9,14 +9,17 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
   const [engraving, setEngraving] = useState('none')
   const [coating, setCoating] = useState(false)
   const [lid, setLid] = useState(false)
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(10)
 
   const selectedEngraving = engravingMethods.find((m) => m.id === engraving)
-  const engravingPrice = selectedEngraving?.price ?? 0
+  const engravingPerUnit = selectedEngraving?.pricePerUnit ?? 0
+  const engravingSetup = selectedEngraving?.setupFee ?? 0
   const coatingPrice = coating ? optionPrices.coating : 0
-  const lidPrice = lid && product.hasLidOption ? optionPrices.lid : 0
-  const unitPrice = product.priceFrom + engravingPrice + coatingPrice + lidPrice
-  const totalPrice = unitPrice * quantity
+  const lidPrice = lid && product.hasLidOption
+    ? (product.id === 'sanjaku' ? optionPrices.lid.sanjaku : optionPrices.lid.ichigo)
+    : 0
+  const unitPrice = product.priceFrom + engravingPerUnit + coatingPrice + lidPrice
+  const totalPrice = unitPrice * quantity + engravingSetup
 
   const purchaseUrl = `https://shop.fomus.co.jp?product=${product.id}&engraving=${engraving}&coating=${coating ? 'yes' : 'no'}&lid=${lid ? 'yes' : 'no'}&qty=${quantity}`
 
@@ -24,17 +27,18 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
     <div className="space-y-8">
       {/* 価格表示 */}
       <div>
-        <p className="text-xs tracking-wider mb-1" style={{ color: 'var(--color-muted)' }}>
+        <p className="text-xs mb-1" style={{ color: 'var(--color-muted)' }}>
           合計金額（税別）
         </p>
         <p className="text-3xl font-medium tracking-tight" style={{ color: 'var(--color-accent)' }}>
           &yen;{totalPrice.toLocaleString()}
         </p>
-        {quantity > 1 && (
-          <p className="text-xs mt-1" style={{ color: 'var(--color-muted)' }}>
-            &yen;{unitPrice.toLocaleString()} / 個 &times; {quantity}個
-          </p>
-        )}
+        <p className="text-xs mt-1" style={{ color: 'var(--color-muted)' }}>
+          &yen;{unitPrice.toLocaleString()} / 個 &times; {quantity}個
+          {engravingSetup > 0 && (
+            <span> ＋ 金型代 &yen;{engravingSetup.toLocaleString()}</span>
+          )}
+        </p>
       </div>
 
       <div className="divider" />
@@ -63,11 +67,11 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
                 <span className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
                   {method.name}
                 </span>
-                {method.price > 0 && (
-                  <span className="text-xs" style={{ color: 'var(--color-accent)' }}>
-                    +&yen;{method.price.toLocaleString()}
-                  </span>
-                )}
+                <span className="text-xs" style={{ color: 'var(--color-accent)' }}>
+                  {method.id === 'none' && '無料'}
+                  {method.id === 'yakiin' && `金型代 ¥${method.setupFee.toLocaleString()}`}
+                  {method.id === 'laser' && `+¥${method.pricePerUnit.toLocaleString()} / 個`}
+                </span>
               </div>
               {method.description && (
                 <p className="text-xs mt-1 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
@@ -113,7 +117,7 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
               </span>
             </div>
             <span className="text-xs" style={{ color: 'var(--color-accent)' }}>
-              +&yen;{optionPrices.coating.toLocaleString()}
+              +&yen;{optionPrices.coating.toLocaleString()} / 個
             </span>
           </div>
           <p className="text-xs mt-1 ml-8 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
@@ -157,7 +161,7 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
                 </span>
               </div>
               <span className="text-xs" style={{ color: 'var(--color-accent)' }}>
-                +&yen;{optionPrices.lid.toLocaleString()}
+                +&yen;{(product.id === 'sanjaku' ? optionPrices.lid.sanjaku : optionPrices.lid.ichigo).toLocaleString()} / 個
               </span>
             </div>
             <p className="text-xs mt-1 ml-8 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
@@ -173,7 +177,7 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
         <div className="flex items-center gap-4">
           <button
             type="button"
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            onClick={() => setQuantity(Math.max(10, quantity - 1))}
             className="flex h-10 w-10 items-center justify-center rounded-sm text-lg transition-colors"
             style={{
               border: '1px solid var(--color-border)',
@@ -185,13 +189,13 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
           </button>
           <input
             type="number"
-            min={1}
+            min={10}
             value={quantity}
             onChange={(e) => {
               const v = parseInt(e.target.value, 10)
-              if (!isNaN(v) && v >= 1) setQuantity(v)
+              if (!isNaN(v) && v >= 10) setQuantity(v)
             }}
-            className="h-10 w-16 rounded-sm text-center text-sm"
+            className="h-10 w-20 rounded-sm text-center text-sm"
             style={{
               border: '1px solid var(--color-border)',
               background: 'var(--background)',
@@ -212,25 +216,30 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
           </button>
         </div>
         <p className="text-xs mt-2" style={{ color: 'var(--color-muted)' }}>
-          ※ 無垢の枡は10個以上からのご注文となります
+          ※ 10個以上からのご注文となります
         </p>
       </div>
 
       <div className="divider" />
 
       {/* 合計 */}
-      <div className="flex items-end justify-between">
-        <div>
-          <p className="text-xs tracking-wider" style={{ color: 'var(--color-muted)' }}>
+      <div>
+        <div className="flex items-end justify-between mb-1">
+          <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
             合計金額（税別）
           </p>
-          <p className="text-2xl font-medium tracking-tight" style={{ color: 'var(--color-accent)' }}>
-            &yen;{totalPrice.toLocaleString()}
+          <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
+            {quantity}個
           </p>
         </div>
-        <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
-          {quantity}個
+        <p className="text-2xl font-medium tracking-tight" style={{ color: 'var(--color-accent)' }}>
+          &yen;{totalPrice.toLocaleString()}
         </p>
+        {engravingSetup > 0 && (
+          <p className="text-xs mt-1" style={{ color: 'var(--color-muted)' }}>
+            うち金型代 &yen;{engravingSetup.toLocaleString()}（初回のみ）
+          </p>
+        )}
       </div>
 
       {/* 購入ボタン */}
@@ -247,7 +256,7 @@ export default function ProductConfigurator({ product }: { product: MasuSize }) 
           href="/custom"
           className="btn-outline block w-full text-center"
         >
-          お見積り相談
+          お見積り・ご相談
         </Link>
       </div>
     </div>

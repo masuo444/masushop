@@ -109,19 +109,17 @@ export const masuSizes: MasuSize[] = [
 
 // ===== オプション価格データ =====
 export const optionPrices = {
-  engraving: {
-    none: 0,
-    yakiin: 300,
-    laser: 500,
+  coating: 800,         // 特殊コーティング 1個あたり
+  lid: {
+    sanjaku: 600,       // 三勺枡の蓋
+    ichigo: 1000,       // 一合枡の蓋
   },
-  coating: 200,
-  lid: 400,
 }
 
 export const engravingMethods = [
-  { id: 'none', name: 'なし', price: 0, description: '' },
-  { id: 'yakiin', name: '焼印', price: 300, description: '約400度の銅版で押す伝統技法。味わいある焦げ茶色の仕上がり。' },
-  { id: 'laser', name: 'レーザー刻印', price: 500, description: '高精度な彫刻。濃淡表現・写真・QRコードにも対応。' },
+  { id: 'none', name: 'なし', pricePerUnit: 0, setupFee: 0, description: '' },
+  { id: 'yakiin', name: '焼印', pricePerUnit: 0, setupFee: 13000, description: '約400度の銅版で押す伝統技法。味わいある焦げ茶色の仕上がり。金型代として初回13,000円が別途かかります。' },
+  { id: 'laser', name: 'レーザー刻印', pricePerUnit: 150, setupFee: 0, description: '高精度な彫刻。濃淡表現・写真・QRコードにも対応。1個あたり150円。' },
 ]
 
 // ===== 用途別選び方 =====
