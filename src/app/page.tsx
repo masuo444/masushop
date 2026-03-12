@@ -12,31 +12,37 @@ const useCases = [
     title: '日本酒・もっきり',
     desc: 'ヒノキの香りが日本酒を引き立てる。一合枡で注ぐ正統派から、グラスを枡に入れて溢れさせる「もっきり」スタイルまで。',
     href: '/sake',
+    image: '/images/generated/mokkiri.jpg',
   },
   {
     title: 'ギフト・お祝い',
     desc: '「益す＝増す」の縁起物。結婚祝い、出産祝い、還暦祝いに名入れ枡を。ペア枡も人気です。',
     href: '/guide',
+    image: '/images/generated/gift-masu.jpg',
   },
   {
     title: '企業ノベルティ',
     desc: '社名・ロゴを刻印した記念品。周年記念、顧客ギフト、展示会配布に。10個から対応。まとめ買いで割引あり。',
     href: '/business',
+    image: '/images/generated/corporate-masu.jpg',
   },
   {
     title: '節分・鏡開き',
     desc: '節分の豆まきには五合枡、鏡開きの乾杯には一合枡。日本の行事に欠かせない存在です。',
     href: '/history',
+    image: '/images/generated/setsubun-masu.jpg',
   },
   {
     title: 'インテリア',
     desc: 'ペン立て、小物入れ、プランターカバー。ヒノキの温もりが空間に和の趣を加えます。',
     href: '/products',
+    image: '/images/generated/interior-masu.jpg',
   },
   {
     title: '海外ギフト',
     desc: '日本の伝統工芸品として外国の方に喜ばれます。名前をローマ字で刻印するサービスも。',
     href: '/guide',
+    image: '/images/generated/wedding-masu.jpg',
   },
 ]
 
@@ -291,31 +297,41 @@ export default function HomePage() {
           <Link
             href={useCases[0].href}
             style={{
-              display: 'block',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
               background: 'var(--color-subtle)',
-              padding: 'clamp(2rem, 4vw, 3rem)',
-              marginBottom: '2rem',
               textDecoration: 'none',
               color: 'inherit',
-              transition: 'background 0.4s',
+              marginBottom: '2rem',
+              overflow: 'hidden',
             }}
+            className="max-md:!grid-cols-1"
           >
-            <h3
-              className="serif"
-              style={{
-                fontWeight: 500,
-                fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
-                marginBottom: '0.75rem',
-              }}
-            >
-              {useCases[0].title}
-            </h3>
-            <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', maxWidth: 640 }}>
-              {useCases[0].desc}
-            </p>
-            <span style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.85rem', color: 'var(--color-accent)' }}>
-              詳しく見る →
-            </span>
+            <Image
+              src={useCases[0].image}
+              alt={useCases[0].title}
+              width={500}
+              height={400}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+            <div style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <h3
+                className="serif"
+                style={{
+                  fontWeight: 500,
+                  fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                {useCases[0].title}
+              </h3>
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)' }}>
+                {useCases[0].desc}
+              </p>
+              <span style={{ display: 'inline-block', marginTop: '1rem', fontSize: '0.85rem', color: 'var(--color-accent)' }}>
+                詳しく見る →
+              </span>
+            </div>
           </Link>
 
           {/* Remaining items in 2-col grid */}
@@ -333,28 +349,36 @@ export default function HomePage() {
                 href={uc.href}
                 style={{
                   display: 'block',
-                  padding: '1.5rem 0',
-                  borderBottom: '1px solid var(--color-border)',
                   textDecoration: 'none',
                   color: 'inherit',
+                  overflow: 'hidden',
                 }}
               >
-                <h3
-                  className="serif"
-                  style={{
-                    fontWeight: 500,
-                    fontSize: '1.05rem',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  {uc.title}
-                </h3>
-                <p style={{ fontSize: '0.85rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
-                  {uc.desc}
-                </p>
-                <span style={{ display: 'inline-block', marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--color-accent)' }}>
-                  →
-                </span>
+                <Image
+                  src={uc.image}
+                  alt={uc.title}
+                  width={400}
+                  height={250}
+                  style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block' }}
+                />
+                <div style={{ padding: '1.25rem 0' }}>
+                  <h3
+                    className="serif"
+                    style={{
+                      fontWeight: 500,
+                      fontSize: '1.05rem',
+                      marginBottom: '0.5rem',
+                    }}
+                  >
+                    {uc.title}
+                  </h3>
+                  <p style={{ fontSize: '0.85rem', lineHeight: 1.8, color: 'var(--color-muted)' }}>
+                    {uc.desc}
+                  </p>
+                  <span style={{ display: 'inline-block', marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--color-accent)' }}>
+                    →
+                  </span>
+                </div>
               </Link>
             ))}
           </div>

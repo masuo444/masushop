@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
@@ -76,6 +77,17 @@ export default function HistoryPage() {
           枡が歩んだ1300年の歴史をたどります。
         </p>
       </section>
+
+      <div className="max-w-3xl mx-auto px-6 pb-8">
+        <Image
+          src="/images/generated/masu-history.jpg"
+          alt="歴史ある計量用の枡"
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto' }}
+          className="rounded"
+        />
+      </div>
 
       {/* Quick Answer Box */}
       <section className="max-w-3xl mx-auto px-6 pb-16">

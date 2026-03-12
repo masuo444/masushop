@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
@@ -129,6 +130,18 @@ export default function BusinessPage() {
         </div>
       </section>
 
+      {/* Hero Image */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <Image
+          src="/images/generated/corporate-masu.jpg"
+          alt="企業ノベルティ・記念品の枡"
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto' }}
+          className="rounded-sm"
+        />
+      </div>
+
       {/* Quick Answer */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
@@ -189,6 +202,14 @@ export default function BusinessPage() {
               style={{ border: '1px solid var(--color-border)' }}
             >
               <h3 className="text-lg font-medium mb-4">焼印</h3>
+              <Image
+                src="/images/generated/yakiin.jpg"
+                alt="焼印の仕上がり"
+                width={800}
+                height={500}
+                style={{ width: '100%', height: 'auto' }}
+                className="rounded-sm mb-4"
+              />
               <div className="space-y-3 text-sm">
                 <div>
                   <p className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
@@ -223,6 +244,14 @@ export default function BusinessPage() {
               style={{ border: '1px solid var(--color-border)' }}
             >
               <h3 className="text-lg font-medium mb-4">レーザー刻印</h3>
+              <Image
+                src="/images/generated/laser-engraving.jpg"
+                alt="レーザー刻印の精密な仕上がり"
+                width={800}
+                height={500}
+                style={{ width: '100%', height: 'auto' }}
+                className="rounded-sm mb-4"
+              />
               <div className="space-y-3 text-sm">
                 <div>
                   <p className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>

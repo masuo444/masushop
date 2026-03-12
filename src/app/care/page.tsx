@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { careGuide, faqItems } from '@/lib/masu-data'
@@ -85,6 +86,17 @@ export default function CarePage() {
           3つのポイントを押さえて、枡を長持ちさせましょう。
         </p>
       </section>
+
+      <div className="max-w-3xl mx-auto px-6 pb-8">
+        <Image
+          src="/images/generated/masu-care.jpg"
+          alt="枡のお手入れ"
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto' }}
+          className="rounded"
+        />
+      </div>
 
       {/* Quick Answer — 3つのポイント */}
       <section className="max-w-3xl mx-auto px-6 pb-16">

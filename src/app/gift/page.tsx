@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
@@ -149,6 +150,17 @@ export default function GiftPage() {
         </div>
       </section>
 
+      <div className="max-w-3xl mx-auto px-6 pb-8">
+        <Image
+          src="/images/generated/gift-masu.jpg"
+          alt="名入れ枡のギフト"
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto' }}
+          className="rounded-sm"
+        />
+      </div>
+
       {/* ===== QUICK ANSWER (AIO) ===== */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
@@ -279,6 +291,17 @@ export default function GiftPage() {
                 </p>
               </div>
             ))}
+          </div>
+
+          <div className="mb-8">
+            <Image
+              src="/images/generated/wedding-masu.jpg"
+              alt="結婚祝いのペア枡"
+              width={800}
+              height={500}
+              style={{ width: '100%', height: 'auto' }}
+              className="rounded-sm"
+            />
           </div>
 
           {/* Scene detail cards (desktop) */}

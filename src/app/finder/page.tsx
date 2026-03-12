@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
@@ -36,6 +37,18 @@ export default function FinderPage() {
           </p>
         </div>
       </section>
+
+      {/* Decorative Image */}
+      <div className="max-w-md mx-auto px-6 pt-10">
+        <Image
+          src="/images/generated/masu-sizes.jpg"
+          alt="あなたに合う枡を見つける"
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto' }}
+          className="rounded-sm"
+        />
+      </div>
 
       {/* Finder */}
       <section style={{ padding: '4rem 1.5rem' }}>

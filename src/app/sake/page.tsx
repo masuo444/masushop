@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { masuSizes, faqItems } from '@/lib/masu-data'
@@ -91,6 +92,17 @@ export default function SakePage() {
           その理由、もっきりの作法、枡酒の楽しみ方を解説します。
         </p>
       </section>
+
+      <div className="max-w-3xl mx-auto px-6 pb-8">
+        <Image
+          src="/images/generated/mokkiri.jpg"
+          alt="もっきり — グラスから枡に溢れる日本酒"
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto' }}
+          className="rounded"
+        />
+      </div>
 
       {/* Quick Answer */}
       <section className="max-w-3xl mx-auto px-6 pb-16">
@@ -249,6 +261,16 @@ export default function SakePage() {
         <h2 className="serif text-2xl font-light mb-8">
           枡で日本酒を飲む手順
         </h2>
+        <div className="mb-8">
+          <Image
+            src="/images/generated/sake-masu.jpg"
+            alt="枡で日本酒を楽しむ"
+            width={800}
+            height={500}
+            style={{ width: '100%', height: 'auto' }}
+            className="rounded"
+          />
+        </div>
         <div className="space-y-8">
           <div>
             <h3 className="text-base font-medium mb-3">1. 新品の枡の準備</h3>
@@ -270,6 +292,16 @@ export default function SakePage() {
           </div>
           <div>
             <h3 className="text-base font-medium mb-3">4. 塩を縁に置く伝統 — 枡の塩</h3>
+            <div className="my-6">
+              <Image
+                src="/images/generated/masu-salt.jpg"
+                alt="枡の角に塩を盛って日本酒を楽しむ"
+                width={800}
+                height={500}
+                style={{ width: '100%', height: 'auto' }}
+                className="rounded"
+              />
+            </div>
             <p className="text-sm leading-[2.2] text-[var(--foreground)]">
               枡の角に少量の塩を盛って日本酒を飲む「枡の塩」という伝統的な楽しみ方があります。塩をひとなめしてから日本酒を口に含むと、塩の効果で日本酒の甘みや旨味がより鮮明に感じられます。これは料理の味付けにおける塩の役割と同じ原理です。
             </p>

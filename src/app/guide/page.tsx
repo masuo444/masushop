@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { masuSizes, selectionGuide, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
@@ -46,6 +47,18 @@ export default function GuidePage() {
           </p>
         </div>
       </section>
+
+      {/* Hero Image */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <Image
+          src="/images/generated/masu-sizes.jpg"
+          alt="枡の全サイズ比較"
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto' }}
+          className="rounded-sm"
+        />
+      </div>
 
       {/* Quick Answer */}
       <section className="py-16 md:py-20">
