@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
@@ -19,28 +20,53 @@ const baseUrl = siteConfig.url
 
 const originalProducts = [
   {
+    name: 'FOMUSロゴ入り枡',
+    description: 'FOMUSオリジナルロゴ入りのヒノキ枡',
+    sub: '焼印でロゴを刻んだ定番モデル',
+    price: 'お問い合わせ',
+    image: '/images/original/fomus-masu.jpg',
+  },
+  {
     name: '枡の首飾り（MASU NECKLACE）',
     description: '三勺枡をベースにしたウェアラブル枡',
     sub: 'ヒノキの香りを身につける新しいアクセサリー',
     price: 'お問い合わせ',
+    image: '/images/original/masu-necklace.jpg',
   },
   {
     name: '枡バッジ（MASU BADGE）',
     description: 'ミニチュア枡のピンバッジ',
     sub: 'スーツの襟元や帽子に',
     price: 'お問い合わせ',
+    image: '/images/original/masu-badge.jpg',
   },
   {
-    name: 'アート枡',
-    description: 'アーティストとのコラボレーション枡',
-    sub: '限定デザイン',
+    name: 'SILVA — カードゲーム × 枡',
+    description: 'FOMUSオリジナルカードゲームと枡のセット',
+    sub: '枡をカードケースとして使う新しい遊び方',
     price: 'お問い合わせ',
+    image: '/images/original/silva.jpg',
   },
   {
-    name: '枡キャンドル',
-    description: '一合枡にソイキャンドルを注いだインテリアアイテム',
-    sub: 'ヒノキ × キャンドルの香りの融合',
+    name: '七宝焼コラボ枡',
+    description: '伝統工芸・七宝焼とヒノキ枡のコラボレーション',
+    sub: '枡 × ジュエリーの融合',
     price: 'お問い合わせ',
+    image: '/images/original/shippo-collab.jpg',
+  },
+  {
+    name: 'MASUKAME',
+    description: 'ヒノキで作った枡の亀',
+    sub: '枡の技術を活かしたオブジェ',
+    price: 'お問い合わせ',
+    image: '/images/original/masukame.jpg',
+  },
+  {
+    name: '枡タワー',
+    description: '枡を積み上げたディスプレイ・オブジェ',
+    sub: 'イベント・展示会の演出に',
+    price: 'お問い合わせ',
+    image: '/images/original/masu-tower.jpg',
   },
 ]
 
@@ -230,30 +256,39 @@ export default async function ProductsPage() {
           FOMUSが伝統の枡にアート・デザインを掛け合わせたオリジナルプロダクト。FOMUSロゴ入り・オリジナルデザイン枡は1個からお買い求めいただけます。
         </p>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {originalProducts.map((p) => (
             <div
               key={p.name}
-              className="flex flex-col justify-between rounded-sm p-6"
+              className="flex flex-col rounded-sm overflow-hidden"
               style={{
                 border: '1px solid var(--color-border)',
                 background: 'var(--color-subtle)',
               }}
             >
-              <div>
-                <h3 className="mb-2 text-lg font-medium" style={{ color: 'var(--foreground)' }}>
-                  {p.name}
-                </h3>
-                <p className="mb-1 text-sm leading-relaxed" style={{ color: 'var(--foreground)' }}>
-                  {p.description}
-                </p>
-                <p className="mb-4 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                  {p.sub}
+              <Image
+                src={p.image}
+                alt={p.name}
+                width={600}
+                height={600}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+              <div className="flex flex-col justify-between flex-1 p-5">
+                <div>
+                  <h3 className="mb-1 text-base font-medium" style={{ color: 'var(--foreground)' }}>
+                    {p.name}
+                  </h3>
+                  <p className="mb-1 text-sm leading-relaxed" style={{ color: 'var(--foreground)' }}>
+                    {p.description}
+                  </p>
+                  <p className="mb-3 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                    {p.sub}
+                  </p>
+                </div>
+                <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>
+                  価格：{p.price}
                 </p>
               </div>
-              <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>
-                価格：{p.price}
-              </p>
             </div>
           ))}
         </div>
