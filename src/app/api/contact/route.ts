@@ -5,7 +5,14 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
-    const { name, email, company, phone, size, quantity, purpose, printMethod, printContent, deadline, jpycPayment, notes } = body
+    const {
+      name, email, phone, quantity, purpose, printMethod, printContent, jpycPayment, notes,
+      // Support both old and new field names
+      company, companyName, size, masuSize, deadline, desiredDelivery,
+    } = body
+    const companyVal = company || companyName || ''
+    const sizeVal = size || masuSize || ''
+    const deadlineVal = deadline || desiredDelivery || ''
 
     // Validate required fields
     if (!name || !email || !quantity) {
@@ -38,7 +45,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           from: siteConfig.contactEmail,
           to: adminEmail,
-          subject: `【枡のお見積り】${company ? company + ' ' : ''}${name}様`,
+          subject: `【枡のお見積り】${companyVal ? companyVal + ' ' : ''}${name}様`,
           html: `<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
 <div style="background:#1A1A1A;padding:24px;text-align:center;"><h1 style="color:#fff;margin:0;font-size:16px;letter-spacing:3px;">MASU-STORE</h1></div>
 <div style="padding:24px;background:#fff;border:1px solid #e5e5e5;">
@@ -46,15 +53,15 @@ export async function POST(request: Request) {
 <table style="width:100%;font-size:14px;border-collapse:collapse;">
 <tr><td style="padding:8px 0;color:#888;width:120px;">お名前</td><td style="padding:8px 0;">${name}</td></tr>
 <tr><td style="padding:8px 0;color:#888;">メール</td><td style="padding:8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
-${company ? `<tr><td style="padding:8px 0;color:#888;">会社名</td><td style="padding:8px 0;">${company}</td></tr>` : ''}
+${companyVal ? `<tr><td style="padding:8px 0;color:#888;">会社名</td><td style="padding:8px 0;">${companyVal}</td></tr>` : ''}
 ${phone ? `<tr><td style="padding:8px 0;color:#888;">電話番号</td><td style="padding:8px 0;">${phone}</td></tr>` : ''}
 <tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">ご注文内容</td></tr>
-${size ? `<tr><td style="padding:8px 0;color:#888;">サイズ</td><td style="padding:8px 0;">${size}</td></tr>` : ''}
+${sizeVal ? `<tr><td style="padding:8px 0;color:#888;">サイズ</td><td style="padding:8px 0;">${sizeVal}</td></tr>` : ''}
 <tr><td style="padding:8px 0;color:#888;">数量</td><td style="padding:8px 0;">${quantity}</td></tr>
 ${purpose ? `<tr><td style="padding:8px 0;color:#888;">用途</td><td style="padding:8px 0;">${purpose}</td></tr>` : ''}
 ${printMethod ? `<tr><td style="padding:8px 0;color:#888;">名入れ方法</td><td style="padding:8px 0;">${printLabels[printMethod] || printMethod}</td></tr>` : ''}
 ${printContent ? `<tr><td style="padding:8px 0;color:#888;">名入れ内容</td><td style="padding:8px 0;">${printContent}</td></tr>` : ''}
-${deadline ? `<tr><td style="padding:8px 0;color:#888;">希望納期</td><td style="padding:8px 0;">${deadline}</td></tr>` : ''}
+${deadlineVal ? `<tr><td style="padding:8px 0;color:#888;">希望納期</td><td style="padding:8px 0;">${deadlineVal}</td></tr>` : ''}
 ${jpycPayment ? `<tr><td style="padding:8px 0;color:#888;">JPYC決済</td><td style="padding:8px 0;">希望あり</td></tr>` : ''}
 ${notes ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">その他ご要望</td></tr><tr><td colspan="2" style="padding:8px 0;white-space:pre-wrap;">${notes}</td></tr>` : ''}
 </table>

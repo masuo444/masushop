@@ -4,9 +4,8 @@ import Image from 'next/image'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
-import { fetchMasuProducts, fetchAllProducts } from '@/lib/api'
-import ProductCard from '@/components/ui/ProductCard'
 import { getAverageRating, getReviewCount } from '@/lib/reviews'
+import OrderConfigurator from '@/components/ui/OrderConfigurator'
 
 export const metadata: Metadata = {
   title: '枡の商品一覧 — 国産ヒノキ枡 全サイズ',
@@ -70,11 +69,7 @@ const originalProducts = [
   },
 ]
 
-export default async function ProductsPage() {
-  const products = await fetchMasuProducts()
-  const allProducts = products.length > 0 ? products : await fetchAllProducts(8)
-  const displayProducts = products.length > 0 ? products : allProducts
-
+export default function ProductsPage() {
   return (
     <>
       <BreadcrumbJsonLd
@@ -84,27 +79,25 @@ export default async function ProductsPage() {
         ]}
       />
 
-      {/* Product JSON-LD for each product */}
-      {displayProducts.map((product) => (
+      {/* Product JSON-LD for each masu size */}
+      {masuSizes.map((m) => (
         <script
-          key={product.id}
+          key={m.id}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Product',
-              name: product.name,
-              description: product.description || product.name,
-              image: product.images[0] || undefined,
-              url: product.url,
+              name: m.name,
+              description: m.description,
+              image: `${baseUrl}/images/masu-crest.jpg`,
+              url: `${baseUrl}/products/${m.id}`,
               offers: {
                 '@type': 'Offer',
-                price: product.price,
+                price: m.priceFrom,
                 priceCurrency: 'JPY',
-                availability: product.is_available
-                  ? 'https://schema.org/InStock'
-                  : 'https://schema.org/OutOfStock',
-                url: product.url,
+                availability: 'https://schema.org/InStock',
+                url: `${baseUrl}/products/${m.id}`,
               },
               aggregateRating: {
                 '@type': 'AggregateRating',
@@ -126,123 +119,17 @@ export default async function ProductsPage() {
         </div>
       </section>
 
-      {/* ===== オンラインで購入可能な枡 ===== */}
-      <section id="online" className="mx-auto max-w-5xl px-6 py-20">
-        <h2 className="section-title mb-4">オンラインで購入可能な枡</h2>
+      {/* ===== 枡を購入する ===== */}
+      <section id="order" className="mx-auto max-w-5xl px-6 py-20">
+        <h2 className="section-title mb-4">国産ヒノキ枡を購入する</h2>
         <p
           className="mb-10 text-sm leading-relaxed"
           style={{ color: 'var(--color-muted)' }}
         >
-          FOMUS SHOPで販売中の枡製品です。1個からご購入いただけます。
+          サイズ・オプションを選んで、そのまま決済に進めます。10個からご注文いただけます。
         </p>
 
-        {displayProducts.length > 0 ? (
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-            {displayProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div
-            className="rounded-sm px-6 py-10 text-center"
-            style={{
-              border: '1px solid var(--color-border)',
-              background: 'var(--color-subtle)',
-            }}
-          >
-            <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
-              現在準備中です。お見積りフォームからお問い合わせください。
-            </p>
-            <Link href="/custom" className="btn-primary mt-4 inline-block">
-              お見積りフォームへ
-            </Link>
-          </div>
-        )}
-      </section>
-
-      <div className="divider mx-auto max-w-5xl" />
-
-      {/* ===== 無垢の枡 ===== */}
-      <section id="standard" className="mx-auto max-w-5xl px-6 py-20">
-        <h2 className="section-title mb-4">無垢の枡 — 無地・名入れ対応</h2>
-        <p
-          className="mb-10 text-sm leading-relaxed"
-          style={{ color: 'var(--color-muted)' }}
-        >
-          ※ 無垢の枡は{siteConfig.standardMasuMinOrder}
-          個以上からのご注文となります。まとめ買いほどお得です。
-        </p>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {masuSizes.map((m) => (
-            <Link
-              key={m.id}
-              href={`/products/${m.id}`}
-              className="group flex flex-col justify-between rounded-sm p-6 transition-all duration-300"
-              style={{
-                border: '1px solid var(--color-border)',
-                background: 'var(--background)',
-              }}
-            >
-              <div>
-                <h3 className="mb-1 text-lg font-medium" style={{ color: 'var(--foreground)' }}>
-                  {m.name}
-                </h3>
-                <p className="mb-4 text-xs" style={{ color: 'var(--color-muted)' }}>
-                  {m.reading}
-                </p>
-
-                <dl className="mb-4 space-y-1 text-sm" style={{ color: 'var(--foreground)' }}>
-                  <div className="flex justify-between">
-                    <dt style={{ color: 'var(--color-muted)' }}>外寸</dt>
-                    <dd>{m.size}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt style={{ color: 'var(--color-muted)' }}>容量</dt>
-                    <dd>{m.capacity}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt style={{ color: 'var(--color-muted)' }}>容量目安</dt>
-                    <dd>{m.capacityNote}</dd>
-                  </div>
-                </dl>
-
-                <p className="mb-4 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                  用途：{m.use}
-                </p>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-base font-medium" style={{ color: 'var(--color-accent)' }}>
-                    &yen;{m.priceFrom.toLocaleString()}〜 / 個
-                  </span>
-                  <span
-                    className="rounded-sm px-2 py-0.5 text-[10px] tracking-wider"
-                    style={{
-                      background: 'var(--color-accent-light)',
-                      color: 'var(--color-accent)',
-                    }}
-                  >
-                    名入れ対応
-                  </span>
-                </div>
-                <p
-                  className="text-xs group-hover:text-[var(--color-accent)] transition-colors"
-                  style={{ color: 'var(--color-muted)' }}
-                >
-                  詳細を見る &rarr;
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link href="/business" className="btn-primary">
-            法人・大口のお見積りはこちら
-          </Link>
-        </div>
+        <OrderConfigurator />
       </section>
 
       <div className="divider mx-auto max-w-5xl" />
