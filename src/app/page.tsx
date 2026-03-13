@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { masuSizes, selectionGuide, faqItems } from '@/lib/masu-data'
+import { selectionGuide, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import ReviewSection from '@/components/ui/ReviewSection'
@@ -236,60 +236,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== サイズ一覧 ===== */}
-      <section style={{ padding: 'clamp(3rem, 6vw, 5rem) 1.5rem' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <h2
-            className="serif section-title"
-            style={{ marginBottom: '0.75rem' }}
-          >
-            全7サイズ取り揃え
-          </h2>
-          <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', marginBottom: '2.5rem', lineHeight: 1.8 }}>
-            三勺（54ml）から一升（1800ml）まで、用途に合った枡をお選びいただけます。
-          </p>
-
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.75rem',
-            }}
-          >
-            {masuSizes.map((s) => (
-              <Link
-                key={s.id}
-                href={`/products/${s.id}`}
-                className="serif"
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  border: '1px solid var(--color-border)',
-                  textDecoration: 'none',
-                  color: 'var(--foreground)',
-                  fontSize: '1rem',
-                  fontWeight: 500,
-                  transition: 'all 0.3s',
-                }}
-              >
-                {s.name}
-              </Link>
-            ))}
-          </div>
-
-          <div style={{ marginTop: '2rem' }}>
-            <Link
-              href="/products#standard"
-              style={{
-                fontSize: '0.85rem',
-                color: 'var(--color-accent)',
-                textDecoration: 'none',
-              }}
-            >
-              サイズ比較・詳細を見る →
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* ===== 枡の用途 ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
