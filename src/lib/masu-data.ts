@@ -111,7 +111,7 @@ export const masuSizes: MasuSize[] = [
 export const optionPrices = {
   coating: 800,         // 特殊コーティング 1個あたり
   lid: {
-    sanjaku: 600,       // 三勺枡の蓋
+    sanjaku: 800,       // 三勺枡の蓋
     ichigo: 1000,       // 一合枡の蓋
   },
 }
