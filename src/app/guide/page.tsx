@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords: '枡 選び方,枡 サイズ,枡 おすすめ,一合枡,五勺枡,枡 用途',
   alternates: { canonical: `${baseUrl}/guide`, languages: { ja: `${baseUrl}/guide`, en: `${baseUrl}/en/guide` } },
   openGraph: {
-    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

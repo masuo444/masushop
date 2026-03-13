@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   keywords: '枡 サイズ 比較,枡 サイズ 一覧,枡 大きさ,一合枡 サイズ,枡 容量',
   alternates: { canonical: `${baseUrl}/products/sizes` },
   openGraph: {
-    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: 'ja_JP',
     images: [{
-      url: `${baseUrl}/og-image.png`,
+      url: `${baseUrl}/opengraph-image`,
       width: 1200,
       height: 630,
       alt: siteConfig.name,

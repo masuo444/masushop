@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     type: 'article',
     siteName: siteConfig.name,
     locale: 'ja_JP',
-    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
   twitter: { card: 'summary_large_image' },
   alternates: { canonical: `${baseUrl}/sake`, languages: { ja: `${baseUrl}/sake`, en: `${baseUrl}/en/sake-cups` } },

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     '枡 とは,升 読み方,合 単位,勺 単位,もっきり 意味,あられ組,焼印 枡,枡 用語,枡 辞典,枡 種類,枡 サイズ,枡 単位,枡 文化,枡 歴史,ヒノキ 枡,フィトンチッド,枡酒,鏡開き 枡,節分 枡',
   alternates: { canonical: `${baseUrl}/glossary`, languages: { ja: `${baseUrl}/glossary`, en: `${baseUrl}/en/glossary` } },
   openGraph: {
-    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

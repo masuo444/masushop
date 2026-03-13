@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Japanese Wooden Sake Cups — Handcrafted Hinoki Masu',
     description: 'A 1,300-year-old craft that transforms your sake experience. Ships worldwide.',
-    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
     locale: 'en_US',
   },
 }

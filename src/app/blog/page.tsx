@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   keywords: '枡 コラム,枡 ブログ,枡 歴史,枡 日本酒,枡 お手入れ,枡 選び方,枡 ノベルティ',
   alternates: { canonical: `${siteConfig.url}/blog` },
   openGraph: {
-    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${siteConfig.url}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

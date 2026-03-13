@@ -14,6 +14,12 @@ export const metadata: Metadata = {
   keywords:
     '枡 ギフト,枡 プレゼント,枡 結婚祝い,枡 お祝い,枡 記念品,枡 引き出物,枡 出産祝い,枡 還暦祝い,枡 父の日,枡 母の日,枡 海外 ギフト,枡 企業 記念品,名入れ枡 ギフト,枡 贈り物,枡 お返し',
   alternates: { canonical: `${baseUrl}/gift`, languages: { ja: `${baseUrl}/gift`, en: `${baseUrl}/en/gifts` } },
+  openGraph: {
+    title: '枡ギフトガイド — お祝い・記念品にぴったりの枡の選び方',
+    description: '枡は「益す＝増す」に通じる縁起物。結婚祝い、出産祝い、還暦祝い、企業記念品に最適な枡ギフトの選び方をご紹介。',
+    type: 'website',
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
+  },
 }
 
 const giftScenes = [

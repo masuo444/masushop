@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   keywords: '枡 FAQ,枡 よくある質問,枡 サイズ,枡 名入れ,枡 お手入れ,枡 選び方',
   alternates: { canonical: `${siteConfig.url}/faq`, languages: { ja: `${siteConfig.url}/faq`, en: `${siteConfig.url}/en/faq` } },
   openGraph: {
-    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${siteConfig.url}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

@@ -13,6 +13,12 @@ export const metadata: Metadata = {
     '3つの質問に答えるだけで、用途やこだわりに合った最適な枡をAIがご提案。日本酒用、ギフト、節分、インテリア、企業ノベルティなど、あなたにぴったりの枡が見つかります。',
   keywords: '枡 おすすめ,枡 選び方,枡 診断,枡 どれがいい',
   alternates: { canonical: `${baseUrl}/finder` },
+  openGraph: {
+    title: '枡診断 — あなたにぴったりの枡を見つけよう',
+    description: '3つの質問に答えるだけで、用途やこだわりに合った最適な枡をご提案。日本酒用、ギフト、節分、インテリアなどに。',
+    type: 'website',
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
+  },
 }
 
 export default function FinderPage() {

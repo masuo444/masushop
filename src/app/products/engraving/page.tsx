@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   keywords: '枡 名入れ 比較,枡 焼印,枡 レーザー刻印,枡 名入れ 方法,枡 ロゴ入れ',
   alternates: { canonical: `${baseUrl}/products/engraving` },
   openGraph: {
-    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

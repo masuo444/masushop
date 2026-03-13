@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: `名入れ・オーダーメイド枡 お見積り・ご相談 | ${siteConfig.name}`,
     description: '枡の名入れ・オーダーメイドのお見積り・ご相談。焼印・レーザー刻印対応。',
+    type: 'website',
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
   alternates: { canonical: `${baseUrl}/custom` },
 }

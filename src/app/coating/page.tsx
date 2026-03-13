@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   keywords:
     '枡 コーティング,枡 撥水,枡 防汚,枡 抗菌,枡 お手入れ,枡 長持ち',
   alternates: { canonical: `${siteConfig.url}/coating` },
+  openGraph: {
+    title: '特殊コーティング加工 — 枡を水・汚れから守る',
+    description: '枡に施せる特殊コーティングの詳細。水・油・汚れを弾いて、枡を長持ちさせます。食品衛生法の基準に適合済み。',
+    type: 'article',
+    images: [{ url: `${siteConfig.url}/opengraph-image`, width: 1200, height: 630 }],
+  },
 }
 
 const baseUrl = siteConfig.url

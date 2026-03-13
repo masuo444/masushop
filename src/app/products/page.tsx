@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   keywords: '枡 購入,枡 通販,枡 販売,ヒノキ枡,名入れ枡,枡 サイズ,枡 価格,枡 法人,枡 ノベルティ',
   alternates: { canonical: `${siteConfig.url}/products` },
   openGraph: {
-    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${siteConfig.url}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

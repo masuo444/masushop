@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: `枡の専門店MASU-STOREのお客様レビュー。${reviewCount}件のレビュー、平均評価${avgRating}点。日本酒・ギフト・ノベルティ・行事など多彩な用途でご好評いただいています。`,
   alternates: { canonical: `${siteConfig.url}/reviews` },
   openGraph: {
-    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${siteConfig.url}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
 

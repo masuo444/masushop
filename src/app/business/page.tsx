@@ -15,6 +15,12 @@ export const metadata: Metadata = {
   keywords:
     '枡 ノベルティ,枡 OEM,枡 企業ギフト,枡 記念品 法人,枡 卸,枡 名入れ 法人,枡 周年記念,枡 株主優待,枡 大口注文,枡 数量割引,枡 サンプル',
   alternates: { canonical: `${baseUrl}/business`, languages: { ja: `${baseUrl}/business`, en: `${baseUrl}/en/corporate` } },
+  openGraph: {
+    title: '法人のお客様 — 枡のノベルティ・記念品・OEM',
+    description: '法人向け枡のノベルティ・記念品・OEM製作。企業ロゴ・社名の名入れ対応。10個〜10,000個以上の大口注文に数量割引で対応。',
+    type: 'website',
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
+  },
 }
 
 // ── 数量別単価テーブル（税別） ──

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     languages: { ja: `${baseUrl}/business`, en: `${baseUrl}/en/corporate` },
   },
   openGraph: {
-    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
     locale: 'en_US',
   },
 }
