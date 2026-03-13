@@ -6,6 +6,7 @@ import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 import { getAverageRating, getReviewCount } from '@/lib/reviews'
 import OrderConfigurator from '@/components/ui/OrderConfigurator'
+import Cart from '@/components/ui/Cart'
 
 export const metadata: Metadata = {
   title: '枡の商品一覧 — 国産ヒノキ枡 全サイズ',
@@ -130,6 +131,11 @@ export default function ProductsPage() {
         </p>
 
         <OrderConfigurator />
+
+        {/* カート */}
+        <div className="mt-12">
+          <Cart />
+        </div>
       </section>
 
       <div className="divider mx-auto max-w-5xl" />

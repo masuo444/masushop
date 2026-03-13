@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import siteConfig from '@/lib/site-config'
+import { CartProvider } from '@/lib/cart'
 
 const notoSerifJP = Noto_Serif_JP({
   variable: '--font-serif-jp',
@@ -116,9 +117,11 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       </head>
       <body className={`${notoSerifJP.variable} antialiased`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   )

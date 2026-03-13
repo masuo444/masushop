@@ -4,14 +4,16 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { masuSizes, engravingMethods, optionPrices } from '@/lib/masu-data'
 import type { MasuSize } from '@/lib/masu-data'
-import siteConfig from '@/lib/site-config'
+import { useCart } from '@/lib/cart'
 
 export default function OrderConfigurator() {
+  const { addItem } = useCart()
   const [selectedSize, setSelectedSize] = useState<MasuSize | null>(null)
   const [engraving, setEngraving] = useState('none')
   const [coating, setCoating] = useState(false)
   const [lid, setLid] = useState(false)
   const [quantity, setQuantity] = useState(10)
+  const [added, setAdded] = useState(false)
 
   const selectedEngraving = engravingMethods.find((m) => m.id === engraving)
   const engravingPerUnit = selectedEngraving?.pricePerUnit ?? 0
@@ -26,15 +28,38 @@ export default function OrderConfigurator() {
   const unitPrice = (selectedSize?.priceFrom ?? 0) + engravingPerUnit + coatingPrice + lidPrice
   const totalPrice = unitPrice * quantity + engravingSetup
 
-  const purchaseUrl = selectedSize
-    ? `${siteConfig.fomusUrl}?product=${selectedSize.id}&engraving=${engraving}&coating=${coating ? 'yes' : 'no'}&lid=${lid ? 'yes' : 'no'}&qty=${quantity}`
-    : '#'
-
-  // Reset options when size changes
   const handleSizeSelect = (size: MasuSize) => {
     setSelectedSize(size)
     setLid(false)
-    // Keep other options
+    setAdded(false)
+  }
+
+  const handleAddToCart = () => {
+    if (!selectedSize) return
+    addItem({
+      sizeId: selectedSize.id,
+      sizeName: selectedSize.name,
+      capacity: selectedSize.capacity,
+      engraving,
+      engravingLabel: selectedEngraving?.name ?? 'なし',
+      coating,
+      lid,
+      quantity,
+      unitPrice,
+      setupFee: engravingSetup,
+      lineTotal: totalPrice,
+    })
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
+  }
+
+  const resetForm = () => {
+    setSelectedSize(null)
+    setEngraving('none')
+    setCoating(false)
+    setLid(false)
+    setQuantity(10)
+    setAdded(false)
   }
 
   return (
@@ -82,7 +107,7 @@ export default function OrderConfigurator() {
         </div>
       </div>
 
-      {/* ===== STEP 2〜: オプション（サイズ選択後に表示） ===== */}
+      {/* ===== STEP 2〜: オプション ===== */}
       {selectedSize && (
         <div className="space-y-10">
           {/* 選択中のサイズ情報 */}
@@ -146,17 +171,12 @@ export default function OrderConfigurator() {
                     </span>
                     <span className="text-xs" style={{ color: 'var(--color-accent)' }}>
                       {method.id === 'none' && '無料'}
-                      {method.id === 'yakiin' &&
-                        `金型代 ¥${method.setupFee.toLocaleString()}`}
-                      {method.id === 'laser' &&
-                        `+¥${method.pricePerUnit.toLocaleString()} / 個`}
+                      {method.id === 'yakiin' && `金型代 ¥${method.setupFee.toLocaleString()}`}
+                      {method.id === 'laser' && `+¥${method.pricePerUnit.toLocaleString()} / 個`}
                     </span>
                   </div>
                   {method.description && (
-                    <p
-                      className="text-xs mt-1 leading-relaxed"
-                      style={{ color: 'var(--color-muted)' }}
-                    >
+                    <p className="text-xs mt-1 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                       {method.description}
                     </p>
                   )}
@@ -177,15 +197,12 @@ export default function OrderConfigurator() {
               その他オプション
             </h3>
             <div className="space-y-2">
-              {/* コーティング */}
               <button
                 type="button"
                 onClick={() => setCoating(!coating)}
                 className="w-full text-left rounded-sm p-4 transition-all duration-200"
                 style={{
-                  border: coating
-                    ? '2px solid var(--color-accent)'
-                    : '1px solid var(--color-border)',
+                  border: coating ? '2px solid var(--color-accent)' : '1px solid var(--color-border)',
                   background: coating ? 'var(--color-accent-light)' : 'var(--background)',
                   padding: coating ? '15px' : '16px',
                 }}
@@ -195,9 +212,7 @@ export default function OrderConfigurator() {
                     <span
                       className="flex h-5 w-5 items-center justify-center rounded-sm text-xs"
                       style={{
-                        border: coating
-                          ? '2px solid var(--color-accent)'
-                          : '1px solid var(--color-border)',
+                        border: coating ? '2px solid var(--color-accent)' : '1px solid var(--color-border)',
                         background: coating ? 'var(--color-accent)' : 'transparent',
                         color: coating ? '#fff' : 'transparent',
                       }}
@@ -212,24 +227,18 @@ export default function OrderConfigurator() {
                     +&yen;{optionPrices.coating.toLocaleString()} / 個
                   </span>
                 </div>
-                <p
-                  className="text-xs mt-1 ml-8 leading-relaxed"
-                  style={{ color: 'var(--color-muted)' }}
-                >
+                <p className="text-xs mt-1 ml-8 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                   水や汚れに強い特殊コーティングを施します
                 </p>
               </button>
 
-              {/* 蓋 */}
               {selectedSize.hasLidOption && (
                 <button
                   type="button"
                   onClick={() => setLid(!lid)}
                   className="w-full text-left rounded-sm p-4 transition-all duration-200"
                   style={{
-                    border: lid
-                      ? '2px solid var(--color-accent)'
-                      : '1px solid var(--color-border)',
+                    border: lid ? '2px solid var(--color-accent)' : '1px solid var(--color-border)',
                     background: lid ? 'var(--color-accent-light)' : 'var(--background)',
                     padding: lid ? '15px' : '16px',
                   }}
@@ -239,9 +248,7 @@ export default function OrderConfigurator() {
                       <span
                         className="flex h-5 w-5 items-center justify-center rounded-sm text-xs"
                         style={{
-                          border: lid
-                            ? '2px solid var(--color-accent)'
-                            : '1px solid var(--color-border)',
+                          border: lid ? '2px solid var(--color-accent)' : '1px solid var(--color-border)',
                           background: lid ? 'var(--color-accent)' : 'transparent',
                           color: lid ? '#fff' : 'transparent',
                         }}
@@ -261,10 +268,7 @@ export default function OrderConfigurator() {
                       / 個
                     </span>
                   </div>
-                  <p
-                    className="text-xs mt-1 ml-8 leading-relaxed"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
+                  <p className="text-xs mt-1 ml-8 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                     小物入れやギフトボックスとしてもお使いいただけます
                   </p>
                 </button>
@@ -289,7 +293,6 @@ export default function OrderConfigurator() {
                 onClick={() => setQuantity(Math.max(10, quantity - 10))}
                 className="flex h-10 w-10 items-center justify-center rounded-sm text-sm transition-colors"
                 style={{ border: '1px solid var(--color-border)', color: 'var(--foreground)' }}
-                aria-label="-10"
               >
                 -10
               </button>
@@ -298,7 +301,6 @@ export default function OrderConfigurator() {
                 onClick={() => setQuantity(Math.max(10, quantity - 1))}
                 className="flex h-10 w-10 items-center justify-center rounded-sm text-lg transition-colors"
                 style={{ border: '1px solid var(--color-border)', color: 'var(--foreground)' }}
-                aria-label="数量を減らす"
               >
                 &minus;
               </button>
@@ -322,7 +324,6 @@ export default function OrderConfigurator() {
                 onClick={() => setQuantity(quantity + 1)}
                 className="flex h-10 w-10 items-center justify-center rounded-sm text-lg transition-colors"
                 style={{ border: '1px solid var(--color-border)', color: 'var(--foreground)' }}
-                aria-label="数量を増やす"
               >
                 +
               </button>
@@ -331,7 +332,6 @@ export default function OrderConfigurator() {
                 onClick={() => setQuantity(quantity + 10)}
                 className="flex h-10 w-10 items-center justify-center rounded-sm text-sm transition-colors"
                 style={{ border: '1px solid var(--color-border)', color: 'var(--foreground)' }}
-                aria-label="+10"
               >
                 +10
               </button>
@@ -341,23 +341,20 @@ export default function OrderConfigurator() {
             </p>
           </div>
 
-          {/* ===== 合計金額 & 決済ボタン ===== */}
+          {/* ===== 小計 & カートに入れる ===== */}
           <div
             className="rounded-sm p-6"
             style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
           >
             <div className="flex items-end justify-between mb-1">
               <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
-                合計金額（税別）
+                小計（税別）
               </p>
               <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
                 {selectedSize.name} &times; {quantity}個
               </p>
             </div>
-            <p
-              className="text-3xl font-medium tracking-tight mb-1"
-              style={{ color: 'var(--color-accent)' }}
-            >
+            <p className="text-3xl font-medium tracking-tight mb-1" style={{ color: 'var(--color-accent)' }}>
               &yen;{totalPrice.toLocaleString()}
             </p>
             <p className="text-xs mb-6" style={{ color: 'var(--color-muted)' }}>
@@ -368,26 +365,26 @@ export default function OrderConfigurator() {
             </p>
 
             <div className="space-y-3">
-              <a
-                href={purchaseUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-accent block w-full text-center"
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="btn-accent block w-full text-center transition-all"
+                style={added ? { background: '#16a34a', borderColor: '#16a34a' } : {}}
               >
-                決済に進む（FOMUS SHOP）
-              </a>
-              <a
-                href="/custom"
+                {added ? '\u2713 カートに追加しました' : 'カートに入れる'}
+              </button>
+              <button
+                type="button"
+                onClick={() => { handleAddToCart(); resetForm() }}
                 className="btn-outline block w-full text-center"
               >
-                お見積り・ご相談フォームへ
-              </a>
+                カートに入れて、別のサイズも追加する
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* サイズ未選択時のガイド */}
       {!selectedSize && (
         <p className="text-center text-sm py-8" style={{ color: 'var(--color-muted)' }}>
           上からサイズを選択してください
