@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { masuSizes, engravingMethods, optionPrices } from '@/lib/masu-data'
 import type { MasuSize } from '@/lib/masu-data'
 import { useCart } from '@/lib/cart'
@@ -191,9 +192,11 @@ export default function OrderConfigurator() {
 
             {/* コーティング・蓋 */}
             <div>
-              <p className="text-xs font-medium tracking-wider mb-3" style={{ color: 'var(--color-accent)' }}>
-                STEP 3 — オプション
-              </p>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs font-medium tracking-wider" style={{ color: 'var(--color-accent)' }}>
+                  STEP 3 — オプション
+                </p>
+              </div>
               <div className={`grid gap-2 ${selectedSize.hasLidOption ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 <button
                   type="button"
@@ -255,6 +258,19 @@ export default function OrderConfigurator() {
                   </button>
                 )}
               </div>
+              <Link
+                href="/coating"
+                className="inline-flex items-center gap-1.5 mt-3 text-[11px] transition-colors hover:underline"
+                style={{ color: 'var(--color-accent)' }}
+                target="_blank"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+                コーティングについて詳しく見る
+              </Link>
             </div>
 
             {/* 数量 */}
