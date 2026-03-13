@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
@@ -51,10 +52,35 @@ const initialFormData: FormData = {
 }
 
 export default function CustomPage() {
+  return (
+    <Suspense>
+      <CustomPageInner />
+    </Suspense>
+  )
+}
+
+function CustomPageInner() {
+  const searchParams = useSearchParams()
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState('')
+
+  // Pre-fill from URL params (e.g. from /business page links)
+  useEffect(() => {
+    const updates: Partial<FormData> = {}
+    const purpose = searchParams.get('purpose')
+    const quantity = searchParams.get('quantity')
+    const size = searchParams.get('size')
+    const type = searchParams.get('type')
+    if (purpose) updates.purpose = purpose
+    if (quantity) updates.quantity = quantity
+    if (size) updates.masuSize = size
+    if (type === 'sample') updates.notes = 'サンプル作成を希望します。'
+    if (Object.keys(updates).length > 0) {
+      setFormData((prev) => ({ ...prev, ...updates }))
+    }
+  }, [searchParams])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>

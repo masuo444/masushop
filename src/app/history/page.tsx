@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
-import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 const baseUrl = siteConfig.url
 
@@ -30,9 +31,10 @@ export const metadata: Metadata = {
     type: 'article',
     siteName: siteConfig.name,
     locale: 'ja_JP',
+    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
   },
   twitter: { card: 'summary_large_image' },
-  alternates: { canonical: `${baseUrl}/history` },
+  alternates: { canonical: `${baseUrl}/history`, languages: { ja: `${baseUrl}/history`, en: `${baseUrl}/en/history` } },
 }
 
 const articleJsonLd = {
@@ -55,19 +57,13 @@ export default function HistoryPage() {
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbItems} />
+      <SpeakableJsonLd url={`${baseUrl}/history`} cssSelectors={['[data-speakable]', '.section-title']} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
 
-      {/* Breadcrumb */}
-      <nav aria-label="パンくずリスト" className="max-w-4xl mx-auto px-6 pt-8 text-[11px] text-[var(--color-muted)]">
-        <ol className="flex items-center gap-2">
-          <li><Link href="/" className="hover:text-[var(--foreground)] transition-colors">ホーム</Link></li>
-          <li>/</li>
-          <li className="text-[var(--foreground)]">枡の歴史</li>
-        </ol>
-      </nav>
+      <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '枡の歴史' }]} />
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
@@ -91,7 +87,7 @@ export default function HistoryPage() {
 
       {/* Quick Answer Box */}
       <section className="max-w-3xl mx-auto px-6 pb-16">
-        <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-8 rounded">
+        <div data-speakable className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-8 rounded">
           <p className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-muted)] mb-3">まとめ</p>
           <p className="text-sm leading-[2.2] text-[var(--foreground)]">
             枡は約1300年前、奈良時代から使われてきた日本の伝統的な木製計量器です。豊臣秀吉の太閤検地で全国統一され、明治時代に計量器としての役割を終えた後、酒器や縁起物として現代に受け継がれています。

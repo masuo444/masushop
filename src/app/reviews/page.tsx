@@ -4,6 +4,7 @@ import { getAllReviews, getAverageRating, getReviewCount } from '@/lib/reviews'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 import ReviewCard from '@/components/ui/ReviewCard'
 import siteConfig from '@/lib/site-config'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 const avgRating = getAverageRating()
 const reviewCount = getReviewCount()
@@ -12,6 +13,9 @@ export const metadata: Metadata = {
   title: 'お客様の声',
   description: `枡の専門店MASU-STOREのお客様レビュー。${reviewCount}件のレビュー、平均評価${avgRating}点。日本酒・ギフト・ノベルティ・行事など多彩な用途でご好評いただいています。`,
   alternates: { canonical: `${siteConfig.url}/reviews` },
+  openGraph: {
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
+  },
 }
 
 const baseUrl = siteConfig.url
@@ -86,6 +90,7 @@ export default function ReviewsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingJsonLd) }}
       />
+      <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: 'お客様の声' }]} />
 
       {/* Hero */}
       <section
@@ -197,6 +202,17 @@ export default function ReviewsPage() {
               </span>
             )
           })}
+        </div>
+
+        <div
+          data-speakable
+          className="rounded-sm p-6 mb-12"
+          style={{ background: 'var(--color-accent-light)', borderLeft: '4px solid var(--color-accent)' }}
+        >
+          <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-accent)' }}>お客様の声まとめ</p>
+          <p className="text-sm leading-[2]">
+            日本酒の晩酌・結婚祝い・企業ノベルティなど多彩な用途で高評価。「ヒノキの香りが日本酒の味を引き立てる」「もらった方に喜ばれた」「展示会の集客に貢献」といった声が寄せられています。
+          </p>
         </div>
       </section>
 

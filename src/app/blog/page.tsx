@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     '枡（ます）に関するコラム記事の一覧。枡の1300年の歴史、日本酒との関係、お手入れ方法、サイズ別の選び方ガイド、法人向けノベルティ活用事例など、枡にまつわる知識と情報をお届けします。',
   keywords: '枡 コラム,枡 ブログ,枡 歴史,枡 日本酒,枡 お手入れ,枡 選び方,枡 ノベルティ',
   alternates: { canonical: `${siteConfig.url}/blog` },
+  openGraph: {
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
+  },
 }
 
 const baseUrl = siteConfig.url

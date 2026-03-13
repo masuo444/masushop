@@ -3,10 +3,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
-import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, ItemListJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import { getAverageRating, getReviewCount } from '@/lib/reviews'
 import OrderConfigurator from '@/components/ui/OrderConfigurator'
 import Cart from '@/components/ui/Cart'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
   title: '枡の商品一覧 — 国産ヒノキ枡 全サイズ',
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
     '国産ヒノキ枡の全7サイズ（三勺〜一升）とFOMUSオリジナル枡の商品一覧。無垢の枡は法人・大口向け10個〜、オリジナル枡は1個から購入可能。まとめ買いほどお得。名入れ・焼印・レーザー刻印対応。JPYC決済にも対応。',
   keywords: '枡 購入,枡 通販,枡 販売,ヒノキ枡,名入れ枡,枡 サイズ,枡 価格,枡 法人,枡 ノベルティ',
   alternates: { canonical: `${siteConfig.url}/products` },
+  openGraph: {
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
+  },
 }
 
 const baseUrl = siteConfig.url
@@ -79,6 +83,20 @@ export default function ProductsPage() {
           { name: '商品一覧', href: `${baseUrl}/products` },
         ]}
       />
+      <ItemListJsonLd
+        name="国産ヒノキ枡 全7サイズ"
+        items={masuSizes.map((m, i) => ({
+          name: m.name,
+          url: `${baseUrl}/products/${m.id}`,
+          position: i + 1,
+          image: `${baseUrl}/images/masu-crest.jpg`,
+          description: m.description,
+        }))}
+      />
+      <SpeakableJsonLd
+        url={`${baseUrl}/products`}
+        cssSelectors={['.section-title', '[data-speakable]']}
+      />
 
       {/* Product JSON-LD for each masu size */}
       {masuSizes.map((m) => (
@@ -110,6 +128,8 @@ export default function ProductsPage() {
         />
       ))}
 
+      <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '商品一覧' }]} />
+
       {/* Hero */}
       <section
         className="flex items-center justify-center py-20"
@@ -136,6 +156,26 @@ export default function ProductsPage() {
         <div className="mt-12">
           <Cart />
         </div>
+
+        {/* 法人バナー */}
+        <div
+          className="mt-12 rounded-sm p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{ background: 'var(--color-accent-light)', border: '1px solid var(--color-accent)' }}
+        >
+          <div>
+            <p className="text-sm font-medium mb-1">法人・大量注文のお客様</p>
+            <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
+              100個以上で数量割引あり。サンプル作成・請求書払いにも対応しています。
+            </p>
+          </div>
+          <Link
+            href="/business"
+            className="shrink-0 text-xs px-5 py-2.5 rounded-sm font-medium transition-opacity hover:opacity-85"
+            style={{ background: 'var(--color-accent)', color: '#fff' }}
+          >
+            法人ページを見る
+          </Link>
+        </div>
       </section>
 
       <div className="divider mx-auto max-w-5xl" />
@@ -161,7 +201,7 @@ export default function ProductsPage() {
             >
               <Image
                 src={p.image}
-                alt={p.name}
+                alt={`${p.name} — ${p.description}`}
                 width={600}
                 height={600}
                 style={{ width: '100%', height: 'auto', display: 'block' }}

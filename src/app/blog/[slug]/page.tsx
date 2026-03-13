@@ -240,7 +240,7 @@ export default function BlogArticlePage({
 
   const articleJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: article.title,
     description: article.description,
     ...(article.heroImage && { image: `${baseUrl}${article.heroImage}` }),
@@ -248,7 +248,10 @@ export default function BlogArticlePage({
     dateModified: article.updatedAt,
     author: { '@type': 'Organization', name: siteConfig.name },
     publisher: { '@type': 'Organization', name: siteConfig.name },
-    mainEntityOfPage: `${baseUrl}/blog/${article.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${baseUrl}/blog/${article.slug}`,
+    },
   }
 
   const publishedDate = new Date(article.publishedAt).toLocaleDateString('ja-JP', {

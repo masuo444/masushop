@@ -79,7 +79,17 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       '@type': 'Brand',
       name: 'MASU-STORE',
     },
-    material: 'ヒノキ（檜）',
+    category: 'Kitchen & Dining > Drinkware',
+    material: 'ヒノキ（檜） / Japanese Cypress (Hinoki)',
+    manufacturer: {
+      '@type': 'Organization',
+      name: 'FOMUS',
+      url: siteConfig.url,
+    },
+    countryOfOrigin: {
+      '@type': 'Country',
+      name: 'Japan',
+    },
     offers: {
       '@type': 'Offer',
       price: product.priceFrom,
@@ -93,6 +103,27 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       reviewCount: getReviewCount(),
     },
     hasVariant: variants,
+    additionalProperty: [
+      {
+        '@type': 'PropertyValue',
+        name: '素材',
+        value: '国産ヒノキ（檜）',
+      },
+      {
+        '@type': 'PropertyValue',
+        name: '寸法',
+        value: product.size,
+      },
+      {
+        '@type': 'PropertyValue',
+        name: '容量',
+        value: product.capacity,
+      },
+    ],
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${baseUrl}/products/${product.id}`,
+    },
   }
 
   return (

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { masuSizes, faqItems } from '@/lib/masu-data'
-import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 
 const baseUrl = siteConfig.url
 
@@ -31,9 +31,10 @@ export const metadata: Metadata = {
     type: 'article',
     siteName: siteConfig.name,
     locale: 'ja_JP',
+    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
   },
   twitter: { card: 'summary_large_image' },
-  alternates: { canonical: `${baseUrl}/sake` },
+  alternates: { canonical: `${baseUrl}/sake`, languages: { ja: `${baseUrl}/sake`, en: `${baseUrl}/en/sake-cups` } },
 }
 
 const articleJsonLd = {
@@ -69,6 +70,7 @@ export default function SakePage() {
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbItems} />
+      <SpeakableJsonLd url={`${baseUrl}/sake`} cssSelectors={['[data-speakable]', '.section-title']} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -106,7 +108,7 @@ export default function SakePage() {
 
       {/* Quick Answer */}
       <section className="max-w-3xl mx-auto px-6 pb-16">
-        <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-8 rounded">
+        <div data-speakable className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-8 rounded">
           <p className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-muted)] mb-3">なぜ枡で飲むと美味しいのか</p>
           <p className="text-sm leading-[2.2] text-[var(--foreground)]">
             ヒノキ枡には「ヒノキチオール」と「フィトンチッド」という天然の芳香成分が含まれています。枡に日本酒を注ぐと、ヒノキの爽やかな香りが日本酒の風味と調和し、グラスでは味わえない独特のまろやかさと奥行きが生まれます。木肌から微かに溶け出す成分が日本酒に優しいまろやかさを加えるため、同じ銘柄でも枡で飲むと味わいが変わるのです。

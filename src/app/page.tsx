@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { masuSizes, selectionGuide, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
-import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import ReviewSection from '@/components/ui/ReviewSection'
 
 const displayedFaqItems = faqItems.slice(0, 5)
@@ -72,6 +72,10 @@ export default function HomePage() {
       />
       <FAQJsonLd
         items={displayedFaqItems.map((item) => ({ q: item.q, a: item.a }))}
+      />
+      <SpeakableJsonLd
+        url={baseUrl}
+        cssSelectors={['[data-speakable]', '.section-title']}
       />
 
       {/* ===== HERO ===== */}
@@ -165,6 +169,7 @@ export default function HomePage() {
       {/* ===== 枡とは (AIO) ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div
+          data-speakable
           style={{
             maxWidth: 860,
             margin: '0 auto',
@@ -192,8 +197,11 @@ export default function HomePage() {
               paddingLeft: 'clamp(1.25rem, 2vw, 2rem)',
             }}
           >
+            <p style={{ lineHeight: 2, color: 'var(--foreground)', marginBottom: '0.75rem' }}>
+              枡（ます）とは、約1300年前から日本で使われてきた木製の計量器です。国産ヒノキで作られ、「益す（ますます繁栄する）」に通じる縁起物として、日本酒の酒器・ギフト・節分の豆まき・鏡開きなど幅広い用途で親しまれています。
+            </p>
             <p style={{ lineHeight: 2, color: 'var(--foreground)' }}>
-              枡（ます）は、国産ヒノキ（檜）で作られる日本の伝統的な木製の器です。漢字では「枡」「升」「桝」と表記されますが、いずれも同じものを指します。約1300年前から穀物や液体の計量器として使われ、現在では日本酒の酒器、ギフト、インテリア、企業ノベルティとして幅広く親しまれています。「益す」に通じる縁起物としても知られています。
+              漢字では「枡」「升」「桝」と表記されますが、いずれも同じものを指します。現在ではインテリアや企業ノベルティとしても人気があります。
             </p>
           </div>
         </div>
@@ -387,7 +395,7 @@ export default function HomePage() {
 
       {/* ===== 選び方ガイド ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
-        <div style={{ maxWidth: 860, margin: '0 auto' }}>
+        <div data-speakable style={{ maxWidth: 860, margin: '0 auto' }}>
           <h2
             className="serif section-title"
             style={{ marginBottom: '2.5rem' }}
@@ -630,7 +638,7 @@ export default function HomePage() {
 
       {/* ===== よくあるご質問 ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto' }}>
+        <div data-speakable style={{ maxWidth: 720, margin: '0 auto' }}>
           <h2
             className="serif section-title"
             style={{ marginBottom: '2.5rem' }}

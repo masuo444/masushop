@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 const baseUrl = siteConfig.url
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     '枡（ます）は「益す＝増す」に通じる縁起物。結婚祝い、出産祝い、還暦祝い、企業記念品に最適な枡ギフトの選び方を、シーン別にご紹介します。名入れ対応、1個からOK。',
   keywords:
     '枡 ギフト,枡 プレゼント,枡 結婚祝い,枡 お祝い,枡 記念品,枡 引き出物,枡 出産祝い,枡 還暦祝い,枡 父の日,枡 母の日,枡 海外 ギフト,枡 企業 記念品,名入れ枡 ギフト,枡 贈り物,枡 お返し',
-  alternates: { canonical: `${baseUrl}/gift` },
+  alternates: { canonical: `${baseUrl}/gift`, languages: { ja: `${baseUrl}/gift`, en: `${baseUrl}/en/gifts` } },
 }
 
 const giftScenes = [
@@ -136,6 +137,7 @@ export default function GiftPage() {
       <FAQJsonLd
         items={giftFaqItems.map((item) => ({ q: item.q, a: item.a }))}
       />
+      <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: 'ギフトガイド' }]} />
 
       {/* ===== HERO ===== */}
       <section
@@ -146,6 +148,19 @@ export default function GiftPage() {
           <h1 className="section-title mb-6">枡ギフトガイド</h1>
           <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
             お祝い・記念品にぴったりの枡の選び方を、シーン別にご紹介します
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-6 pt-12">
+        <div
+          data-speakable
+          className="rounded-sm p-6"
+          style={{ background: 'var(--color-accent-light)', borderLeft: '4px solid var(--color-accent)' }}
+        >
+          <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-accent)' }}>ひとことで言うと</p>
+          <p className="text-sm leading-[2]">
+            枡は「益す（ますます繁栄する）」に通じる縁起物。結婚祝い・父の日・記念日など、どんなシーンにも喜ばれる日本の伝統ギフトです。名入れで世界に一つだけの贈り物にできます。
           </p>
         </div>
       </section>

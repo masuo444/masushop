@@ -3,7 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { careGuide, faqItems } from '@/lib/masu-data'
-import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 const baseUrl = siteConfig.url
 
@@ -31,9 +32,10 @@ export const metadata: Metadata = {
     type: 'article',
     siteName: siteConfig.name,
     locale: 'ja_JP',
+    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
   },
   twitter: { card: 'summary_large_image' },
-  alternates: { canonical: `${baseUrl}/care` },
+  alternates: { canonical: `${baseUrl}/care`, languages: { ja: `${baseUrl}/care`, en: `${baseUrl}/en/care` } },
 }
 
 const breadcrumbItems = [
@@ -62,6 +64,7 @@ export default function CarePage() {
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbItems} />
+      <SpeakableJsonLd url={`${baseUrl}/care`} cssSelectors={['[data-speakable]', '.section-title']} />
       <HowToJsonLd
         name="枡のお手入れ方法"
         description="ヒノキ枡を長持ちさせるための正しいお手入れ方法。使用後の洗い方から保管方法、カビ・ヤニの対処法まで詳しく解説します。"
@@ -69,14 +72,7 @@ export default function CarePage() {
       />
       <FAQJsonLd items={careFaqItems} />
 
-      {/* Breadcrumb */}
-      <nav aria-label="パンくずリスト" className="max-w-4xl mx-auto px-6 pt-8 text-[11px] text-[var(--color-muted)]">
-        <ol className="flex items-center gap-2">
-          <li><Link href="/" className="hover:text-[var(--foreground)] transition-colors">ホーム</Link></li>
-          <li>/</li>
-          <li className="text-[var(--foreground)]">枡のお手入れ方法</li>
-        </ol>
-      </nav>
+      <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: 'お手入れ' }]} />
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
@@ -100,7 +96,7 @@ export default function CarePage() {
 
       {/* Quick Answer — 3つのポイント */}
       <section className="max-w-3xl mx-auto px-6 pb-16">
-        <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-8 rounded">
+        <div data-speakable className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-8 rounded">
           <p className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-muted)] mb-4">3つのポイント</p>
           <ol className="space-y-3">
             {careGuide.points.map((point, i) => (

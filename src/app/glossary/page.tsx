@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
-import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 
 const baseUrl = siteConfig.url
 
@@ -11,7 +11,10 @@ export const metadata: Metadata = {
     '枡（ます）に関する用語を50音順で解説。枡・升・桝の違い、勺・合・升の単位、もっきり、あられ組、焼印など、枡にまつわる専門用語から文化まで。',
   keywords:
     '枡 とは,升 読み方,合 単位,勺 単位,もっきり 意味,あられ組,焼印 枡,枡 用語,枡 辞典,枡 種類,枡 サイズ,枡 単位,枡 文化,枡 歴史,ヒノキ 枡,フィトンチッド,枡酒,鏡開き 枡,節分 枡',
-  alternates: { canonical: `${baseUrl}/glossary` },
+  alternates: { canonical: `${baseUrl}/glossary`, languages: { ja: `${baseUrl}/glossary`, en: `${baseUrl}/en/glossary` } },
+  openGraph: {
+    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+  },
 }
 
 type GlossaryTerm = {
@@ -300,6 +303,7 @@ export default function GlossaryPage() {
           { name: '枡用語辞典', href: `${baseUrl}/glossary` },
         ]}
       />
+      <SpeakableJsonLd url={`${baseUrl}/glossary`} cssSelectors={['[data-speakable]', '.section-title']} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetJsonLd) }}
@@ -312,7 +316,7 @@ export default function GlossaryPage() {
       >
         <div className="max-w-3xl mx-auto px-6">
           <h1 className="section-title mb-6">枡用語辞典</h1>
-          <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
+          <p data-speakable style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
             枡に関する用語・単位・文化を網羅的に解説します
           </p>
         </div>

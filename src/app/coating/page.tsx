@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
-import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
   title: '特殊コーティング加工 — 枡を水・汚れから守る',
@@ -23,6 +24,8 @@ export default function CoatingPage() {
           { name: '特殊コーティング', href: `${baseUrl}/coating` },
         ]}
       />
+      <SpeakableJsonLd url={`${baseUrl}/coating`} cssSelectors={['[data-speakable]', '.section-title']} />
+      <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '特殊コーティング' }]} />
 
       {/* Hero */}
       <section
@@ -53,6 +56,7 @@ export default function CoatingPage() {
           ヒノキの香りもそのまま楽しめます。
         </p>
         <div
+          data-speakable
           className="rounded-sm p-5"
           style={{ background: 'var(--color-accent-light)', border: '1px solid var(--color-accent)' }}
         >

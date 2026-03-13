@@ -20,8 +20,10 @@ const footerLinks = {
   ],
   法人のお客様: [
     { href: '/business', label: '法人向けサービス' },
-    { href: '/business#novelty', label: 'ノベルティ・記念品' },
-    { href: '/business#oem', label: 'OEM・大口注文' },
+    { href: '/business#pricing', label: '数量別価格表' },
+    { href: '/business#cases', label: '導入事例' },
+    { href: '/business#sample', label: 'サンプル依頼' },
+    { href: '/business/catalog', label: 'PDFカタログ' },
     { href: '/custom', label: 'お見積り相談' },
   ],
 }

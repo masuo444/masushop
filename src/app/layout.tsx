@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer'
 import siteConfig from '@/lib/site-config'
 import { CartProvider } from '@/lib/cart'
 import FloatingCartButton from '@/components/ui/FloatingCartButton'
+import FloatingContactButton from '@/components/ui/FloatingContactButton'
 
 const notoSerifJP = Noto_Serif_JP({
   variable: '--font-serif-jp',
@@ -62,6 +63,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: baseUrl,
+    languages: { ja: baseUrl, en: `${baseUrl}/en` },
   },
 }
 
@@ -73,8 +75,10 @@ const organizationJsonLd = {
   description: siteConfig.description,
   url: baseUrl,
   brand: { '@type': 'Brand', name: 'MASU-STORE' },
-  sameAs: [siteConfig.fomusOfficialUrl],
+  sameAs: [siteConfig.fomusOfficialUrl, siteConfig.fomusUrl],
   email: 'masu@fomus.co.jp',
+  foundingDate: '1950',
+  slogan: '一三〇〇年の技、一つの枡に。',
   areaServed: 'JP',
   priceRange: '¥500-¥5,000',
   knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸'],
@@ -91,6 +95,33 @@ const organizationJsonLd = {
       { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '一升枡', description: '1800ml ヒノキ枡' } },
     ],
   },
+}
+
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${baseUrl}/#localbusiness`,
+  name: 'FOMUS（フォーマス）',
+  description: '国産ヒノキ枡の製造・販売。名入れ・オーダーメイド対応。',
+  url: baseUrl,
+  email: 'masu@fomus.co.jp',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: '大垣市',
+    addressRegion: '岐阜県',
+    addressCountry: 'JP',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 35.3593,
+    longitude: 136.6126,
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Japan',
+  },
+  priceRange: '¥500-¥5,000',
+  knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸'],
 }
 
 const websiteJsonLd = {
@@ -116,12 +147,14 @@ export default function RootLayout({
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
       </head>
       <body className={`${notoSerifJP.variable} antialiased`}>
         <CartProvider>
           <Header />
           <main>{children}</main>
           <FloatingCartButton />
+          <FloatingContactButton />
           <Footer />
         </CartProvider>
       </body>

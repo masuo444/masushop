@@ -149,3 +149,61 @@ export function DefinedTermSetJsonLd({
     />
   )
 }
+
+// Speakable — tells AI which sections can be read aloud / extracted
+export function SpeakableJsonLd({
+  url,
+  cssSelectors
+}: {
+  url: string
+  cssSelectors: string[]
+}) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    url,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: cssSelectors,
+    },
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  )
+}
+
+// ItemList — for product listings, ranked lists
+export function ItemListJsonLd({
+  name,
+  items,
+}: {
+  name: string
+  items: { name: string; url: string; position: number; image?: string; description?: string }[]
+}) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((item) => ({
+      '@type': 'ListItem',
+      position: item.position,
+      item: {
+        '@type': 'Product',
+        name: item.name,
+        url: item.url,
+        ...(item.image && { image: item.image }),
+        ...(item.description && { description: item.description }),
+      },
+    })),
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  )
+}

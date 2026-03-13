@@ -3,7 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { masuSizes, selectionGuide, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
-import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 const baseUrl = siteConfig.url
 
@@ -12,7 +13,10 @@ export const metadata: Metadata = {
   description:
     '枡選びのポイントは「用途」と「サイズ」。日本酒には一合枡、節分には五合枡、ギフトには名入れ五勺枡がおすすめ。全7サイズの比較表と用途別おすすめを解説。',
   keywords: '枡 選び方,枡 サイズ,枡 おすすめ,一合枡,五勺枡,枡 用途',
-  alternates: { canonical: `${baseUrl}/guide` },
+  alternates: { canonical: `${baseUrl}/guide`, languages: { ja: `${baseUrl}/guide`, en: `${baseUrl}/en/guide` } },
+  openGraph: {
+    images: [{ url: `${baseUrl}/og-image.png`, width: 1200, height: 630 }],
+  },
 }
 
 const guideFaqItems = faqItems.filter(
@@ -28,12 +32,14 @@ export default function GuidePage() {
           { name: '枡の選び方ガイド', href: `${baseUrl}/guide` },
         ]}
       />
+      <SpeakableJsonLd url={`${baseUrl}/guide`} cssSelectors={['[data-speakable]', '.section-title']} />
       <FAQJsonLd
         items={guideFaqItems.map((item) => ({
           q: item.q,
           a: item.a,
         }))}
       />
+      <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '選び方ガイド' }]} />
 
       {/* Hero */}
       <section
@@ -64,6 +70,7 @@ export default function GuidePage() {
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
           <div
+            data-speakable
             className="p-8 rounded-sm"
             style={{ background: 'var(--color-accent-light)', borderLeft: '4px solid var(--color-accent)' }}
           >
