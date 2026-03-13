@@ -4,11 +4,11 @@ import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-  title: '特殊コーティング加工 — 撥水・撥油・防汚・抗菌',
+  title: '特殊コーティング加工 — 枡を水・汚れから守る',
   description:
-    '枡に施せる特殊コーティング「ビバプロテクト」の詳細。撥水・撥油・防汚・抗菌効果で枡を長持ちさせます。日本食品分析センター（JFRL）の食品衛生法適合試験に合格済み。安心して飲食にお使いいただけます。',
+    '枡に施せる特殊コーティングの詳細。水・油・汚れを弾いて、枡を長持ちさせます。食品衛生法の基準に適合済みで、日本酒を飲む枡にも安心。+¥800/個で選べるオプションです。',
   keywords:
-    '枡 コーティング,枡 撥水,枡 防汚,枡 抗菌,ビバプロテクト,枡 お手入れ,枡 長持ち',
+    '枡 コーティング,枡 撥水,枡 防汚,枡 抗菌,枡 お手入れ,枡 長持ち',
   alternates: { canonical: `${siteConfig.url}/coating` },
 }
 
@@ -30,246 +30,220 @@ export default function CoatingPage() {
         style={{ background: 'var(--color-subtle)', borderBottom: '1px solid var(--color-border)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <p
-            className="text-xs tracking-widest mb-4"
-            style={{ color: 'var(--color-accent)' }}
-          >
+          <p className="text-xs tracking-widest mb-4" style={{ color: 'var(--color-accent)' }}>
             COATING OPTION
           </p>
           <h1 className="section-title mb-4">特殊コーティング加工</h1>
           <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-            撥水・撥油・防汚・抗菌の4つの効果で、枡をより長く美しくお使いいただけます。
+            水や汚れを弾いて、枡を長く美しく保つオプションです。
           </p>
         </div>
       </section>
 
-      {/* コーティングとは */}
+      {/* コーティングって何？ */}
       <section className="mx-auto max-w-3xl px-6 py-20">
-        <h2 className="section-title mb-6">なぜコーティングが必要？</h2>
-        <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--foreground)' }}>
-          ヒノキ枡は天然の木製品のため、水分や油分が染み込みやすく、長期間の使用でシミやカビが発生することがあります。
-          特殊コーティングを施すことで、木の質感と香りを保ちながら、水や汚れを弾き、お手入れを格段に楽にします。
+        <h2 className="section-title mb-6">コーティングすると、何が変わる？</h2>
+        <p className="text-sm leading-[2] mb-6" style={{ color: 'var(--foreground)' }}>
+          枡はヒノキの天然木でできているため、水や日本酒を入れると少しずつ木に染み込んでいきます。
+          これは木ならではの風合いでもありますが、シミやカビの原因にもなります。
         </p>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--foreground)' }}>
-          日本酒を飲む枡はもちろん、企業ノベルティやギフト用の枡にもおすすめです。
-          コーティングなしの枡は使用後すぐに洗って乾燥させる必要がありますが、
-          コーティング済みの枡なら、より気軽に日常使いしていただけます。
+        <p className="text-sm leading-[2] mb-6" style={{ color: 'var(--foreground)' }}>
+          コーティングを施すと、<strong>枡の表面に目に見えないほど薄い膜</strong>ができ、
+          水や油を弾くようになります。見た目や手触りはほとんど変わりません。
+          ヒノキの香りもそのまま楽しめます。
         </p>
-      </section>
-
-      <div className="divider mx-auto max-w-3xl" />
-
-      {/* 4つの効果 */}
-      <section className="mx-auto max-w-4xl px-6 py-20">
-        <h2 className="section-title mb-10 text-center">4つの効果</h2>
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div
-            className="rounded-sm p-6"
-            style={{ border: '1px solid var(--color-border)', background: 'var(--background)' }}
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <span
-                className="flex items-center justify-center w-10 h-10 rounded-full text-lg"
-                style={{ background: 'var(--color-accent-light)', color: 'var(--color-accent)' }}
-              >
-                💧
-              </span>
-              <h3 className="text-base font-medium" style={{ color: 'var(--foreground)' }}>撥水</h3>
-            </div>
-            <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-              水を強力に弾き、木材への浸透を防ぎます。日本酒やお茶を入れた後の染み込みを大幅に軽減。使用後のお手入れが格段に楽になります。
-            </p>
-          </div>
-          <div
-            className="rounded-sm p-6"
-            style={{ border: '1px solid var(--color-border)', background: 'var(--background)' }}
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <span
-                className="flex items-center justify-center w-10 h-10 rounded-full text-lg"
-                style={{ background: 'var(--color-accent-light)', color: 'var(--color-accent)' }}
-              >
-                🛡
-              </span>
-              <h3 className="text-base font-medium" style={{ color: 'var(--foreground)' }}>撥油</h3>
-            </div>
-            <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-              油分の付着も防止。食品やおつまみを入れる器として使う場合にも、油ジミを気にせずお使いいただけます。
-            </p>
-          </div>
-          <div
-            className="rounded-sm p-6"
-            style={{ border: '1px solid var(--color-border)', background: 'var(--background)' }}
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <span
-                className="flex items-center justify-center w-10 h-10 rounded-full text-lg"
-                style={{ background: 'var(--color-accent-light)', color: 'var(--color-accent)' }}
-              >
-                ✨
-              </span>
-              <h3 className="text-base font-medium" style={{ color: 'var(--foreground)' }}>防汚</h3>
-            </div>
-            <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-              汚れの付着を防ぎ、美しい木目をキープ。手垢やホコリが付きにくくなるため、インテリアやディスプレイ用途にも最適です。
-            </p>
-          </div>
-          <div
-            className="rounded-sm p-6"
-            style={{ border: '1px solid var(--color-border)', background: 'var(--background)' }}
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <span
-                className="flex items-center justify-center w-10 h-10 rounded-full text-lg"
-                style={{ background: 'var(--color-accent-light)', color: 'var(--color-accent)' }}
-              >
-                🦠
-              </span>
-              <h3 className="text-base font-medium" style={{ color: 'var(--foreground)' }}>抗菌</h3>
-            </div>
-            <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-              抗菌効果により、雑菌の繁殖を抑制。飲食用途でも衛生的にお使いいただけます。飲食店やイベントでの大量使用にも安心です。
-            </p>
-          </div>
+        <div
+          className="rounded-sm p-5"
+          style={{ background: 'var(--color-accent-light)', border: '1px solid var(--color-accent)' }}
+        >
+          <p className="text-sm leading-[2]" style={{ color: 'var(--foreground)' }}>
+            <strong style={{ color: 'var(--color-accent)' }}>ひとことで言うと：</strong>
+            お手入れが楽になり、枡が長持ちするようになるオプションです。
+          </p>
         </div>
       </section>
 
       <div className="divider mx-auto max-w-3xl" />
 
-      {/* 使用コーティング剤 */}
+      {/* コーティングあり・なし比較 */}
       <section className="mx-auto max-w-3xl px-6 py-20">
-        <h2 className="section-title mb-6">使用コーティング剤</h2>
+        <h2 className="section-title mb-10 text-center">コーティングあり・なし の違い</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm" style={{ borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
+                <th className="text-left py-3 pr-4" style={{ color: 'var(--color-muted)' }}></th>
+                <th className="text-center py-3 px-4" style={{ color: 'var(--color-muted)' }}>コーティングなし</th>
+                <th
+                  className="text-center py-3 px-4 rounded-t-sm"
+                  style={{ color: 'var(--color-accent)', background: 'var(--color-accent-light)' }}
+                >
+                  コーティングあり
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['水を入れたとき', '木に少しずつ染み込む', '水を弾いて染み込みにくい'],
+                ['日本酒のシミ', 'つきやすい', 'つきにくい'],
+                ['油汚れ', '染み込みやすい', '弾いて落としやすい'],
+                ['カビのリスク', '湿気が残ると発生しやすい', '水分を弾くので発生しにくい'],
+                ['お手入れ', 'すぐ洗って、すぐ乾燥が必要', 'さっと水洗いでOK'],
+                ['見た目・手触り', 'そのままの木の質感', 'ほぼ変わらない'],
+                ['ヒノキの香り', 'そのまま', 'そのまま楽しめる'],
+              ].map(([label, without, withCoat]) => (
+                <tr key={label} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <td className="py-3 pr-4 text-xs font-medium" style={{ color: 'var(--foreground)' }}>
+                    {label}
+                  </td>
+                  <td className="text-center py-3 px-4 text-xs" style={{ color: 'var(--color-muted)' }}>
+                    {without}
+                  </td>
+                  <td
+                    className="text-center py-3 px-4 text-xs font-medium"
+                    style={{ color: 'var(--color-accent)', background: 'var(--color-accent-light)' }}
+                  >
+                    {withCoat}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div className="divider mx-auto max-w-3xl" />
+
+      {/* 安全性 */}
+      <section className="mx-auto max-w-3xl px-6 py-20">
+        <h2 className="section-title mb-6">口に触れても大丈夫？</h2>
+        <p className="text-sm leading-[2] mb-6" style={{ color: 'var(--foreground)' }}>
+          はい、安心してお使いいただけます。
+        </p>
+        <p className="text-sm leading-[2] mb-8" style={{ color: 'var(--foreground)' }}>
+          このコーティングは、<strong>日本食品分析センター（JFRL）</strong>という
+          国の基準に基づいて食品の安全性を調べる第三者機関で試験を受けています。
+          食品衛生法が定める基準をすべてクリアしており、
+          日本酒やお茶など飲み物を入れる枡にも安心してお使いいただけます。
+        </p>
         <div
-          className="rounded-sm p-6 mb-8"
+          className="rounded-sm p-6"
           style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
         >
-          <h3 className="text-base font-medium mb-1" style={{ color: 'var(--foreground)' }}>
-            ビバプロテクト A-BM
-          </h3>
-          <p className="text-xs mb-4" style={{ color: 'var(--color-muted)' }}>
-            株式会社タカハラコーポレーション / ビバ国際技術研究所
+          <p className="text-sm font-medium mb-3" style={{ color: 'var(--foreground)' }}>
+            試験結果（2022年9月 / 日本食品分析センター）
           </p>
-          <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--foreground)' }}>
-            「ビバプロテクト」は、特殊添加剤を配合した一液性常温硬化型の撥水・撥油コーティング剤です。
-            ゴム・金属・樹脂・木材に幅広く使用でき、高い撥水・撥油効果で汚れの付着を防止します。
-            被膜は柔軟性がありながら硬度3Hを実現し、耐熱性300℃という高い性能を持っています。
-          </p>
-
-          <h4 className="text-sm font-medium mb-3" style={{ color: 'var(--foreground)' }}>
-            技術仕様
-          </h4>
-          <div className="space-y-1">
+          <div className="space-y-2">
             {[
-              ['主成分', 'シリコン化合物'],
-              ['対象材質', 'ゴム、金属、樹脂、木材'],
-              ['硬度', '3H'],
-              ['耐熱性', '300℃'],
-              ['膜厚', '0.1〜0.2μm（ナノレベルの薄膜）'],
-              ['膜耐久性', '約6ヶ月（使用環境による）'],
-              ['乾燥時間', '3〜6時間'],
-            ].map(([label, value]) => (
-              <div key={label} className="flex text-xs py-1.5" style={{ borderBottom: '1px solid var(--color-border)' }}>
-                <span className="w-28 shrink-0" style={{ color: 'var(--color-muted)' }}>{label}</span>
-                <span style={{ color: 'var(--foreground)' }}>{value}</span>
+              '有害物質（カドミウム・鉛）→ 基準値以下で適合',
+              '重金属 → 基準値以下で適合',
+              '溶出物 → 基準値以下で適合',
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-2 text-xs" style={{ color: 'var(--foreground)' }}>
+                <span style={{ color: 'var(--color-accent)' }}>&#10003;</span>
+                {item}
               </div>
             ))}
           </div>
+          <p className="text-[11px] mt-4 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+            試験番号: 第22080132001-0101号 / 第22080132001-0201号
+            <br />
+            食品、添加物等の規格基準（昭和34年厚生省告示第370号）に基づく試験
+          </p>
         </div>
-
-        <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-          ナノレベル（0.1〜0.2μm）の極薄被膜のため、ヒノキ本来の木目や手触りを損なうことなく、コーティング効果を発揮します。
-          見た目や質感はほぼ変わらないまま、機能性だけが向上します。
-        </p>
       </section>
 
       <div className="divider mx-auto max-w-3xl" />
 
-      {/* 食品安全試験 */}
+      {/* どんなコーティング？ */}
       <section className="mx-auto max-w-3xl px-6 py-20">
-        <h2 className="section-title mb-6">食品衛生法適合 — 安心の第三者試験</h2>
-        <div
-          className="rounded-sm p-6 mb-6"
-          style={{
-            background: 'var(--color-accent-light)',
-            border: '1px solid var(--color-accent)',
-          }}
-        >
-          <p className="text-sm font-medium mb-2" style={{ color: 'var(--color-accent)' }}>
-            一般財団法人 日本食品分析センター（JFRL）試験合格
-          </p>
-          <p className="text-xs leading-relaxed" style={{ color: 'var(--foreground)' }}>
-            第三者機関である日本食品分析センターの分析試験（2022年9月）にて、
-            食品衛生法の規格基準（昭和34年厚生省告示第370号）に適合していることが確認されています。
-          </p>
-        </div>
+        <h2 className="section-title mb-6">どんなコーティング？</h2>
+        <p className="text-sm leading-[2] mb-6" style={{ color: 'var(--foreground)' }}>
+          使用しているのは「<strong>ビバプロテクト</strong>」という、
+          株式会社タカハラコーポレーションが開発した特殊コーティング剤です。
+          電車の車体や工業製品にも使われている実績のある技術で、木材にも対応しています。
+        </p>
 
-        <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--foreground)' }}>
-          試験結果
-        </h3>
-        <div className="space-y-1 mb-6">
+        <div className="grid gap-4 sm:grid-cols-2 mb-8">
           {[
-            ['カドミウム', '適合'],
-            ['鉛', '適合'],
-            ['重金属', '適合'],
-            ['過マンガン酸カリウム消費量', '適合（7.6μg/mL, 0.8μg/mL）'],
-          ].map(([item, result]) => (
-            <div key={item} className="flex text-xs py-1.5" style={{ borderBottom: '1px solid var(--color-border)' }}>
-              <span className="w-48 shrink-0" style={{ color: 'var(--color-muted)' }}>{item}</span>
-              <span className="font-medium" style={{ color: 'var(--color-accent)' }}>{result}</span>
+            {
+              title: '膜の厚さ',
+              desc: 'わずか0.1〜0.2ミクロン。髪の毛の太さの約1/500という薄さなので、見た目や手触りはほぼ変わりません。',
+            },
+            {
+              title: '耐熱性',
+              desc: '300℃まで耐えられるので、熱いお茶を入れても問題ありません。',
+            },
+            {
+              title: '耐久性',
+              desc: '使用環境にもよりますが、約6ヶ月間効果が持続します。',
+            },
+            {
+              title: '対応素材',
+              desc: 'ゴム・金属・樹脂・木材に対応。ヒノキ枡との相性も良好です。',
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="rounded-sm p-5"
+              style={{ border: '1px solid var(--color-border)' }}
+            >
+              <h3 className="text-sm font-medium mb-1" style={{ color: 'var(--foreground)' }}>
+                {item.title}
+              </h3>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
-        <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-          合成樹脂（PET）および金属板（アルミ）での試験を実施し、いずれも食品衛生法の基準を満たしています。
-          日本酒やお茶などの飲料を入れる枡にも安心してお使いいただけます。
-        </p>
       </section>
 
       <div className="divider mx-auto max-w-3xl" />
 
       {/* こんな方におすすめ */}
       <section className="mx-auto max-w-3xl px-6 py-20">
-        <h2 className="section-title mb-8">コーティングがおすすめのケース</h2>
-        <div className="space-y-4">
+        <h2 className="section-title mb-8">こんな方におすすめ</h2>
+        <div className="space-y-3">
           {[
             {
-              title: '飲食店・居酒屋で枡を使う場合',
-              desc: '毎日の営業で使う枡には必須。洗い物が楽になり、カビやシミの発生を抑え、衛生的に使い続けられます。',
+              who: '日本酒を枡で飲みたい方',
+              why: 'シミや匂い残りを気にせず、毎日の晩酌に使えます。',
             },
             {
-              title: '企業ノベルティ・記念品として配布する場合',
-              desc: '受け取った方がすぐに使えて、長く美しい状態を保てます。贈り物としての品質が一段上がります。',
+              who: '飲食店・居酒屋で枡を使うオーナー様',
+              why: '洗い物が楽に。カビやシミを防ぎ、衛生的に使い続けられます。',
             },
             {
-              title: '日本酒用の枡を長く使いたい場合',
-              desc: '日本酒のシミや匂い残りを防ぎ、ヒノキの香りをより長く楽しめます。',
+              who: 'ノベルティ・記念品として配る企業様',
+              why: 'もらった方がすぐ使えて、長くきれいな状態を保てます。',
             },
             {
-              title: 'インテリア・ディスプレイとして飾る場合',
-              desc: 'ホコリや手垢が付きにくくなり、お手入れの手間が減ります。',
+              who: 'ギフトとして贈る方',
+              why: '「お手入れが簡単」というのは、もらう側にとって嬉しいポイントです。',
             },
             {
-              title: 'イベント・展示会で大量に使う場合',
-              desc: '抗菌効果があり、不特定多数が手にするシーンでも衛生的です。',
+              who: '枡をインテリアとして飾りたい方',
+              why: 'ホコリや手垢が付きにくく、美しい状態をキープしやすくなります。',
             },
           ].map((item) => (
             <div
-              key={item.title}
+              key={item.who}
               className="flex gap-4 rounded-sm p-5"
               style={{ border: '1px solid var(--color-border)' }}
             >
               <span
-                className="flex items-center justify-center w-8 h-8 shrink-0 rounded-full text-xs font-bold"
+                className="flex items-center justify-center w-7 h-7 shrink-0 rounded-full text-[10px] font-bold"
                 style={{ background: 'var(--color-accent)', color: '#fff' }}
               >
                 &#10003;
               </span>
               <div>
-                <h3 className="text-sm font-medium mb-1" style={{ color: 'var(--foreground)' }}>
-                  {item.title}
+                <h3 className="text-sm font-medium mb-0.5" style={{ color: 'var(--foreground)' }}>
+                  {item.who}
                 </h3>
                 <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                  {item.desc}
+                  {item.why}
                 </p>
               </div>
             </div>
@@ -281,16 +255,16 @@ export default function CoatingPage() {
 
       {/* 料金 */}
       <section className="mx-auto max-w-3xl px-6 py-20">
-        <h2 className="section-title mb-6">料金</h2>
+        <h2 className="section-title mb-6 text-center">料金</h2>
         <div
-          className="rounded-sm p-6 text-center"
+          className="rounded-sm p-8 text-center"
           style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
         >
           <p className="text-3xl font-medium tracking-tight mb-2" style={{ color: 'var(--color-accent)' }}>
             &yen;800<span className="text-base font-normal"> / 個（税別）</span>
           </p>
-          <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
-            全サイズ共通。ご注文時にオプションとしてお選びいただけます。
+          <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+            全サイズ共通。枡のご注文時にオプションとして追加できます。
           </p>
         </div>
       </section>
@@ -301,11 +275,11 @@ export default function CoatingPage() {
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
         <h2 className="section-title mb-4">コーティング付きの枡を注文する</h2>
         <p className="text-sm mb-8 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-          商品一覧ページで枡のサイズを選び、オプションで「コーティング」を選択してください。
+          商品一覧でサイズを選び、オプションで「コーティング」にチェックを入れるだけです。
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link href="/products#order" className="btn-accent">
-            商品一覧で枡を注文する
+            枡を注文する
           </Link>
           <Link href="/custom" className="btn-outline">
             お見積り・ご相談
