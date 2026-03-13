@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import CartBadge from '@/components/ui/CartBadge'
 
 const navLinks = [
   { href: '/finder', label: '枡診断' },
@@ -9,7 +10,6 @@ const navLinks = [
   { href: '/products', label: '商品一覧' },
   { href: '/business', label: '法人の方' },
   { href: '/blog', label: '読みもの' },
-  { href: '/custom', label: 'ご相談' },
 ]
 
 export default function Header() {
@@ -22,7 +22,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden'
@@ -65,43 +64,42 @@ export default function Header() {
             ))}
             <Link
               href="/custom"
-              className="text-xs text-[var(--color-accent)] hover:text-[var(--color-accent)]/70 transition-colors ml-2"
+              className="text-xs text-[var(--color-accent)] hover:text-[var(--color-accent)]/70 transition-colors"
             >
-              お見積り・ご相談
+              お見積り
             </Link>
+            <CartBadge />
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            className="lg:hidden p-2 text-[var(--foreground)]/50"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="メニュー"
-          >
-            {menuOpen ? (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-              </svg>
-            )}
-          </button>
+          {/* Mobile: cart + menu */}
+          <div className="lg:hidden flex items-center gap-3">
+            <CartBadge />
+            <button
+              className="p-2 text-[var(--foreground)]/50"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="メニュー"
+            >
+              {menuOpen ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Navigation — slide-in panel */}
+      {/* Mobile Navigation */}
       <div
         className={`fixed inset-0 top-16 md:top-20 z-40 lg:hidden transition-opacity duration-300 ${
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Backdrop */}
-        <div
-          className="absolute inset-0 bg-black/20"
-          onClick={() => setMenuOpen(false)}
-        />
-        {/* Panel */}
+        <div className="absolute inset-0 bg-black/20" onClick={() => setMenuOpen(false)} />
         <div
           className={`absolute top-0 right-0 w-full max-w-xs h-full bg-[var(--background)] shadow-xl transition-transform duration-300 ${
             menuOpen ? 'translate-x-0' : 'translate-x-full'

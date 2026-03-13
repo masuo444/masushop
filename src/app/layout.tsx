@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import siteConfig from '@/lib/site-config'
 import { CartProvider } from '@/lib/cart'
+import FloatingCartButton from '@/components/ui/FloatingCartButton'
 
 const notoSerifJP = Noto_Serif_JP({
   variable: '--font-serif-jp',
@@ -120,6 +121,7 @@ export default function RootLayout({
         <CartProvider>
           <Header />
           <main>{children}</main>
+          <FloatingCartButton />
           <Footer />
         </CartProvider>
       </body>
