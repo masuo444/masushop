@@ -1,6 +1,26 @@
 import { NextResponse } from 'next/server'
 import siteConfig from '@/lib/site-config'
 
+async function sendEmail(
+  apiKey: string,
+  payload: { from: string; to: string; subject: string; html: string },
+) {
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify(payload),
+  })
+
+  if (!response.ok) {
+    const detail = await response.text()
+    console.error('Resend API error', response.status, detail)
+    throw new Error(`Resend rejected the email with status ${response.status}`)
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
@@ -27,26 +47,29 @@ export async function POST(request: Request) {
     const adminEmail = siteConfig.adminEmail
     const resendApiKey = process.env.RESEND_API_KEY
 
-    // If Resend is configured, send emails
-    if (resendApiKey && adminEmail) {
-      const printLabels: Record<string, string> = {
-        branding: '焼印',
-        laser: 'レーザー刻印',
-        undecided: '相談したい',
-      }
+    if (!resendApiKey || !adminEmail) {
+      console.error('Contact form email is not configured', {
+        hasResendApiKey: Boolean(resendApiKey),
+        hasAdminEmail: Boolean(adminEmail),
+      })
+      return NextResponse.json(
+        { error: 'メール送信設定を確認しています。contact@fomus.jpへ直接お問い合わせください。' },
+        { status: 503 },
+      )
+    }
 
-      // Send to admin
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${resendApiKey}`,
-        },
-        body: JSON.stringify({
-          from: siteConfig.contactEmail,
-          to: adminEmail,
-          subject: `【枡のお見積り】${companyVal ? companyVal + ' ' : ''}${name}様`,
-          html: `<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
+    const printLabels: Record<string, string> = {
+      branding: '焼印',
+      laser: 'レーザー刻印',
+      undecided: '相談したい',
+    }
+
+    // Send to admin
+    await sendEmail(resendApiKey, {
+      from: siteConfig.contactEmail,
+      to: adminEmail,
+      subject: `【枡のお見積り】${companyVal ? companyVal + ' ' : ''}${name}様`,
+      html: `<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
 <div style="background:#1A1A1A;padding:24px;text-align:center;"><h1 style="color:#fff;margin:0;font-size:16px;letter-spacing:3px;">MASU-STORE</h1></div>
 <div style="padding:24px;background:#fff;border:1px solid #e5e5e5;">
 <h2 style="font-size:18px;margin:0 0 20px;">お見積り・ご相談</h2>
@@ -66,21 +89,14 @@ ${jpycPayment ? `<tr><td style="padding:8px 0;color:#888;">JPYC決済</td><td st
 ${notes ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">その他ご要望</td></tr><tr><td colspan="2" style="padding:8px 0;white-space:pre-wrap;">${notes}</td></tr>` : ''}
 </table>
 </div></div>`,
-        }),
-      })
+    })
 
-      // Auto-reply to customer
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${resendApiKey}`,
-        },
-        body: JSON.stringify({
-          from: siteConfig.contactEmail,
-          to: email,
-          subject: '【枡の専門店 MASU-STORE】お問い合わせありがとうございます',
-          html: `<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
+    // Auto-reply to customer
+    await sendEmail(resendApiKey, {
+      from: siteConfig.contactEmail,
+      to: email,
+      subject: '【枡の専門店 MASU-STORE】お問い合わせありがとうございます',
+      html: `<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
 <div style="background:#1A1A1A;padding:24px;text-align:center;"><h1 style="color:#fff;margin:0;font-size:16px;letter-spacing:3px;">MASU-STORE</h1></div>
 <div style="padding:24px;background:#fff;border:1px solid #e5e5e5;">
 <h2 style="font-size:18px;margin:0 0 20px;">お問い合わせありがとうございます</h2>
@@ -93,14 +109,7 @@ ${name}様<br><br>
 </div>
 <div style="padding:12px;text-align:center;"><p style="font-size:11px;color:#999;">枡の専門店 MASU-STORE</p></div>
 </div>`,
-        }),
-      })
-    } else {
-      // Log to console if email not configured
-      console.log('=== 枡お見積り受付 ===')
-      console.log(JSON.stringify(body, null, 2))
-      console.log('=== (RESEND_API_KEY or ADMIN_EMAIL not configured) ===')
-    }
+    })
 
     return NextResponse.json({ success: true })
   } catch (error) {
