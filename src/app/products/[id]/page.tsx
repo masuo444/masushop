@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { masuSizes, engravingMethods, optionPrices } from '@/lib/masu-data'
@@ -8,18 +9,24 @@ import { getAverageRating, getReviewCount } from '@/lib/reviews'
 import ProductConfigurator from '@/components/ui/ProductConfigurator'
 
 const baseUrl = siteConfig.url
+type ProductPageProps = { params: Promise<{ id: string }> }
 
 export function generateStaticParams() {
   return masuSizes.map((m) => ({ id: m.id }))
 }
 
-export function generateMetadata({ params }: { params: { id: string } }): Metadata {
-  const product = masuSizes.find((m) => m.id === params.id)
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { id } = await params
+  const product = masuSizes.find((m) => m.id === id)
   if (!product) return {}
 
-  const optionsSummary = product.hasLidOption
-    ? '名入れ（焼印・レーザー）・特殊コーティング・蓋オプション対応。'
-    : '名入れ（焼印・レーザー）・特殊コーティング対応。'
+  let optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング対応。'
+  if (product.hasLidOption) {
+    optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋オプション対応。'
+  }
+  if (product.id === 'ichigo') {
+    optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋・専用パッケージ（クリアケース・白箱）対応。'
+  }
 
   const title = `${product.name} — 国産ヒノキ枡 ${product.capacity}`
   const description = `${product.description} ${optionsSummary} ¥${product.priceFrom.toLocaleString()}〜`
@@ -27,7 +34,7 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
   return {
     title,
     description,
-    keywords: `${product.name},${product.reading},枡 ${product.capacity},ヒノキ枡,国産枡,名入れ枡,${product.use}`,
+    keywords: `${product.name},${product.reading},枡 ${product.capacity},ヒノキ枡,国産枡,名入れ枡,${product.id === 'ichigo' ? '一合枡 クリアケース,一合枡 白箱,枡 パッケージ,' : ''}${product.use}`,
     alternates: { canonical: `${baseUrl}/products/${product.id}` },
     openGraph: {
       title,
@@ -39,8 +46,9 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
   }
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = masuSizes.find((m) => m.id === params.id)
+export default async function ProductDetailPage({ params }: ProductPageProps) {
+  const { id } = await params
+  const product = masuSizes.find((m) => m.id === id)
   if (!product) notFound()
 
   const variants = engravingMethods
@@ -119,6 +127,15 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         name: '容量',
         value: product.capacity,
       },
+      ...(product.id === 'ichigo'
+        ? [
+            {
+              '@type': 'PropertyValue',
+              name: '専用パッケージ',
+              value: 'クリアケース・白箱（要見積り）',
+            },
+          ]
+        : []),
     ],
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -283,6 +300,82 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             </div>
           </div>
         </div>
+
+        {product.id === 'ichigo' && (
+          <section
+            className="mt-16 rounded-sm p-6 md:p-10"
+            style={{
+              background: 'var(--color-subtle)',
+              border: '1px solid var(--color-border)',
+            }}
+            aria-labelledby="ichigo-packaging-title"
+          >
+            <div className="mx-auto max-w-3xl text-center">
+              <p
+                className="mb-3 text-xs font-medium tracking-[0.18em]"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                一合枡限定オプション
+              </p>
+              <h2 id="ichigo-packaging-title" className="section-title mb-4">
+                一合枡専用パッケージ
+              </h2>
+              <p className="text-sm leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
+                一合枡のみ、クリアケースと白箱をご用意できます。
+                名入れギフト、企業記念品、引き出物などの個別包装にご利用ください。
+                価格は数量・仕様に応じてお見積りします。
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
+              <article
+                className="overflow-hidden rounded-sm"
+                style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}
+              >
+                <Image
+                  src="/images/package/ichigo-clear-case.webp"
+                  alt="一合枡を入れられる透明なクリアケース"
+                  width={1254}
+                  height={1254}
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  className="aspect-square w-full object-cover"
+                />
+                <div className="p-5">
+                  <h3 className="serif mb-2 text-lg">クリアケース</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                    枡の木目や名入れデザインを見せたまま、展示・配布できる透明パッケージです。
+                  </p>
+                </div>
+              </article>
+
+              <article
+                className="overflow-hidden rounded-sm"
+                style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}
+              >
+                <Image
+                  src="/images/package/ichigo-white-box.webp"
+                  alt="一合枡を個別包装できる白箱"
+                  width={1254}
+                  height={1254}
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  className="aspect-square w-full object-cover"
+                />
+                <div className="p-5">
+                  <h3 className="serif mb-2 text-lg">白箱</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                    清潔感のある個別包装。企業記念品や引き出物、贈答用の一合枡に適しています。
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <div className="mt-8 text-center">
+              <Link href="/custom?size=ichigo&type=packaging" className="btn-accent">
+                パッケージ込みで見積り・相談する
+              </Link>
+            </div>
+          </section>
+        )}
       </section>
     </>
   )

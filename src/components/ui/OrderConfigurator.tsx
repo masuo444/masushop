@@ -271,6 +271,47 @@ export default function OrderConfigurator() {
                 </svg>
                 コーティングについて詳しく見る
               </Link>
+
+              {selectedSize.id === 'ichigo' && (
+                <div
+                  className="mt-4 flex items-center gap-3 rounded-sm p-3"
+                  style={{
+                    background: 'var(--color-accent-light)',
+                    border: '1px solid var(--color-accent)',
+                  }}
+                >
+                  <div className="flex shrink-0 -space-x-2">
+                    <Image
+                      src="/images/package/ichigo-clear-case.webp"
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="h-12 w-12 rounded-sm border-2 object-cover"
+                      style={{ borderColor: 'var(--background)' }}
+                    />
+                    <Image
+                      src="/images/package/ichigo-white-box.webp"
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="h-12 w-12 rounded-sm border-2 object-cover"
+                      style={{ borderColor: 'var(--background)' }}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium" style={{ color: 'var(--foreground)' }}>
+                      一合枡限定：クリアケース・白箱をご用意できます
+                    </p>
+                    <Link
+                      href="/products/ichigo#ichigo-packaging-title"
+                      className="mt-1 inline-block text-[11px] hover:underline"
+                      style={{ color: 'var(--color-accent)' }}
+                    >
+                      パッケージを見る・見積りを相談する &rarr;
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* 数量 */}
