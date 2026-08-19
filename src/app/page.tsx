@@ -10,6 +10,7 @@ const displayedFaqItems = faqItems.slice(0, 5)
 const orderFacts = [
   { label: '素材', value: '国産ヒノキ' },
   { label: 'サイズ', value: '全7サイズ' },
+  { label: '無垢枡の参考価格', value: '¥500〜／個' },
   { label: '名入れ', value: '焼印・レーザー刻印' },
   { label: '法人注文', value: '無垢枡10個から' },
 ]
@@ -200,7 +201,7 @@ export default function HomePage() {
             margin: '0 auto',
             padding: '1.75rem 1.5rem',
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: 'repeat(5, 1fr)',
             gap: '1.5rem',
           }}
           className="max-md:!grid-cols-2 max-sm:!grid-cols-1"
