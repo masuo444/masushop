@@ -46,7 +46,7 @@ export default function Header() {
             <span className="serif text-2xl font-light text-[var(--foreground)]">
               枡
             </span>
-            <span className="text-[9px] tracking-[0.12em] text-[var(--foreground)]/40 hidden sm:inline mt-1">
+            <span className="text-[11px] tracking-[0.12em] text-[var(--foreground)]/60 hidden sm:inline mt-1">
               MASU-STORE
             </span>
           </Link>
@@ -57,14 +57,14 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-xs text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-colors"
+                className="text-sm text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors"
               >
                 {link.label}
               </Link>
             ))}
             <Link
               href="/custom"
-              className="text-xs text-[var(--color-accent)] hover:text-[var(--color-accent)]/70 transition-colors"
+              className="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent)]/70 transition-colors"
             >
               お見積り
             </Link>
@@ -110,7 +110,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block py-3 text-sm text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors border-b border-[var(--color-border)]/50"
+                className="block py-3 text-base text-[var(--foreground)]/75 hover:text-[var(--foreground)] transition-colors border-b border-[var(--color-border)]/50"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
@@ -119,7 +119,7 @@ export default function Header() {
             <div className="pt-6">
               <Link
                 href="/custom"
-                className="text-sm text-[var(--color-accent)]"
+                className="text-base text-[var(--color-accent)]"
                 onClick={() => setMenuOpen(false)}
               >
                 お見積り・ご相談

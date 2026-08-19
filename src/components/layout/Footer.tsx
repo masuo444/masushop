@@ -39,23 +39,23 @@ export default function Footer() {
             <p className="serif text-3xl font-light text-white tracking-[0.15em] mb-3">
               枡
             </p>
-            <p className="text-[10px] tracking-[0.12em] text-white/30 mb-6">
+            <p className="text-xs tracking-[0.12em] text-white/60 mb-6">
               MASU-STORE
             </p>
-            <p className="serif text-sm leading-relaxed text-white/40 mb-8">
+            <p className="serif text-base leading-relaxed text-white/70 mb-8">
               一三〇〇年の技、一つの枡に。
             </p>
-            <p className="text-xs leading-[2] text-white/30">
+            <p className="text-sm leading-[2] text-white/65">
               国産ヒノキ枡の総合専門サイト。<br />
               販売・名入れ・オーダーメイド対応。
             </p>
 
             {/* Contact */}
             <div className="mt-8 pt-6 border-t border-white/10">
-              <p className="text-[11px] text-white/50 mb-2">お問い合わせ</p>
+              <p className="text-sm text-white/70 mb-2">お問い合わせ</p>
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
-                className="text-xs text-white/40 hover:text-white/60 transition-colors"
+                className="text-sm text-white/75 hover:text-white transition-colors"
               >
                 {siteConfig.contactEmail}
               </a>
@@ -65,13 +65,13 @@ export default function Footer() {
           {/* Link sections */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <p className="text-[11px] text-white/50 mb-5">{category}</p>
+              <p className="text-sm text-white/75 mb-5">{category}</p>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.href + link.label}>
                     <Link
                       href={link.href}
-                      className="text-xs text-white/35 hover:text-white/60 transition-colors"
+                      className="text-sm text-white/65 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -84,7 +84,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] text-white/20">
+          <p className="text-xs text-white/55">
             &copy; {new Date().getFullYear()} {siteConfig.name}
           </p>
           <div className="flex items-center gap-6">
@@ -92,7 +92,7 @@ export default function Footer() {
               href={siteConfig.fomusUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] text-white/25 hover:text-white/45 transition-colors"
+              className="text-xs text-white/60 hover:text-white transition-colors"
             >
               FOMUS SHOP
             </a>
@@ -100,7 +100,7 @@ export default function Footer() {
               href={siteConfig.fomusOfficialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] text-white/25 hover:text-white/45 transition-colors"
+              className="text-xs text-white/60 hover:text-white transition-colors"
             >
               FOMUS 公式サイト
             </a>

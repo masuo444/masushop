@@ -77,6 +77,13 @@ const organizationJsonLd = {
   brand: { '@type': 'Brand', name: 'MASU-STORE' },
   sameAs: [siteConfig.fomusOfficialUrl, siteConfig.fomusUrl],
   email: siteConfig.contactEmail,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: siteConfig.contactEmail,
+    availableLanguage: ['Japanese', 'English'],
+    areaServed: 'Worldwide',
+  },
   foundingDate: '1950',
   slogan: '一三〇〇年の技、一つの枡に。',
   areaServed: 'JP',
@@ -130,11 +137,7 @@ const websiteJsonLd = {
   name: siteConfig.name,
   url: baseUrl,
   description: siteConfig.description,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: { '@type': 'EntryPoint', urlTemplate: `${baseUrl}/search?q={search_term_string}` },
-    'query-input': 'required name=search_term_string',
-  },
+  inLanguage: ['ja', 'en'],
 }
 
 export default function RootLayout({
@@ -152,7 +155,7 @@ export default function RootLayout({
       <body className={`${notoSerifJP.variable} antialiased`}>
         <CartProvider>
           <Header />
-          <main>{children}</main>
+          <main className="site-main">{children}</main>
           <FloatingCartButton />
           <FloatingContactButton />
           <Footer />

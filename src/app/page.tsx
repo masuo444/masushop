@@ -7,6 +7,13 @@ import ReviewSection from '@/components/ui/ReviewSection'
 
 const displayedFaqItems = faqItems.slice(0, 5)
 
+const orderFacts = [
+  { label: '素材', value: '国産ヒノキ' },
+  { label: 'サイズ', value: '全7サイズ' },
+  { label: '名入れ', value: '焼印・レーザー刻印' },
+  { label: '法人注文', value: '無垢枡10個から' },
+]
+
 const useCases = [
   {
     title: '日本酒・もっきり',
@@ -113,20 +120,32 @@ export default function HomePage() {
             <h1
               className="serif"
               style={{
-                fontSize: 'clamp(1.2rem, 3vw, 1.75rem)',
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
                 fontWeight: 300,
-                lineHeight: 1.6,
+                lineHeight: 1.5,
                 marginBottom: '1.25rem',
-                letterSpacing: '0.1em',
+                letterSpacing: '0.08em',
               }}
             >
               国産ヒノキ枡の専門店
+              <span
+                style={{
+                  display: 'block',
+                  marginTop: '0.5rem',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+                  fontSize: '0.625em',
+                  letterSpacing: '0.08em',
+                  color: '#C8C1B8',
+                }}
+              >
+                名入れ・オリジナル枡・法人注文に対応
+              </span>
             </h1>
             <p
               style={{
-                fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
+                fontSize: '1rem',
                 lineHeight: 2,
-                color: '#A09A92',
+                color: '#C8C1B8',
                 maxWidth: 440,
                 marginBottom: '2.5rem',
               }}
@@ -164,6 +183,39 @@ export default function HomePage() {
             />
           </div>
         </div>
+      </section>
+
+      {/* ===== 注文概要（検索・AI向けの要点） ===== */}
+      <section
+        data-speakable
+        aria-label="枡の注文概要"
+        style={{
+          background: 'var(--color-subtle)',
+          borderBottom: '1px solid var(--color-border)',
+        }}
+      >
+        <dl
+          style={{
+            maxWidth: 960,
+            margin: '0 auto',
+            padding: '1.75rem 1.5rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '1.5rem',
+          }}
+          className="max-md:!grid-cols-2 max-sm:!grid-cols-1"
+        >
+          {orderFacts.map((fact) => (
+            <div key={fact.label}>
+              <dt style={{ fontSize: '0.875rem', color: 'var(--color-muted)', marginBottom: '0.25rem' }}>
+                {fact.label}
+              </dt>
+              <dd style={{ fontSize: '1rem', fontWeight: 600, lineHeight: 1.6 }}>
+                {fact.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* ===== 枡とは (AIO) ===== */}
