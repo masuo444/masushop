@@ -24,8 +24,9 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   if (product.hasLidOption) {
     optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋オプション対応。'
   }
+
   if (product.id === 'ichigo') {
-    optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋・専用パッケージ（クリアケース・白箱）対応。'
+    optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋・専用パッケージ（クリアケース・白箱 各150円／個・税別）対応。'
   }
 
   const title = `${product.name} — 国産ヒノキ枡 ${product.capacity}`
@@ -75,6 +76,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         availability: 'https://schema.org/InStock',
       },
     })
+  }
+
+  if (product.id === 'ichigo') {
+    for (const packageName of ['クリアケース', '白箱']) {
+      variants.push({
+        '@type': 'ProductModel',
+        name: `${product.name}（${packageName}入り）`,
+        offers: {
+          '@type': 'Offer',
+          price: product.priceFrom + optionPrices.packaging,
+          priceCurrency: 'JPY',
+          availability: 'https://schema.org/InStock',
+        },
+      })
+    }
   }
 
   const productJsonLd = {
@@ -132,7 +148,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {
               '@type': 'PropertyValue',
               name: '専用パッケージ',
-              value: 'クリアケース・白箱（要見積り）',
+              value: `クリアケース・白箱 各¥${optionPrices.packaging}/個（税別）`,
             },
           ]
         : []),
@@ -323,7 +339,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <p className="text-sm leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
                 一合枡のみ、クリアケースと白箱をご用意できます。
                 名入れギフト、企業記念品、引き出物などの個別包装にご利用ください。
-                価格は数量・仕様に応じてお見積りします。
+                価格はどちらも1個あたり&yen;{optionPrices.packaging}（税別）です。
               </p>
             </div>
 
@@ -341,7 +357,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   className="aspect-square w-full object-cover"
                 />
                 <div className="p-5">
-                  <h3 className="serif mb-2 text-lg">クリアケース</h3>
+                  <div className="mb-2 flex items-baseline justify-between gap-3">
+                    <h3 className="serif text-lg">クリアケース</h3>
+                    <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>
+                      +&yen;{optionPrices.packaging}/個（税別）
+                    </p>
+                  </div>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                     枡の木目や名入れデザインを見せたまま、展示・配布できる透明パッケージです。
                   </p>
@@ -361,7 +382,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   className="aspect-square w-full object-cover"
                 />
                 <div className="p-5">
-                  <h3 className="serif mb-2 text-lg">白箱</h3>
+                  <div className="mb-2 flex items-baseline justify-between gap-3">
+                    <h3 className="serif text-lg">白箱</h3>
+                    <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>
+                      +&yen;{optionPrices.packaging}/個（税別）
+                    </p>
+                  </div>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                     清潔感のある個別包装。企業記念品や引き出物、贈答用の一合枡に適しています。
                   </p>

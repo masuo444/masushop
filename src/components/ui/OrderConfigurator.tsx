@@ -300,7 +300,7 @@ export default function OrderConfigurator() {
                   </div>
                   <div>
                     <p className="text-xs font-medium" style={{ color: 'var(--foreground)' }}>
-                      一合枡限定：クリアケース・白箱をご用意できます
+                      一合枡限定：クリアケース・白箱 各&yen;{optionPrices.packaging}/個（税別）
                     </p>
                     <Link
                       href="/products/ichigo#ichigo-packaging-title"
