@@ -5,7 +5,7 @@ const siteConfig = {
   url: process.env.NEXT_PUBLIC_BASE_URL || 'https://masu.fomus.jp',
   fomusUrl: 'https://shop.fomus.co.jp',
   fomusOfficialUrl: 'https://fomus.jp',
-  contactEmail: process.env.CONTACT_EMAIL || 'masu@fomus.co.jp',
+  contactEmail: 'contact@fomus.jp',
   adminEmail: process.env.ADMIN_EMAIL || '',
   // Minimum order for standard masu (plain/unbranded)
   standardMasuMinOrder: 10,

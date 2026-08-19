@@ -18,7 +18,7 @@ const orgJsonLd = {
   description: 'Handcrafted Japanese hinoki cypress wooden cups (masu). Custom engraving, worldwide shipping.',
   url: `${baseUrl}/en`,
   brand: { '@type': 'Brand', name: 'MASU-STORE' },
-  email: 'masu@fomus.co.jp',
+  email: siteConfig.contactEmail,
   areaServed: 'Worldwide',
   knowsAbout: ['masu', 'Japanese sake cups', 'hinoki cypress', 'Japanese traditional crafts', 'custom engraving'],
   foundingDate: '1950',

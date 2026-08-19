@@ -76,7 +76,7 @@ const organizationJsonLd = {
   url: baseUrl,
   brand: { '@type': 'Brand', name: 'MASU-STORE' },
   sameAs: [siteConfig.fomusOfficialUrl, siteConfig.fomusUrl],
-  email: 'masu@fomus.co.jp',
+  email: siteConfig.contactEmail,
   foundingDate: '1950',
   slogan: '一三〇〇年の技、一つの枡に。',
   areaServed: 'JP',
@@ -104,7 +104,7 @@ const localBusinessJsonLd = {
   name: 'FOMUS（フォーマス）',
   description: '国産ヒノキ枡の製造・販売。名入れ・オーダーメイド対応。',
   url: baseUrl,
-  email: 'masu@fomus.co.jp',
+  email: siteConfig.contactEmail,
   address: {
     '@type': 'PostalAddress',
     addressLocality: '大垣市',
