@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -114,13 +113,13 @@ const orderSteps = [
 const whyFomus = [
   {
     num: '01',
-    title: '岐阜県大垣市の自社工場で一貫製造',
-    desc: '日本有数のヒノキの産地に近い大垣市で、木材の仕入れから加工・検品まで一貫管理。中間マージンがないため、品質を保ちながら適正価格でご提供できます。',
+    title: '国産ヒノキの枡を全7サイズ',
+    desc: '三勺枡（54ml）から一升枡（1800ml）まで。用途とご予算に合わせて最適なサイズをご提案します。',
   },
   {
     num: '02',
     title: '10個から10,000個超まで柔軟に対応',
-    desc: '小ロットの試作から大規模イベント用の大量注文まで、自社工場だからこそ柔軟に対応。数量に応じた割引でまとめ買いほどお得になります。',
+    desc: '小ロットの試作から大規模イベント用の大量注文まで対応します。数量に応じた割引でまとめ買いほどお得になります。',
   },
   {
     num: '03',
@@ -406,8 +405,7 @@ export default function BusinessPage() {
 
           <div className="mt-6 space-y-1">
             {[
-              '焼印：単価に含む（初回版代 ¥13,000 別途）',
-              'レーザー刻印：+¥150/個',
+              '名入れ（焼印・レーザー刻印）：内容と数量に応じてお見積り',
               'コーティング：+¥800/個',
               '蓋オプション：三勺枡 +¥800/個、一合枡 +¥1,000/個',
             ].map((note) => (
@@ -555,7 +553,7 @@ export default function BusinessPage() {
                   {[
                     { label: '仕上がり', val: '焦げ茶色の温かみある印字' },
                     { label: '向いている用途', val: 'ロゴ・社名・シンプルなデザイン' },
-                    { label: '費用', val: '版代 ¥13,000（初回のみ）/ 印字代は単価に含む' },
+                    { label: '版', val: '専用の銅版を初回に製作' },
                     { label: 'ロット', val: '1個〜' },
                   ].map((item) => (
                     <div key={item.label} className="flex gap-3 text-xs">
@@ -587,7 +585,7 @@ export default function BusinessPage() {
                   {[
                     { label: '仕上がり', val: '繊細な彫刻。グラデーション・写真も表現可' },
                     { label: '向いている用途', val: '細かいデザイン・QRコード・個別名入れ' },
-                    { label: '費用', val: '¥150/個（版代不要）' },
+                    { label: '版', val: '不要' },
                     { label: 'ロット', val: '1個〜（個別に異なるデザインも可）' },
                   ].map((item) => (
                     <div key={item.label} className="flex gap-3 text-xs">

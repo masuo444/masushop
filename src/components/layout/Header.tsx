@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import CartBadge from '@/components/ui/CartBadge'
 
 const navLinks = [
   { href: '/finder', label: '枡診断' },
   { href: '/guide', label: '選び方' },
   { href: '/products', label: '商品一覧' },
+  { href: '/order-made', label: 'オーダーメイド' },
   { href: '/business', label: '法人の方' },
   { href: '/blog', label: '読みもの' },
 ]
@@ -68,12 +68,10 @@ export default function Header() {
             >
               お見積り
             </Link>
-            <CartBadge />
           </nav>
 
-          {/* Mobile: cart + menu */}
+          {/* Mobile: menu */}
           <div className="lg:hidden flex items-center gap-3">
-            <CartBadge />
             <button
               className="p-2 text-[var(--foreground)]/50"
               onClick={() => setMenuOpen(!menuOpen)}

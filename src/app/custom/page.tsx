@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
+import { getAttribution } from '@/lib/attribution'
 
 const purposes = [
   '企業ノベルティ・記念品',
@@ -104,7 +105,11 @@ function CustomPageInner() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          formType: 'custom',
+          ...getAttribution(),
+        }),
       })
       if (!res.ok) throw new Error('送信に失敗しました')
       setIsSuccess(true)
@@ -293,7 +298,7 @@ function CustomPageInner() {
                     required
                     className={inputClass}
                     style={inputStyle}
-                    placeholder="例：100個、500〜1000個、未定"
+                    placeholder="例：1個、10個、100個、未定"
                   />
                 </div>
                 <div>

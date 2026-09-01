@@ -1,6 +1,7 @@
 import { put } from '@vercel/blob'
 import { NextResponse } from 'next/server'
 import siteConfig from '@/lib/site-config'
+import { masuSizes } from '@/lib/masu-data'
 
 type DeliveryStatus = 'pending' | 'sent' | 'failed' | 'not_configured'
 
@@ -29,6 +30,23 @@ type ContactSubmission = {
     admin: DeliveryStatus
     customer: DeliveryStatus
   }
+  /** どこから来た問い合わせかを後から分析するための計測情報 */
+  context: {
+    formType: string
+    submittedFrom: string
+    landingPage: string
+    referrer: string
+    utmSource: string
+    utmMedium: string
+    utmCampaign: string
+  }
+}
+
+/** サイズIDを日本語名に直す（管理メールに 'ichigo' と出さないため） */
+function resolveSizeLabel(raw: string) {
+  if (!raw) return ''
+  const match = masuSizes.find((m) => m.id === raw || m.name === raw)
+  return match ? match.name : raw
 }
 
 class ContactValidationError extends Error {}
@@ -90,7 +108,7 @@ function parseSubmission(body: unknown): ContactSubmission {
       phone: readText(values, ['phone'], 100),
     },
     order: {
-      size: readText(values, ['size', 'masuSize'], 200),
+      size: resolveSizeLabel(readText(values, ['size', 'masuSize'], 200)),
       quantity,
       purpose: readText(values, ['purpose'], 500),
       printMethod: readText(values, ['printMethod'], 200),
@@ -102,6 +120,15 @@ function parseSubmission(body: unknown): ContactSubmission {
     delivery: {
       admin: 'pending',
       customer: 'pending',
+    },
+    context: {
+      formType: readText(values, ['formType'], 60) || 'custom',
+      submittedFrom: readText(values, ['submittedFrom'], 500),
+      landingPage: readText(values, ['landingPage'], 500),
+      referrer: readText(values, ['referrer'], 500),
+      utmSource: readText(values, ['utmSource'], 200),
+      utmMedium: readText(values, ['utmMedium'], 200),
+      utmCampaign: readText(values, ['utmCampaign'], 200),
     },
   }
 }
@@ -177,15 +204,20 @@ export async function POST(request: Request) {
 
   const pathname = backupPath(submission)
 
+  // Save first: a successful response is never returned without a durable copy.
+  // If the backup store is unavailable we still attempt the notification emails —
+  // a delivered email is itself a durable copy, and losing an inquiry is worse.
+  let backupSaved = true
   try {
-    // Save first. A successful response is never returned without a durable copy.
     await saveBackup(pathname, submission)
   } catch (error) {
+    backupSaved = false
     console.error('Contact backup creation failed', submission.id, error)
-    return NextResponse.json(
-      { error: '受付内容を保存できませんでした。contact@fomus.jpへ直接お問い合わせください。' },
-      { status: 503 },
-    )
+  }
+
+  const persist = async () => {
+    if (!backupSaved) return
+    await updateBackup(pathname, submission)
   }
 
   const adminEmail = siteConfig.adminEmail
@@ -195,13 +227,17 @@ export async function POST(request: Request) {
     submission.status = 'email_not_configured'
     submission.delivery.admin = 'not_configured'
     submission.delivery.customer = 'not_configured'
-    await updateBackup(pathname, submission)
+    await persist()
     console.error('Contact form email is not configured', submission.id, {
       hasResendApiKey: Boolean(resendApiKey),
       hasAdminEmail: Boolean(adminEmail),
     })
     return NextResponse.json(
-      { error: '受付内容は保存しましたが通知できませんでした。contact@fomus.jpへ直接お問い合わせください。' },
+      {
+        error: backupSaved
+          ? '受付内容は保存しましたが通知できませんでした。contact@fomus.jpへ直接お問い合わせください。'
+          : '受付できませんでした。お手数ですがcontact@fomus.jpへ直接お問い合わせください。',
+      },
       { status: 503 },
     )
   }
@@ -250,6 +286,12 @@ ${printContent ? `<tr><td style="padding:8px 0;color:#888;">名入れ内容</td>
 ${desiredDelivery ? `<tr><td style="padding:8px 0;color:#888;">希望納期</td><td style="padding:8px 0;">${desiredDelivery}</td></tr>` : ''}
 ${order.jpycPayment ? `<tr><td style="padding:8px 0;color:#888;">JPYC決済</td><td style="padding:8px 0;">希望あり</td></tr>` : ''}
 ${notes ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">その他ご要望</td></tr><tr><td colspan="2" style="padding:8px 0;white-space:pre-wrap;">${notes}</td></tr>` : ''}
+<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">流入経路</td></tr>
+<tr><td style="padding:8px 0;color:#888;">フォーム</td><td style="padding:8px 0;">${escapeHtml(submission.context.formType)}</td></tr>
+${submission.context.submittedFrom ? `<tr><td style="padding:8px 0;color:#888;">送信ページ</td><td style="padding:8px 0;">${escapeHtml(submission.context.submittedFrom)}</td></tr>` : ''}
+${submission.context.landingPage ? `<tr><td style="padding:8px 0;color:#888;">最初に見たページ</td><td style="padding:8px 0;">${escapeHtml(submission.context.landingPage)}</td></tr>` : ''}
+<tr><td style="padding:8px 0;color:#888;">参照元</td><td style="padding:8px 0;">${escapeHtml(submission.context.referrer || '直接アクセス / 不明')}</td></tr>
+${submission.context.utmSource ? `<tr><td style="padding:8px 0;color:#888;">UTM</td><td style="padding:8px 0;">${escapeHtml([submission.context.utmSource, submission.context.utmMedium, submission.context.utmCampaign].filter(Boolean).join(' / '))}</td></tr>` : ''}
 </table>
 </div></div>`,
     })
@@ -257,10 +299,14 @@ ${notes ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #e
   } catch (error) {
     submission.status = 'email_failed'
     submission.delivery.admin = 'failed'
-    await updateBackup(pathname, submission)
+    await persist()
     console.error('Contact admin notification failed', submission.id, error)
     return NextResponse.json(
-      { error: '受付内容は保存しましたが通知できませんでした。contact@fomus.jpへ直接お問い合わせください。' },
+      {
+        error: backupSaved
+          ? '受付内容は保存しましたが通知できませんでした。contact@fomus.jpへ直接お問い合わせください。'
+          : '受付できませんでした。お手数ですがcontact@fomus.jpへ直接お問い合わせください。',
+      },
       { status: 503 },
     )
   }
@@ -290,13 +336,16 @@ ${name}様<br><br>
     // The durable backup and admin notification have already succeeded.
     submission.status = 'email_failed'
     submission.delivery.customer = 'failed'
-    await updateBackup(pathname, submission)
+    await persist()
     console.error('Contact customer auto-reply failed', submission.id, error)
     return NextResponse.json({ success: true, submissionId: submission.id })
   }
 
   submission.status = 'completed'
-  await updateBackup(pathname, submission)
+  await persist()
+  if (!backupSaved) {
+    console.error('Contact stored only via email', submission.id)
+  }
 
   return NextResponse.json({ success: true, submissionId: submission.id })
 }

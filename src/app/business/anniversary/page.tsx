@@ -231,7 +231,7 @@ export default function AnniversaryPage() {
               { step: '01', title: 'お見積り', desc: 'サイズ・数量・加工方法をお伝えください' },
               { step: '02', title: 'デザイン確認', desc: 'レイアウトをご提案。修正は何度でも無料' },
               { step: '03', title: 'サンプル確認', desc: '実物で仕上がりを確認（任意）' },
-              { step: '04', title: '量産・製作', desc: '自社工場で一つずつ丁寧に製作' },
+              { step: '04', title: '量産・製作', desc: '一つずつ丁寧に製作' },
               { step: '05', title: '検品・納品', desc: '全品検品し梱包してお届け' },
             ].map((s) => (
               <div key={s.step} className="text-center">

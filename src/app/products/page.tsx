@@ -5,8 +5,6 @@ import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, ItemListJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import { getAverageRating, getReviewCount } from '@/lib/reviews'
-import OrderConfigurator from '@/components/ui/OrderConfigurator'
-import Cart from '@/components/ui/Cart'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
@@ -140,21 +138,38 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* ===== 枡を購入する ===== */}
+      {/* ===== ご注文・ご相談 ===== */}
       <section id="order" className="mx-auto max-w-5xl px-6 py-20">
-        <h2 className="section-title mb-4">国産ヒノキ枡を購入する</h2>
+        <h2 className="section-title mb-4">ご注文・ご相談</h2>
         <p
           className="mb-10 text-sm leading-relaxed"
           style={{ color: 'var(--color-muted)' }}
         >
-          サイズ・オプションを選んで、そのまま決済に進めます。10個からご注文いただけます。
+          ご注文はお問い合わせフォームから承ります。サイズ・数量・名入れのご希望をお知らせいただければ、
+          お見積りをお出しします。ご相談・お見積りは無料です。
         </p>
 
-        <OrderConfigurator />
-
-        {/* カート */}
-        <div className="mt-12">
-          <Cart />
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/custom"
+            className="rounded-sm p-6 transition-opacity hover:opacity-85"
+            style={{ background: 'var(--color-accent)', color: '#fff' }}
+          >
+            <p className="text-sm font-medium mb-1">枡のお見積り・ご相談</p>
+            <p className="text-xs leading-relaxed" style={{ opacity: 0.85 }}>
+              サイズ・数量・名入れの希望をお知らせください
+            </p>
+          </Link>
+          <Link
+            href="/order-made"
+            className="rounded-sm p-6 transition-colors"
+            style={{ border: '1px solid var(--color-border)' }}
+          >
+            <p className="text-sm font-medium mb-1">オーダーメイド枡（1個〜）</p>
+            <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+              文章を送るだけで、デザイン制作からお任せいただけます
+            </p>
+          </Link>
         </div>
 
         {/* 法人バナー */}

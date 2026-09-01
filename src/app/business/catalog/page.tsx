@@ -17,8 +17,8 @@ const volumePricing = [
 
 // ── Options pricing ──
 const options = [
-  { name: '焼印', price: '版代 ¥13,000（初回のみ）＋ 単価に込み' },
-  { name: 'レーザー刻印', price: '¥150/個' },
+  { name: '焼印', price: '内容と数量に応じてお見積り' },
+  { name: 'レーザー刻印', price: '内容と数量に応じてお見積り' },
   { name: '特殊コーティング', price: '¥800/個' },
   { name: '蓋（三勺枡）', price: '¥800/個' },
   { name: '蓋（一合枡）', price: '¥1,000/個' },

@@ -15,12 +15,13 @@ export function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
-}): Metadata {
-  const article = getArticleBySlug(params.slug)
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const article = getArticleBySlug(slug)
   if (!article) return {}
 
   return {
@@ -225,12 +226,13 @@ function ArticleContent({ sections }: { sections: ArticleSection[] }) {
   )
 }
 
-export default function BlogArticlePage({
+export default async function BlogArticlePage({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const article = getArticleBySlug(params.slug)
+  const { slug } = await params
+  const article = getArticleBySlug(slug)
   if (!article) notFound()
 
   const allArticles = getAllArticles()
@@ -393,13 +395,17 @@ export default function BlogArticlePage({
           style={{ color: 'var(--color-muted)' }}
         >
           国産ヒノキ枡の購入から名入れ・オリジナル枡の制作まで、お気軽にご相談ください。
+          一点もののオーダーメイドは1個から承ります。
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Link href="/products" className="btn-primary">
+          <Link href="/order-made" className="btn-primary">
+            オーダーメイド枡（1個〜）
+          </Link>
+          <Link href="/products" className="btn-outline">
             商品一覧を見る
           </Link>
           <Link href="/custom" className="btn-outline">
-            名入れ・オーダーメイド
+            法人・大口のお見積り
           </Link>
         </div>
       </section>

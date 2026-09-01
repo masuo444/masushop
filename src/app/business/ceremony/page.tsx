@@ -220,7 +220,7 @@ export default function CeremonyPage() {
               </table>
             </div>
             <p className="text-[12px] mt-4" style={{ color: 'var(--color-muted)' }}>
-              ※ 価格は税別。焼印版代（初回¥13,000）・レーザー刻印（¥150/個）は別途。
+              ※ 価格は税別。名入れ（焼印・レーザー刻印）の費用は、内容と数量に応じて別途お見積りいたします。
             </p>
           </div>
         </section>

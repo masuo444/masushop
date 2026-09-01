@@ -4,9 +4,8 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import siteConfig from '@/lib/site-config'
-import { CartProvider } from '@/lib/cart'
-import FloatingCartButton from '@/components/ui/FloatingCartButton'
 import FloatingContactButton from '@/components/ui/FloatingContactButton'
+import Analytics from '@/components/analytics/Analytics'
 
 const notoSerifJP = Noto_Serif_JP({
   variable: '--font-serif-jp',
@@ -114,14 +113,7 @@ const localBusinessJsonLd = {
   email: siteConfig.contactEmail,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: '大垣市',
-    addressRegion: '岐阜県',
     addressCountry: 'JP',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 35.3593,
-    longitude: 136.6126,
   },
   areaServed: {
     '@type': 'Country',
@@ -153,13 +145,11 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
       </head>
       <body className={`${notoSerifJP.variable} antialiased`}>
-        <CartProvider>
-          <Header />
-          <main className="site-main">{children}</main>
-          <FloatingCartButton />
-          <FloatingContactButton />
-          <Footer />
-        </CartProvider>
+        <Header />
+        <main className="site-main">{children}</main>
+        <FloatingContactButton />
+        <Footer />
+        <Analytics />
       </body>
     </html>
   )

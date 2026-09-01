@@ -13,6 +13,7 @@ const orderFacts = [
   { label: '無垢枡の参考価格', value: '¥500〜／個' },
   { label: '名入れ', value: '焼印・レーザー刻印' },
   { label: '法人注文', value: '無垢枡10個から' },
+  { label: 'オーダーメイド', value: '1個から相談可' },
 ]
 
 const useCases = [
@@ -153,7 +154,7 @@ export default function HomePage() {
             >
               約1300年の歴史を持つ日本の木の器。
               <br />
-              岐阜県大垣市の職人が、国産ヒノキで一つひとつ仕上げます。
+              職人の手で、国産ヒノキから一つひとつ仕上げます。
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="max-md:!justify-center">
               <Link href="/products" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
@@ -201,10 +202,10 @@ export default function HomePage() {
             margin: '0 auto',
             padding: '1.75rem 1.5rem',
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1.5rem',
           }}
-          className="max-md:!grid-cols-2 max-sm:!grid-cols-1"
+          className="max-sm:!grid-cols-2"
         >
           {orderFacts.map((fact) => (
             <div key={fact.label}>
@@ -490,6 +491,45 @@ export default function HomePage() {
       {/* ===== お客様の声 ===== */}
       <ReviewSection />
 
+      {/* ===== オーダーメイド ===== */}
+      <section
+        style={{
+          padding: 'clamp(4rem, 8vw, 7rem) 1.5rem',
+          background: 'var(--color-subtle)',
+        }}
+      >
+        <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
+          <p
+            style={{
+              fontSize: '0.7rem',
+              letterSpacing: '0.2em',
+              color: 'var(--color-accent)',
+              marginBottom: '1rem',
+            }}
+          >
+            ORDER MADE
+          </p>
+          <h2 className="serif section-title" style={{ marginBottom: '1.5rem' }}>
+            世界にひとつの枡を、一個から
+          </h2>
+          <p
+            style={{
+              fontSize: '0.95rem',
+              lineHeight: 2,
+              color: 'var(--color-muted)',
+              marginBottom: '2.5rem',
+            }}
+          >
+            名前、日付、手書きの文字、写真、外国語のメッセージ。
+            国産ヒノキの枡に刻めば、どこにも売っていない一点ものになります。
+            贈り物にも、記念にも。1個からご相談いただけます。
+          </p>
+          <Link href="/order-made" className="btn-accent">
+            オーダーメイド枡を見る
+          </Link>
+        </div>
+      </section>
+
       {/* ===== ご購入について ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
@@ -521,6 +561,13 @@ export default function HomePage() {
               </h3>
               <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
                 10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー刻印）にも対応。まとめ買いほどお得です。100個以上のご注文やお見積りはお問い合わせフォームからご相談ください。
+              </p>
+              <p style={{ fontSize: '0.85rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
+                1個だけの一点ものをご希望の方は{' '}
+                <Link href="/order-made" style={{ textDecoration: 'underline' }}>
+                  オーダーメイド枡
+                </Link>
+                {' '}をご覧ください。
               </p>
               <Link href="/custom" className="btn-primary">
                 お見積り・ご相談

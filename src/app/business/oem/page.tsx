@@ -84,7 +84,7 @@ export default function OemPage() {
             style={{ color: 'var(--color-muted)' }}
           >
             飲食店のオリジナル酒器、酒蔵の銘柄入り枡、ホテルのウェルカムアメニティ。
-            企画のご相談から製造・納品まで、自社工場でワンストップ対応。
+            企画のご相談から製造・納品までワンストップ対応。
             「こんな枡がほしい」を形にします。
           </p>
         </section>
@@ -182,7 +182,7 @@ export default function OemPage() {
                 { step: '01', title: 'ヒアリング', desc: '用途・数量・ご希望のイメージ・ご予算をお伺いします。「こんなことできる？」というざっくりしたご相談でもOKです。' },
                 { step: '02', title: '企画・ご提案', desc: 'ヒアリング内容をもとに、サイズ・加工方法・パッケージを含めたご提案書をお出しします。' },
                 { step: '03', title: 'サンプル製作', desc: '実物サンプルを1〜2個製作。仕上がり・サイズ感・刻印の再現度をご確認いただきます。' },
-                { step: '04', title: '量産', desc: 'サンプルご承認後、自社工場で量産。全品検品し品質を担保します。' },
+                { step: '04', title: '量産', desc: 'サンプルご承認後に量産へ。全品検品し品質を担保します。' },
                 { step: '05', title: '納品', desc: '指定場所へ納品。複数箇所への分納にも対応。継続的なリピート注文もお任せください。' },
               ].map((item) => (
                 <div key={item.step} className="flex items-start gap-6 bg-[var(--background)] p-6 rounded-sm">

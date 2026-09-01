@@ -6,7 +6,6 @@ import { masuSizes, engravingMethods, optionPrices } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 import { getAverageRating, getReviewCount } from '@/lib/reviews'
-import ProductConfigurator from '@/components/ui/ProductConfigurator'
 
 const baseUrl = siteConfig.url
 type ProductPageProps = { params: Promise<{ id: string }> }
@@ -303,7 +302,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
           </div>
 
-          {/* 右カラム：コンフィギュレーター */}
+          {/* 右カラム：ご相談 */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div
               className="rounded-sm p-6"
@@ -312,7 +311,34 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 background: 'var(--background)',
               }}
             >
-              <ProductConfigurator product={product} />
+              <h2 className="text-base font-medium mb-3">
+                {product.name}のご相談
+              </h2>
+              <p
+                className="text-[13px] leading-[1.9] mb-6"
+                style={{ color: 'var(--color-muted)' }}
+              >
+                数量・名入れのご希望をお知らせいただければ、お見積りをお出しします。
+                名入れは、入れたい文章をお送りいただければデザインからお作りします。
+                ご相談・お見積りは無料です。
+              </p>
+              <Link
+                href={`/custom?size=${product.id}`}
+                className="block w-full rounded-sm py-3 text-center text-sm font-medium transition-opacity hover:opacity-85"
+                style={{ background: 'var(--color-accent)', color: '#fff' }}
+              >
+                この枡のお見積り・ご相談
+              </Link>
+              <Link
+                href="/order-made"
+                className="mt-3 block w-full rounded-sm py-3 text-center text-sm transition-colors"
+                style={{
+                  border: '1px solid var(--color-border)',
+                  color: 'var(--foreground)',
+                }}
+              >
+                1個からのオーダーメイド
+              </Link>
             </div>
           </div>
         </div>

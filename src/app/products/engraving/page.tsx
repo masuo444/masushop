@@ -22,7 +22,7 @@ const comparisonRows = [
   { label: '仕上がり', yakiin: '焦げ茶色の温かみある印字', laser: '繊細な彫刻、グラデーション可' },
   { label: '色', yakiin: '白黒（焦げ茶色）のみ', laser: '白黒の繊細な濃淡表現' },
   { label: '対応デザイン', yakiin: 'ロゴ・社名・シンプルなデザイン', laser: '写真・QRコード・細かいデザイン' },
-  { label: '費用', yakiin: '版代¥13,000（初回のみ）+ 印字代は単価に含む', laser: '¥150/個（版代不要）' },
+  { label: '版の要否', yakiin: '専用の銅版を製作（初回のみ）', laser: '版は不要' },
   { label: '個別デザイン', yakiin: '不可（同一版で量産）', laser: '可能（1個ずつ異なるデザインOK）' },
   { label: '最小ロット', yakiin: '1個〜', laser: '1個〜' },
   { label: 'おすすめ', yakiin: '大量ノベルティ、企業ロゴ', laser: '少量・個別名入れ、写真入り' },
@@ -50,9 +50,9 @@ const useCases = [
     reason: '銅版で押す焼印は、木に焦げ目がつく独特の風合い。手仕事の温もりが伝わります。',
   },
   {
-    scenario: '少量（10個以下）でロゴ入りの枡を作りたい',
+    scenario: '少量でロゴ入りの枡を作りたい',
     answer: 'レーザー刻印',
-    reason: '版代不要なので少量でもコストを抑えられます。1個¥150で対応可能。',
+    reason: '版代が不要なので、少ない数でも無理なくお作りできます。刻む内容が1個ずつ違っても対応できます。',
   },
 ]
 
@@ -147,6 +147,25 @@ export default function EngravingPage() {
               ))}
             </tbody>
           </table>
+
+          <div className="mt-8 rounded-sm border border-[var(--color-border)] p-6">
+            <p
+              className="text-[13px] leading-[1.9]"
+              style={{ color: 'var(--color-muted)' }}
+            >
+              <span style={{ color: 'var(--foreground)' }}>
+                入れたい文章やメッセージだけお送りいただければ、デザインの制作からお引き受けします。
+              </span>
+              {' '}書体選び・レイアウト・配置の調整までこちらで行い、仕上がりのイメージをご確認いただいたうえで製作します。デザインデータをご用意いただく必要はありません。費用は、枡のサイズ・刻む内容・数量に応じてお見積りいたします。
+            </p>
+            <Link
+              href="/order-made"
+              className="mt-4 inline-block text-[13px] underline"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              オーダーメイド枡について見る →
+            </Link>
+          </div>
         </div>
       </section>
 
