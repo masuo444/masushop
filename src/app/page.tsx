@@ -7,14 +7,6 @@ import ReviewSection from '@/components/ui/ReviewSection'
 
 const displayedFaqItems = faqItems.slice(0, 5)
 
-const orderFacts = [
-  { label: '素材', value: '国産ヒノキ' },
-  { label: 'サイズ', value: '全7サイズ' },
-  { label: '無垢枡の参考価格', value: '¥500〜／個' },
-  { label: '名入れ', value: '焼印・レーザー刻印' },
-  { label: '法人注文', value: '無垢枡10個から' },
-  { label: 'オーダーメイド', value: '1個から相談可' },
-]
 
 const useCases = [
   {
@@ -185,39 +177,6 @@ export default function HomePage() {
             />
           </div>
         </div>
-      </section>
-
-      {/* ===== 注文概要（検索・AI向けの要点） ===== */}
-      <section
-        data-speakable
-        aria-label="枡の注文概要"
-        style={{
-          background: 'var(--color-subtle)',
-          borderBottom: '1px solid var(--color-border)',
-        }}
-      >
-        <dl
-          style={{
-            maxWidth: 960,
-            margin: '0 auto',
-            padding: '1.75rem 1.5rem',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1.5rem',
-          }}
-          className="max-sm:!grid-cols-2"
-        >
-          {orderFacts.map((fact) => (
-            <div key={fact.label}>
-              <dt style={{ fontSize: '0.875rem', color: 'var(--color-muted)', marginBottom: '0.25rem' }}>
-                {fact.label}
-              </dt>
-              <dd style={{ fontSize: '1rem', fontWeight: 600, lineHeight: 1.6 }}>
-                {fact.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </section>
 
       {/* ===== 枡とは (AIO) ===== */}
@@ -507,10 +466,10 @@ export default function HomePage() {
               marginBottom: '1rem',
             }}
           >
-            ORDER MADE
+            ORIGINAL
           </p>
           <h2 className="serif section-title" style={{ marginBottom: '1.5rem' }}>
-            世界にひとつの枡を、一個から
+            オリジナル枡を、一個から
           </h2>
           <p
             style={{
@@ -520,12 +479,12 @@ export default function HomePage() {
               marginBottom: '2.5rem',
             }}
           >
+            入れたい文章やメッセージを送るだけで、デザインはこちらでお作りします。
             名前、日付、手書きの文字、写真、外国語のメッセージ。
-            国産ヒノキの枡に刻めば、どこにも売っていない一点ものになります。
             贈り物にも、記念にも。1個からご相談いただけます。
           </p>
-          <Link href="/order-made" className="btn-accent">
-            オーダーメイド枡を見る
+          <Link href="/original" className="btn-accent">
+            オリジナル枡を見る
           </Link>
         </div>
       </section>
@@ -564,8 +523,8 @@ export default function HomePage() {
               </p>
               <p style={{ fontSize: '0.85rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
                 1個だけの一点ものをご希望の方は{' '}
-                <Link href="/order-made" style={{ textDecoration: 'underline' }}>
-                  オーダーメイド枡
+                <Link href="/original" style={{ textDecoration: 'underline' }}>
+                  オリジナル枡
                 </Link>
                 {' '}をご覧ください。
               </p>
@@ -586,7 +545,7 @@ export default function HomePage() {
               style={{ height: 1, background: 'var(--color-border)' }}
             />
 
-            {/* FOMUSオリジナル枡 */}
+            {/* オリジナル枡 */}
             <div>
               <h3
                 className="serif"
@@ -596,16 +555,16 @@ export default function HomePage() {
                   marginBottom: '1rem',
                 }}
               >
-                FOMUSオリジナル枡
+                オリジナル枡
               </h3>
               <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '0.5rem' }}>
-                個人のお客様・1個から購入可能
+                個人のお客様・1個からご相談可能
               </p>
               <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
-                FOMUSロゴ入り枡・オリジナルデザイン枡は1個から購入可能。首飾り枡、枡バッジ、アート枡など、ユニークな製品を取り揃え。個人のお客様もお気軽にどうぞ。
+                名前・日付・メッセージ・手書きの文字・写真を、国産ヒノキの枡に刻みます。デザインデータは不要。入れたい文章を送っていただければ、書体やレイアウトはこちらでお作りします。
               </p>
-              <Link href="/products" className="btn-accent">
-                商品を見る
+              <Link href="/original" className="btn-accent">
+                オリジナル枡を見る
               </Link>
             </div>
           </div>

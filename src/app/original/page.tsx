@@ -8,21 +8,36 @@ import OrderMadeForm from '@/components/forms/OrderMadeForm'
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: 'オーダーメイド枡 — 世界にひとつの枡を1個から',
+  title: 'オリジナル枡を1個から｜文章を送るだけでデザイン制作',
   description:
-    '一点もののオーダーメイド枡を1個からご相談いただけます。入れたい文章やメッセージを送るだけで、書体やレイアウトのデザイン制作からお引き受け。名入れ・写真・手書き文字・外国語にも対応。国産ヒノキの枡を1点ずつお作りします。',
+    'オリジナル枡を1個からご相談いただけます。入れたい文章やメッセージを送るだけで、書体・レイアウトのデザイン制作からお引き受け。デザインデータは不要です。名入れ・写真・手書き文字・外国語にも対応。国産ヒノキの枡に刻んで、世界に一つの贈り物や記念品に。',
   keywords:
-    'オーダーメイド 枡,枡 一点もの,枡 名入れ 1個,特注 枡,オリジナル枡 制作,枡 記念品 1個,枡 名前入り,枡 レーザー刻印,枡 焼印 オーダー,枡 プレゼント 名入れ,世界に一つ 枡',
-  alternates: { canonical: `${baseUrl}/order-made` },
+    'オリジナル枡,オリジナル枡 1個,オリジナル枡 作成,オリジナル枡 制作,オリジナルデザイン 枡,オーダーメイド 枡,枡 名入れ 1個,枡 一点もの,枡 プレゼント 名入れ,世界に一つ 枡,特注 枡,枡 記念品 1個',
+  alternates: { canonical: `${baseUrl}/original` },
   openGraph: {
-    title: 'オーダーメイド枡 — 世界にひとつの枡を1個から',
+    title: 'オリジナル枡を1個から｜文章を送るだけでデザイン制作',
     description:
-      '文章やメッセージを送るだけで、デザイン制作から名入れまでお任せ。一点もののオーダーメイド枡を1個からご相談いただけます。',
+      '文章やメッセージを送るだけで、デザイン制作から名入れまでお任せ。オリジナル枡を1個からご相談いただけます。',
     type: 'website',
-    url: `${baseUrl}/order-made`,
+    url: `${baseUrl}/original`,
     images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
 }
+
+const differences = [
+  {
+    title: 'デザインデータは要りません',
+    desc: '入れたい文章やメッセージを送っていただくだけ。書体・大きさ・配置はこちらで組んで、仕上がりのイメージをお送りします。画像ソフトを触る必要はありません。',
+  },
+  {
+    title: '国産ヒノキの枡に刻みます',
+    desc: '印刷用の既製品ではなく、日本酒の酒器として使われてきた国産ヒノキの枡。手に取ったときの香りと木目が、贈り物としての価値を決めます。',
+  },
+  {
+    title: '相談しながら決められます',
+    desc: '「還暦のお祝いにしたい」「英語で入れたい」だけで大丈夫。サイズも刻み方も、用途をお聞きしてからご提案します。納得いただいてから製作に入ります。',
+  },
+]
 
 const scenes = [
   {
@@ -129,6 +144,10 @@ const flow = [
 
 const faqItems = [
   {
+    q: 'オリジナル枡とは、どんなものが作れますか？',
+    a: '国産ヒノキの枡に、お名前・日付・メッセージ・手書きの文字・写真・ロゴなどを刻んだ、世界に一つの枡です。贈り物、結婚やプロポーズの記念、還暦や退職のお祝い、お店の看板枡など、用途に合わせて1個からお作りします。',
+  },
+  {
     q: 'デザインのデータを用意できないのですが、頼めますか？',
     a: 'はい、そのままお任せいただけます。入れたい文章やメッセージ、お名前と日付をお送りいただければ、書体選び・レイアウト・配置の調整までこちらで行います。仕上がりのイメージをお送りしてご確認いただいてから製作に入りますので、デザインの知識は必要ありません。',
   },
@@ -138,7 +157,7 @@ const faqItems = [
   },
   {
     q: '本当に1個だけでも注文できますか？',
-    a: 'はい、一点もののオーダーメイドは1個からご相談を承ります。無地の枡をまとめて購入される場合（10個から）とは別の扱いで、内容をお伺いしてお見積りをお出しします。',
+    a: 'はい、オリジナル枡は1個からご相談を承ります。無地の枡をまとめて購入される場合（10個から）とは別の扱いで、内容をお伺いしてお見積りをお出しします。',
   },
   {
     q: '1個だけ作る場合、焼印とレーザー刻印どちらがいいですか？',
@@ -154,7 +173,7 @@ const faqItems = [
   },
   {
     q: '納期はどのくらいかかりますか？',
-    a: '名入れ枡は通常2〜3週間程度で製作・発送いたします。お急ぎの場合も可能な限り対応いたしますので、ご希望の日付をフォームにご記入ください。',
+    a: '通常2〜3週間程度で製作・発送いたします。お急ぎの場合も可能な限り対応いたしますので、ご希望の日付をフォームにご記入ください。',
   },
   {
     q: '写真を刻印することはできますか？',
@@ -170,13 +189,13 @@ const faqItems = [
   },
 ]
 
-export default function OrderMadePage() {
+export default function OriginalPage() {
   return (
     <>
       <BreadcrumbJsonLd
         items={[
           { name: 'ホーム', href: baseUrl },
-          { name: 'オーダーメイド枡', href: `${baseUrl}/order-made` },
+          { name: 'オリジナル枡', href: `${baseUrl}/original` },
         ]}
       />
       <FAQJsonLd items={faqItems} />
@@ -184,20 +203,22 @@ export default function OrderMadePage() {
       <main className="min-h-screen bg-[var(--background)]">
         <div className="max-w-4xl mx-auto px-6 pt-8">
           <Breadcrumb
-            items={[{ label: 'ホーム', href: '/' }, { label: 'オーダーメイド枡' }]}
+            items={[{ label: 'ホーム', href: '/' }, { label: 'オリジナル枡' }]}
           />
         </div>
 
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-6 pt-12 pb-16 text-center">
           <p className="text-[11px] tracking-[0.2em] text-[var(--color-accent)] mb-4">
-            ORDER MADE
+            ORIGINAL MASU
           </p>
           <h1
             className="serif text-3xl md:text-4xl font-light leading-relaxed mb-6"
             style={{ color: 'var(--foreground)' }}
           >
-            世界にひとつの枡を、一個から。
+            オリジナル枡を、1個から。
+            <br />
+            デザインはこちらで。
           </h1>
           <p
             className="text-[15px] leading-[2] max-w-2xl mx-auto"
@@ -224,27 +245,33 @@ export default function OrderMadePage() {
           </div>
         </section>
 
-        {/* Scenes */}
+        {/* Differences */}
         <section className="bg-[var(--color-subtle)] py-20">
           <div className="max-w-4xl mx-auto px-6">
             <h2
               className="serif text-xl font-medium text-center mb-4"
               style={{ color: 'var(--foreground)' }}
             >
-              こんなご相談をいただいています
+              MASU-STOREのオリジナル枡、3つの違い
             </h2>
             <p
               className="text-[13px] text-center mb-12 leading-[1.9]"
               style={{ color: 'var(--color-muted)' }}
             >
-              数は一つでも、込める意味は一つひとつ違います。
+              「自分でデータを作ってアップロードする」方式ではありません。
             </p>
-            <div className="grid sm:grid-cols-2 gap-8">
-              {scenes.map((item) => (
+            <div className="grid sm:grid-cols-3 gap-6">
+              {differences.map((item, i) => (
                 <div
                   key={item.title}
                   className="bg-[var(--background)] p-6 rounded-sm"
                 >
+                  <p
+                    className="serif text-[13px] mb-3"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
+                    0{i + 1}
+                  </p>
                   <h3
                     className="serif text-base font-medium mb-2"
                     style={{ color: 'var(--foreground)' }}
@@ -263,38 +290,38 @@ export default function OrderMadePage() {
           </div>
         </section>
 
-        {/* Capabilities */}
+        {/* Scenes */}
         <section className="max-w-4xl mx-auto px-6 py-20">
           <h2
-            className="serif text-xl font-medium text-center mb-12"
+            className="serif text-xl font-medium text-center mb-4"
             style={{ color: 'var(--foreground)' }}
           >
-            できること
+            こんなご相談をいただいています
           </h2>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {capabilities.map((group) => (
+          <p
+            className="text-[13px] text-center mb-12 leading-[1.9]"
+            style={{ color: 'var(--color-muted)' }}
+          >
+            数は一つでも、込める意味は一つひとつ違います。
+          </p>
+          <div className="grid sm:grid-cols-2 gap-8">
+            {scenes.map((item) => (
               <div
-                key={group.category}
+                key={item.title}
                 className="border border-[var(--color-border)] p-6 rounded-sm"
               >
                 <h3
-                  className="text-[14px] font-medium mb-4"
+                  className="serif text-base font-medium mb-2"
                   style={{ color: 'var(--foreground)' }}
                 >
-                  {group.category}
+                  {item.title}
                 </h3>
-                <ul className="space-y-2">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-[13px] flex items-start gap-2"
-                      style={{ color: 'var(--color-muted)' }}
-                    >
-                      <span className="text-[var(--color-accent)]">—</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <p
+                  className="text-[13px] leading-[1.9]"
+                  style={{ color: 'var(--color-muted)' }}
+                >
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -357,50 +384,89 @@ export default function OrderMadePage() {
           </div>
         </section>
 
-        {/* Flow */}
-        <section className="max-w-3xl mx-auto px-6 py-20">
+        {/* Capabilities */}
+        <section className="max-w-4xl mx-auto px-6 py-20">
           <h2
             className="serif text-xl font-medium text-center mb-12"
             style={{ color: 'var(--foreground)' }}
           >
-            ご相談から完成まで
+            できること
           </h2>
-          <div className="space-y-8">
-            {flow.map((item) => (
-              <div key={item.step} className="flex gap-6">
-                <span
-                  className="serif text-[13px] pt-0.5 shrink-0"
-                  style={{ color: 'var(--color-accent)' }}
+          <div className="grid sm:grid-cols-3 gap-6">
+            {capabilities.map((group) => (
+              <div
+                key={group.category}
+                className="border border-[var(--color-border)] p-6 rounded-sm"
+              >
+                <h3
+                  className="text-[14px] font-medium mb-4"
+                  style={{ color: 'var(--foreground)' }}
                 >
-                  {item.step}
-                </span>
-                <div>
-                  <h3
-                    className="text-[14px] font-medium mb-1.5"
-                    style={{ color: 'var(--foreground)' }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className="text-[13px] leading-[1.9]"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
+                  {group.category}
+                </h3>
+                <ul className="space-y-2">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="text-[13px] flex items-start gap-2"
+                      style={{ color: 'var(--color-muted)' }}
+                    >
+                      <span className="text-[var(--color-accent)]">—</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </section>
 
+        {/* Flow */}
+        <section className="bg-[var(--color-subtle)] py-20">
+          <div className="max-w-3xl mx-auto px-6">
+            <h2
+              className="serif text-xl font-medium text-center mb-12"
+              style={{ color: 'var(--foreground)' }}
+            >
+              ご相談から完成まで
+            </h2>
+            <div className="space-y-8">
+              {flow.map((item) => (
+                <div key={item.step} className="flex gap-6">
+                  <span
+                    className="serif text-[13px] pt-0.5 shrink-0"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
+                    {item.step}
+                  </span>
+                  <div>
+                    <h3
+                      className="text-[14px] font-medium mb-1.5"
+                      style={{ color: 'var(--foreground)' }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="text-[13px] leading-[1.9]"
+                      style={{ color: 'var(--color-muted)' }}
+                    >
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Form */}
-        <section id="form" className="bg-[var(--color-subtle)] py-20">
+        <section id="form" className="py-20">
           <div className="max-w-2xl mx-auto px-6">
             <h2
               className="serif text-xl font-medium text-center mb-4"
               style={{ color: 'var(--foreground)' }}
             >
-              オーダーメイドのご相談
+              オリジナル枡のご相談
             </h2>
             <p
               className="text-[13px] text-center mb-10 leading-[1.9]"
@@ -415,41 +481,43 @@ export default function OrderMadePage() {
         </section>
 
         {/* FAQ */}
-        <section className="max-w-3xl mx-auto px-6 py-20">
-          <h2
-            className="serif text-xl font-medium text-center mb-12"
-            style={{ color: 'var(--foreground)' }}
-          >
-            よくあるご質問
-          </h2>
-          <div className="space-y-6">
-            {faqItems.map((item) => (
-              <details
-                key={item.q}
-                className="group bg-[var(--color-subtle)] rounded-sm"
-              >
-                <summary
-                  className="cursor-pointer p-5 text-[14px] font-medium list-none flex items-center justify-between gap-4"
-                  style={{ color: 'var(--foreground)' }}
+        <section className="bg-[var(--color-subtle)] py-20">
+          <div className="max-w-3xl mx-auto px-6">
+            <h2
+              className="serif text-xl font-medium text-center mb-12"
+              style={{ color: 'var(--foreground)' }}
+            >
+              よくあるご質問
+            </h2>
+            <div className="space-y-6">
+              {faqItems.map((item) => (
+                <details
+                  key={item.q}
+                  className="group bg-[var(--background)] rounded-sm"
                 >
-                  {item.q}
-                  <span className="text-[var(--color-muted)] group-open:rotate-45 transition-transform text-lg shrink-0">
-                    +
-                  </span>
-                </summary>
-                <p
-                  className="px-5 pb-5 text-[13px] leading-[1.9]"
-                  style={{ color: 'var(--color-muted)' }}
-                >
-                  {item.a}
-                </p>
-              </details>
-            ))}
+                  <summary
+                    className="cursor-pointer p-5 text-[14px] font-medium list-none flex items-center justify-between gap-4"
+                    style={{ color: 'var(--foreground)' }}
+                  >
+                    {item.q}
+                    <span className="text-[var(--color-muted)] group-open:rotate-45 transition-transform text-lg shrink-0">
+                      +
+                    </span>
+                  </summary>
+                  <p
+                    className="px-5 pb-5 text-[13px] leading-[1.9]"
+                    style={{ color: 'var(--color-muted)' }}
+                  >
+                    {item.a}
+                  </p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Cross links */}
-        <section className="bg-[var(--color-subtle)] py-16 text-center">
+        <section className="py-16 text-center">
           <p
             className="text-[13px] mb-6 leading-[1.9]"
             style={{ color: 'var(--color-muted)' }}

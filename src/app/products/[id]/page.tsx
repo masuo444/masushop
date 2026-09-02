@@ -106,7 +106,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     material: 'ヒノキ（檜） / Japanese Cypress (Hinoki)',
     manufacturer: {
       '@type': 'Organization',
-      name: 'FOMUS',
+      name: 'MASU-STORE',
       url: siteConfig.url,
     },
     countryOfOrigin: {
@@ -330,14 +330,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 この枡のお見積り・ご相談
               </Link>
               <Link
-                href="/order-made"
+                href="/original"
                 className="mt-3 block w-full rounded-sm py-3 text-center text-sm transition-colors"
                 style={{
                   border: '1px solid var(--color-border)',
                   color: 'var(--foreground)',
                 }}
               >
-                1個からのオーダーメイド
+                1個からのオリジナル枡
               </Link>
             </div>
           </div>

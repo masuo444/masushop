@@ -191,7 +191,7 @@ const useCases = [
 const businessFaq = [
   {
     q: '最小注文数はいくつですか？',
-    a: '無垢の枡は10個から、名入れ枡・FOMUSオリジナル枡は1個からご注文いただけます。まとめ買いほどお得です。',
+    a: '無垢の枡は10個から、名入れのオリジナル枡は1個からご相談いただけます。まとめ買いほどお得です。',
   },
   {
     q: '納期はどのくらいですか？',
@@ -305,13 +305,13 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* ━━━ FOMUSが選ばれる理由 ━━━ */}
+      {/* ━━━ 選ばれる理由 ━━━ */}
       <section className="py-20 md:py-28">
         <div className="max-w-5xl mx-auto px-6">
           <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
-            Why FOMUS
+            WHY US
           </p>
-          <h2 className="section-title text-center mb-16">FOMUSが選ばれる6つの理由</h2>
+          <h2 className="section-title text-center mb-16">MASU-STOREが選ばれる6つの理由</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {whyFomus.map((item) => (

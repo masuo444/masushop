@@ -57,7 +57,7 @@ export default function OrderMadeForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          formType: 'order-made',
+          formType: 'original',
           ...getAttribution(),
         }),
       })

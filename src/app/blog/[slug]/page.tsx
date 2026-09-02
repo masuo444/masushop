@@ -398,8 +398,8 @@ export default async function BlogArticlePage({
           一点もののオーダーメイドは1個から承ります。
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Link href="/order-made" className="btn-primary">
-            オーダーメイド枡（1個〜）
+          <Link href="/original" className="btn-primary">
+            オリジナル枡（1個〜）
           </Link>
           <Link href="/products" className="btn-outline">
             商品一覧を見る

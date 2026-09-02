@@ -7,14 +7,14 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: 'OEM・オリジナル枡製作 — 自社ブランドの枡を作りませんか',
+  title: 'OEM・自社ブランド枡の製作 — 飲食店・酒蔵・ホテル向け',
   description:
     'OEM・オリジナル枡の製作ならMASU-STORE。自社ブランドの枡を企画から製造・納品までワンストップで対応。飲食店のオリジナル酒器、酒蔵のオリジナル枡、ホテルのアメニティなど。小ロット10個〜対応。',
   keywords:
     '枡 OEM,オリジナル枡 製作,枡 オーダーメイド,枡 自社ブランド,枡 OEM 小ロット,飲食店 オリジナル枡,酒蔵 枡,ホテル アメニティ 枡,枡 特注,枡 オリジナル商品',
   alternates: { canonical: `${baseUrl}/business/oem` },
   openGraph: {
-    title: 'OEM・オリジナル枡製作 — 自社ブランドの枡を作りませんか',
+    title: 'OEM・自社ブランド枡の製作 — 飲食店・酒蔵・ホテル向け',
     description: 'OEM・オリジナル枡の製作。企画から製造・納品までワンストップ。小ロット10個〜対応。',
     type: 'website',
     url: `${baseUrl}/business/oem`,

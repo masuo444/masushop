@@ -150,9 +150,6 @@ export default function CatalogPage() {
         <p style={{ fontSize: 13, letterSpacing: '0.3em', marginTop: 6, color: '#666' }}>
           枡の専門店
         </p>
-        <p style={{ fontSize: 10, letterSpacing: '0.2em', marginTop: 4, color: '#999' }}>
-          by FOMUS
-        </p>
         <p style={{ fontSize: 20, fontWeight: 300, marginTop: 24, letterSpacing: '0.08em' }}>
           法人向け枡カタログ
         </p>
@@ -459,7 +456,7 @@ export default function CatalogPage() {
         </div>
 
         <p style={{ fontSize: 10, color: '#999', marginTop: 8 }}>
-          {siteConfig.name} / FOMUS
+          {siteConfig.name}
         </p>
         <p style={{ fontSize: 9, color: '#bbb', marginTop: 16 }}>
           本カタログの価格は{dateStr}時点のものです。内容は予告なく変更される場合がございます。

@@ -74,7 +74,6 @@ const organizationJsonLd = {
   description: siteConfig.description,
   url: baseUrl,
   brand: { '@type': 'Brand', name: 'MASU-STORE' },
-  sameAs: [siteConfig.fomusOfficialUrl, siteConfig.fomusUrl],
   email: siteConfig.contactEmail,
   contactPoint: {
     '@type': 'ContactPoint',
@@ -107,7 +106,7 @@ const localBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': `${baseUrl}/#localbusiness`,
-  name: 'FOMUS（フォーマス）',
+  name: siteConfig.name,
   description: '国産ヒノキ枡の製造・販売。名入れ・オーダーメイド対応。',
   url: baseUrl,
   email: siteConfig.contactEmail,

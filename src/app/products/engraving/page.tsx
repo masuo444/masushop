@@ -159,11 +159,11 @@ export default function EngravingPage() {
               {' '}書体選び・レイアウト・配置の調整までこちらで行い、仕上がりのイメージをご確認いただいたうえで製作します。デザインデータをご用意いただく必要はありません。費用は、枡のサイズ・刻む内容・数量に応じてお見積りいたします。
             </p>
             <Link
-              href="/order-made"
+              href="/original"
               className="mt-4 inline-block text-[13px] underline"
               style={{ color: 'var(--color-accent)' }}
             >
-              オーダーメイド枡について見る →
+              オリジナル枡について見る →
             </Link>
           </div>
         </div>

@@ -14,7 +14,7 @@ const footerLinks = {
     { href: '/products', label: '商品一覧' },
     { href: '/products#standard', label: '無垢の枡（10個〜）' },
     { href: '/products#original', label: 'オリジナル枡' },
-    { href: '/order-made', label: 'オーダーメイド枡（1個〜）' },
+    { href: '/original', label: 'オリジナル枡（1個〜）' },
     { href: '/custom', label: '名入れのお見積り' },
     { href: '/gift', label: 'ギフトガイド' },
     { href: '/reviews', label: 'お客様の声' },
@@ -88,24 +88,6 @@ export default function Footer() {
           <p className="text-xs text-white/55">
             &copy; {new Date().getFullYear()} {siteConfig.name}
           </p>
-          <div className="flex items-center gap-6">
-            <a
-              href={siteConfig.fomusUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-white/60 hover:text-white transition-colors"
-            >
-              FOMUS SHOP
-            </a>
-            <a
-              href={siteConfig.fomusOfficialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-white/60 hover:text-white transition-colors"
-            >
-              FOMUS 公式サイト
-            </a>
-          </div>
         </div>
       </div>
     </footer>
