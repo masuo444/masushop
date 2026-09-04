@@ -336,8 +336,8 @@ export default function CarePage() {
           <Link href="/products" className="btn-primary">
             商品一覧を見る
           </Link>
-          <Link href="/guide" className="btn-outline">
-            枡の選び方ガイド
+          <Link href="/original" className="btn-outline">
+            オリジナル枡を1個から作る
           </Link>
         </div>
       </section>

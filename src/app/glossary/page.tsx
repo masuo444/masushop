@@ -497,8 +497,8 @@ export default function GlossaryPage() {
             <Link href="/gift" className="btn-outline">
               枡ギフトガイド
             </Link>
-            <Link href="/history" className="btn-outline">
-              枡の歴史
+            <Link href="/original" className="btn-outline">
+              オリジナル枡（1個〜）
             </Link>
           </div>
         </div>

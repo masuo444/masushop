@@ -314,13 +314,15 @@ export default function HistoryPage() {
       <section className="max-w-3xl mx-auto px-6 py-20 text-center">
         <p className="text-sm text-[var(--color-muted)] leading-[2] mb-8">
           1300年の歴史を持つ枡を、あなたの暮らしに取り入れてみませんか。
+          <br />
+          名前やメッセージを刻んだオリジナル枡は、1個からご相談いただけます。
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/guide" className="btn-primary">
-            枡の選び方ガイド
+          <Link href="/original" className="btn-primary">
+            オリジナル枡を1個から作る
           </Link>
-          <Link href="/sake" className="btn-outline">
-            枡と日本酒
+          <Link href="/guide" className="btn-outline">
+            枡の選び方ガイド
           </Link>
         </div>
       </section>

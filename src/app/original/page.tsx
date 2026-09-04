@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
-import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import OrderMadeForm from '@/components/forms/OrderMadeForm'
 
@@ -199,6 +199,15 @@ export default function OriginalPage() {
         ]}
       />
       <FAQJsonLd items={faqItems} />
+      <SpeakableJsonLd
+        url={`${baseUrl}/original`}
+        cssSelectors={['[data-speakable]']}
+      />
+      <HowToJsonLd
+        name="オリジナル枡を1個から作る方法"
+        description="入れたい文章やメッセージを送るだけで、デザイン制作から名入れ・製作まで。オリジナル枡が完成するまでの流れ。"
+        steps={flow.map((f) => ({ name: f.title, text: f.desc }))}
+      />
 
       <main className="min-h-screen bg-[var(--background)]">
         <div className="max-w-4xl mx-auto px-6 pt-8">
@@ -241,6 +250,28 @@ export default function OriginalPage() {
               style={{ color: 'var(--color-muted)' }}
             >
               1個からOK ／ デザイン制作までお任せ ／ ご相談・お見積り無料
+            </p>
+          </div>
+        </section>
+
+        {/* 定義（AI・検索向けの要点） */}
+        <section className="max-w-3xl mx-auto px-6 pb-16">
+          <div
+            data-speakable
+            className="rounded-sm border border-[var(--color-border)] p-6"
+          >
+            <p
+              className="text-[13px] leading-[2]"
+              style={{ color: 'var(--color-muted)' }}
+            >
+              <strong style={{ color: 'var(--foreground)', fontWeight: 500 }}>
+                オリジナル枡とは
+              </strong>
+              、名前・日付・メッセージ・ロゴ・写真などを木製の枡に刻んだ、世界に一つの枡のことです。
+              枡の専門店MASU-STOREでは、国産ヒノキのオリジナル枡を
+              <strong style={{ color: 'var(--foreground)', fontWeight: 500 }}>1個からご相談</strong>
+              いただけます。デザインデータは不要で、入れたい文章を送るだけで書体・レイアウトの制作から対応します。
+              納期の目安は約2〜3週間、海外発送にも対応しています。
             </p>
           </div>
         </section>

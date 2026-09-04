@@ -349,8 +349,8 @@ export default function SakePage() {
           <Link href="/products" className="btn-primary">
             商品一覧を見る
           </Link>
-          <Link href="/care" className="btn-outline">
-            枡のお手入れ方法
+          <Link href="/original" className="btn-outline">
+            名前入りのオリジナル枡を作る
           </Link>
         </div>
       </section>
