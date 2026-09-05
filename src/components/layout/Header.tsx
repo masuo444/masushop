@@ -8,6 +8,7 @@ const navLinks = [
   { href: '/guide', label: '選び方' },
   { href: '/products', label: '商品一覧' },
   { href: '/original', label: 'オリジナル枡' },
+  { href: '/logo', label: 'ロゴ入れ' },
   { href: '/business', label: '法人の方' },
   { href: '/blog', label: '読みもの' },
 ]

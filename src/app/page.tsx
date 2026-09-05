@@ -547,7 +547,15 @@ export default function HomePage() {
                 <Link href="/original" style={{ textDecoration: 'underline' }}>
                   オリジナル枡
                 </Link>
-                {' '}をご覧ください。
+                、企業ロゴ・社名を刻む場合は{' '}
+                <Link href="/logo" style={{ textDecoration: 'underline' }}>
+                  ロゴ入れ
+                </Link>
+                {' '}をご覧ください。頼み方・最小ロット・納期は{' '}
+                <Link href="/order" style={{ textDecoration: 'underline' }}>
+                  依頼方法のページ
+                </Link>
+                {' '}にまとめています。
               </p>
               <Link href="/custom" className="btn-primary">
                 お見積り・ご相談

@@ -165,6 +165,13 @@ export default function EngravingPage() {
             >
               オリジナル枡について見る →
             </Link>
+            <Link
+              href="/logo"
+              className="mt-4 ml-5 inline-block text-[13px] underline"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              企業ロゴを枡に入れる →
+            </Link>
           </div>
         </div>
       </section>

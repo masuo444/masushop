@@ -263,6 +263,15 @@ export default function BusinessPage() {
             <br className="hidden md:block" />
             ノベルティ・記念品・OEMとして、10個から10,000個超まで対応します。
           </p>
+          <p className="text-[13px] mb-8" style={{ opacity: 0.75 }}>
+            <Link href="/logo" className="underline underline-offset-4">
+              ロゴ入れの詳細
+            </Link>
+            {' ／ '}
+            <Link href="/order" className="underline underline-offset-4">
+              依頼方法・納期
+            </Link>
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/custom"

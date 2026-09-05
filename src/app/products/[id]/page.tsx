@@ -275,6 +275,24 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                     枡で日本酒を楽しむ &rarr;
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/order"
+                    className="text-sm hover:underline"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
+                    枡の依頼方法・納期 &rarr;
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/logo"
+                    className="text-sm hover:underline"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
+                    枡へのロゴ入れ &rarr;
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

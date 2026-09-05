@@ -290,6 +290,15 @@ export default function OriginalPage() {
             style={{ color: 'var(--color-muted)' }}
           >
             レーザー刻印の仕上がり例です。文字・ロゴ・イラストも、この精度で木目とともに刻めます。
+            企業ロゴ・社名を入れる場合は{' '}
+            <Link href="/logo" style={{ textDecoration: 'underline' }}>
+              ロゴ入れのページ
+            </Link>
+            、頼み方や納期は{' '}
+            <Link href="/order" style={{ textDecoration: 'underline' }}>
+              依頼方法のページ
+            </Link>
+            {' '}にまとめています。
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Image
