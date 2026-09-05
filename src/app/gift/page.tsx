@@ -8,14 +8,14 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: '枡ギフトガイド — お祝い・記念品にぴったりの枡の選び方',
+  title: '名入れギフト・記念品の選び方｜シーン別に選ぶ枡の贈り物ガイド',
   description:
-    '枡（ます）は「益す＝増す」に通じる縁起物。結婚祝い、出産祝い、還暦祝い、企業記念品に最適な枡ギフトの選び方を、シーン別にご紹介します。名入れ対応、1個からOK。',
+    '結婚祝い、出産祝い、還暦祝い、退職祝い、企業記念品。シーン別に選ぶ名入れギフト・記念品のガイドです。贈るのは「益す＝増す」に通じる縁起物の枡（ます）。名前や日付を刻んで1個からお作りします。デザインデータは不要で、入れたい文章を送るだけで制作します。',
   keywords:
-    '枡 ギフト,枡 プレゼント,枡 結婚祝い,枡 お祝い,枡 記念品,枡 引き出物,枡 出産祝い,枡 還暦祝い,枡 父の日,枡 母の日,枡 海外 ギフト,枡 企業 記念品,名入れ枡 ギフト,枡 贈り物,枡 お返し',
+    '名入れ ギフト,名入れ 記念品,記念品 選び方,お祝い ギフト 名入れ,結婚祝い 記念品,還暦祝い プレゼント,退職祝い 記念品,出産祝い ギフト,企業 記念品,引き出物 おしゃれ,和風 ギフト,枡 ギフト,枡 プレゼント,枡 結婚祝い,枡 記念品,枡 引き出物,枡 還暦祝い,名入れ枡 ギフト,枡 贈り物',
   alternates: { canonical: `${baseUrl}/gift`, languages: { ja: `${baseUrl}/gift`, en: `${baseUrl}/en/gifts` } },
   openGraph: {
-    title: '枡ギフトガイド — お祝い・記念品にぴったりの枡の選び方',
+    title: '名入れギフト・記念品の選び方｜シーン別に選ぶ枡の贈り物ガイド',
     description: '枡は「益す＝増す」に通じる縁起物。結婚祝い、出産祝い、還暦祝い、企業記念品に最適な枡ギフトの選び方をご紹介。',
     type: 'website',
     images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
@@ -151,9 +151,10 @@ export default function GiftPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <h1 className="section-title mb-6">枡ギフトガイド</h1>
+          <h1 className="section-title mb-6">名入れギフト・記念品の選び方</h1>
           <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
-            お祝い・記念品にぴったりの枡の選び方を、シーン別にご紹介します
+            お祝い・記念品にぴったりの贈り物を、シーン別にご紹介します。
+            贈るのは「益す＝増す」に通じる縁起物、国産ヒノキの枡（ます）です。
           </p>
         </div>
       </section>
@@ -446,6 +447,16 @@ export default function GiftPage() {
           </h2>
           <p className="text-sm mb-10 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
             名入れ内容のご相談、デザインのご提案、お見積りなど、お気軽にお問い合わせください。1個からオーダー可能です。
+            デザインデータは不要で、入れたい文章を送っていただければ制作までお引き受けします。
+          </p>
+          <p className="text-[13px] mb-8" style={{ color: 'var(--color-muted)' }}>
+            <Link
+              href="/order-made"
+              className="underline underline-offset-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              オーダーメイド記念品のご案内を見る →
+            </Link>
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/custom" className="btn-accent">

@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/finder', label: '枡診断' },
   { href: '/guide', label: '選び方' },
   { href: '/products', label: '商品一覧' },
+  { href: '/order-made', label: '記念品・名入れ' },
   { href: '/original', label: 'オリジナル枡' },
   { href: '/logo', label: 'ロゴ入れ' },
   { href: '/business', label: '法人の方' },

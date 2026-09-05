@@ -4,6 +4,7 @@ import { selectionGuide, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import ReviewSection from '@/components/ui/ReviewSection'
+import Differentiators from '@/components/ui/Differentiators'
 
 const displayedFaqItems = faqItems.slice(0, 5)
 
@@ -270,6 +271,8 @@ export default function HomePage() {
         </div>
       </section>
 
+
+      <Differentiators />
 
       {/* ===== 枡の用途 ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
@@ -543,7 +546,11 @@ export default function HomePage() {
                 10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー刻印）にも対応。まとめ買いほどお得です。100個以上のご注文やお見積りはお問い合わせフォームからご相談ください。
               </p>
               <p style={{ fontSize: '0.85rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
-                1個だけの一点ものをご希望の方は{' '}
+                何を贈るか決まっていない段階なら{' '}
+                <Link href="/order-made" style={{ textDecoration: 'underline' }}>
+                  オーダーメイドの記念品
+                </Link>
+                、1個だけの一点ものをご希望の方は{' '}
                 <Link href="/original" style={{ textDecoration: 'underline' }}>
                   オリジナル枡
                 </Link>

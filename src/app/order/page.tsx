@@ -25,6 +25,14 @@ export const metadata: Metadata = {
 
 const routes = [
   {
+    case: '何を贈るか、まだ決まっていない',
+    min: '相談から',
+    detail:
+      '贈る相手とシーン、ご予算だけお聞かせいただければ、こちらからご提案します。退職祝い・還暦祝い・周年記念・開店祝いなど、記念品としての使われ方をまとめています。',
+    href: '/order-made',
+    linkLabel: 'オーダーメイド記念品のページへ',
+  },
+  {
     case: '1個だけ、名入れして贈りたい',
     min: '1個から',
     detail:

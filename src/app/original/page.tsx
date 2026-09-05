@@ -4,6 +4,7 @@ import Image from 'next/image'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import Differentiators from '@/components/ui/Differentiators'
 import OrderMadeForm from '@/components/forms/OrderMadeForm'
 
 const baseUrl = siteConfig.url
@@ -277,6 +278,8 @@ export default function OriginalPage() {
           </div>
         </section>
 
+        <Differentiators />
+
         {/* Sample */}
         <section className="max-w-4xl mx-auto px-6 pb-20">
           <h2
@@ -290,7 +293,11 @@ export default function OriginalPage() {
             style={{ color: 'var(--color-muted)' }}
           >
             レーザー刻印の仕上がり例です。文字・ロゴ・イラストも、この精度で木目とともに刻めます。
-            企業ロゴ・社名を入れる場合は{' '}
+            退職祝いや周年記念など、記念品としての選び方は{' '}
+            <Link href="/order-made" style={{ textDecoration: 'underline' }}>
+              オーダーメイド記念品のページ
+            </Link>
+            、企業ロゴ・社名を入れる場合は{' '}
             <Link href="/logo" style={{ textDecoration: 'underline' }}>
               ロゴ入れのページ
             </Link>

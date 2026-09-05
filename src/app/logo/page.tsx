@@ -4,6 +4,7 @@ import Image from 'next/image'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import Differentiators from '@/components/ui/Differentiators'
 
 const baseUrl = siteConfig.url
 
@@ -332,7 +333,11 @@ export default function LogoPage() {
 
         <div className="divider max-w-4xl mx-auto" />
 
-        {/* 用途 */}
+        <Differentiators />
+
+        <div className="divider max-w-4xl mx-auto" />
+
+                {/* 用途 */}
         <section className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="section-title mb-10 text-center">ロゴ入り枡の使われ方</h2>
           <div className="grid gap-5 sm:grid-cols-2">
