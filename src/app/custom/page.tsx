@@ -33,7 +33,6 @@ type FormData = {
   printMethod: string
   printContent: string
   desiredDelivery: string
-  jpycPayment: boolean
   notes: string
 }
 
@@ -48,7 +47,6 @@ const initialFormData: FormData = {
   printMethod: '相談したい',
   printContent: '',
   desiredDelivery: '',
-  jpycPayment: false,
   notes: '',
 }
 
@@ -410,24 +408,6 @@ function CustomPageInner() {
             <div>
               <h2 className="text-lg font-medium mb-6">その他</h2>
               <div className="space-y-5">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="jpycPayment"
-                    checked={formData.jpycPayment}
-                    onChange={handleChange}
-                    className="mt-1 w-4 h-4 accent-[var(--color-accent)]"
-                  />
-                  <span className="text-sm">
-                    JPYC（暗号資産）決済を希望する
-                    <span
-                      className="block text-xs mt-1"
-                      style={{ color: 'var(--color-muted)' }}
-                    >
-                      JPYC（日本円ステーブルコイン / Polygon）でのお支払いに対応しています。
-                    </span>
-                  </span>
-                </label>
                 <div>
                   <label htmlFor="notes" className={labelClass}>
                     その他ご要望

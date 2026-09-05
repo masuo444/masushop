@@ -23,7 +23,6 @@ type ContactSubmission = {
     printMethod: string
     printContent: string
     desiredDelivery: string
-    jpycPayment: boolean
     notes: string
   }
   delivery: {
@@ -114,7 +113,6 @@ function parseSubmission(body: unknown): ContactSubmission {
       printMethod: readText(values, ['printMethod'], 200),
       printContent: readText(values, ['printContent'], 2_000),
       desiredDelivery: readText(values, ['deadline', 'desiredDelivery'], 500),
-      jpycPayment: values.jpycPayment === true,
       notes: readText(values, ['notes'], 10_000),
     },
     delivery: {
@@ -284,7 +282,6 @@ ${purpose ? `<tr><td style="padding:8px 0;color:#888;">用途</td><td style="pad
 ${printMethod ? `<tr><td style="padding:8px 0;color:#888;">名入れ方法</td><td style="padding:8px 0;">${printMethod}</td></tr>` : ''}
 ${printContent ? `<tr><td style="padding:8px 0;color:#888;">名入れ内容</td><td style="padding:8px 0;">${printContent}</td></tr>` : ''}
 ${desiredDelivery ? `<tr><td style="padding:8px 0;color:#888;">希望納期</td><td style="padding:8px 0;">${desiredDelivery}</td></tr>` : ''}
-${order.jpycPayment ? `<tr><td style="padding:8px 0;color:#888;">JPYC決済</td><td style="padding:8px 0;">希望あり</td></tr>` : ''}
 ${notes ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">その他ご要望</td></tr><tr><td colspan="2" style="padding:8px 0;white-space:pre-wrap;">${notes}</td></tr>` : ''}
 <tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">流入経路</td></tr>
 <tr><td style="padding:8px 0;color:#888;">フォーム</td><td style="padding:8px 0;">${escapeHtml(submission.context.formType)}</td></tr>

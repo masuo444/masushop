@@ -138,8 +138,8 @@ const whyFomus = [
   },
   {
     num: '06',
-    title: '請求書払い・暗号資産決済にも対応',
-    desc: '法人のお客様には請求書払い（月末締め翌月末払い）をご用意。JPYC（暗号資産）決済にも対応し、お支払い方法を柔軟に選べます。',
+    title: '請求書払いにも対応',
+    desc: '法人のお客様には請求書払い（月末締め翌月末払い）をご用意。クレジットカード・銀行振込とあわせて、お支払い方法を柔軟に選べます。',
   },
 ]
 
@@ -773,7 +773,7 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* ━━━ JPYC決済 ━━━ */}
+      {/* ━━━ お支払い方法 ━━━ */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
           <div
@@ -781,9 +781,9 @@ export default function BusinessPage() {
             style={{ border: '1px solid var(--color-border)' }}
           >
             <div className="flex-1">
-              <h3 className="text-sm font-medium mb-1">JPYC（暗号資産）決済対応</h3>
+              <h3 className="text-sm font-medium mb-1">お支払い方法</h3>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                JPYC（日本円ステーブルコイン / Polygon）での決済に対応。クレジットカード手数料を抑えたお支払いが可能です。
+                クレジットカード・銀行振込に対応。法人のお客様には請求書払い（月末締め翌月末払い）もご用意しています。
               </p>
             </div>
             <Link

@@ -8,7 +8,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 export const metadata: Metadata = {
   title: '枡の商品一覧 — 国産ヒノキ枡 全サイズ',
   description:
-    '国産ヒノキ枡の全7サイズ（三勺〜一升）の商品一覧。無地の枡は10個から、名入れのオリジナル枡は1個からご相談いただけます。焼印・レーザー刻印対応。JPYC決済にも対応。',
+    '国産ヒノキ枡の全7サイズ（三勺〜一升）の商品一覧。無地の枡は10個から、名入れのオリジナル枡は1個からご相談いただけます。焼印・レーザー刻印対応。クレジットカード・銀行振込・請求書払いに対応。',
   keywords: '枡 購入,枡 通販,枡 販売,ヒノキ枡,名入れ枡,枡 サイズ,枡 価格,枡 法人,枡 ノベルティ',
   alternates: { canonical: `${siteConfig.url}/products` },
   openGraph: {
@@ -113,7 +113,7 @@ export default function ProductsPage() {
       <div className="divider mx-auto max-w-5xl" />
 
 
-      {/* ===== JPYC決済対応 ===== */}
+      {/* ===== お支払い方法 ===== */}
       <section className="mx-auto max-w-5xl px-6 py-12">
         <div
           className="rounded-sm px-6 py-5 text-center text-sm leading-relaxed"
@@ -123,7 +123,7 @@ export default function ProductsPage() {
             border: '1px solid var(--color-accent)',
           }}
         >
-          当店ではJPYC（日本円ステーブルコイン）でのお支払いに対応しています。
+          お支払いはクレジットカード・銀行振込に対応。法人のお客様は請求書払いもご相談いただけます。
         </div>
       </section>
 

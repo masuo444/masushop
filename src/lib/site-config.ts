@@ -7,10 +7,6 @@ const siteConfig = {
   adminEmail: process.env.ADMIN_EMAIL || '',
   // Minimum order for standard masu (plain/unbranded)
   standardMasuMinOrder: 10,
-  jpyc: {
-    enabled: process.env.FEATURE_JPYC === 'true',
-    walletAddress: process.env.JPYC_WALLET_ADDRESS || '',
-  },
 }
 
 export default siteConfig
