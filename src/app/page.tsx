@@ -149,17 +149,38 @@ export default function HomePage() {
               職人の手で、国産ヒノキから一つひとつ仕上げます。
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="max-md:!justify-center">
-              <Link href="/products" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
-                商品を見る
+              <Link href="/original" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
+                オリジナル枡を1個から
               </Link>
               <Link
-                href="/guide"
+                href="/business"
                 className="btn-outline"
                 style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
               >
-                選び方ガイド
+                法人・大口のお見積り
               </Link>
             </div>
+
+            {/* 条件サマリー */}
+            <ul
+              style={{
+                listStyle: 'none',
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.5rem 1.25rem',
+                marginTop: '2rem',
+                paddingTop: '1.5rem',
+                borderTop: '1px solid #4A413B',
+                fontSize: '0.8125rem',
+                letterSpacing: '0.04em',
+                color: '#C8C1B8',
+              }}
+              className="max-md:!justify-center"
+            >
+              {['名入れは1個から', '全7サイズ', '納期2〜3週間', '海外発送可'].map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
           <div className="max-md:!order-first">
             <Image
