@@ -9,7 +9,7 @@ const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
   title: '枡のサイズ比較 — 全7サイズを徹底比較',
-  description: '枡の全7サイズ（三勺・五勺・八勺・一合・二合半・五合・一升）を寸法・容量・用途・価格で徹底比較。用途別おすすめサイズがひと目でわかります。',
+  description: '枡の全7サイズ（三勺・五勺・八勺・一合・二合半・五合・一升）を寸法・容量・用途で徹底比較。用途別おすすめサイズがひと目でわかります。',
   keywords: '枡 サイズ 比較,枡 サイズ 一覧,枡 大きさ,一合枡 サイズ,枡 容量',
   alternates: { canonical: `${baseUrl}/products/sizes` },
   openGraph: {
@@ -51,7 +51,7 @@ export default function SizesPage() {
         <div className="max-w-3xl mx-auto px-6">
           <h1 className="section-title mb-6">枡のサイズ比較</h1>
           <p style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
-            全7サイズを寸法・容量・用途・価格で徹底比較
+            全7サイズを寸法・容量・用途で徹底比較
           </p>
         </div>
       </section>
@@ -71,7 +71,6 @@ export default function SizesPage() {
                 <th className="px-4 py-3 text-left font-medium" style={{ color: 'var(--color-muted)' }}>容量</th>
                 <th className="px-4 py-3 text-left font-medium" style={{ color: 'var(--color-muted)' }}>容量目安</th>
                 <th className="px-4 py-3 text-left font-medium" style={{ color: 'var(--color-muted)' }}>おすすめ用途</th>
-                <th className="px-4 py-3 text-right font-medium" style={{ color: 'var(--color-muted)' }}>参考価格</th>
               </tr>
             </thead>
             <tbody>
@@ -93,9 +92,6 @@ export default function SizesPage() {
                   <td className="px-4 py-4 whitespace-nowrap">{masu.capacity}</td>
                   <td className="px-4 py-4" style={{ color: 'var(--color-muted)' }}>{masu.capacityNote}</td>
                   <td className="px-4 py-4 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>{masu.use}</td>
-                  <td className="px-4 py-4 text-right whitespace-nowrap" style={{ color: 'var(--color-accent)' }}>
-                    &yen;{masu.priceFrom.toLocaleString()}〜
-                  </td>
                 </tr>
               ))}
             </tbody>

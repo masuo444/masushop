@@ -2,10 +2,9 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { masuSizes, engravingMethods, optionPrices } from '@/lib/masu-data'
+import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
-import { getAverageRating, getReviewCount } from '@/lib/reviews'
 
 const baseUrl = siteConfig.url
 type ProductPageProps = { params: Promise<{ id: string }> }
@@ -25,11 +24,11 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 
   if (product.id === 'ichigo') {
-    optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋・専用パッケージ（クリアケース・白箱 各150円／個・税別）対応。'
+    optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋・専用パッケージ（クリアケース・白箱）対応。'
   }
 
   const title = `${product.name} — 国産ヒノキ枡 ${product.capacity}`
-  const description = `${product.description} ${optionsSummary} ¥${product.priceFrom.toLocaleString()}〜`
+  const description = `${product.description} ${optionsSummary}`
 
   return {
     title,
@@ -50,47 +49,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { id } = await params
   const product = masuSizes.find((m) => m.id === id)
   if (!product) notFound()
-
-  const variants = engravingMethods
-    .filter((m) => m.id !== 'none')
-    .map((method) => ({
-      '@type': 'ProductModel',
-      name: `${product.name}（${method.name}）`,
-      offers: {
-        '@type': 'Offer',
-        price: product.priceFrom + method.pricePerUnit,
-        priceCurrency: 'JPY',
-        availability: 'https://schema.org/InStock',
-      },
-    }))
-
-  if (product.hasLidOption) {
-    variants.push({
-      '@type': 'ProductModel',
-      name: `${product.name}（蓋付き）`,
-      offers: {
-        '@type': 'Offer',
-        price: product.priceFrom + (product.id === 'sanjaku' ? optionPrices.lid.sanjaku : optionPrices.lid.ichigo),
-        priceCurrency: 'JPY',
-        availability: 'https://schema.org/InStock',
-      },
-    })
-  }
-
-  if (product.id === 'ichigo') {
-    for (const packageName of ['クリアケース', '白箱']) {
-      variants.push({
-        '@type': 'ProductModel',
-        name: `${product.name}（${packageName}入り）`,
-        offers: {
-          '@type': 'Offer',
-          price: product.priceFrom + optionPrices.packaging,
-          priceCurrency: 'JPY',
-          availability: 'https://schema.org/InStock',
-        },
-      })
-    }
-  }
 
   const productJsonLd = {
     '@context': 'https://schema.org',
@@ -113,19 +71,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       '@type': 'Country',
       name: 'Japan',
     },
-    offers: {
-      '@type': 'Offer',
-      price: product.priceFrom,
-      priceCurrency: 'JPY',
-      availability: 'https://schema.org/InStock',
-      url: `${baseUrl}/products/${product.id}`,
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: getAverageRating(),
-      reviewCount: getReviewCount(),
-    },
-    hasVariant: variants,
     additionalProperty: [
       {
         '@type': 'PropertyValue',
@@ -147,7 +92,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {
               '@type': 'PropertyValue',
               name: '専用パッケージ',
-              value: `クリアケース・白箱 各¥${optionPrices.packaging}/個（税別）`,
+              value: 'クリアケース・白箱',
             },
           ]
         : []),
@@ -219,10 +164,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 <dd>{product.capacityNote}</dd>
               </div>
               <div className="flex justify-between">
-                <dt style={{ color: 'var(--color-muted)' }}>参考価格</dt>
-                <dd style={{ color: 'var(--color-accent)' }}>
-                  &yen;{product.priceFrom.toLocaleString()}〜
-                </dd>
+                <dt style={{ color: 'var(--color-muted)' }}>価格</dt>
+                <dd style={{ color: 'var(--color-accent)' }}>お見積り</dd>
               </div>
             </dl>
 
@@ -365,7 +308,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <p className="text-sm leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
                 一合枡のみ、クリアケースと白箱をご用意できます。
                 名入れギフト、企業記念品、引き出物などの個別包装にご利用ください。
-                価格はどちらも1個あたり&yen;{optionPrices.packaging}（税別）です。
+                費用は数量に応じてお見積りいたします。
               </p>
             </div>
 
@@ -383,12 +326,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   className="aspect-square w-full object-cover"
                 />
                 <div className="p-5">
-                  <div className="mb-2 flex items-baseline justify-between gap-3">
-                    <h3 className="serif text-lg">クリアケース</h3>
-                    <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>
-                      +&yen;{optionPrices.packaging}/個（税別）
-                    </p>
-                  </div>
+                  <h3 className="serif text-lg mb-2">クリアケース</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                     枡の木目や名入れデザインを見せたまま、展示・配布できる透明パッケージです。
                   </p>
@@ -408,12 +346,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   className="aspect-square w-full object-cover"
                 />
                 <div className="p-5">
-                  <div className="mb-2 flex items-baseline justify-between gap-3">
-                    <h3 className="serif text-lg">白箱</h3>
-                    <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>
-                      +&yen;{optionPrices.packaging}/個（税別）
-                    </p>
-                  </div>
+                  <h3 className="serif text-lg mb-2">白箱</h3>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                     清潔感のある個別包装。企業記念品や引き出物、贈答用の一合枡に適しています。
                   </p>

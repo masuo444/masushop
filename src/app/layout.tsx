@@ -85,7 +85,6 @@ const organizationJsonLd = {
   foundingDate: '1950',
   slogan: '一三〇〇年の技、一つの枡に。',
   areaServed: 'JP',
-  priceRange: '¥500-¥5,000',
   knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸'],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -118,7 +117,6 @@ const localBusinessJsonLd = {
     '@type': 'Country',
     name: 'Japan',
   },
-  priceRange: '¥500-¥5,000',
   knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸'],
 }
 

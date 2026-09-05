@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, ItemListJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
-import { getAverageRating, getReviewCount } from '@/lib/reviews'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
@@ -43,36 +42,6 @@ export default function ProductsPage() {
         url={`${baseUrl}/products`}
         cssSelectors={['.section-title', '[data-speakable]']}
       />
-
-      {/* Product JSON-LD for each masu size */}
-      {masuSizes.map((m) => (
-        <script
-          key={m.id}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Product',
-              name: m.name,
-              description: m.description,
-              image: `${baseUrl}/images/masu-crest.jpg`,
-              url: `${baseUrl}/products/${m.id}`,
-              offers: {
-                '@type': 'Offer',
-                price: m.priceFrom,
-                priceCurrency: 'JPY',
-                availability: 'https://schema.org/InStock',
-                url: `${baseUrl}/products/${m.id}`,
-              },
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: getAverageRating(),
-                reviewCount: getReviewCount(),
-              },
-            }),
-          }}
-        />
-      ))}
 
       <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '商品一覧' }]} />
 

@@ -372,9 +372,9 @@ export default function MasuFinder() {
                 </div>
                 <div>
                   <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', color: 'var(--color-muted)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>
-                    参考価格
+                    外寸
                   </p>
-                  <p style={{ fontWeight: 500, fontSize: '0.9rem' }}>{recommendedMasu.priceFrom.toLocaleString()}円〜</p>
+                  <p style={{ fontWeight: 500, fontSize: '0.9rem' }}>{recommendedMasu.size}</p>
                 </div>
               </div>
 

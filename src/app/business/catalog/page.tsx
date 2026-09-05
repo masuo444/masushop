@@ -204,7 +204,11 @@ export default function CatalogPage() {
                   {masu.capacity}
                 </td>
                 <td style={{ padding: '8px 0 8px 8px', textAlign: 'right', fontWeight: 500 }}>
-                  &yen;{masu.priceFrom.toLocaleString()}〜
+                  &yen;
+                  {volumePricing
+                    .find((v) => v.size === masu.name)
+                    ?.p10.toLocaleString()}
+                  〜
                 </td>
               </tr>
             ))}

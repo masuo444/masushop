@@ -7,7 +7,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 export const metadata: Metadata = {
   title: '特殊コーティング加工 — 枡を水・汚れから守る',
   description:
-    '枡に施せる特殊コーティングの詳細。水・油・汚れを弾いて、枡を長持ちさせます。食品衛生法の基準に適合済みで、日本酒を飲む枡にも安心。+¥800/個で選べるオプションです。',
+    '枡に施せる特殊コーティングの詳細。水・油・汚れを弾いて、枡を長持ちさせます。食品衛生法の基準に適合済みで、日本酒を飲む枡にも安心。枡のご注文時に選べるオプションです。',
   keywords:
     '枡 コーティング,枡 撥水,枡 防汚,枡 抗菌,枡 お手入れ,枡 長持ち',
   alternates: { canonical: `${siteConfig.url}/coating` },
@@ -270,11 +270,12 @@ export default function CoatingPage() {
           className="rounded-sm p-8 text-center"
           style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
         >
-          <p className="text-3xl font-medium tracking-tight mb-2" style={{ color: 'var(--color-accent)' }}>
-            &yen;800<span className="text-base font-normal"> / 個（税別）</span>
+          <p className="text-2xl font-medium tracking-tight mb-2" style={{ color: 'var(--color-accent)' }}>
+            お見積り
           </p>
           <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-            全サイズ共通。枡のご注文時にオプションとして追加できます。
+            全サイズに対応。枡のご注文時にオプションとして追加できます。
+            サイズと数量をお知らせいただければ、お見積りをお送りします。
           </p>
         </div>
       </section>

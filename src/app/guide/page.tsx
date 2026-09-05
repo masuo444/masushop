@@ -167,9 +167,6 @@ export default function GuidePage() {
                   <th className="text-left py-4 px-3 font-medium" style={{ color: 'var(--color-muted)' }}>
                     主な用途
                   </th>
-                  <th className="text-right py-4 px-3 font-medium" style={{ color: 'var(--color-muted)' }}>
-                    参考価格〜
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -192,9 +189,6 @@ export default function GuidePage() {
                     <td className="py-4 px-3 text-xs" style={{ color: 'var(--color-muted)' }}>
                       {s.use}
                     </td>
-                    <td className="py-4 px-3 text-right whitespace-nowrap">
-                      {s.priceFrom.toLocaleString()}円
-                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -216,7 +210,6 @@ export default function GuidePage() {
                       {s.reading}
                     </p>
                   </div>
-                  <p className="font-medium">{s.priceFrom.toLocaleString()}円〜</p>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs mb-3">
                   <div>
