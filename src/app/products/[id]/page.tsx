@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { masuSizes } from '@/lib/masu-data'
+import { getReviewsByProduct } from '@/lib/reviews'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 
@@ -50,6 +51,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const product = masuSizes.find((m) => m.id === id)
   if (!product) notFound()
 
+  // レビューは当該サイズのものだけを使う（サイト全体の平均を商品評価として出さない）
+  const productReviews = getReviewsByProduct(product.name)
+  const ratingValue =
+    productReviews.length > 0
+      ? Math.round(
+          (productReviews.reduce((sum, r) => sum + r.rating, 0) / productReviews.length) * 10,
+        ) / 10
+      : null
+
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -71,6 +81,30 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       '@type': 'Country',
       name: 'Japan',
     },
+    ...(ratingValue !== null
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue,
+            reviewCount: productReviews.length,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          review: productReviews.map((r) => ({
+            '@type': 'Review',
+            name: r.title,
+            reviewBody: r.body,
+            datePublished: r.date,
+            author: { '@type': 'Person', name: r.author },
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: r.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+          })),
+        }
+      : {}),
     additionalProperty: [
       {
         '@type': 'PropertyValue',
@@ -357,6 +391,76 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <div className="mt-8 text-center">
               <Link href="/custom?size=ichigo&type=packaging" className="btn-accent">
                 パッケージ込みで見積り・相談する
+              </Link>
+            </div>
+          </section>
+        )}
+
+        {productReviews.length > 0 && (
+          <section className="mt-16" aria-labelledby="product-reviews-title">
+            <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3">
+              <h2 id="product-reviews-title" className="serif text-2xl">
+                {product.name}のお客様の声
+              </h2>
+              <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+                <span
+                  className="text-base font-medium"
+                  style={{ color: 'var(--color-accent)' }}
+                >
+                  {ratingValue}
+                </span>
+                {' / 5.0'}（{productReviews.length}件）
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              {productReviews.map((review) => (
+                <article
+                  key={review.id}
+                  className="rounded-sm p-6"
+                  style={{
+                    background: 'var(--color-subtle)',
+                    border: '1px solid var(--color-border)',
+                  }}
+                >
+                  <div className="mb-3 flex items-center gap-3">
+                    <p
+                      aria-label={`5段階評価で${review.rating}`}
+                      className="text-sm tracking-[0.15em]"
+                      style={{ color: 'var(--color-accent)' }}
+                    >
+                      {'★'.repeat(review.rating)}
+                      <span style={{ color: 'var(--color-border)' }}>
+                        {'★'.repeat(5 - review.rating)}
+                      </span>
+                    </p>
+                    {review.verified && (
+                      <span className="text-[11px]" style={{ color: 'var(--color-muted)' }}>
+                        購入者
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mb-2 text-sm font-medium">{review.title}</h3>
+                  <p
+                    className="mb-3 text-sm leading-[1.9]"
+                    style={{ color: 'var(--color-muted)' }}
+                  >
+                    {review.body}
+                  </p>
+                  <p className="text-[11px]" style={{ color: 'var(--color-muted)' }}>
+                    {review.author}・{review.purpose}・{review.date}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <Link
+                href="/reviews"
+                className="text-sm underline underline-offset-4"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                すべてのお客様の声を見る
               </Link>
             </div>
           </section>
