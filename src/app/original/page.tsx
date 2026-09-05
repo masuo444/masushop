@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -20,7 +21,14 @@ export const metadata: Metadata = {
       '文章やメッセージを送るだけで、デザイン制作から名入れまでお任せ。オリジナル枡を1個からご相談いただけます。',
     type: 'website',
     url: `${baseUrl}/original`,
-    images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
+    images: [
+      {
+        url: `${baseUrl}/images/works/ishiwa-ashiyu-front.jpg`,
+        width: 1448,
+        height: 1086,
+        alt: '施設ロゴをレーザー刻印したオリジナル枡の制作事例',
+      },
+    ],
   },
 }
 
@@ -274,6 +282,54 @@ export default function OriginalPage() {
               納期の目安は約2〜3週間、海外発送にも対応しています。
             </p>
           </div>
+        </section>
+
+        {/* Works */}
+        <section className="max-w-4xl mx-auto px-6 pb-20">
+          <h2
+            className="serif text-xl font-medium text-center mb-4"
+            style={{ color: 'var(--foreground)' }}
+          >
+            制作事例
+          </h2>
+          <p
+            className="text-[13px] text-center mb-10 leading-[1.9]"
+            style={{ color: 'var(--color-muted)' }}
+          >
+            実際にお作りしたオリジナル枡です。
+          </p>
+          <div className="space-y-4">
+            <Image
+              src="/images/works/ishiwa-ashiyu-front.jpg"
+              alt="石和源泉 足湯ひろばのロゴをレーザー刻印した一合枡 — 正面"
+              width={1448}
+              height={1086}
+              className="w-full rounded-sm"
+              priority
+            />
+            <div className="grid grid-cols-2 gap-4">
+              <Image
+                src="/images/works/ishiwa-ashiyu-detail.jpg"
+                alt="レーザー刻印の彫りの質感 — ロゴの細部まで木目とともに再現"
+                width={1536}
+                height={1024}
+                className="w-full rounded-sm"
+              />
+              <Image
+                src="/images/works/ishiwa-ashiyu-hand.jpg"
+                alt="手のひらに載る一合枡のサイズ感"
+                width={1448}
+                height={1086}
+                className="w-full rounded-sm"
+              />
+            </div>
+          </div>
+          <p
+            className="text-[12px] mt-4 text-center"
+            style={{ color: 'var(--color-muted)' }}
+          >
+            石和源泉 足湯ひろば 様｜施設ロゴを刻印した一合枡（レーザー刻印）
+          </p>
         </section>
 
         {/* Differences */}
