@@ -1,16 +1,34 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 export default function FloatingContactButton() {
   const pathname = usePathname()
+  // フォームが見えているページのパスを保持する。パスが変わればひとりでに無効になるので、
+  // 遷移時に同期的な setState でリセットする必要がない。
+  const [visibleFor, setVisibleFor] = useState<string | null>(null)
 
   const isEnglish = pathname.startsWith('/en')
   const href = isEnglish ? '/en/contact' : '/custom'
   const label = isEnglish ? 'Contact Us' : '無料で見積り'
 
+  // ページ内にフォームがある場合、それが見えている間はボタンを隠す。
+  // 同じ導線が二重に出るのを避け、狭い画面で送信ボタンと重なるのも防ぐ。
+  useEffect(() => {
+    const form = document.getElementById('form')
+    if (!form) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisibleFor(entry.isIntersecting ? pathname : null),
+      { rootMargin: '0px 0px -10% 0px' },
+    )
+    observer.observe(form)
+    return () => observer.disconnect()
+  }, [pathname])
+
   // 遷移先そのものでは出さない（フォーム画面で重ねて出す意味がないため）
   if (pathname === href) return null
+  if (visibleFor === pathname) return null
 
   return (
     <a
