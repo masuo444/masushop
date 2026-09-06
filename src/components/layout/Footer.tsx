@@ -1,5 +1,10 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import siteConfig from '@/lib/site-config'
+import { isEnglishPath } from '@/lib/locale'
+import LanguageToggle from './LanguageToggle'
 
 const footerLinks = {
   枡について: [
@@ -31,7 +36,58 @@ const footerLinks = {
   ],
 }
 
+const enFooterLinks = {
+  'About Masu': [
+    { href: '/en/sake-cups', label: 'Japanese Sake Cups' },
+    { href: '/en/history', label: 'History' },
+    { href: '/en/care', label: 'Care & Maintenance' },
+    { href: '/en/glossary', label: 'Glossary' },
+    { href: '/en/guide', label: 'Size Guide' },
+  ],
+  'Shop & Order': [
+    { href: '/en/gifts', label: 'Gifts' },
+    { href: '/en/corporate', label: 'Corporate Orders' },
+    { href: '/en/contact', label: 'Request a Quote' },
+    { href: '/en/faq', label: 'FAQ' },
+  ],
+  Reading: [
+    { href: '/en/blog/japanese-gift-ideas', label: 'Japanese Gift Ideas' },
+    { href: '/en/blog/sake-drinking-guide', label: 'How to Drink Sake' },
+    { href: '/en/blog/wooden-vs-glass-sake-cups', label: 'Wood vs Glass Cups' },
+  ],
+}
+
+const copy = {
+  ja: {
+    tagline: '一三〇〇年の技、一つの枡に。',
+    description: (
+      <>
+        国産ヒノキ枡の総合専門サイト。
+        <br />
+        販売・名入れ・オーダーメイド対応。
+      </>
+    ),
+    contactLabel: 'お問い合わせ',
+  },
+  en: {
+    tagline: 'Thirteen centuries of craft, in a single cup.',
+    description: (
+      <>
+        Handcrafted Japanese hinoki cypress masu.
+        <br />
+        Custom engraving and worldwide shipping.
+      </>
+    ),
+    contactLabel: 'Contact',
+  },
+}
+
 export default function Footer() {
+  const pathname = usePathname()
+  const isEnglish = isEnglishPath(pathname)
+  const links = isEnglish ? enFooterLinks : footerLinks
+  const t = isEnglish ? copy.en : copy.ja
+
   return (
     <footer className="bg-[var(--color-warm)] text-white/50">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-24">
@@ -45,16 +101,13 @@ export default function Footer() {
               MASU-STORE
             </p>
             <p className="serif text-base leading-relaxed text-white/70 mb-8">
-              一三〇〇年の技、一つの枡に。
+              {t.tagline}
             </p>
-            <p className="text-sm leading-[2] text-white/65">
-              国産ヒノキ枡の総合専門サイト。<br />
-              販売・名入れ・オーダーメイド対応。
-            </p>
+            <p className="text-sm leading-[2] text-white/65">{t.description}</p>
 
             {/* Contact */}
             <div className="mt-8 pt-6 border-t border-white/10">
-              <p className="text-sm text-white/70 mb-2">お問い合わせ</p>
+              <p className="text-sm text-white/70 mb-2">{t.contactLabel}</p>
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
                 className="text-sm text-white/75 hover:text-white transition-colors"
@@ -65,11 +118,11 @@ export default function Footer() {
           </div>
 
           {/* Link sections */}
-          {Object.entries(footerLinks).map(([category, links]) => (
+          {Object.entries(links).map(([category, items]) => (
             <div key={category}>
               <p className="text-sm text-white/75 mb-5">{category}</p>
               <ul className="space-y-3">
-                {links.map((link) => (
+                {items.map((link) => (
                   <li key={link.href + link.label}>
                     <Link
                       href={link.href}
@@ -87,8 +140,9 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/55">
-            &copy; {new Date().getFullYear()} {siteConfig.name}
+            &copy; {new Date().getFullYear()} {isEnglish ? 'MASU-STORE' : siteConfig.name}
           </p>
+          <LanguageToggle className="[&_a]:!text-white/65 [&_span]:!text-white/45" />
         </div>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import siteConfig from '@/lib/site-config'
 import FloatingContactButton from '@/components/ui/FloatingContactButton'
+import HtmlLang from '@/components/layout/HtmlLang'
 import Analytics from '@/components/analytics/Analytics'
 
 const notoSerifJP = Noto_Serif_JP({
@@ -142,6 +143,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
       </head>
       <body className={`${notoSerifJP.variable} antialiased`}>
+        <HtmlLang />
         <Header />
         <main className="site-main">{children}</main>
         <FloatingContactButton />

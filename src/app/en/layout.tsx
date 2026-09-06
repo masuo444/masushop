@@ -1,11 +1,15 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  // ルートの日本語テンプレート（%s | 枡の専門店 MASU-STORE）を英語側で上書きする
+  title: {
+    default: 'MASU-STORE — Handcrafted Japanese Wooden Sake Cups',
+    template: '%s | MASU-STORE',
+  },
   openGraph: {
     locale: 'en_US',
   },
@@ -44,39 +48,6 @@ export default function EnLayout({ children }: { children: React.ReactNode }) {
     <div lang="en">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
-
-      <nav className="border-b" style={{ borderColor: 'var(--color-border)' }}>
-        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between h-12">
-          <Link href="/en" className="text-xs font-medium" style={{ color: 'var(--foreground)' }}>
-            MASU-STORE
-          </Link>
-          <div className="flex items-center gap-6">
-            {[
-              { href: '/en/sake-cups', label: 'Sake Cups' },
-              { href: '/en/gifts', label: 'Gifts' },
-              { href: '/en/corporate', label: 'Corporate' },
-              { href: '/en/guide', label: 'Guide' },
-              { href: '/en/faq', label: 'FAQ' },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[11px] transition-colors"
-                style={{ color: 'var(--color-muted)' }}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/en/contact"
-              className="text-[11px]"
-              style={{ color: 'var(--color-accent)' }}
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
-      </nav>
 
       {children}
     </div>

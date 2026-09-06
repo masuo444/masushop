@@ -6,7 +6,8 @@ import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/J
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: 'Japanese Wooden Sake Cups — Handcrafted Hinoki Cypress Masu | MASU-STORE',
+  // 同階層の layout の template は自身には適用されないため absolute で指定する
+  title: { absolute: 'Japanese Wooden Sake Cups — Handcrafted Hinoki Cypress Masu | MASU-STORE' },
   description:
     'Handcrafted wooden sake cups made from Japanese hinoki cypress. A 1,300-year-old tradition that transforms how you experience sake. Custom engraving available. Ships worldwide.',
   keywords:

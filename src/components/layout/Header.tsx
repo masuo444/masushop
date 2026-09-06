@@ -1,9 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { isEnglishPath } from '@/lib/locale'
+import LanguageToggle from './LanguageToggle'
 
-const navLinks = [
+const jaNavLinks = [
   { href: '/order-made', label: 'オーダーメイド' },
   { href: '/logo', label: 'ロゴ入れ' },
   { href: '/products', label: '商品一覧' },
@@ -11,7 +14,23 @@ const navLinks = [
   { href: '/blog', label: '読みもの' },
 ]
 
+const enNavLinks = [
+  { href: '/en/sake-cups', label: 'Sake Cups' },
+  { href: '/en/gifts', label: 'Gifts' },
+  { href: '/en/corporate', label: 'Corporate' },
+  { href: '/en/guide', label: 'Guide' },
+  { href: '/en/faq', label: 'FAQ' },
+]
+
 export default function Header() {
+  const pathname = usePathname()
+  const isEnglish = isEnglishPath(pathname)
+  const navLinks = isEnglish ? enNavLinks : jaNavLinks
+  const homeHref = isEnglish ? '/en' : '/'
+  const contactHref = isEnglish ? '/en/contact' : '/custom'
+  const contactLabel = isEnglish ? 'Contact' : '無料で見積り'
+  const menuLabel = isEnglish ? 'Menu' : 'メニュー'
+
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -41,7 +60,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href={homeHref} className="flex items-center gap-2">
             <span className="serif text-2xl font-light text-[var(--foreground)]">
               枡
             </span>
@@ -61,28 +80,29 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <LanguageToggle />
             <Link
-              href="/custom"
+              href={contactHref}
               className="text-sm px-5 py-2.5 rounded-sm font-medium transition-opacity hover:opacity-85 whitespace-nowrap"
               style={{ background: 'var(--color-accent)', color: '#fff' }}
             >
-              無料で見積り
+              {contactLabel}
             </Link>
           </nav>
 
           {/* Mobile: menu */}
           <div className="lg:hidden flex items-center gap-3">
             <Link
-              href="/custom"
+              href={contactHref}
               className="text-xs px-4 py-2 rounded-sm font-medium transition-opacity hover:opacity-85 whitespace-nowrap"
               style={{ background: 'var(--color-accent)', color: '#fff' }}
             >
-              無料で見積り
+              {contactLabel}
             </Link>
             <button
               className="p-2 text-[var(--foreground)]/50"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="メニュー"
+              aria-label={menuLabel}
             >
               {menuOpen ? (
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -123,13 +143,17 @@ export default function Header() {
             ))}
             <div className="pt-6">
               <Link
-                href="/custom"
+                href={contactHref}
                 className="block text-center text-base px-6 py-3 rounded-sm font-medium"
                 style={{ background: 'var(--color-accent)', color: '#fff' }}
                 onClick={() => setMenuOpen(false)}
               >
-                無料で見積り・ご相談
+                {isEnglish ? 'Contact Us' : '無料で見積り・ご相談'}
               </Link>
+              <LanguageToggle
+                className="mt-6 justify-center"
+                onNavigate={() => setMenuOpen(false)}
+              />
             </div>
           </nav>
         </div>
