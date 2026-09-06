@@ -2,6 +2,7 @@ import { put } from '@vercel/blob'
 import { NextResponse } from 'next/server'
 import siteConfig from '@/lib/site-config'
 import { masuSizes } from '@/lib/masu-data'
+import { quantityBucket, isHighValue } from '@/lib/conversion'
 
 type DeliveryStatus = 'pending' | 'sent' | 'failed' | 'not_configured'
 
@@ -257,6 +258,12 @@ export async function POST(request: Request) {
   const printContent = escapeHtml(order.printContent)
   const desiredDelivery = escapeHtml(order.desiredDelivery)
   const notes = escapeHtml(order.notes)
+  const bucket = quantityBucket(order.quantity)
+  const quantityLabel =
+    bucket === 'unknown' || bucket === 'undecided'
+      ? ''
+      : `・${bucket === '1' ? '1個' : `${bucket}個`}${isHighValue(bucket) ? '・大口' : ''}`
+
   const subjectCompany = contact.company.replace(/[\r\n]+/g, ' ')
   const subjectName = contact.name.replace(/[\r\n]+/g, ' ')
 
@@ -264,7 +271,8 @@ export async function POST(request: Request) {
     await sendEmail(resendApiKey, {
       from: siteConfig.contactEmail,
       to: adminEmail,
-      subject: `【枡のお見積り】${subjectCompany ? subjectCompany + ' ' : ''}${subjectName}様`,
+      // 大口かどうかをメールを開かずに判別できるよう、件名に数量帯を入れる
+      subject: `【枡のお見積り${quantityLabel}】${subjectCompany ? subjectCompany + ' ' : ''}${subjectName}様`,
       html: `<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
 <div style="background:#1A1A1A;padding:24px;text-align:center;"><h1 style="color:#fff;margin:0;font-size:16px;letter-spacing:3px;">MASU-STORE</h1></div>
 <div style="padding:24px;background:#fff;border:1px solid #e5e5e5;">

@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { getAttribution } from '@/lib/attribution'
+import { trackLead } from '@/lib/conversion'
 
 const subjects = [
   'Sake cups for personal use',
@@ -65,9 +67,16 @@ function ContactForm() {
           purpose: form.subject,
           quantity: form.quantity,
           notes: form.message,
+          formType: 'en-contact',
+          ...getAttribution(),
         }),
       })
       if (!res.ok) throw new Error()
+      trackLead({
+        formType: 'en-contact',
+        quantity: form.quantity,
+        purpose: form.subject,
+      })
       setSent(true)
     } catch {
       setError('Something went wrong. Please try again, or email us directly.')

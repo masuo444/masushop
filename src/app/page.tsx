@@ -133,7 +133,7 @@ export default function HomePage() {
                   color: '#C8C1B8',
                 }}
               >
-                名入れ・オリジナル枡・法人注文に対応
+                周年記念品・ノベルティ・OEMの名入れ枡
               </span>
             </h1>
             <p
@@ -145,20 +145,20 @@ export default function HomePage() {
                 marginBottom: '1.75rem',
               }}
             >
-              約1300年の歴史を持つ日本の木の器。
+              企業ロゴ・社名を刻んだ記念品を、10個から10,000個超まで。
               <br />
-              職人の手で、国産ヒノキから一つひとつ仕上げます。
+              約1300年使われてきた日本の木の器に、職人の手で刻みます。
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="max-md:!justify-center">
               <Link href="/custom" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
                 無料で見積り・相談する
               </Link>
               <Link
-                href="/order-made"
+                href="/business"
                 className="btn-outline"
                 style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
               >
-                できることを見る
+                法人向けのご案内
               </Link>
             </div>
 
@@ -178,7 +178,7 @@ export default function HomePage() {
               }}
               className="max-md:!justify-center"
             >
-              {['名入れは1個から', '全7サイズ', '納期2〜3週間', '海外発送可'].map((item) => (
+              {['10個〜10,000個超', '数量割引あり', 'サンプル製作可', '名入れは1個から'].map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -198,6 +198,99 @@ export default function HomePage() {
                 margin: '0 auto',
               }}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 制作事例 ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <h2 className="serif section-title" style={{ marginBottom: '0.75rem', textAlign: 'center' }}>
+            制作事例
+          </h2>
+          <p className="lead text-center" style={{ marginBottom: '2.5rem' }}>
+            石和源泉 足湯ひろば様の枡です（掲載許可をいただいています）。
+            レーザー刻印なら、ロゴの線も木目とともにこの精度で刻めます。
+          </p>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '1rem',
+            }}
+            className="max-sm:!grid-cols-1"
+          >
+            {[
+              { src: '/images/works/ishiwa-ashiyu-front.jpg', alt: 'レーザー刻印を施した一合枡 — 正面', w: 1448, h: 1086 },
+              { src: '/images/works/ishiwa-ashiyu-detail.jpg', alt: 'レーザー刻印の彫りの質感 — 木目とともに再現', w: 1536, h: 1024 },
+              { src: '/images/works/ishiwa-ashiyu-hand.jpg', alt: '手のひらに載る一合枡のサイズ感', w: 1448, h: 1086 },
+            ].map((img) => (
+              <Image
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                width={img.w}
+                height={img.h}
+                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 2 }}
+              />
+            ))}
+          </div>
+          <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Link href="/logo" style={{ textDecoration: 'underline', color: 'var(--color-accent)', fontSize: '0.9375rem' }}>
+              ロゴ入れの詳細を見る →
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ===== 法人のご発注条件 ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem', background: 'var(--color-subtle)' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <h2 className="serif section-title" style={{ marginBottom: '0.75rem', textAlign: 'center' }}>
+            法人のご発注について
+          </h2>
+          <p className="lead text-center" style={{ marginBottom: '2.5rem' }}>
+            周年記念品、展示会ノベルティ、株主優待、式典の振る舞い枡。
+            数量が増えるほど単価は下がります。
+          </p>
+          <div
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}
+            className="max-md:!grid-cols-2"
+          >
+            {[
+              { label: '対応数量', value: '10個〜10,000個超', note: '数量に応じた割引をご案内します' },
+              { label: '納期の目安', value: '約3週間', note: '無地は約2週間、300個以上は約4週間' },
+              { label: 'サンプル', value: '製作できます', note: '量産前に実物で仕上がりを確認できます' },
+              { label: 'お支払い', value: '請求書払い可', note: '月末締め翌月末払いにも対応します' },
+            ].map((item) => (
+              <div
+                key={item.label}
+                style={{
+                  background: 'var(--background)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 2,
+                  padding: '1.5rem 1.25rem',
+                }}
+              >
+                <p className="text-[11px]" style={{ color: 'var(--color-accent)', marginBottom: '0.5rem', letterSpacing: '0.1em' }}>
+                  {item.label}
+                </p>
+                <p className="serif" style={{ fontSize: '1.125rem', marginBottom: '0.625rem' }}>
+                  {item.value}
+                </p>
+                <p className="text-[13px]" style={{ color: 'var(--color-muted)' }}>
+                  {item.note}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2.5rem' }}>
+            <Link href="/custom" className="btn-accent">
+              無料で見積り・相談する
+            </Link>
+            <Link href="/business" className="btn-outline">
+              法人向けの詳細を見る
+            </Link>
           </div>
         </div>
       </section>

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { getAttribution } from '@/lib/attribution'
+import { trackLead } from '@/lib/conversion'
 
 const purposes = [
   '企業ノベルティ・記念品',
@@ -110,6 +111,12 @@ function CustomPageInner() {
         }),
       })
       if (!res.ok) throw new Error('送信に失敗しました')
+      trackLead({
+        formType: 'custom',
+        quantity: formData.quantity,
+        purpose: formData.purpose,
+        masuSize: formData.masuSize,
+      })
       setIsSuccess(true)
     } catch {
       setError('送信に失敗しました。お手数ですがメールでお問い合わせください。')

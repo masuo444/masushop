@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd, HowToJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -59,6 +60,39 @@ const faqData = [
   {
     q: 'Do you handle packaging?',
     a: 'Yes. Individual wrapping, custom boxes, and noshi (Japanese ceremonial wrapping) available.',
+  },
+]
+
+// Questions a procurement team has to answer internally before signing off.
+// Framed as a buyer's checklist rather than self-promotion.
+const preOrderChecks = [
+  {
+    q: 'Is there a plate or setup fee?',
+    a: 'Branding irons require a one-time copper plate for the first order. Laser engraving needs no plate, so there is no setup fee. We recommend whichever suits your artwork and quantity.',
+  },
+  {
+    q: 'Do we need to supply artwork files?',
+    a: 'No. Send a photo of your logo on a business card, envelope or signage and we will rebuild the artwork. We can also start from plain text. Revisions are free, as many rounds as you need.',
+  },
+  {
+    q: 'Can we approve a physical sample first?',
+    a: 'Yes. We produce samples on request so you can check engraving depth and placement on the actual product before we run the full order.',
+  },
+  {
+    q: 'Can each unit carry different text?',
+    a: 'Yes, with laser engraving. Individual names for award recipients or per-department variations require no additional plates.',
+  },
+  {
+    q: 'Where are they made?',
+    a: 'Japan. We use domestic hinoki cypress and produce everything in-house, from raw timber through to engraving and inspection.',
+  },
+  {
+    q: 'What lead time should we plan for?',
+    a: 'Roughly 2 weeks for plain cups, 3 weeks with engraving, and 4 weeks for orders above 300 units. Timelines shift depending on how quickly artwork is approved.',
+  },
+  {
+    q: 'Do you ship internationally?',
+    a: 'Yes. We have shipped to Asia, North America and Europe, and can engrave messages in English and other languages.',
   },
 ]
 
@@ -268,6 +302,59 @@ export default function EnCorporatePage() {
               <p className="font-medium mb-1">Turnaround</p>
               <p className="text-sm" style={{ color: 'var(--color-muted)' }}>2&ndash;4 weeks depending on quantity</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Real work sample */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="section-title mb-4 text-center">Recent Work</h2>
+          <p className="lead text-center mb-10">
+            Laser engraving on a 180ml cup for Ishiwa Onsen Ashiyu Hiroba, published with their permission.
+            Fine logo lines are reproduced together with the wood grain at this level of detail.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { src: '/images/works/ishiwa-ashiyu-front.jpg', alt: 'Laser-engraved hinoki masu cup, front view', w: 1448, h: 1086 },
+              { src: '/images/works/ishiwa-ashiyu-detail.jpg', alt: 'Close-up of laser engraving on hinoki wood grain', w: 1536, h: 1024 },
+              { src: '/images/works/ishiwa-ashiyu-hand.jpg', alt: 'Hinoki masu cup held in hand, showing scale', w: 1448, h: 1086 },
+            ].map((img) => (
+              <Image
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                width={img.w}
+                height={img.h}
+                className="w-full rounded-sm"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pre-order checklist */}
+      <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="section-title mb-4 text-center">Before You Order</h2>
+          <p className="lead text-center mb-10">
+            These are the questions procurement teams have to answer internally.
+            Here are our terms, laid out so you can compare them against other quotes.
+          </p>
+          <div className="space-y-6">
+            {preOrderChecks.map((item) => (
+              <div key={item.q} className="pb-6" style={{ borderBottom: '1px solid var(--color-border)' }}>
+                <h3 className="text-sm font-medium mb-3">{item.q}</h3>
+                <p className="text-sm leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link href="/en/contact" className="btn-accent">
+              Request a Free Quote
+            </Link>
           </div>
         </div>
       </section>

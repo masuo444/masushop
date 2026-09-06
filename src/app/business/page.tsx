@@ -111,6 +111,39 @@ const orderSteps = [
 ]
 
 // ── 選ばれる理由 ──
+// 相見積もりの場面で、購買担当が社内を通すために必要になる確認事項。
+// 自社の宣伝ではなく「発注前に確認すべきこと」として並べ、当店の回答を添える。
+const preOrderChecks = [
+  {
+    q: '版代はかかりますか？',
+    a: '焼印は初回に専用の銅版を製作します。レーザー刻印は版が不要なので、版代はかかりません。同じロゴを大量に入れるか、少量かで適した方をご提案します。',
+  },
+  {
+    q: 'ロゴやデザインのデータが必要ですか？',
+    a: '不要です。ロゴが載っている名刺・封筒・看板の写真をお送りいただければ、こちらでデータを起こします。入れたい文章だけの状態からでもレイアウトを組みます。修正は何度でも無料です。',
+  },
+  {
+    q: '量産前に実物を確認できますか？',
+    a: 'ご希望に応じてサンプルを製作します。刻印の濃さや位置を実物で確認してから量産に入れるので、納品後に想定と違うということが起きません。',
+  },
+  {
+    q: '1個ずつ違う内容を刻めますか？',
+    a: 'レーザー刻印なら可能です。受賞者名を1個ずつ変える社内表彰や、部署ごとに名入れを変える記念品にも、追加の版を作らずに対応できます。',
+  },
+  {
+    q: '産地はどこですか？',
+    a: '国産ヒノキ（檜）を使い、日本国内で製作しています。建築材の端材を活用しており、原材料から加工まで国内で完結します。',
+  },
+  {
+    q: '納期はどのくらい見ておけばいいですか？',
+    a: '無地枡は約2週間、焼印・レーザー刻印を入れる場合は約3週間、300個以上の大口注文は約4週間が目安です。デザイン確認にかかる期間で前後します。',
+  },
+  {
+    q: '海外の拠点へ送れますか？',
+    a: '対応しています。アジア・北米・ヨーロッパへの発送実績があります。英語などのメッセージを刻印しての発送も可能です。',
+  },
+]
+
 const whyFomus = [
   {
     num: '01',
@@ -340,6 +373,39 @@ export default function BusinessPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="divider mx-auto max-w-5xl" />
+
+      {/* ━━━ 発注前チェックリスト ━━━ */}
+      <section className="py-20 md:py-28">
+        <div className="max-w-3xl mx-auto px-6">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
+            BEFORE YOU ORDER
+          </p>
+          <h2 className="section-title text-center mb-4">発注前に確認しておきたい7項目</h2>
+          <p className="lead text-center mb-12">
+            記念品やノベルティは、社内で稟議を通す段階で必ず聞かれる点が決まっています。
+            相見積もりのときにそのまま比較できるよう、当店の条件を並べました。
+          </p>
+
+          <div className="space-y-6">
+            {preOrderChecks.map((item) => (
+              <div key={item.q} className="pb-6" style={{ borderBottom: '1px solid var(--color-border)' }}>
+                <h3 className="text-sm font-medium mb-3">{item.q}</h3>
+                <p className="text-sm leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link href="#form" className="btn-accent">
+              条件を伝えて見積りを依頼する
+            </Link>
           </div>
         </div>
       </section>

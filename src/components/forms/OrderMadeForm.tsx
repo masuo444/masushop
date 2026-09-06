@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { getAttribution } from '@/lib/attribution'
+import { trackLead } from '@/lib/conversion'
 
 const occasions = [
   '贈り物（誕生日・記念日）',
@@ -67,6 +68,12 @@ export default function OrderMadeForm({
         }),
       })
       if (!res.ok) throw new Error('送信に失敗しました')
+      trackLead({
+        formType,
+        quantity: formData.quantity,
+        purpose: formData.purpose,
+        masuSize: formData.masuSize,
+      })
       setIsSuccess(true)
     } catch {
       setError(
