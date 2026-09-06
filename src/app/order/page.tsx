@@ -3,6 +3,7 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import OrderMadeForm from '@/components/forms/OrderMadeForm'
 
 const baseUrl = siteConfig.url
 
@@ -420,21 +421,15 @@ export default function OrderPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="max-w-4xl mx-auto px-6 py-16 text-center">
-          <h2 className="serif text-2xl font-light mb-4">まずはご相談ください</h2>
-          <p className="text-sm leading-[1.9] mb-8" style={{ color: 'var(--color-muted)' }}>
-            決まっていない項目があっても構いません。用途だけお聞かせいただければ、
-            サイズも刻印方法もこちらからご提案します。ご相談・お見積りは無料です。
+        <section id="form" className="max-w-2xl mx-auto px-6 py-16">
+          <h2 className="section-title mb-4 text-center">ご相談・お見積り</h2>
+          <p
+            className="text-[13px] text-center mb-10 leading-[1.9]"
+            style={{ color: 'var(--color-muted)' }}
+          >
+            決まっていない項目は空欄で構いません。用途だけお聞かせいただければ、サイズも刻印方法もこちらからご提案します。ご相談・お見積りは無料です。
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/custom" className="btn-primary">
-              お見積り・ご相談フォームへ
-            </Link>
-            <Link href="/faq" className="btn-outline">
-              よくある質問を見る
-            </Link>
-          </div>
+          <OrderMadeForm formType="order" />
         </section>
       </main>
     </>

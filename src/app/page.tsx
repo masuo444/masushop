@@ -150,15 +150,15 @@ export default function HomePage() {
               職人の手で、国産ヒノキから一つひとつ仕上げます。
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="max-md:!justify-center">
-              <Link href="/original" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
-                オリジナル枡を1個から
+              <Link href="/custom" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
+                無料で見積り・相談する
               </Link>
               <Link
-                href="/business"
+                href="/order-made"
                 className="btn-outline"
                 style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
               >
-                法人・大口のお見積り
+                できることを見る
               </Link>
             </div>
 

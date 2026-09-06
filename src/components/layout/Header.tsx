@@ -4,12 +4,9 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 const navLinks = [
-  { href: '/finder', label: '枡診断' },
-  { href: '/guide', label: '選び方' },
-  { href: '/products', label: '商品一覧' },
-  { href: '/order-made', label: '記念品・名入れ' },
-  { href: '/original', label: 'オリジナル枡' },
+  { href: '/order-made', label: 'オーダーメイド' },
   { href: '/logo', label: 'ロゴ入れ' },
+  { href: '/products', label: '商品一覧' },
   { href: '/business', label: '法人の方' },
   { href: '/blog', label: '読みもの' },
 ]
@@ -66,14 +63,22 @@ export default function Header() {
             ))}
             <Link
               href="/custom"
-              className="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent)]/70 transition-colors"
+              className="text-sm px-5 py-2.5 rounded-sm font-medium transition-opacity hover:opacity-85 whitespace-nowrap"
+              style={{ background: 'var(--color-accent)', color: '#fff' }}
             >
-              お見積り
+              無料で見積り
             </Link>
           </nav>
 
           {/* Mobile: menu */}
           <div className="lg:hidden flex items-center gap-3">
+            <Link
+              href="/custom"
+              className="text-xs px-4 py-2 rounded-sm font-medium transition-opacity hover:opacity-85 whitespace-nowrap"
+              style={{ background: 'var(--color-accent)', color: '#fff' }}
+            >
+              無料で見積り
+            </Link>
             <button
               className="p-2 text-[var(--foreground)]/50"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -119,10 +124,11 @@ export default function Header() {
             <div className="pt-6">
               <Link
                 href="/custom"
-                className="text-base text-[var(--color-accent)]"
+                className="block text-center text-base px-6 py-3 rounded-sm font-medium"
+                style={{ background: 'var(--color-accent)', color: '#fff' }}
                 onClick={() => setMenuOpen(false)}
               >
-                お見積り・ご相談
+                無料で見積り・ご相談
               </Link>
             </div>
           </nav>

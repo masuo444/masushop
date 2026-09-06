@@ -4,6 +4,7 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import OrderMadeForm from '@/components/forms/OrderMadeForm'
 
 const baseUrl = siteConfig.url
 
@@ -835,39 +836,18 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* ━━━ CTA ━━━ */}
-      <section
-        className="py-24 md:py-32 text-center"
-        style={{ background: 'var(--color-accent)', color: '#fff' }}
-      >
+      {/* ━━━ お見積りフォーム ━━━ */}
+      <section id="form" className="py-20 md:py-24">
         <div className="max-w-2xl mx-auto px-6">
-          <h2
-            className="text-2xl md:text-3xl font-light mb-4"
-            style={{ lineHeight: 1.5 }}
+          <h2 className="section-title mb-4 text-center">無料お見積り・ご相談</h2>
+          <p
+            className="text-[13px] text-center mb-10 leading-[1.9]"
+            style={{ color: 'var(--color-muted)' }}
           >
-            まずはお気軽にご相談ください
-          </h2>
-          <p className="text-sm mb-10 leading-[2]" style={{ opacity: 0.85 }}>
-            枡のサイズ・数量・デザインなど、どんなことでもお問い合わせいただけます。
-            <br className="hidden md:block" />
-            専門スタッフが最適なプランをご提案いたします。お見積りは無料です。
+            サイズ・数量・デザインなど、決まっていない項目は空欄で構いません。
+            サンプルのご依頼も、その他ご要望欄にご記入ください。お見積りは無料です。
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/custom"
-              className="inline-block px-10 py-4 text-xs tracking-[0.15em] uppercase font-medium rounded-sm transition-opacity hover:opacity-85"
-              style={{ background: '#fff', color: 'var(--color-accent)' }}
-            >
-              無料お見積り・ご相談
-            </Link>
-            <a
-              href="#sample"
-              className="inline-block px-10 py-4 text-xs tracking-[0.15em] uppercase font-medium rounded-sm transition-opacity hover:opacity-85"
-              style={{ border: '1px solid rgba(255,255,255,0.4)', color: '#fff' }}
-            >
-              サンプルを依頼
-            </a>
-          </div>
+          <OrderMadeForm formType="business" />
         </div>
       </section>
     </>

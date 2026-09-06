@@ -12,8 +12,6 @@ const footerLinks = {
   ],
   '商品・ご注文': [
     { href: '/products', label: '商品一覧' },
-    { href: '/products#standard', label: '無垢の枡（10個〜）' },
-    { href: '/products#original', label: 'オリジナル枡' },
     { href: '/original', label: 'オリジナル枡（1個〜）' },
     { href: '/order-made', label: 'オーダーメイド記念品' },
     { href: '/logo', label: 'ロゴ入れ' },

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import OrderMadeForm from '@/components/forms/OrderMadeForm'
 import Differentiators from '@/components/ui/Differentiators'
 
 const baseUrl = siteConfig.url
@@ -416,22 +417,15 @@ export default function LogoPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="max-w-4xl mx-auto px-6 py-16 text-center">
-          <h2 className="serif text-2xl font-light mb-4">ロゴをお送りください</h2>
-          <p className="text-sm leading-[1.9] mb-8" style={{ color: 'var(--color-muted)' }}>
-            ロゴと、サイズ・数量・ご希望の納期をお知らせいただければ、
-            刻印方法のご提案とお見積りをお送りします。
-            ロゴデータが無い場合は、ロゴが載っているものの写真で構いません。
+        <section id="form" className="max-w-2xl mx-auto px-6 py-16">
+          <h2 className="section-title mb-4 text-center">ロゴ入れのご相談</h2>
+          <p
+            className="text-[13px] text-center mb-10 leading-[1.9]"
+            style={{ color: 'var(--color-muted)' }}
+          >
+            ロゴと、サイズ・数量・ご希望の納期をお知らせください。ロゴデータが無い場合は、ロゴが載っているものの写真で構いません。決まっていない項目は空欄のままで大丈夫です。
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/custom" className="btn-primary">
-              ロゴ入れを相談する
-            </Link>
-            <Link href="/business" className="btn-outline">
-              法人向けのご案内
-            </Link>
-          </div>
+          <OrderMadeForm formType="logo" />
         </section>
       </main>
     </>

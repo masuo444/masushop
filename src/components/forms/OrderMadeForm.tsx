@@ -31,7 +31,12 @@ const initialFormData = {
   notes: '',
 }
 
-export default function OrderMadeForm() {
+export default function OrderMadeForm({
+  formType = 'original',
+}: {
+  /** 送信元のページを通知メールで識別するための値 */
+  formType?: string
+} = {}) {
   const [formData, setFormData] = useState(initialFormData)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -57,7 +62,7 @@ export default function OrderMadeForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          formType: 'original',
+          formType,
           ...getAttribution(),
         }),
       })
