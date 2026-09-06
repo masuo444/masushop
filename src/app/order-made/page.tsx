@@ -167,8 +167,7 @@ export default function OrderMadePage() {
           </h1>
           <p
             data-speakable
-            className="text-sm md:text-[15px] leading-[2] max-w-2xl mx-auto mb-8"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-8"
           >
             退職祝い、還暦祝い、周年記念、開店祝い、結婚祝い。
             名前・日付・メッセージを刻んだオーダーメイドの記念品を
@@ -199,8 +198,7 @@ export default function OrderMadePage() {
         <section className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="section-title mb-4 text-center">こんな場面で選ばれています</h2>
           <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             贈る相手とシーンが決まっていれば、あとはこちらでご提案できます。
           </p>
@@ -229,8 +227,7 @@ export default function OrderMadePage() {
           </h2>
           <p
             data-speakable
-            className="text-[13px] text-center mb-10 leading-[1.9] max-w-2xl mx-auto"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             名入れの依頼で一番の壁になるのが「デザインデータの用意」です。
             当店はそこを引き受けます。入れたい言葉を送るだけで、あとは仕上がりを確認するだけです。
@@ -363,7 +360,7 @@ export default function OrderMadePage() {
         <div className="divider max-w-4xl mx-auto" />
 
         {/* FAQ */}
-        <section className="max-w-4xl mx-auto px-6 py-16">
+        <section className="max-w-3xl mx-auto px-6 py-16">
           <h2 className="section-title mb-10 text-center">よくある質問</h2>
           <div className="space-y-6">
             {faqItems.map((item) => (
@@ -388,8 +385,7 @@ export default function OrderMadePage() {
         <section id="form" className="max-w-2xl mx-auto px-6 py-16">
           <h2 className="section-title mb-4 text-center">ご相談・お見積り</h2>
           <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             贈る相手とシーン、ご予算だけで構いません。何を贈るか、何を刻むかが決まっていなくても、こちらからご提案します。ご相談・お見積りは無料です。
           </p>

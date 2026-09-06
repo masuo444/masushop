@@ -91,7 +91,7 @@ export default function HomePage() {
           style={{
             maxWidth: 1100,
             margin: '0 auto',
-            padding: 'clamp(4rem, 10vw, 8rem) 1.5rem',
+            padding: 'clamp(2.5rem, 10vw, 8rem) 1.5rem',
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: 'clamp(2rem, 5vw, 5rem)',
@@ -103,9 +103,9 @@ export default function HomePage() {
             <p
               className="serif"
               style={{
-                fontSize: 'clamp(4rem, 10vw, 6rem)',
+                fontSize: 'clamp(2.75rem, 9vw, 6rem)',
                 lineHeight: 1,
-                marginBottom: '1.25rem',
+                marginBottom: '0.75rem',
                 letterSpacing: '0.08em',
                 color: '#FAFAF7',
               }}
@@ -142,7 +142,7 @@ export default function HomePage() {
                 lineHeight: 2,
                 color: '#C8C1B8',
                 maxWidth: 440,
-                marginBottom: '2.5rem',
+                marginBottom: '1.75rem',
               }}
             >
               約1300年の歴史を持つ日本の木の器。
@@ -190,6 +190,7 @@ export default function HomePage() {
               width={600}
               height={600}
               priority
+              className="max-md:!max-w-[190px]"
               style={{
                 width: '100%',
                 height: 'auto',

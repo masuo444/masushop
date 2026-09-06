@@ -359,8 +359,8 @@ export default function BusinessPage() {
             表示価格は枡本体の税別単価です。名入れ・コーティング等のオプションは別途。
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm" style={{ borderCollapse: 'collapse' }}>
+          <div className="overflow-x-auto table-cards-wrap">
+            <table className="w-full text-sm table-cards" style={{ borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
                   <th className="text-left py-3 pr-3 text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
@@ -395,16 +395,23 @@ export default function BusinessPage() {
                         {row.capacity}
                       </span>
                     </td>
-                    <td className="text-center py-3 px-3 text-xs">&yen;{row.p10.toLocaleString()}</td>
-                    <td className="text-center py-3 px-3 text-xs">&yen;{row.p50.toLocaleString()}</td>
+                    <td className="text-center py-3 px-3 text-xs" data-label="10〜49個">&yen;{row.p10.toLocaleString()}</td>
+                    <td className="text-center py-3 px-3 text-xs" data-label="50〜99個">&yen;{row.p50.toLocaleString()}</td>
                     <td
                       className="text-center py-3 px-3 text-xs font-medium"
                       style={{ color: 'var(--color-accent)', background: 'var(--color-accent-light)' }}
+                      data-label="100〜299個"
                     >
                       &yen;{row.p100.toLocaleString()}
                     </td>
-                    <td className="text-center py-3 px-3 text-xs">&yen;{row.p300.toLocaleString()}</td>
-                    <td className="text-center py-3 px-3 text-xs" style={{ color: 'var(--color-muted)' }}>
+                    <td className="text-center py-3 px-3 text-xs" data-label="300〜499個">
+                      &yen;{row.p300.toLocaleString()}
+                    </td>
+                    <td
+                      className="text-center py-3 px-3 text-xs"
+                      style={{ color: 'var(--color-muted)' }}
+                      data-label="500個以上"
+                    >
                       別途見積
                     </td>
                   </tr>

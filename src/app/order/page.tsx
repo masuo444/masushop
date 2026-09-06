@@ -209,8 +209,7 @@ export default function OrderPage() {
           </h1>
           <p
             data-speakable
-            className="text-sm md:text-[15px] leading-[2] max-w-2xl mx-auto mb-8"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-8"
           >
             枡はすべてお見積り制です。サイズ・数量・刻む内容・用途・ご希望の納期をフォームからお送りいただき、
             ご提案とお見積りをご返信するところから始まります。
@@ -231,8 +230,7 @@ export default function OrderPage() {
         <section className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="section-title mb-4 text-center">ご依頼のケース別に</h2>
           <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             どのケースでもお見積りフォームが窓口です。ケースごとの詳しい説明は各ページにまとめています。
           </p>
@@ -281,8 +279,7 @@ export default function OrderPage() {
           <h2 className="section-title mb-4 text-center">ご依頼時にお伝えいただく情報</h2>
           <p
             data-speakable
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             この6つが揃うとそのままお見積りをお出しできます。決まっていない項目は空欄で構いません。
           </p>
@@ -317,7 +314,7 @@ export default function OrderPage() {
         <div className="divider max-w-4xl mx-auto" />
 
         {/* 流れ */}
-        <section className="max-w-4xl mx-auto px-6 py-16">
+        <section className="max-w-3xl mx-auto px-6 py-16">
           <h2 className="section-title mb-10 text-center">ご依頼から到着までの流れ</h2>
           <ol className="space-y-6">
             {flow.map((item) => (
@@ -399,7 +396,7 @@ export default function OrderPage() {
         <div className="divider max-w-4xl mx-auto" />
 
         {/* FAQ */}
-        <section className="max-w-4xl mx-auto px-6 py-16">
+        <section className="max-w-3xl mx-auto px-6 py-16">
           <h2 className="section-title mb-10 text-center">依頼についてのよくある質問</h2>
           <div className="space-y-6">
             {faqItems.map((item) => (
@@ -424,8 +421,7 @@ export default function OrderPage() {
         <section id="form" className="max-w-2xl mx-auto px-6 py-16">
           <h2 className="section-title mb-4 text-center">ご相談・お見積り</h2>
           <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             決まっていない項目は空欄で構いません。用途だけお聞かせいただければ、サイズも刻印方法もこちらからご提案します。ご相談・お見積りは無料です。
           </p>

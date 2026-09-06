@@ -59,9 +59,9 @@ export default function SizesPage() {
       {/* 比較表 */}
       <section className="max-w-5xl mx-auto px-6 py-16">
         <h2 className="section-title mb-8 text-center">全7サイズ 比較表</h2>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto table-cards-wrap">
           <table
-            className="w-full text-sm"
+            className="w-full text-sm table-cards"
             style={{ borderCollapse: 'collapse' }}
           >
             <thead>
@@ -88,10 +88,10 @@ export default function SizesPage() {
                       {masu.name}
                     </Link>
                   </td>
-                  <td className="px-4 py-4 whitespace-nowrap">{masu.size}</td>
-                  <td className="px-4 py-4 whitespace-nowrap">{masu.capacity}</td>
-                  <td className="px-4 py-4" style={{ color: 'var(--color-muted)' }}>{masu.capacityNote}</td>
-                  <td className="px-4 py-4 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>{masu.use}</td>
+                  <td className="px-4 py-4 whitespace-nowrap" data-label="外寸">{masu.size}</td>
+                  <td className="px-4 py-4 whitespace-nowrap" data-label="容量">{masu.capacity}</td>
+                  <td className="px-4 py-4" style={{ color: 'var(--color-muted)' }} data-label="容量目安">{masu.capacityNote}</td>
+                  <td className="px-4 py-4 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }} data-label="おすすめ用途">{masu.use}</td>
                 </tr>
               ))}
             </tbody>

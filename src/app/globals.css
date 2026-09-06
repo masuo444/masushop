@@ -111,30 +111,89 @@ a { color: inherit; }
   letter-spacing: 0.04em;
 }
 
-/* Readability floor for legacy inline type scales. */
+/* ===== タイポグラフィの下限 =====
+   本文15px / 補足13px を全ページ共通の下限とする。
+   個別ページに散らばった任意サイズ（text-[10px] 等）をここで吸収するので、
+   新しくページを作るときも text-sm / text-xs を使えばこの基準に乗る。 */
+
+/* 補足・注釈：13px */
+.text-\[9px\],
+.text-\[10px\],
+.text-\[11px\],
+.text-\[12px\] {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+}
+
+/* 本文：15px */
+.text-\[13px\],
+.text-\[14px\] {
+  font-size: 0.9375rem;
+  line-height: 1.9;
+}
+
+/* インラインstyleで指定された古い型スケールも同じ基準に寄せる */
 .site-main [style*="font-size:0.7rem"],
 .site-main [style*="font-size:0.75rem"],
 .site-main [style*="font-size:0.8rem"] {
-  font-size: 0.875rem !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.7;
 }
 
 .site-main [style*="font-size:0.85rem"],
 .site-main [style*="font-size:0.875rem"],
 .site-main [style*="font-size:0.9rem"],
 .site-main [style*="font-size:0.95rem"] {
-  font-size: 1rem !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.9;
 }
 
-/* Keep utility-sized captions legible across product and order screens. */
-.text-\[9px\],
-.text-\[10px\] {
-  font-size: 0.75rem;
-  line-height: 1.5;
+/* ===== 本文の行長 =====
+   日本語は1行48文字前後が読みやすい。リード文・FAQ本文など
+   読ませる段落は幅を絞る。 */
+.prose-measure {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.text-\[11px\] {
-  font-size: 0.8125rem;
-  line-height: 1.5;
+/* ===== リード文 =====
+   セクション冒頭の導入文。本文より一段大きく、見出しとの段差をつくる。 */
+.lead {
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--color-muted);
+  max-width: 44rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* スマホでは中央揃えの長文が読みにくいので左揃えにする */
+@media (max-width: 640px) {
+  .lead {
+    text-align: left;
+  }
+}
+
+/* ===== スマホの余白 =====
+   PC向けに取った大きめのセクション余白だけを詰める。
+   意図的に余白を持たないセクションには触れないよう、
+   実際に使っているクラスだけを対象にする。 */
+@media (max-width: 640px) {
+  .site-main .py-16 { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+  .site-main .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+  .site-main .py-24 { padding-top: 3.25rem; padding-bottom: 3.25rem; }
+  .site-main .pt-12 { padding-top: 2rem; }
+  .site-main .pb-16 { padding-bottom: 2.75rem; }
+  .site-main .pb-20 { padding-bottom: 3rem; }
+  .site-main .mt-16 { margin-top: 2.75rem; }
+
+  /* インラインの clamp 指定（トップページなど）も同様に詰める */
+  .site-main [style*="clamp(4rem, 8vw, 7rem)"],
+  .site-main [style*="clamp(4rem, 8vw, 6rem)"] {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
 }
 
 /* Selection marker for lists */
@@ -144,4 +203,55 @@ details summary::-webkit-details-marker {
 details summary::marker {
   display: none;
   content: '';
+}
+
+
+/* ===== スマホでの表 → カード表示 =====
+   横スクロールしないと読めない比較表を、スマホでは縦積みのカードにする。
+   使い方: <table className="table-cards"> とし、各 <td> に data-label を付ける。
+   1列目はカードの見出しとして扱うので data-label は不要。 */
+@media (max-width: 640px) {
+  .site-main .table-cards,
+  .site-main .table-cards tbody {
+    display: block;
+  }
+  .site-main .table-cards thead {
+    display: none;
+  }
+  .site-main .table-cards tr {
+    display: block;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 2px;
+    padding: 1rem 1.125rem;
+    margin-bottom: 0.75rem;
+    background: var(--background);
+  }
+  .site-main .table-cards td {
+    display: block;
+    border: none !important;
+    padding: 0.5rem 0 !important;
+    text-align: left !important;
+    white-space: normal !important;
+  }
+  .site-main .table-cards td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    margin-bottom: 0.125rem;
+  }
+  .site-main .table-cards td:first-child {
+    font-weight: 500;
+    padding-top: 0 !important;
+    padding-bottom: 0.625rem !important;
+    margin-bottom: 0.375rem;
+    border-bottom: 1px solid var(--color-border) !important;
+  }
+  .site-main .table-cards td:first-child::before {
+    content: none;
+  }
+  /* カード化した表は横スクロール不要 */
+  .site-main .table-cards-wrap {
+    overflow-x: visible;
+  }
 }

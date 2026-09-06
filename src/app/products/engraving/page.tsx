@@ -122,9 +122,9 @@ export default function EngravingPage() {
       {/* 比較表 */}
       <section className="max-w-5xl mx-auto px-6 py-16">
         <h2 className="section-title mb-8 text-center">焼印 vs レーザー刻印 比較表</h2>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto table-cards-wrap">
           <table
-            className="w-full text-sm"
+            className="w-full text-sm table-cards"
             style={{ borderCollapse: 'collapse' }}
           >
             <thead>
@@ -141,8 +141,8 @@ export default function EngravingPage() {
                   style={{ borderBottom: '1px solid var(--color-border)' }}
                 >
                   <td className="px-4 py-4 font-medium whitespace-nowrap">{row.label}</td>
-                  <td className="px-4 py-4 leading-relaxed">{row.yakiin}</td>
-                  <td className="px-4 py-4 leading-relaxed">{row.laser}</td>
+                  <td className="px-4 py-4 leading-relaxed" data-label="焼印">{row.yakiin}</td>
+                  <td className="px-4 py-4 leading-relaxed" data-label="レーザー刻印">{row.laser}</td>
                 </tr>
               ))}
             </tbody>

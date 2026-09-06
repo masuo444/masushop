@@ -88,9 +88,9 @@ function SectionList({ section }: { section: ArticleSection }) {
 
 function SectionTable({ section }: { section: ArticleSection }) {
   return (
-    <div className="mb-6 overflow-x-auto">
+    <div className="mb-6 overflow-x-auto table-cards-wrap">
       <table
-        className="w-full text-[13px]"
+        className="w-full text-[13px] table-cards"
         style={{ borderCollapse: 'collapse' }}
       >
         {section.headers && (
@@ -118,6 +118,7 @@ function SectionTable({ section }: { section: ArticleSection }) {
               {row.map((cell, j) => (
                 <td
                   key={j}
+                  data-label={section.headers?.[j]}
                   className="px-4 py-3"
                   style={{
                     borderBottom: '1px solid var(--color-border)',

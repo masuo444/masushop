@@ -198,8 +198,7 @@ export default function LogoPage() {
           </h1>
           <p
             data-speakable
-            className="text-sm md:text-[15px] leading-[2] max-w-2xl mx-auto mb-8"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-8"
           >
             国産ヒノキの枡に、企業ロゴ・社名・屋号を刻印します。刻み方は、約400度の銅版を押す
             <strong style={{ color: 'var(--foreground)', fontWeight: 500 }}>焼印</strong>
@@ -227,14 +226,13 @@ export default function LogoPage() {
         <section className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="section-title mb-4 text-center">ロゴの入れ方は2通り</h2>
           <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             どちらが良いかは、ロゴの線の細さと数量で決まります。迷う場合はロゴをお送りいただければご提案します。
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm" style={{ borderCollapse: 'collapse' }}>
+          <div className="overflow-x-auto table-cards-wrap">
+            <table className="w-full text-sm table-cards" style={{ borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
                   <th
@@ -256,8 +254,8 @@ export default function LogoPage() {
                     >
                       {row.label}
                     </td>
-                    <td className="py-4 px-3 leading-[1.8]">{row.yakiin}</td>
-                    <td className="py-4 px-3 leading-[1.8]">{row.laser}</td>
+                    <td className="py-4 px-3 leading-[1.8]" data-label="焼印">{row.yakiin}</td>
+                    <td className="py-4 px-3 leading-[1.8]" data-label="レーザー刻印">{row.laser}</td>
                   </tr>
                 ))}
               </tbody>
@@ -271,8 +269,7 @@ export default function LogoPage() {
         <section className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="section-title mb-4 text-center">刻印の仕上がりサンプル</h2>
           <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             レーザー刻印の仕上がり例です。ロゴの線も、この精度で木目とともに刻めます。
           </p>
@@ -308,8 +305,7 @@ export default function LogoPage() {
           <h2 className="section-title mb-4 text-center">ロゴデータについて</h2>
           <p
             data-speakable
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             ロゴデータが手元に無くてもご依頼いただけます。ロゴが載っているものを撮影して送るだけで、こちらでデータを起こします。
           </p>
@@ -370,7 +366,7 @@ export default function LogoPage() {
         <div className="divider max-w-4xl mx-auto" />
 
         {/* 流れ */}
-        <section className="max-w-4xl mx-auto px-6 py-16">
+        <section className="max-w-3xl mx-auto px-6 py-16">
           <h2 className="section-title mb-10 text-center">ご依頼の流れ</h2>
           <ol className="space-y-6">
             {flow.map((item) => (
@@ -395,7 +391,7 @@ export default function LogoPage() {
         <div className="divider max-w-4xl mx-auto" />
 
         {/* FAQ */}
-        <section className="max-w-4xl mx-auto px-6 py-16">
+        <section className="max-w-3xl mx-auto px-6 py-16">
           <h2 className="section-title mb-10 text-center">ロゴ入れのよくある質問</h2>
           <div className="space-y-6">
             {faqItems.map((item) => (
@@ -420,8 +416,7 @@ export default function LogoPage() {
         <section id="form" className="max-w-2xl mx-auto px-6 py-16">
           <h2 className="section-title mb-4 text-center">ロゴ入れのご相談</h2>
           <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
+            className="lead text-center mb-10"
           >
             ロゴと、サイズ・数量・ご希望の納期をお知らせください。ロゴデータが無い場合は、ロゴが載っているものの写真で構いません。決まっていない項目は空欄のままで大丈夫です。
           </p>
