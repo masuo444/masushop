@@ -30,7 +30,7 @@ const footerLinks = {
     { href: '/business/anniversary', label: '周年記念品' },
     { href: '/business/novelty', label: '展示会ノベルティ' },
     { href: '/business/ceremony', label: '式典・鏡開き' },
-    { href: '/business/oem', label: 'OEM・オリジナル枡' },
+    { href: '/business/oem', label: '自社ブランドの枡' },
     { href: '/business/catalog', label: 'PDFカタログ' },
     { href: '/custom', label: 'お見積り相談' },
   ],

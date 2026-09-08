@@ -335,7 +335,7 @@ export default function GiftsPage() {
               Corporate Gifts
             </span>
             <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
-              100 &ndash; 10,000+ cups
+              100 cups and up
             </p>
           </div>
         </div>

@@ -90,7 +90,7 @@ const useCases = [
     title: '飲食店・酒蔵の店舗枡',
     desc: '屋号を刻んだ枡を、もっきりの提供や店頭のディスプレイに。同じロゴで揃えると、店の設えとして統一感が出ます。',
     href: '/business/oem',
-    linkLabel: 'OEM・自社ブランドの詳細',
+    linkLabel: '自社ブランドの枡の詳細',
   },
   {
     title: '式典・鏡開きの振る舞い枡',

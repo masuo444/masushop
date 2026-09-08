@@ -133,7 +133,7 @@ export default function HomePage() {
                   color: '#C8C1B8',
                 }}
               >
-                周年記念品・ノベルティ・OEMの名入れ枡
+                周年記念品・ノベルティの名入れ枡
               </span>
             </h1>
             <p
@@ -145,7 +145,7 @@ export default function HomePage() {
                 marginBottom: '1.75rem',
               }}
             >
-              企業ロゴ・社名を刻んだ記念品を、10個から10,000個超まで。
+              企業ロゴ・社名を刻んだ記念品を、10個から。
               <br />
               約1300年使われてきた日本の木の器に、職人の手で刻みます。
             </p>
@@ -178,7 +178,7 @@ export default function HomePage() {
               }}
               className="max-md:!justify-center"
             >
-              {['10個〜10,000個超', '数量割引あり', 'サンプル製作可', '名入れは1個から'].map((item) => (
+              {['10個から対応', '数量割引あり', 'サンプル製作可', '名入れは1個から'].map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -258,7 +258,7 @@ export default function HomePage() {
             className="max-md:!grid-cols-2"
           >
             {[
-              { label: '対応数量', value: '10個〜10,000個超', note: '数量に応じた割引をご案内します' },
+              { label: '対応数量', value: '10個から', note: '大口は数量に応じて割引をご案内します' },
               { label: '納期の目安', value: '約3週間', note: '無地は約2週間、300個以上は約4週間' },
               { label: 'サンプル', value: '製作できます', note: '量産前に実物で仕上がりを確認できます' },
               { label: 'お支払い', value: '請求書払い可', note: '月末締め翌月末払いにも対応します' },

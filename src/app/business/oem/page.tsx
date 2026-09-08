@@ -7,15 +7,15 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: 'OEM・自社ブランド枡の製作 — 飲食店・酒蔵・ホテル向け',
+  title: '自社ブランドのオリジナル枡 — 飲食店・酒蔵・ホテル向け',
   description:
-    'OEM・オリジナル枡の製作ならMASU-STORE。自社ブランドの枡を企画から製造・納品までワンストップで対応。飲食店のオリジナル酒器、酒蔵のオリジナル枡、ホテルのアメニティなど。小ロット10個〜対応。',
+    '自社ブランドのオリジナル枡ならMASU-STORE。企画から製造・納品までワンストップで対応。飲食店のオリジナル酒器、酒蔵のオリジナル枡、ホテルのアメニティなど。小ロット10個〜対応。',
   keywords:
-    '枡 OEM,オリジナル枡 製作,枡 オーダーメイド,枡 自社ブランド,枡 OEM 小ロット,飲食店 オリジナル枡,酒蔵 枡,ホテル アメニティ 枡,枡 特注,枡 オリジナル商品',
+    'オリジナル枡 製作,枡 オーダーメイド,枡 自社ブランド,自社ブランド 枡 小ロット,飲食店 オリジナル枡,酒蔵 枡,ホテル アメニティ 枡,枡 特注,枡 オリジナル商品,屋号入り 枡',
   alternates: { canonical: `${baseUrl}/business/oem` },
   openGraph: {
-    title: 'OEM・自社ブランド枡の製作 — 飲食店・酒蔵・ホテル向け',
-    description: 'OEM・オリジナル枡の製作。企画から製造・納品までワンストップ。小ロット10個〜対応。',
+    title: '自社ブランドのオリジナル枡 — 飲食店・酒蔵・ホテル向け',
+    description: '自社ブランドのオリジナル枡。企画から製造・納品までワンストップ。小ロット10個〜対応。',
     type: 'website',
     url: `${baseUrl}/business/oem`,
     images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 
 const faqItems = [
   {
-    q: 'OEMの最小ロット数はいくつですか？',
-    a: '名入れ・刻印のみのOEMは10個から、形状やサイズの特注は50個からご相談を承ります。',
+    q: '最小ロット数はいくつですか？',
+    a: '名入れ・刻印のみであれば10個から、形状やサイズの特注は50個からご相談を承ります。',
   },
   {
     q: '完全オリジナルの形状（サイズ変更・特殊形状）は可能ですか？',
@@ -41,7 +41,7 @@ const faqItems = [
   },
   {
     q: '自社ECサイトで販売したいのですが、商品写真の提供はありますか？',
-    a: 'OEMの場合は商品撮影のご支援も可能です。商品画像データの提供についてはご相談ください。',
+    a: '商品撮影のご支援も可能です。商品画像データの提供についてはご相談ください。',
   },
 ]
 
@@ -52,7 +52,7 @@ export default function OemPage() {
         items={[
           { name: 'ホーム', href: baseUrl },
           { name: '法人のお客様', href: `${baseUrl}/business` },
-          { name: 'OEM・オリジナル枡', href: `${baseUrl}/business/oem` },
+          { name: '自社ブランドの枡', href: `${baseUrl}/business/oem` },
         ]}
       />
       <FAQJsonLd items={faqItems} />
@@ -63,7 +63,7 @@ export default function OemPage() {
             items={[
               { label: 'ホーム', href: '/' },
               { label: '法人のお客様', href: '/business' },
-              { label: 'OEM・オリジナル枡' },
+              { label: '自社ブランドの枡' },
             ]}
           />
         </div>
@@ -71,7 +71,7 @@ export default function OemPage() {
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-6 pt-12 pb-16 text-center">
           <p className="text-[11px] tracking-[0.2em] text-[var(--color-accent)] mb-4">
-            OEM &amp; ORIGINAL
+            ORIGINAL BRAND
           </p>
           <h1
             className="serif text-3xl md:text-4xl font-light leading-relaxed mb-6"
@@ -89,11 +89,11 @@ export default function OemPage() {
           </p>
         </section>
 
-        {/* OEM examples */}
+        {/* 活用シーン */}
         <section className="bg-[var(--color-subtle)] py-20">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="serif text-xl font-medium text-center mb-12" style={{ color: 'var(--foreground)' }}>
-              OEM・オリジナル枡の活用シーン
+              自社ブランドの枡の活用シーン
             </h2>
             <div className="grid sm:grid-cols-2 gap-8">
               {[
@@ -175,7 +175,7 @@ export default function OemPage() {
         <section className="bg-[var(--color-subtle)] py-20">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="serif text-xl font-medium text-center mb-12" style={{ color: 'var(--foreground)' }}>
-              OEM製作の流れ
+              製作の流れ
             </h2>
             <div className="space-y-6">
               {[

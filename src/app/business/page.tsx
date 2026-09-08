@@ -9,15 +9,15 @@ import OrderMadeForm from '@/components/forms/OrderMadeForm'
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: '法人のお客様 — 枡のノベルティ・記念品・OEM | 大口注文・数量割引対応',
+  title: '法人のお客様 — 枡のノベルティ・記念品 | 大口注文・数量割引対応',
   description:
-    '法人向け枡のノベルティ・記念品・OEM製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー刻印加工。1個からのサンプル、10個〜10,000個以上の大口注文に数量割引で対応。納期2〜4週間。',
+    '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー刻印加工。1個からのサンプル、10個からの大口注文に数量割引で対応。納期2〜4週間。',
   keywords:
-    '枡 ノベルティ,枡 OEM,枡 企業ギフト,枡 記念品 法人,枡 卸,枡 名入れ 法人,枡 周年記念,枡 株主優待,枡 大口注文,枡 数量割引,枡 サンプル',
+    '枡 ノベルティ,枡 自社ブランド,枡 企業ギフト,枡 記念品 法人,枡 卸,枡 名入れ 法人,枡 周年記念,枡 株主優待,枡 大口注文,枡 数量割引,枡 サンプル',
   alternates: { canonical: `${baseUrl}/business`, languages: { ja: `${baseUrl}/business`, en: `${baseUrl}/en/corporate` } },
   openGraph: {
-    title: '法人のお客様 — 枡のノベルティ・記念品・OEM',
-    description: '法人向け枡のノベルティ・記念品・OEM製作。企業ロゴ・社名の名入れ対応。10個〜10,000個以上の大口注文に数量割引で対応。',
+    title: '法人のお客様 — 枡のノベルティ・記念品',
+    description: '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。10個からの大口注文に数量割引で対応。',
     type: 'website',
     images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
@@ -152,7 +152,7 @@ const whyFomus = [
   },
   {
     num: '02',
-    title: '10個から10,000個超まで柔軟に対応',
+    title: '10個から大口まで柔軟に対応',
     desc: '小ロットの試作から大規模イベント用の大量注文まで対応します。数量に応じた割引でまとめ買いほどお得になります。',
   },
   {
@@ -295,7 +295,7 @@ export default function BusinessPage() {
           <p className="text-sm leading-[2] mb-10" style={{ opacity: 0.85 }}>
             国産ヒノキの枡に、企業ロゴや社名を刻印。
             <br className="hidden md:block" />
-            ノベルティ・記念品・OEMとして、10個から10,000個超まで対応します。
+            ノベルティ・記念品として、10個から承ります。
           </p>
           <p className="text-[13px] mb-8" style={{ opacity: 0.75 }}>
             <Link href="/logo" className="underline underline-offset-4">

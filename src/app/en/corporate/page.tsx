@@ -9,7 +9,7 @@ const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
   title: 'Japanese Corporate Gifts — Custom-Engraved Wooden Cups for Business',
-  description: 'Stand out with branded hinoki cypress cups from Japan. Custom logo engraving, bulk orders from 10 to 10,000+ units. Perfect for conferences, anniversaries, client gifts, and employee recognition.',
+  description: 'Stand out with branded hinoki cypress cups from Japan. Custom logo engraving, bulk orders from 10 units. Perfect for conferences, anniversaries, client gifts, and employee recognition.',
   keywords: 'Japanese corporate gift, branded wooden cup, corporate gift ideas, conference giveaway, Japanese business gift, custom logo gift, bulk corporate gifts, employee recognition gift, client appreciation gift, trade show giveaway',
   alternates: {
     canonical: `${baseUrl}/en/corporate`,
@@ -277,7 +277,7 @@ export default function EnCorporatePage() {
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="section-title mb-6">Scale</h2>
           <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--color-muted)' }}>
-            From 10 cups to 10,000+. Whether you&apos;re gifting your team or your entire conference, we&apos;ve got you covered.
+            From 10 cups upward. Whether you&apos;re gifting your team or your entire conference, we&apos;ve got you covered.
           </p>
 
           <div className="grid sm:grid-cols-3 gap-6">
