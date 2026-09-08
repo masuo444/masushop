@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { masuSizes } from '@/lib/masu-data'
+import { masuSizes, sizeDetails } from '@/lib/masu-data'
 import { getReviewsByProduct } from '@/lib/reviews'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
@@ -52,6 +52,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   if (!product) notFound()
 
   // レビューは当該サイズのものだけを使う（サイト全体の平均を商品評価として出さない）
+  const detail = sizeDetails[product.id]
   const productReviews = getReviewsByProduct(product.name)
   const ratingValue =
     productReviews.length > 0
@@ -411,6 +412,56 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 パッケージ込みで見積り・相談する
               </Link>
             </div>
+          </section>
+        )}
+
+        {detail && (
+          <section className="mt-16" aria-labelledby="size-detail-title">
+            <h2 id="size-detail-title" className="serif text-2xl mb-8">
+              {product.name}を選ぶ前に
+            </h2>
+            <div className="grid gap-5 md:grid-cols-2">
+              {[
+                { label: '向いている使い方', body: detail.suited },
+                { label: 'このサイズでは難しいこと', body: detail.notSuited },
+                { label: '刻印できる面の大きさ', body: detail.engravingArea },
+                { label: '前後のサイズとの違い', body: detail.compare },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-sm p-6"
+                  style={{
+                    background: 'var(--color-subtle)',
+                    border: '1px solid var(--color-border)',
+                  }}
+                >
+                  <h3
+                    className="text-[11px] tracking-[0.15em] mb-3"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
+                    {item.label}
+                  </h3>
+                  <p
+                    data-speakable
+                    className="text-sm leading-[1.9]"
+                    style={{ color: 'var(--color-muted)' }}
+                  >
+                    {item.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-sm" style={{ color: 'var(--color-muted)' }}>
+              サイズ選びに迷う場合は{' '}
+              <Link
+                href="/products/sizes"
+                className="underline underline-offset-4"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                全7サイズの比較表
+              </Link>
+              {' '}をご覧ください。用途からのご相談も承ります。
+            </p>
           </section>
         )}
 
