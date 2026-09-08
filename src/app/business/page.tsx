@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
@@ -139,41 +138,12 @@ const preOrderChecks = [
     a: '無地枡は約2週間、焼印・レーザー刻印を入れる場合は約3週間、300個以上の大口注文は約4週間が目安です。デザイン確認にかかる期間で前後します。',
   },
   {
+    q: '支払い方法は何が使えますか？',
+    a: 'クレジットカードと銀行振込に対応しています。法人のお客様には請求書払い（月末締め翌月末払い）もご相談いただけます。お見積りの際にご希望のお支払い方法をお知らせください。',
+  },
+  {
     q: '海外の拠点へ送れますか？',
     a: '対応しています。アジア・北米・ヨーロッパへの発送実績があります。英語などのメッセージを刻印しての発送も可能です。',
-  },
-]
-
-const whyFomus = [
-  {
-    num: '01',
-    title: '国産ヒノキの枡を全7サイズ',
-    desc: '三勺枡（54ml）から一升枡（1800ml）まで。用途とご予算に合わせて最適なサイズをご提案します。',
-  },
-  {
-    num: '02',
-    title: '10個から大口まで柔軟に対応',
-    desc: '小ロットの試作から大規模イベント用の大量注文まで対応します。数量に応じた割引でまとめ買いほどお得になります。',
-  },
-  {
-    num: '03',
-    title: '焼印・レーザー刻印の2種類の名入れ',
-    desc: '伝統的な焼印と高精度なレーザー刻印を使い分け。ロゴ・社名・QRコード・写真まで、あらゆるデザインに対応します。',
-  },
-  {
-    num: '04',
-    title: 'デザイン修正は何度でも無料',
-    desc: '「イメージと違った」をなくすため、ご納得いただけるまでデザイン調整を承ります。初めてのご注文でも安心です。',
-  },
-  {
-    num: '05',
-    title: '特殊コーティングで実用性アップ',
-    desc: '食品衛生法基準適合のコーティングオプションで、水・油・汚れをブロック。飲食店での業務用途やギフトにも安心してお使いいただけます。',
-  },
-  {
-    num: '06',
-    title: '請求書払いにも対応',
-    desc: '法人のお客様には請求書払い（月末締め翌月末払い）をご用意。クレジットカード・銀行振込とあわせて、お支払い方法を柔軟に選べます。',
   },
 ]
 
@@ -302,6 +272,14 @@ export default function BusinessPage() {
               ロゴ入れの詳細
             </Link>
             {' ／ '}
+            <Link href="/products/engraving" className="underline underline-offset-4">
+              焼印とレーザーの比較
+            </Link>
+            {' ／ '}
+            <Link href="/coating" className="underline underline-offset-4">
+              コーティング
+            </Link>
+            {' ／ '}
             <Link href="/original" className="underline underline-offset-4">
               1個からの記念品
             </Link>
@@ -348,44 +326,13 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* ━━━ 選ばれる理由 ━━━ */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
-            WHY US
-          </p>
-          <h2 className="section-title text-center mb-16">MASU-STOREが選ばれる6つの理由</h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {whyFomus.map((item) => (
-              <div key={item.num} className="relative">
-                <span
-                  className="block text-[2.5rem] font-light leading-none mb-3"
-                  style={{ color: 'var(--color-border)' }}
-                >
-                  {item.num}
-                </span>
-                <h3 className="text-sm font-medium mb-2" style={{ color: 'var(--foreground)' }}>
-                  {item.title}
-                </h3>
-                <p className="text-xs leading-[2]" style={{ color: 'var(--color-muted)' }}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="divider mx-auto max-w-5xl" />
-
       {/* ━━━ 発注前チェックリスト ━━━ */}
       <section className="py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
           <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
             BEFORE YOU ORDER
           </p>
-          <h2 className="section-title text-center mb-4">発注前に確認しておきたい7項目</h2>
+          <h2 className="section-title text-center mb-4">発注前に確認しておきたい8項目</h2>
           <p className="lead text-center mb-12">
             記念品やノベルティは、社内で稟議を通す段階で必ず聞かれる点が決まっています。
             相見積もりのときにそのまま比較できるよう、当店の条件を並べました。
@@ -609,82 +556,6 @@ export default function BusinessPage() {
 
       <div className="divider mx-auto max-w-5xl" />
 
-      {/* ━━━ 名入れ加工の比較 ━━━ */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
-            Engraving
-          </p>
-          <h2 className="section-title text-center mb-16">名入れ加工 — 2つの方法</h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* 焼印 */}
-            <div
-              className="rounded-sm overflow-hidden"
-              style={{ border: '1px solid var(--color-border)' }}
-            >
-              <Image
-                src="/images/generated/yakiin.jpg"
-                alt="焼印の仕上がり"
-                width={800}
-                height={400}
-                style={{ width: '100%', height: 'auto' }}
-              />
-              <div className="p-6">
-                <h3 className="text-base font-medium mb-4">焼印</h3>
-                <div className="space-y-3">
-                  {[
-                    { label: '仕上がり', val: '焦げ茶色の温かみある印字' },
-                    { label: '向いている用途', val: 'ロゴ・社名・シンプルなデザイン' },
-                    { label: '版', val: '専用の銅版を初回に製作' },
-                    { label: 'ロット', val: '1個〜' },
-                  ].map((item) => (
-                    <div key={item.label} className="flex gap-3 text-xs">
-                      <span className="shrink-0 w-24 font-medium" style={{ color: 'var(--color-muted)' }}>
-                        {item.label}
-                      </span>
-                      <span>{item.val}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* レーザー */}
-            <div
-              className="rounded-sm overflow-hidden"
-              style={{ border: '1px solid var(--color-border)' }}
-            >
-              <Image
-                src="/images/generated/laser-engraving.jpg"
-                alt="レーザー刻印の精密な仕上がり"
-                width={800}
-                height={400}
-                style={{ width: '100%', height: 'auto' }}
-              />
-              <div className="p-6">
-                <h3 className="text-base font-medium mb-4">レーザー刻印</h3>
-                <div className="space-y-3">
-                  {[
-                    { label: '仕上がり', val: '繊細な彫刻。グラデーション・写真も表現可' },
-                    { label: '向いている用途', val: '細かいデザイン・QRコード・個別名入れ' },
-                    { label: '版', val: '不要' },
-                    { label: 'ロット', val: '1個〜（個別に異なるデザインも可）' },
-                  ].map((item) => (
-                    <div key={item.label} className="flex gap-3 text-xs">
-                      <span className="shrink-0 w-24 font-medium" style={{ color: 'var(--color-muted)' }}>
-                        {item.label}
-                      </span>
-                      <span>{item.val}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ━━━ 納期 ━━━ */}
       <section
         className="py-20 md:py-28"
@@ -810,68 +681,6 @@ export default function BusinessPage() {
           </div>
         </div>
       </section>
-
-      {/* ━━━ コーティング訴求 ━━━ */}
-      <section
-        className="py-16 md:py-20"
-        style={{ background: 'var(--color-subtle)' }}
-      >
-        <div className="max-w-3xl mx-auto px-6">
-          <div
-            className="rounded-sm p-8 md:p-10 flex flex-col md:flex-row gap-6 md:items-center"
-            style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}
-          >
-            <div className="md:flex-1">
-              <p className="text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--color-accent)' }}>
-                Option
-              </p>
-              <h3 className="text-base font-medium mb-2">特殊コーティング加工</h3>
-              <p className="text-xs leading-[2]" style={{ color: 'var(--color-muted)' }}>
-                水・油・汚れを弾く特殊コーティング。食品衛生法基準適合で、飲食店での業務利用にも安心。
-                飲み物を入れる枡にも使え、お手入れも楽になります。
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-3 shrink-0">
-              <p className="text-xl font-light" style={{ color: 'var(--color-accent)' }}>
-                +&yen;800<span className="text-xs font-normal">/個</span>
-              </p>
-              <Link
-                href="/coating"
-                className="text-xs underline"
-                style={{ color: 'var(--color-accent)' }}
-              >
-                コーティングについて詳しく
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ━━━ お支払い方法 ━━━ */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-3xl mx-auto px-6">
-          <div
-            className="rounded-sm p-6 flex flex-col sm:flex-row gap-4 sm:items-center"
-            style={{ border: '1px solid var(--color-border)' }}
-          >
-            <div className="flex-1">
-              <h3 className="text-sm font-medium mb-1">お支払い方法</h3>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                クレジットカード・銀行振込に対応。法人のお客様には請求書払い（月末締め翌月末払い）もご用意しています。
-              </p>
-            </div>
-            <Link
-              href="/custom"
-              className="text-xs shrink-0 underline"
-              style={{ color: 'var(--color-accent)' }}
-            >
-              お問い合わせ
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <div className="divider mx-auto max-w-3xl" />
 
       {/* ━━━ FAQ ━━━ */}
       <section className="py-20 md:py-28">

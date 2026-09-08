@@ -26,21 +26,6 @@ export const metadata: Metadata = {
   },
 }
 
-const differences = [
-  {
-    title: 'デザインデータは要りません',
-    desc: '入れたい文章やメッセージを送っていただくだけ。書体・大きさ・配置はこちらで組んで、仕上がりのイメージをお送りします。画像ソフトを触る必要はありません。',
-  },
-  {
-    title: '国産ヒノキの枡に刻みます',
-    desc: '印刷用の既製品ではなく、日本酒の酒器として使われてきた国産ヒノキの枡。手に取ったときの香りと木目が、贈り物としての価値を決めます。',
-  },
-  {
-    title: '相談しながら決められます',
-    desc: '「還暦のお祝いにしたい」「英語で入れたい」だけで大丈夫。サイズも刻み方も、用途をお聞きしてからご提案します。納得いただいてから製作に入ります。',
-  },
-]
-
 const scenes = [
   {
     scene: '退職祝い・送別',
@@ -106,21 +91,6 @@ const capabilities = [
       '海外発送に対応',
       'ご相談・お見積りは無料',
     ],
-  },
-]
-
-const designPoints = [
-  {
-    title: '文章を送るだけでOK',
-    desc: '入れたい言葉、お名前、日付。それだけお送りください。デザインデータをご用意いただく必要はありません。',
-  },
-  {
-    title: '書体もレイアウトもお任せ',
-    desc: '枡の面の大きさと木目を見ながら、書体・文字の大きさ・配置を組みます。仕上がりのイメージをお送りします。',
-  },
-  {
-    title: '納得いくまで調整',
-    desc: '「もう少し小さく」「この行だけ書体を変えたい」。ご確認いただいてから製作に入るので、仕上がりで驚くことはありません。',
   },
 ]
 
@@ -338,51 +308,6 @@ export default function OriginalPage() {
           </p>
         </section>
 
-        {/* Differences */}
-        <section className="bg-[var(--color-subtle)] py-20">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2
-              className="serif text-xl font-medium text-center mb-4"
-              style={{ color: 'var(--foreground)' }}
-            >
-              MASU-STOREのオリジナル枡、3つの違い
-            </h2>
-            <p
-              className="text-[13px] text-center mb-12 leading-[1.9]"
-              style={{ color: 'var(--color-muted)' }}
-            >
-              「自分でデータを作ってアップロードする」方式ではありません。
-            </p>
-            <div className="grid sm:grid-cols-3 gap-6">
-              {differences.map((item, i) => (
-                <div
-                  key={item.title}
-                  className="bg-[var(--background)] p-6 rounded-sm"
-                >
-                  <p
-                    className="serif text-[13px] mb-3"
-                    style={{ color: 'var(--color-accent)' }}
-                  >
-                    0{i + 1}
-                  </p>
-                  <h3
-                    className="serif text-base font-medium mb-2"
-                    style={{ color: 'var(--foreground)' }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className="text-[13px] leading-[1.9]"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Scenes */}
         <section className="max-w-4xl mx-auto px-6 py-20">
           <h2
@@ -417,63 +342,6 @@ export default function OriginalPage() {
                 </p>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Design */}
-        <section className="bg-[var(--color-subtle)] py-20">
-          <div className="max-w-3xl mx-auto px-6">
-            <h2
-              className="serif text-xl font-medium text-center mb-4"
-              style={{ color: 'var(--foreground)' }}
-            >
-              デザインは、こちらでお作りします
-            </h2>
-            <p
-              className="text-[13px] text-center mb-12 leading-[1.9]"
-              style={{ color: 'var(--color-muted)' }}
-            >
-              「こんな言葉を入れたい」だけ決まっていれば大丈夫です。
-              <br className="hidden sm:block" />
-              デザインの知識も、データの用意も必要ありません。
-            </p>
-
-            <div className="grid sm:grid-cols-3 gap-6 mb-10">
-              {designPoints.map((item) => (
-                <div
-                  key={item.title}
-                  className="bg-[var(--background)] p-6 rounded-sm"
-                >
-                  <h3
-                    className="serif text-base font-medium mb-2"
-                    style={{ color: 'var(--foreground)' }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className="text-[13px] leading-[1.9]"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-[var(--background)] rounded-sm p-6 text-center">
-              <p
-                className="text-[13px] leading-[2]"
-                style={{ color: 'var(--color-muted)' }}
-              >
-                お値段は、枡のサイズ・刻む内容・デザインの作り込みによって変わります。
-                <br className="hidden sm:block" />
-                ご相談内容をお聞きしたうえで、デザイン制作を含めたお見積りをお出しします。
-                <br className="hidden sm:block" />
-                <span style={{ color: 'var(--foreground)' }}>
-                  ご相談とお見積りは無料です。
-                </span>
-              </p>
-            </div>
           </div>
         </section>
 
