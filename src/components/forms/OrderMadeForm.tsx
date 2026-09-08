@@ -123,6 +123,7 @@ export default function OrderMadeForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* 最初に見えるのは3項目だけ。残りは任意ブロックに畳んで、送信のハードルを下げる。 */}
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="om-name" className={labelClass}>
@@ -142,8 +143,7 @@ export default function OrderMadeForm({
         </div>
         <div>
           <label htmlFor="om-email" className={labelClass}>
-            メールアドレス{' '}
-            <span style={{ color: 'var(--color-accent)' }}>*</span>
+            メールアドレス <span style={{ color: 'var(--color-accent)' }}>*</span>
           </label>
           <input
             type="email"
@@ -157,159 +157,31 @@ export default function OrderMadeForm({
             placeholder="例：taro@example.com"
           />
         </div>
-        <div>
-          <label htmlFor="om-phone" className={labelClass}>
-            電話番号（任意）
-          </label>
-          <input
-            type="tel"
-            id="om-phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className={inputClass}
-            style={inputStyle}
-            placeholder="例：090-1234-5678"
-          />
-        </div>
-        <div>
-          <label htmlFor="om-companyName" className={labelClass}>
-            会社名・店名（法人・店舗の方のみ）
-          </label>
-          <input
-            type="text"
-            id="om-companyName"
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleChange}
-            className={inputClass}
-            style={inputStyle}
-            placeholder="個人の方は空欄で構いません"
-          />
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="om-quantity" className={labelClass}>
-            ご希望個数 <span style={{ color: 'var(--color-accent)' }}>*</span>
-          </label>
-          <input
-            type="text"
-            id="om-quantity"
-            name="quantity"
-            required
-            value={formData.quantity}
-            onChange={handleChange}
-            className={inputClass}
-            style={inputStyle}
-            placeholder="例：1個"
-          />
-          <p
-            className="text-[11px] mt-2"
-            style={{ color: 'var(--color-muted)' }}
-          >
-            1個からご相談いただけます。
-          </p>
-        </div>
-        <div>
-          <label htmlFor="om-masuSize" className={labelClass}>
-            枡のサイズ
-          </label>
-          <select
-            id="om-masuSize"
-            name="masuSize"
-            value={formData.masuSize}
-            onChange={handleChange}
-            className={inputClass}
-            style={inputStyle}
-          >
-            <option value="">まだ決まっていない・相談したい</option>
-            {masuSizes.map((s) => (
-              <option key={s.id} value={s.name}>
-                {s.name}（{s.capacity}）
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
       <div>
-        <label htmlFor="om-purpose" className={labelClass}>
-          どんな場面で使いますか？
+        <label htmlFor="om-quantity" className={labelClass}>
+          ご希望個数 <span style={{ color: 'var(--color-accent)' }}>*</span>
         </label>
-        <select
-          id="om-purpose"
-          name="purpose"
-          value={formData.purpose}
+        <input
+          type="text"
+          id="om-quantity"
+          name="quantity"
+          required
+          value={formData.quantity}
           onChange={handleChange}
           className={inputClass}
           style={inputStyle}
-        >
-          <option value="">選択してください</option>
-          {occasions.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="om-printMethod" className={labelClass}>
-            名入れの方法
-          </label>
-          <select
-            id="om-printMethod"
-            name="printMethod"
-            value={formData.printMethod}
-            onChange={handleChange}
-            className={inputClass}
-            style={inputStyle}
-          >
-            <option value="相談したい">相談したい</option>
-            <option value="レーザー刻印">レーザー刻印（写真・手書き可）</option>
-            <option value="焼印">焼印（伝統技法）</option>
-            <option value="名入れなし">名入れなし</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="om-desiredDelivery" className={labelClass}>
-            希望納期
-          </label>
-          <input
-            type="text"
-            id="om-desiredDelivery"
-            name="desiredDelivery"
-            value={formData.desiredDelivery}
-            onChange={handleChange}
-            className={inputClass}
-            style={inputStyle}
-            placeholder="例：9月20日までに、急ぎではない"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="om-printContent" className={labelClass}>
-          入れたい文字・デザイン
-        </label>
-        <textarea
-          id="om-printContent"
-          name="printContent"
-          rows={3}
-          value={formData.printContent}
-          onChange={handleChange}
-          className={inputClass}
-          style={inputStyle}
-          placeholder="例：「祝 還暦 2026.9.20 山田太郎」／英語のメッセージ／手書きの文字をそのまま入れたい など"
+          placeholder="例：1個 / 100個 / 未定"
         />
+        <p className="text-[11px] mt-2" style={{ color: 'var(--color-muted)' }}>
+          1個からご相談いただけます。決まっていなければ「未定」で構いません。
+        </p>
       </div>
 
       <div>
         <label htmlFor="om-notes" className={labelClass}>
-          ご相談内容・ご要望
+          ご相談内容
         </label>
         <textarea
           id="om-notes"
@@ -319,9 +191,145 @@ export default function OrderMadeForm({
           onChange={handleChange}
           className={inputClass}
           style={inputStyle}
-          placeholder="イメージしている雰囲気、贈る相手、ご予算の目安などがあればお書きください。画像でイメージを共有いただく場合は、送信後の返信メールに添付してお送りいただけます。"
+          placeholder="用途、贈る相手、入れたい文字、ご予算の目安、希望納期など、決まっていることをお書きください。「こんなことできますか？」だけでも構いません。"
         />
       </div>
+
+      <details className="rounded-sm" style={{ border: '1px solid var(--color-border)' }}>
+        <summary
+          className="cursor-pointer select-none px-5 py-4 text-sm font-medium"
+          style={{ color: 'var(--color-accent)' }}
+        >
+          詳しく伝える（任意）
+        </summary>
+        <div className="px-5 pb-5 pt-1 space-y-6">
+          <p className="text-[13px]" style={{ color: 'var(--color-muted)' }}>
+            決まっている項目だけで構いません。空欄のままでもお見積りをお出しします。
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="om-phone" className={labelClass}>
+                電話番号
+              </label>
+              <input
+                type="tel"
+                id="om-phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={inputClass}
+                style={inputStyle}
+                placeholder="例：090-1234-5678"
+              />
+            </div>
+            <div>
+              <label htmlFor="om-companyName" className={labelClass}>
+                会社名・店名
+              </label>
+              <input
+                type="text"
+                id="om-companyName"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+                className={inputClass}
+                style={inputStyle}
+                placeholder="個人の方は空欄で構いません"
+              />
+            </div>
+            <div>
+              <label htmlFor="om-masuSize" className={labelClass}>
+                枡のサイズ
+              </label>
+              <select
+                id="om-masuSize"
+                name="masuSize"
+                value={formData.masuSize}
+                onChange={handleChange}
+                className={inputClass}
+                style={inputStyle}
+              >
+                <option value="">まだ決まっていない・相談したい</option>
+                {masuSizes.map((s) => (
+                  <option key={s.id} value={s.name}>
+                    {s.name}（{s.capacity}）
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="om-purpose" className={labelClass}>
+                どんな場面で使いますか？
+              </label>
+              <select
+                id="om-purpose"
+                name="purpose"
+                value={formData.purpose}
+                onChange={handleChange}
+                className={inputClass}
+                style={inputStyle}
+              >
+                <option value="">選択してください</option>
+                {occasions.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="om-printMethod" className={labelClass}>
+                名入れの方法
+              </label>
+              <select
+                id="om-printMethod"
+                name="printMethod"
+                value={formData.printMethod}
+                onChange={handleChange}
+                className={inputClass}
+                style={inputStyle}
+              >
+                <option value="相談したい">相談したい</option>
+                <option value="レーザー刻印">レーザー刻印（写真・手書き可）</option>
+                <option value="焼印">焼印（伝統技法）</option>
+                <option value="名入れなし">名入れなし</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="om-desiredDelivery" className={labelClass}>
+                希望納期
+              </label>
+              <input
+                type="text"
+                id="om-desiredDelivery"
+                name="desiredDelivery"
+                value={formData.desiredDelivery}
+                onChange={handleChange}
+                className={inputClass}
+                style={inputStyle}
+                placeholder="例：9月20日までに、急ぎではない"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="om-printContent" className={labelClass}>
+              入れたい文字・デザイン
+            </label>
+            <textarea
+              id="om-printContent"
+              name="printContent"
+              rows={3}
+              value={formData.printContent}
+              onChange={handleChange}
+              className={inputClass}
+              style={inputStyle}
+              placeholder="例：「祝 還暦 2026.9.20 山田太郎」／英語のメッセージ／手書きの文字をそのまま入れたい など"
+            />
+          </div>
+        </div>
+      </details>
 
       {error && (
         <p className="text-[13px]" style={{ color: '#c0392b' }}>

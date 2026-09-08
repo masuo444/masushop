@@ -10,14 +10,14 @@ import OrderMadeForm from '@/components/forms/OrderMadeForm'
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: 'オリジナル枡を1個から｜文章を送るだけでデザイン制作',
+  title: 'オーダーメイドの記念品・名入れギフトを1個から',
   description:
-    'オリジナル枡を1個からご相談いただけます。入れたい文章やメッセージを送るだけで、書体・レイアウトのデザイン制作からお引き受け。デザインデータは不要です。名入れ・写真・手書き文字・外国語にも対応。国産ヒノキの枡に刻んで、世界に一つの贈り物や記念品に。',
+    '退職祝い、還暦祝い、周年記念、開店祝い、結婚祝いに。名前・日付・メッセージを刻んだオーダーメイドの記念品を1個からお作りします。デザインデータは不要で、入れたい文章を送るだけで書体・レイアウトの制作までお引き受け。国産ヒノキの枡に刻む、世界に一つの贈り物です。',
   keywords:
-    'オリジナル枡,オリジナル枡 1個,オリジナル枡 作成,オリジナル枡 制作,オリジナルデザイン 枡,オーダーメイド 枡,枡 名入れ 1個,枡 一点もの,枡 プレゼント 名入れ,世界に一つ 枡,特注 枡,枡 記念品 1個',
+    'オーダーメイド 記念品,名入れ ギフト,名入れ 記念品,オリジナル 記念品,名入れ プレゼント 1個から,オーダーメイド プレゼント,世界に一つ プレゼント,デザイン お任せ 名入れ,データなし 名入れ,退職祝い 記念品,還暦祝い 記念品,開店祝い ギフト,オリジナル枡,オリジナル枡 1個,オーダーメイド 枡,枡 名入れ 1個,枡 一点もの,特注 枡',
   alternates: { canonical: `${baseUrl}/original` },
   openGraph: {
-    title: 'オリジナル枡を1個から｜文章を送るだけでデザイン制作',
+    title: 'オーダーメイドの記念品・名入れギフトを1個から',
     description:
       '文章やメッセージを送るだけで、デザイン制作から名入れまでお任せ。オリジナル枡を1個からご相談いただけます。',
     type: 'website',
@@ -43,28 +43,36 @@ const differences = [
 
 const scenes = [
   {
-    title: '大切な人への贈り物',
-    desc: '名前と日付を刻んだ枡は、その人だけのものになります。誕生日、記念日、還暦、退職。「おめでとう」を形にして残せます。',
+    scene: '退職祝い・送別',
+    desc: '在籍年数と部署名、送る側の連名。「お疲れさまでした」の一文を添えて。デスクに置いても邪魔にならず、花束のように枯れません。',
   },
   {
-    title: '海外の友人へのプレゼント',
-    desc: '英語やポルトガル語などのメッセージも刻印できます。日本の伝統工芸品として、言葉と一緒に想いが伝わります。',
+    scene: '還暦・長寿のお祝い',
+    desc: '生年月日と名前を刻んで。お酒が好きな方なら、そのまま酒器として毎日使えます。使うたびに贈った人を思い出してもらえる贈り物です。',
   },
   {
-    title: 'プロポーズ・結婚の記念に',
-    desc: '「益す＝増す」の縁起物。ふたりの名前と日付を入れたペアの枡は、指輪とは違う形の記念になります。',
+    scene: '周年記念・創業記念',
+    desc: '社名ロゴと「創業50周年」の文字。取引先への配布と社員への記念品を同じデザインで揃えられます。数量が増えるほど単価は下がります。',
   },
   {
-    title: '手書きの文字をそのまま',
-    desc: 'お子さまの字、故人の筆跡、自分で描いたイラスト。撮影した画像からデータ化して、そのまま枡に刻めます。',
+    scene: '開店祝い・開業祝い',
+    desc: '屋号を刻んだ一点もの。「益す＝増す」に通じる縁起物なので、商売の門出を祝う理由がきちんと立ちます。店頭に置いても様になります。',
   },
   {
-    title: 'お店・施設の一点もの',
-    desc: '屋号を入れた看板枡、カウンターに置く特別な一客。数は少なくても、こだわった一点をお作りします。',
+    scene: '結婚祝い・引き出物',
+    desc: 'ふたりの名前と日付を入れたペア。指輪や食器とは違う、和の記念の形です。ゲストへの引き出物として同じデザインで数を揃えることもできます。',
   },
   {
-    title: 'まだ形になっていない相談',
-    desc: '「こんなことできますか？」の段階で構いません。用途をお聞きして、サイズも仕上げも一緒に決めていきます。',
+    scene: '表彰・社内アワード',
+    desc: '受賞者の名前と受賞名を1個ずつ変えて刻めます。レーザー刻印なら版が不要なので、全員違う内容でも追加の手間はかかりません。',
+  },
+  {
+    scene: '海外の方への贈り物',
+    desc: '英語などのメッセージも刻印できます。日本製の伝統工芸品として、言葉と一緒に想いが伝わります。海外発送にも対応しています。',
+  },
+  {
+    scene: 'まだ決まっていない',
+    desc: '「何を贈るか決まっていない」段階のご相談で構いません。贈る相手とご予算、シーンをお聞かせいただければ、こちらからご提案します。',
   },
 ]
 
@@ -227,7 +235,7 @@ export default function OriginalPage() {
             className="serif text-3xl md:text-4xl font-light leading-relaxed mb-6"
             style={{ color: 'var(--foreground)' }}
           >
-            オリジナル枡を、1個から。
+            オーダーメイドの記念品を、1個から。
             <br />
             デザインはこちらで。
           </h1>
@@ -293,19 +301,11 @@ export default function OriginalPage() {
             style={{ color: 'var(--color-muted)' }}
           >
             レーザー刻印の仕上がり例です。文字・ロゴ・イラストも、この精度で木目とともに刻めます。
-            退職祝いや周年記念など、記念品としての選び方は{' '}
-            <Link href="/order-made" style={{ textDecoration: 'underline' }}>
-              オーダーメイド記念品のページ
-            </Link>
-            、企業ロゴ・社名を入れる場合は{' '}
+            企業ロゴ・社名を入れる場合は{' '}
             <Link href="/logo" style={{ textDecoration: 'underline' }}>
               ロゴ入れのページ
             </Link>
-            、頼み方や納期は{' '}
-            <Link href="/order" style={{ textDecoration: 'underline' }}>
-              依頼方法のページ
-            </Link>
-            {' '}にまとめています。
+            {' '}をご覧ください。
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Image
@@ -400,14 +400,14 @@ export default function OriginalPage() {
           <div className="grid sm:grid-cols-2 gap-8">
             {scenes.map((item) => (
               <div
-                key={item.title}
+                key={item.scene}
                 className="border border-[var(--color-border)] p-6 rounded-sm"
               >
                 <h3
                   className="serif text-base font-medium mb-2"
                   style={{ color: 'var(--foreground)' }}
                 >
-                  {item.title}
+                  {item.scene}
                 </h3>
                 <p
                   className="text-[13px] leading-[1.9]"
@@ -559,7 +559,7 @@ export default function OriginalPage() {
               className="serif text-xl font-medium text-center mb-4"
               style={{ color: 'var(--foreground)' }}
             >
-              オリジナル枡のご相談
+              ご相談・お見積り
             </h2>
             <p
               className="text-[13px] text-center mb-10 leading-[1.9]"

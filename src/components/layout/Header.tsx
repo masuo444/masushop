@@ -7,7 +7,7 @@ import { isEnglishPath } from '@/lib/locale'
 import LanguageToggle from './LanguageToggle'
 
 const jaNavLinks = [
-  { href: '/order-made', label: 'オーダーメイド' },
+  { href: '/original', label: 'オーダーメイド' },
   { href: '/logo', label: 'ロゴ入れ' },
   { href: '/products', label: '商品一覧' },
   { href: '/business', label: '法人の方' },

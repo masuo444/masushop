@@ -451,7 +451,7 @@ export default function GiftPage() {
           </p>
           <p className="text-[13px] mb-8" style={{ color: 'var(--color-muted)' }}>
             <Link
-              href="/order-made"
+              href="/original"
               className="underline underline-offset-4"
               style={{ color: 'var(--color-accent)' }}
             >

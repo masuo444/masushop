@@ -17,10 +17,8 @@ const footerLinks = {
   ],
   '商品・ご注文': [
     { href: '/products', label: '商品一覧' },
-    { href: '/original', label: 'オリジナル枡（1個〜）' },
-    { href: '/order-made', label: 'オーダーメイド記念品' },
+    { href: '/original', label: 'オーダーメイドの記念品（1個〜）' },
     { href: '/logo', label: 'ロゴ入れ' },
-    { href: '/order', label: '依頼方法・納期' },
     { href: '/custom', label: '名入れのお見積り' },
     { href: '/gift', label: 'ギフトガイド' },
     { href: '/reviews', label: 'お客様の声' },

@@ -302,8 +302,8 @@ export default function BusinessPage() {
               ロゴ入れの詳細
             </Link>
             {' ／ '}
-            <Link href="/order" className="underline underline-offset-4">
-              依頼方法・納期
+            <Link href="/original" className="underline underline-offset-4">
+              1個からの記念品
             </Link>
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

@@ -277,11 +277,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </li>
                 <li>
                   <Link
-                    href="/order"
+                    href="/original"
                     className="text-sm hover:underline"
                     style={{ color: 'var(--color-accent)' }}
                   >
-                    枡の依頼方法・納期 &rarr;
+                    オーダーメイドの記念品 &rarr;
                   </Link>
                 </li>
                 <li>
