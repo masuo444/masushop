@@ -82,30 +82,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       '@type': 'Country',
       name: 'Japan',
     },
-    ...(ratingValue !== null
-      ? {
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue,
-            reviewCount: productReviews.length,
-            bestRating: 5,
-            worstRating: 1,
-          },
-          review: productReviews.map((r) => ({
-            '@type': 'Review',
-            name: r.title,
-            reviewBody: r.body,
-            datePublished: r.date,
-            author: { '@type': 'Person', name: r.author },
-            reviewRating: {
-              '@type': 'Rating',
-              ratingValue: r.rating,
-              bestRating: 5,
-              worstRating: 1,
-            },
-          })),
-        }
-      : {}),
     additionalProperty: [
       {
         '@type': 'PropertyValue',

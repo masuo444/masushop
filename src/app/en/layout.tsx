@@ -25,7 +25,12 @@ const orgJsonLd = {
   email: siteConfig.contactEmail,
   areaServed: 'Worldwide',
   knowsAbout: ['masu', 'Japanese sake cups', 'hinoki cypress', 'Japanese traditional crafts', 'custom engraving'],
-  foundingDate: '1950',
+  parentOrganization: {
+    '@type': 'Organization',
+    '@id': 'https://www.fomus.jp/#organization',
+    name: 'FOMUS LLC',
+    url: 'https://www.fomus.jp/',
+  },
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Ogaki',

@@ -50,34 +50,6 @@ export default function ReviewsPage() {
     count: allReviews.filter((r) => r.rating === star).length,
   }))
 
-  // AggregateRating JSON-LD
-  const aggregateRatingJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: '国産ヒノキ枡',
-    brand: { '@type': 'Brand', name: 'MASU-STORE' },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: avgRatingValue,
-      reviewCount: count,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    review: allReviews.map((r) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: r.author },
-      datePublished: r.date,
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: r.rating,
-        bestRating: 5,
-        worstRating: 1,
-      },
-      name: r.title,
-      reviewBody: r.body,
-    })),
-  }
-
   return (
     <>
       <BreadcrumbJsonLd
@@ -85,10 +57,6 @@ export default function ReviewsPage() {
           { name: 'ホーム', href: baseUrl },
           { name: 'お客様の声', href: `${baseUrl}/reviews` },
         ]}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingJsonLd) }}
       />
       <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: 'お客様の声' }]} />
 
