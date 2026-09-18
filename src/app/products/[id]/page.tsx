@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { masuSizes, sizeDetails } from '@/lib/masu-data'
 import { getReviewsByProduct } from '@/lib/reviews'
 import siteConfig from '@/lib/site-config'
+import { orderMinPriceAmount } from '@/lib/pricing'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 import SurveyReviewCard from '@/components/voice/SurveyReviewCard'
 import QuickQuote from '@/components/forms/QuickQuote'
@@ -193,7 +194,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </div>
               <div className="flex justify-between">
                 <dt style={{ color: 'var(--color-muted)' }}>価格</dt>
-                <dd style={{ color: 'var(--color-accent)' }}>お見積り</dd>
+                <dd className="text-right" style={{ color: 'var(--color-accent)' }}>
+                  名入れ {orderMinPriceAmount}
+                  <span className="block text-xs" style={{ color: 'var(--color-muted)' }}>
+                    1回のご注文・税込・送料別
+                  </span>
+                </dd>
               </div>
             </dl>
 

@@ -90,9 +90,12 @@ export default function HomePage() {
                 letterSpacing: '0.05em',
               }}
             >
-              文章を送るだけ。
+              <span className="inline-block">文章を送るだけ。</span>
               <br />
-              デザインから仕上がり確認まで、名入れ枡をまるごとお任せ。
+              <span className="inline-block">デザインから</span>
+              <span className="inline-block">仕上がり確認まで、</span>
+              <span className="inline-block">名入れ枡を</span>
+              <span className="inline-block">まるごとお任せ。</span>
             </h1>
             <p
               style={{
