@@ -44,7 +44,7 @@ const deliveryTimelines = [
 // ── 導入事例 ──
 const caseStudies = [
   {
-    company: '株式会社テクノス',
+    company: '法人のお客様',
     person: 'N.様',
     product: '一合枡（焼印入り）× 100個',
     purpose: '創業30周年の記念品',
@@ -54,7 +54,7 @@ const caseStudies = [
     rating: 5,
   },
   {
-    company: '合同会社クラフトラボ',
+    company: '法人のお客様',
     person: 'W.様',
     product: '一合枡（レーザー刻印）× 200個',
     purpose: '展示会の来場者向けノベルティ',
@@ -64,7 +64,7 @@ const caseStudies = [
     rating: 4,
   },
   {
-    company: 'NPO法人まちづくり協議会',
+    company: '地域団体のお客様',
     person: 'K.様',
     product: '一合枡（レーザー刻印）× 50個',
     purpose: '地域イベントの記念品',

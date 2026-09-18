@@ -89,7 +89,7 @@ const reviews: Review[] = [
   // 7-9: 企業ノベルティ（一合枡）
   {
     id: 'r07',
-    author: 'N.様（株式会社テクノス）',
+    author: 'N.様（法人）',
     rating: 5,
     date: '2025-05-10',
     product: '一合枡（焼印入り）',
@@ -101,7 +101,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r08',
-    author: 'W.様（合同会社クラフトラボ）',
+    author: 'W.様（法人）',
     rating: 4,
     date: '2025-04-18',
     product: '一合枡（レーザー刻印）',
@@ -113,7 +113,7 @@ const reviews: Review[] = [
   },
   {
     id: 'r09',
-    author: 'K.様（NPO法人まちづくり協議会）',
+    author: 'K.様（地域団体）',
     rating: 5,
     date: '2025-03-25',
     product: '一合枡（レーザー刻印）',
