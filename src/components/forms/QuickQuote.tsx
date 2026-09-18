@@ -77,6 +77,7 @@ export default function QuickQuote({
   className?: string
 }) {
   const presetSize = masuSizes.some((m) => m.id === defaultSize) ? defaultSize : ''
+  const customHref = presetSize ? `/custom?size=${presetSize}` : '/custom'
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>({
     purpose: '',
@@ -499,18 +500,25 @@ export default function QuickQuote({
                     </p>
                     <p className="text-[11px] mt-2 leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
                       ご相談・お見積りは無料です。
-                      <br />
-                      詳しく書いて相談したい方は{' '}
-                      <Link href="/custom" className="underline underline-offset-4">
-                        お問い合わせフォーム
-                      </Link>
-                      {' '}へ。
                     </p>
                   </div>
                 </form>
               )}
             </>
           )}
+        </div>
+
+        {/* 通常の見積りフォームへの切り替え（どのステップでも見えるように、カードのすぐ下に置く） */}
+        <div
+          className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 text-center"
+        >
+          <p className="text-[13px] leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
+            <span className="inline-block">詳しく書いて</span>
+            <span className="inline-block">相談したい方は</span>
+          </p>
+          <Link href={customHref} className="btn-outline whitespace-nowrap">
+            通常のお見積りフォームへ →
+          </Link>
         </div>
       </div>
     </section>
