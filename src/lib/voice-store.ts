@@ -127,3 +127,39 @@ export async function listApprovedReviewRecords() {
   )
   return reviews.filter((r): r is ApprovedReview => r !== null)
 }
+
+/**
+ * AI下書きの利用回数の上限（費用の上限）。
+ * 1日・1か月の回数を Blob に記録し、上限を超えたらAIを使わずテンプレの下書きにする。
+ * 記録に失敗したときも費用が膨らまないよう、AIは使わない側に倒す。
+ * voice/ の外に置くのは、回答一覧（voice/ 配下を全件読む）に混ざらないようにするため。
+ */
+type AiUsage = { month: string; total: number; days: Record<string, number> }
+
+function readLimit(name: string, fallback: number) {
+  const value = Number(process.env[name])
+  return Number.isFinite(value) && value >= 0 ? Math.floor(value) : fallback
+}
+
+export const VOICE_AI_DAILY_LIMIT = readLimit('VOICE_AI_DAILY_LIMIT', 20)
+export const VOICE_AI_MONTHLY_LIMIT = readLimit('VOICE_AI_MONTHLY_LIMIT', 200)
+
+export async function reserveAiDraftQuota(now = new Date()) {
+  // 日付の区切りは日本時間
+  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000).toISOString()
+  const month = jst.slice(0, 7)
+  const day = jst.slice(8, 10)
+  const pathname = `usage/voice-ai-${month}.json`
+  try {
+    const usage = (await readJson<AiUsage>(pathname)) ?? { month, total: 0, days: {} }
+    const today = usage.days[day] ?? 0
+    if (usage.total >= VOICE_AI_MONTHLY_LIMIT || today >= VOICE_AI_DAILY_LIMIT) return false
+    usage.total += 1
+    usage.days[day] = today + 1
+    await writeJson(pathname, usage)
+    return true
+  } catch (error) {
+    console.error('Voice AI quota check failed', error)
+    return false
+  }
+}

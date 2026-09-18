@@ -12,6 +12,7 @@ import {
   type VoiceRecord,
 } from '@/lib/voice'
 import { generateVoiceDraft } from '@/lib/voice-draft'
+import { reserveAiDraftQuota } from '@/lib/voice-store'
 import { notifyAdminOfVoice } from '@/lib/voice-notify'
 import { loadVoiceRecord, saveVoiceRecord } from '@/lib/voice-store'
 
@@ -215,9 +216,12 @@ export async function POST(request: Request) {
     })
   }
 
-  const { draft, source } = await generateVoiceDraft(answers, {
-    allowAi: allowAiDraft(request),
-  })
+  // AIを使うのは、キーが設定されていて、同じ接続元の短時間の回数と、1日・1か月の上限の内側のときだけ
+  const allowAi =
+    Boolean(process.env.ANTHROPIC_API_KEY) &&
+    allowAiDraft(request) &&
+    (await reserveAiDraftQuota())
+  const { draft, source } = await generateVoiceDraft(answers, { allowAi })
 
   const now = new Date()
   const record: VoiceRecord = {

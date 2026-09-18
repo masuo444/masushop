@@ -169,8 +169,9 @@ export async function generateVoiceDraft(
     const client = new Anthropic({ apiKey, timeout: 15_000, maxRetries: 0 })
     const response = await client.messages.create({
       model: VOICE_DRAFT_MODEL,
-      // 短い文章なので思考は最小限にして、15秒以内に返す
-      max_tokens: 2000,
+      // 短い文章なので思考は最小限にして、15秒以内に返す。
+      // 1回あたりの費用の上限にもなる（出力はこの数を超えて課金されない）
+      max_tokens: 1000,
       output_config: { effort: 'low' },
       system: VOICE_DRAFT_SYSTEM_PROMPT,
       messages: [{ role: 'user', content: formatAnswersForPrompt(answers) }],
