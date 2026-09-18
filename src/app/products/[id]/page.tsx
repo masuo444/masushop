@@ -7,6 +7,8 @@ import { getReviewsByProduct } from '@/lib/reviews'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 import SurveyReviewCard from '@/components/voice/SurveyReviewCard'
+import QuickQuote from '@/components/forms/QuickQuote'
+import ProductStickyBar from '@/components/ui/ProductStickyBar'
 import {
   averageRating,
   getApprovedReviewsBySize,
@@ -305,27 +307,31 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 className="text-[13px] leading-[1.9] mb-6"
                 style={{ color: 'var(--color-muted)' }}
               >
-                数量・名入れのご希望をお知らせいただければ、お見積りをお出しします。
+                用途・個数・名入れの方法を選ぶだけで、お見積りをお出しします。
                 名入れは、入れたい文章をお送りいただければデザインからお作りします。
-                ご相談・お見積りは無料です。
+                ご注文前に、お見積りと仕上がりイメージを無料でお送りします。
               </p>
               <Link
-                href={`/custom?size=${product.id}`}
+                href="#quote"
                 className="block w-full rounded-sm py-3 text-center text-sm font-medium transition-opacity hover:opacity-85"
                 style={{ background: 'var(--color-accent)', color: '#fff' }}
               >
-                この枡のお見積り・ご相談
+                このサイズで見積り（無料）
               </Link>
               <Link
-                href="/original"
+                href={`/custom?size=${product.id}`}
                 className="mt-3 block w-full rounded-sm py-3 text-center text-sm transition-colors"
                 style={{
                   border: '1px solid var(--color-border)',
                   color: 'var(--foreground)',
                 }}
               >
-                1個からのオリジナル枡
+                詳しく書いて相談する
               </Link>
+              <p className="text-[11px] mt-4 leading-[1.8]" style={{ color: 'var(--color-muted)' }}>
+                名入れは1個から、無地は10個から。
+                <Link href="/original" className="underline underline-offset-4">1個からのオリジナル枡</Link>
+              </p>
             </div>
           </div>
         </div>
@@ -456,6 +462,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </section>
         )}
 
+        {/* 30秒かんたん見積り（このサイズを選んだ状態で始まる） */}
+        <QuickQuote
+          defaultSize={product.id}
+          heading={`${product.name}で、かんたん見積り`}
+          lead="用途・個数・名入れの方法を選んで送るだけ。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+          className="!py-0 mt-16"
+        />
+
         {surveyReviews.length > 0 && (
           <section className="mt-16" aria-labelledby="survey-reviews-title">
             <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3">
@@ -547,6 +561,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </section>
         )}
       </section>
+
+      {/* スマホ：下部固定の見積りバー */}
+      <ProductStickyBar productName={product.name} />
     </>
   )
 }

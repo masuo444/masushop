@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { masuSizes } from '@/lib/masu-data'
 
 export default function FloatingContactButton() {
   const pathname = usePathname()
@@ -13,16 +14,28 @@ export default function FloatingContactButton() {
   const href = isEnglish ? '/en/contact' : '/custom'
   const label = isEnglish ? 'Contact Us' : '無料で見積り'
 
-  // ページ内にフォームがある場合、それが見えている間はボタンを隠す。
+  // 商品詳細ページ（/products/ichigo など）はスマホで下部固定バーを出すので、このボタンは重ねない
+  const isProductDetail = masuSizes.some((m) => pathname === `/products/${m.id}`)
+
+  // ページ内にフォーム（#form）やかんたん見積り（#quote）がある場合、それが見えている間はボタンを隠す。
   // 同じ導線が二重に出るのを避け、狭い画面で送信ボタンと重なるのも防ぐ。
   useEffect(() => {
-    const form = document.getElementById('form')
-    if (!form) return
+    const targets = ['form', 'quote']
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null)
+    if (targets.length === 0) return
+    const visible = new Set<Element>()
     const observer = new IntersectionObserver(
-      ([entry]) => setVisibleFor(entry.isIntersecting ? pathname : null),
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target)
+          else visible.delete(entry.target)
+        }
+        setVisibleFor(visible.size > 0 ? pathname : null)
+      },
       { rootMargin: '0px 0px -10% 0px' },
     )
-    observer.observe(form)
+    targets.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [pathname])
 
@@ -35,7 +48,9 @@ export default function FloatingContactButton() {
   return (
     <a
       href={href}
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-105 hover:brightness-90 p-3 gap-2 sm:px-5 sm:py-3"
+      className={`fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-105 hover:brightness-90 p-3 gap-2 sm:px-5 sm:py-3 ${
+        isProductDetail ? 'max-md:hidden' : ''
+      }`}
       style={{ background: 'var(--color-accent)', color: '#fff' }}
     >
       {/* Mail / envelope icon */}

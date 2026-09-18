@@ -5,7 +5,10 @@ import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import Differentiators from '@/components/ui/Differentiators'
-import OrderMadeForm from '@/components/forms/OrderMadeForm'
+import QuickQuote from '@/components/forms/QuickQuote'
+import OrderFlow from '@/components/ui/OrderFlow'
+import { orderFlowHowToSteps } from '@/lib/order-flow'
+import { orderMinPriceNote, orderMinPriceFaqAnswer } from '@/lib/pricing'
 
 const baseUrl = siteConfig.url
 
@@ -94,34 +97,6 @@ const capabilities = [
   },
 ]
 
-const flow = [
-  {
-    step: '01',
-    title: 'ご相談',
-    desc: '下のフォームから、入れたい文章や用途をお知らせください。デザインデータは不要です。決まっていない部分は空欄で構いません。',
-  },
-  {
-    step: '02',
-    title: 'ご提案・お見積り',
-    desc: '通常1〜2営業日以内にご返信します。サイズと刻印方法のおすすめ、金額と納期をお伝えします。',
-  },
-  {
-    step: '03',
-    title: 'デザイン制作・ご確認',
-    desc: 'いただいた文章から、書体・レイアウトをこちらで作成します。仕上がりのイメージをお送りし、納得いただけるまで調整します。',
-  },
-  {
-    step: '04',
-    title: '製作',
-    desc: '国産ヒノキから、職人の手で一つひとつ仕上げます。目安は約2〜3週間です。',
-  },
-  {
-    step: '05',
-    title: '検品・お届け',
-    desc: '一点ずつ検品し、ヒノキの削り節を緩衝材にして梱包してお届けします。海外発送も承ります。',
-  },
-]
-
 const faqItems = [
   {
     q: 'オリジナル枡とは、どんなものが作れますか？',
@@ -134,6 +109,10 @@ const faqItems = [
   {
     q: '文章の内容から一緒に考えてもらえますか？',
     a: 'はい。「還暦のお祝いに贈りたい」「お店の開店記念に置きたい」といった用途をお聞かせいただければ、言葉の候補からご提案します。決まった文章がなくてもご相談ください。',
+  },
+  {
+    q: '名入れ枡の価格はいくらですか？',
+    a: orderMinPriceFaqAnswer,
   },
   {
     q: '本当に1個だけでも注文できますか？',
@@ -186,7 +165,7 @@ export default function OriginalPage() {
       <HowToJsonLd
         name="オリジナル枡を1個から作る方法"
         description="入れたい文章やメッセージを送るだけで、デザイン制作から名入れ・製作まで。オリジナル枡が完成するまでの流れ。"
-        steps={flow.map((f) => ({ name: f.title, text: f.desc }))}
+        steps={orderFlowHowToSteps}
       />
 
       <main className="min-h-screen bg-[var(--background)]">
@@ -219,17 +198,23 @@ export default function OriginalPage() {
           </p>
           <div className="mt-10">
             <Link
-              href="#form"
+              href="#quote"
               className="inline-block px-8 py-3 text-sm text-white rounded-sm"
               style={{ backgroundColor: 'var(--color-accent)' }}
             >
-              無料で相談する
+              30秒でかんたん見積り（無料）
             </Link>
             <p
               className="text-[11px] mt-4"
               style={{ color: 'var(--color-muted)' }}
             >
-              1個からOK ／ デザイン制作までお任せ ／ ご相談・お見積り無料
+              1個からOK ／ デザイン制作までお任せ ／ 注文前に仕上がりイメージ無料
+            </p>
+            <p
+              className="text-[13px] mt-3 max-w-xl mx-auto leading-[1.9]"
+              style={{ color: 'var(--color-muted)' }}
+            >
+              {orderMinPriceNote}
             </p>
           </div>
         </section>
@@ -251,6 +236,7 @@ export default function OriginalPage() {
               枡の専門店MASU-STOREでは、国産ヒノキのオリジナル枡を
               <strong style={{ color: 'var(--foreground)', fontWeight: 500 }}>1個からご相談</strong>
               いただけます。デザインデータは不要で、入れたい文章を送るだけで書体・レイアウトの制作から対応します。
+              ご注文前に、お見積りと仕上がりイメージを無料でお送りします。
               納期の目安は約2〜3週間、海外発送にも対応しています。
             </p>
           </div>
@@ -258,13 +244,13 @@ export default function OriginalPage() {
 
         <Differentiators />
 
-        {/* Sample */}
+        {/* 仕上がり例 */}
         <section className="max-w-4xl mx-auto px-6 pb-20">
           <h2
             className="serif text-xl font-medium text-center mb-4"
             style={{ color: 'var(--foreground)' }}
           >
-            刻印の仕上がりサンプル
+            刻印の仕上がり例
           </h2>
           <p
             className="text-[13px] text-center mb-10 leading-[1.9]"
@@ -280,7 +266,7 @@ export default function OriginalPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Image
               src="/images/works/ishiwa-ashiyu-front.jpg"
-              alt="レーザー刻印を施した一合枡のサンプル — 正面"
+              alt="レーザー刻印を施した一合枡の仕上がり例 — 正面"
               width={1448}
               height={1086}
               className="w-full rounded-sm"
@@ -304,7 +290,7 @@ export default function OriginalPage() {
             className="text-[12px] mt-4 text-center"
             style={{ color: 'var(--color-muted)' }}
           >
-            サンプル：一合枡・レーザー刻印
+            仕上がり例：一合枡・レーザー刻印
           </p>
         </section>
 
@@ -383,63 +369,13 @@ export default function OriginalPage() {
         </section>
 
         {/* Flow */}
-        <section className="bg-[var(--color-subtle)] py-20">
-          <div className="max-w-3xl mx-auto px-6">
-            <h2
-              className="serif text-xl font-medium text-center mb-12"
-              style={{ color: 'var(--foreground)' }}
-            >
-              ご相談から完成まで
-            </h2>
-            <div className="space-y-8">
-              {flow.map((item) => (
-                <div key={item.step} className="flex gap-6">
-                  <span
-                    className="serif text-[13px] pt-0.5 shrink-0"
-                    style={{ color: 'var(--color-accent)' }}
-                  >
-                    {item.step}
-                  </span>
-                  <div>
-                    <h3
-                      className="text-[14px] font-medium mb-1.5"
-                      style={{ color: 'var(--foreground)' }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p
-                      className="text-[13px] leading-[1.9]"
-                      style={{ color: 'var(--color-muted)' }}
-                    >
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <OrderFlow heading="ご相談から完成まで" />
 
-        {/* Form */}
-        <section id="form" className="py-20">
-          <div className="max-w-2xl mx-auto px-6">
-            <h2
-              className="serif text-xl font-medium text-center mb-4"
-              style={{ color: 'var(--foreground)' }}
-            >
-              ご相談・お見積り
-            </h2>
-            <p
-              className="text-[13px] text-center mb-10 leading-[1.9]"
-              style={{ color: 'var(--color-muted)' }}
-            >
-              決まっていない項目は空欄のままで構いません。
-              <br />
-              「こんなことできますか？」だけでもお送りください。
-            </p>
-            <OrderMadeForm />
-          </div>
-        </section>
+        {/* 30秒かんたん見積り */}
+        <QuickQuote
+          formType="original"
+          lead="4つ選んで送るだけ。「こんなことできますか？」の段階でも構いません。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+        />
 
         {/* FAQ */}
         <section className="bg-[var(--color-subtle)] py-20">

@@ -5,6 +5,8 @@ import { masuSizes, sizeDetails } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import QuickQuote from '@/components/forms/QuickQuote'
+import { orderMinPriceNote } from '@/lib/pricing'
 
 const baseUrl = siteConfig.url
 
@@ -184,7 +186,13 @@ export default function EngravingPage() {
               <span style={{ color: 'var(--foreground)' }}>
                 入れたい文章やメッセージだけお送りいただければ、デザインの制作からお引き受けします。
               </span>
-              {' '}書体選び・レイアウト・配置の調整までこちらで行い、仕上がりのイメージをご確認いただいたうえで製作します。デザインデータをご用意いただく必要はありません。費用は、枡のサイズ・刻む内容・数量に応じてお見積りいたします。
+              {' '}書体選び・レイアウト・配置の調整までこちらで行い、ご注文前にお見積りと一緒に仕上がりイメージを無料でお送りします。デザインデータをご用意いただく必要はありません。費用は、枡のサイズ・刻む内容・数量に応じてお見積りいたします。
+            </p>
+            <p
+              className="text-[13px] leading-[1.9] mt-3"
+              style={{ color: 'var(--foreground)' }}
+            >
+              {orderMinPriceNote}
             </p>
             <Link
               href="/original"
@@ -286,13 +294,18 @@ export default function EngravingPage() {
 
       <div className="divider max-w-5xl mx-auto" />
 
+      {/* 30秒かんたん見積り */}
+      <QuickQuote lead="用途・サイズ・個数・名入れ方法を選ぶだけ。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。" />
+
+      <div className="divider max-w-5xl mx-auto" />
+
       {/* CTA */}
       <section className="max-w-3xl mx-auto px-6 py-16 text-center">
         <h2 className="section-title mb-4">名入れのご相談はお気軽に</h2>
         <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--color-muted)' }}>
           個人の記念品は1個から、法人のノベルティ・周年記念品はまとめてお見積りします。
           <br />
-          手書きのデザインやラフスケッチからの制作も承ります。
+          手書きのデザインやラフスケッチからの制作も承ります。ご注文前に仕上がりイメージを無料でお送りします。
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link href="/original" className="btn-primary">

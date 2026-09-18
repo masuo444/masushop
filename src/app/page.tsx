@@ -3,24 +3,29 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { faqItems, masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
+import { orderMinPriceNote } from '@/lib/pricing'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import ReviewSection from '@/components/ui/ReviewSection'
 import Differentiators from '@/components/ui/Differentiators'
+import OrderFlow from '@/components/ui/OrderFlow'
+import QuickQuote from '@/components/forms/QuickQuote'
 
 export const metadata: Metadata = {
-  title: { absolute: '枡の専門店 MASU-STORE｜国産ヒノキ枡を名入れ1個から・法人10個から' },
+  title: { absolute: '枡の専門店 MASU-STORE｜名入れ枡を1個から、仕上がりイメージ無料' },
   description:
-    '国産ヒノキの枡を全7サイズ（三勺54ml〜一升1,800ml）。焼印・レーザー刻印の名入れ、特殊コーティング、蓋・パッケージに対応。1個からの一点もの、法人ノベルティ・周年記念・鏡開きは見積り無料、通常1〜2営業日以内にご返信します。',
+    '国産ヒノキの枡を全7サイズ（三勺54ml〜一升1,800ml）。文章を送るだけで、デザインから仕上がり確認まで名入れ枡をまるごとお任せ。ご注文前に、お見積りと仕上がりイメージを無料でお送りします。1個から、法人は10個から。請求書払い・海外発送に対応。',
   alternates: { canonical: siteConfig.url, languages: { ja: siteConfig.url, en: `${siteConfig.url}/en` } },
   openGraph: {
-    title: '枡の専門店 MASU-STORE｜国産ヒノキ枡を名入れ1個から・法人10個から',
+    title: '枡の専門店 MASU-STORE｜名入れ枡を1個から、仕上がりイメージ無料',
     description:
-      '国産ヒノキの枡を全7サイズ。焼印・レーザー刻印の名入れは1個から、法人ノベルティ・周年記念は10個から。見積り無料。',
+      '文章を送るだけで、デザインから仕上がり確認まで名入れ枡をまるごとお任せ。ご注文前に見積りと仕上がりイメージを無料でお送りします。1個から／法人10個から。',
     url: siteConfig.url,
   },
 }
 
 const displayedFaqItems = faqItems.slice(0, 5)
+
+const trustItems = ['国産ヒノキ', 'デザインデータ不要', '注文前に仕上がりイメージ無料', '請求書払い', '海外発送']
 
 // お客様の声の欄に購入者アンケートの承認分を出すため、1時間ごとに作り直す（承認時は即時）
 export const revalidate = 3600
@@ -55,9 +60,9 @@ export default function HomePage() {
           style={{
             maxWidth: 1100,
             margin: '0 auto',
-            padding: 'clamp(2.5rem, 10vw, 8rem) 1.5rem',
+            padding: 'clamp(2.5rem, 8vw, 6.5rem) 1.5rem clamp(2rem, 5vw, 4rem)',
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: '1.15fr 1fr',
             gap: 'clamp(2rem, 5vw, 5rem)',
             alignItems: 'center',
           }}
@@ -65,87 +70,97 @@ export default function HomePage() {
         >
           <div>
             <p
-              className="serif"
+              className="text-[11px]"
               style={{
-                fontSize: 'clamp(2.75rem, 9vw, 6rem)',
-                lineHeight: 1,
-                marginBottom: '0.75rem',
-                letterSpacing: '0.08em',
-                color: '#FAFAF7',
+                letterSpacing: '0.2em',
+                color: '#C8C1B8',
+                marginBottom: '1.25rem',
               }}
             >
-              枡
+              国産ヒノキ枡の専門店 MASU-STORE
             </p>
             <h1
               className="serif"
+              data-speakable
               style={{
-                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                fontSize: 'clamp(1.5rem, 2.6vw, 2rem)',
                 fontWeight: 300,
-                lineHeight: 1.5,
+                lineHeight: 1.65,
                 marginBottom: '1.25rem',
-                letterSpacing: '0.08em',
+                letterSpacing: '0.05em',
               }}
             >
-              国産ヒノキ枡の専門店
-              <span
-                style={{
-                  display: 'block',
-                  marginTop: '0.5rem',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-                  fontSize: '0.625em',
-                  letterSpacing: '0.08em',
-                  color: '#C8C1B8',
-                }}
-              >
-                周年記念品・ノベルティの名入れ枡
-              </span>
+              文章を送るだけ。
+              <br />
+              デザインから仕上がり確認まで、名入れ枡をまるごとお任せ。
             </h1>
             <p
               style={{
                 fontSize: '1rem',
                 lineHeight: 2,
+                color: '#FAFAF7',
+                maxWidth: 480,
+                marginBottom: '0.5rem',
+              }}
+              className="max-md:!mx-auto"
+            >
+              ご注文前に、見積りと仕上がりイメージを無料でお送りします。
+            </p>
+            <p
+              style={{
+                fontSize: '0.9375rem',
+                lineHeight: 1.9,
                 color: '#C8C1B8',
-                maxWidth: 440,
+                maxWidth: 480,
                 marginBottom: '1.75rem',
               }}
+              className="max-md:!mx-auto"
             >
-              企業ロゴ・社名を刻んだ記念品を、10個から。
-              <br />
-              約1300年使われてきた日本の木の器に、職人の手で刻みます。
+              1個から／法人10個から・請求書払い可
             </p>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="max-md:!justify-center">
-              <Link href="/custom" className="btn-primary" style={{ background: '#FAFAF7', color: '#2C2420' }}>
-                無料で見積り・相談する
+
+            {/* 入口を2つに分ける */}
+            <div
+              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', maxWidth: 480 }}
+              className="max-md:!mx-auto max-sm:!grid-cols-1"
+            >
+              <Link
+                href="/original"
+                className="block rounded-sm transition-colors hover:bg-[#F4F1EC]"
+                style={{ background: '#FAFAF7', color: '#2C2420', padding: '1rem 1.25rem', textAlign: 'left' }}
+              >
+                <span className="block text-[11px]" style={{ letterSpacing: '0.12em', color: '#7B5B2A' }}>
+                  個人のお客様
+                </span>
+                <span className="serif block" style={{ fontSize: '1.125rem', marginTop: '0.25rem' }}>
+                  個人・1個から →
+                </span>
+                <span className="block text-[13px]" style={{ color: '#6F675F', marginTop: '0.25rem' }}>
+                  記念品・ギフトの名入れ枡
+                </span>
               </Link>
               <Link
                 href="/business"
-                className="btn-outline"
-                style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
+                className="block rounded-sm transition-colors hover:border-[#FAFAF7]"
+                style={{ border: '1px solid #6B605A', color: '#FAFAF7', padding: '1rem 1.25rem', textAlign: 'left' }}
               >
-                法人向けのご案内
+                <span className="block text-[11px]" style={{ letterSpacing: '0.12em', color: '#C8C1B8' }}>
+                  法人のお客様
+                </span>
+                <span className="serif block" style={{ fontSize: '1.125rem', marginTop: '0.25rem' }}>
+                  法人・10個から →
+                </span>
+                <span className="block text-[13px]" style={{ color: '#C8C1B8', marginTop: '0.25rem' }}>
+                  ノベルティ・周年記念・式典
+                </span>
               </Link>
             </div>
-
-            {/* 条件サマリー */}
-            <ul
-              style={{
-                listStyle: 'none',
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '0.5rem 1.25rem',
-                marginTop: '2rem',
-                paddingTop: '1.5rem',
-                borderTop: '1px solid #4A413B',
-                fontSize: '0.8125rem',
-                letterSpacing: '0.04em',
-                color: '#C8C1B8',
-              }}
-              className="max-md:!justify-center"
+            <p
+              className="text-[13px] max-md:!mx-auto"
+              style={{ color: '#C8C1B8', marginTop: '1rem', maxWidth: 480, lineHeight: 1.8 }}
             >
-              {['10個から対応', '数量割引あり', 'サンプル製作可', '名入れは1個から'].map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+              {orderMinPriceNote}
+            </p>
           </div>
           <div className="max-md:!order-first">
             <Image
@@ -158,16 +173,49 @@ export default function HomePage() {
               style={{
                 width: '100%',
                 height: 'auto',
-                maxWidth: 480,
+                maxWidth: 440,
                 margin: '0 auto',
               }}
             />
           </div>
         </div>
+
+        {/* 信頼の帯 */}
+        <div style={{ borderTop: '1px solid #4A413B' }}>
+          <ul
+            style={{
+              listStyle: 'none',
+              maxWidth: 1100,
+              margin: '0 auto',
+              padding: '1rem 1.5rem',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '0.5rem 0',
+              fontSize: '0.8125rem',
+              letterSpacing: '0.06em',
+              color: '#C8C1B8',
+            }}
+          >
+            {trustItems.map((item, i) => (
+              <li key={item} style={{ display: 'flex', alignItems: 'center' }}>
+                {i > 0 && (
+                  <span aria-hidden style={{ margin: '0 0.875rem', color: '#5A504A' }}>
+                    ｜
+                  </span>
+                )}
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
+      {/* ===== 30秒かんたん見積り ===== */}
+      <QuickQuote />
+
       {/* ===== 制作事例 ===== */}
-      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem' }}>
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem', background: 'var(--color-subtle)' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
           <h2 className="serif section-title" style={{ marginBottom: '0.75rem', textAlign: 'center' }}>
             制作事例
@@ -207,6 +255,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== ご依頼の流れ ===== */}
+      <OrderFlow background="plain" />
+
       {/* ===== 法人のご発注条件 ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem', background: 'var(--color-subtle)' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
@@ -224,7 +275,7 @@ export default function HomePage() {
             {[
               { label: '対応数量', value: '10個から', note: '大口は数量に応じて割引をご案内します' },
               { label: '納期の目安', value: '約3週間', note: '無地は約2週間、300個以上は約4週間' },
-              { label: 'サンプル', value: '製作できます', note: '量産前に実物で仕上がりを確認できます' },
+              { label: '仕上がりイメージ', value: '注文前に無料', note: 'お見積りと一緒にレイアウト画像をお送りします' },
               { label: 'お支払い', value: '請求書払い可', note: '月末締め翌月末払いにも対応します' },
             ].map((item) => (
               <div
@@ -249,11 +300,11 @@ export default function HomePage() {
             ))}
           </div>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2.5rem' }}>
-            <Link href="/custom" className="btn-accent">
-              無料で見積り・相談する
-            </Link>
-            <Link href="/business" className="btn-outline">
+            <Link href="/business" className="btn-accent">
               法人向けの詳細を見る
+            </Link>
+            <Link href="/custom" className="btn-outline">
+              詳しく書いて相談する
             </Link>
           </div>
         </div>
@@ -412,7 +463,7 @@ export default function HomePage() {
                 個人のお客様・1個からご相談可能
               </p>
               <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
-                名前・日付・メッセージ・手書きの文字・写真を、国産ヒノキの枡に刻みます。デザインデータは不要。入れたい文章を送っていただければ、書体やレイアウトはこちらでお作りします。
+                名前・日付・メッセージ・手書きの文字・写真を、国産ヒノキの枡に刻みます。デザインデータは不要。入れたい文章を送っていただければ、書体やレイアウトはこちらでお作りし、ご注文前に仕上がりイメージをお送りします。
               </p>
               <Link href="/original" className="btn-accent">
                 オリジナル枡を見る
@@ -498,15 +549,26 @@ export default function HomePage() {
             お見積り・ご相談
           </h2>
           <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: '#A09A92', marginBottom: '2.5rem' }}>
-            名入れ枡、法人向け大口注文、オーダーメイドなど、お気軽にご相談ください。
+            入れたい文章と個数の目安だけで構いません。
+            <br />
+            お見積りと一緒に、仕上がりイメージを無料でお送りします。
           </p>
-          <Link
-            href="/custom"
-            className="btn-primary"
-            style={{ background: '#FAFAF7', color: '#2C2420' }}
-          >
-            お問い合わせ
-          </Link>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link
+              href="#quote"
+              className="btn-primary"
+              style={{ background: '#FAFAF7', color: '#2C2420' }}
+            >
+              30秒でかんたん見積り
+            </Link>
+            <Link
+              href="/custom"
+              className="btn-outline"
+              style={{ color: '#FAFAF7', borderColor: '#5A504A' }}
+            >
+              詳しく書いて相談する
+            </Link>
+          </div>
         </div>
       </section>
     </>

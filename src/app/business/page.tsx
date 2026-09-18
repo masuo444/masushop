@@ -3,20 +3,21 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import OrderMadeForm from '@/components/forms/OrderMadeForm'
+import QuickQuote from '@/components/forms/QuickQuote'
+import OrderFlow from '@/components/ui/OrderFlow'
 
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
   title: '法人のお客様 — 枡のノベルティ・記念品 | 大口注文・数量割引対応',
   description:
-    '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー刻印加工。1個からのサンプル、10個からの大口注文に数量割引で対応。納期2〜4週間。',
+    '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー刻印加工。ロゴや文章を送るだけでデザインはお任せ。ご注文前に見積りと仕上がりイメージを無料でお送りします。10個から数量割引・請求書払い対応。納期2〜4週間。',
   keywords:
-    '枡 ノベルティ,枡 自社ブランド,枡 企業ギフト,枡 記念品 法人,枡 卸,枡 名入れ 法人,枡 周年記念,枡 株主優待,枡 大口注文,枡 数量割引,枡 サンプル',
+    '枡 ノベルティ,枡 自社ブランド,枡 企業ギフト,枡 記念品 法人,枡 卸,枡 名入れ 法人,枡 周年記念,枡 株主優待,枡 大口注文,枡 数量割引,枡 請求書払い',
   alternates: { canonical: `${baseUrl}/business`, languages: { ja: `${baseUrl}/business`, en: `${baseUrl}/en/corporate` } },
   openGraph: {
     title: '法人のお客様 — 枡のノベルティ・記念品',
-    description: '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。10個からの大口注文に数量割引で対応。',
+    description: '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。ご注文前に見積りと仕上がりイメージを無料でお送りします。10個から数量割引・請求書払い対応。',
     type: 'website',
     images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
@@ -75,40 +76,6 @@ const caseStudies = [
   },
 ]
 
-// ── ご注文の流れ ──
-const orderSteps = [
-  {
-    step: 1,
-    title: 'お問い合わせ・お見積り',
-    desc: 'サイズ・数量・加工方法・ご希望納期をお伝えください。即日〜翌営業日にお見積りをお返しします。',
-    detail: 'フォーム・メールどちらでも対応',
-  },
-  {
-    step: 2,
-    title: 'デザイン確認',
-    desc: 'ロゴデータやデザインを元にレイアウトをご提案。修正は何度でも無料です。',
-    detail: 'AI・PDF・JPG・PNG対応',
-  },
-  {
-    step: 3,
-    title: 'サンプル確認（任意）',
-    desc: 'ご希望に応じて実物サンプルを製作。量産前に仕上がりをご確認いただけます。',
-    detail: 'サンプル代は量産時に差し引き',
-  },
-  {
-    step: 4,
-    title: '量産・製作',
-    desc: '国産ヒノキで一つずつ丁寧に製作。進捗はメールでご報告します。',
-    detail: '全品検品・品質管理済み',
-  },
-  {
-    step: 5,
-    title: '検品・納品',
-    desc: '一つひとつ検品し、丁寧に梱包してお届け。個別包装や熨斗対応も可能です。',
-    detail: '全国配送・海外発送対応',
-  },
-]
-
 // ── 選ばれる理由 ──
 // 相見積もりの場面で、購買担当が社内を通すために必要になる確認事項。
 // 自社の宣伝ではなく「発注前に確認すべきこと」として並べ、当店の回答を添える。
@@ -119,11 +86,11 @@ const preOrderChecks = [
   },
   {
     q: 'ロゴやデザインのデータが必要ですか？',
-    a: '不要です。ロゴが載っている名刺・封筒・看板の写真をお送りいただければ、こちらでデータを起こします。入れたい文章だけの状態からでもレイアウトを組みます。修正は何度でも無料です。',
+    a: '不要です。ロゴが載っている名刺・封筒・看板の写真をお送りいただければ、こちらでデータを起こします。入れたい文章だけの状態からでもレイアウトを組み、ご注文前にお見積りと一緒に仕上がりイメージを無料でお送りします。',
   },
   {
-    q: '量産前に実物を確認できますか？',
-    a: 'ご希望に応じてサンプルを製作します。刻印の濃さや位置を実物で確認してから量産に入れるので、納品後に想定と違うということが起きません。',
+    q: '発注前に仕上がりを確認できますか？',
+    a: 'はい。ご注文を決める前に、お見積りと一緒に仕上がりイメージ（レイアウト画像）を無料でお送りします。刻印の位置や大きさをイメージで確認してからご注文を判断いただけるので、社内で回覧してから決めることもできます。',
   },
   {
     q: '1個ずつ違う内容を刻めますか？',
@@ -202,8 +169,8 @@ const businessFaq = [
     a: '無地枡は約2週間、名入れ枡は約3週間、300個以上の大口注文は約4週間が目安です。お急ぎの場合もご相談ください。',
   },
   {
-    q: 'サンプル作成は可能ですか？',
-    a: 'はい、可能です。実物サンプルを1〜2個製作いたします。サンプル代は量産ご注文時に差し引かせていただきます。',
+    q: '注文前に仕上がりを確認できますか？',
+    a: 'はい。ご注文を決める前に、お見積りと一緒に仕上がりイメージ（レイアウト画像）を無料でお送りします。イメージを見てからご注文を判断いただけます。',
   },
   {
     q: '見積りは無料ですか？',
@@ -211,7 +178,7 @@ const businessFaq = [
   },
   {
     q: 'デザインデータがなくても注文できますか？',
-    a: 'はい、手書きのラフやイメージ写真からデータを作成することも可能です。お気軽にご相談ください。',
+    a: 'はい、手書きのラフやイメージ写真からデータを作成することも可能です。入れたい文章だけでもレイアウトを組み、仕上がりイメージをお送りします。お気軽にご相談ください。',
   },
   {
     q: '領収書・請求書は発行できますか？',
@@ -260,12 +227,17 @@ export default function BusinessPage() {
             className="text-3xl md:text-[2.5rem] font-light mb-6"
             style={{ lineHeight: 1.5 }}
           >
-            枡で、企業の想いを届ける
-          </h1>
-          <p className="text-sm leading-[2] mb-10" style={{ opacity: 0.85 }}>
-            国産ヒノキの枡に、企業ロゴや社名を刻印。
+            ロゴと文章を送るだけ。
             <br className="hidden md:block" />
-            ノベルティ・記念品として、10個から承ります。
+            名入れ枡をまるごとお任せ。
+          </h1>
+          <p className="text-sm leading-[2] mb-3" style={{ opacity: 0.9 }}>
+            国産ヒノキの枡に、企業ロゴや社名を刻印。デザインから仕上がり確認までこちらで進めます。
+            <br className="hidden md:block" />
+            ご注文前に、お見積りと仕上がりイメージを無料でお送りします。
+          </p>
+          <p className="text-[13px] mb-10" style={{ opacity: 0.8 }}>
+            10個から・数量割引あり・請求書払い（月末締め翌月末払い）可
           </p>
           <p className="text-[13px] mb-8" style={{ opacity: 0.75 }}>
             <Link href="/logo" className="underline underline-offset-4">
@@ -286,18 +258,18 @@ export default function BusinessPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/custom"
+              href="#quote"
               className="inline-block px-8 py-4 text-xs tracking-[0.15em] uppercase font-medium rounded-sm transition-opacity hover:opacity-85"
               style={{ background: '#fff', color: 'var(--color-accent)' }}
             >
-              無料お見積り
+              30秒でかんたん見積り
             </Link>
             <a
-              href="#sample"
+              href="#flow"
               className="inline-block px-8 py-4 text-xs tracking-[0.15em] uppercase font-medium rounded-sm transition-opacity hover:opacity-85"
               style={{ border: '1px solid rgba(255,255,255,0.4)', color: '#fff' }}
             >
-              サンプルを依頼
+              ご依頼の流れを見る
             </a>
           </div>
         </div>
@@ -350,7 +322,7 @@ export default function BusinessPage() {
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="#form" className="btn-accent">
+            <Link href="#quote" className="btn-accent">
               条件を伝えて見積りを依頼する
             </Link>
           </div>
@@ -446,7 +418,7 @@ export default function BusinessPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
-            <Link href="/custom" className="btn-accent">
+            <Link href="#quote" className="btn-accent">
               この数量でお見積り
             </Link>
             <Link href="/business/catalog" className="btn-outline">
@@ -594,17 +566,19 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* ━━━ サンプル依頼 ━━━ */}
-      <section id="sample" className="py-20 md:py-28">
+      {/* ━━━ 注文前に仕上がりイメージ ━━━ */}
+      <section id="mockup" className="py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-[10px] tracking-[0.4em] uppercase mb-4" style={{ color: 'var(--color-accent)' }}>
-            Sample
+            Before You Order
           </p>
-          <h2 className="section-title mb-6">まずはサンプルでお試しください</h2>
-          <p className="text-sm leading-[2] mb-4" style={{ color: 'var(--color-muted)' }}>
-            「実物を見てから決めたい」という方に。
+          <h2 className="section-title mb-6">ご注文前に、仕上がりイメージを無料でお送りします</h2>
+          <p className="text-sm leading-[2] mb-8" style={{ color: 'var(--color-muted)' }}>
+            「刻印がどう見えるか、決める前に確認したい」という方に。
             <br />
-            1〜2個のサンプルを実際に製作し、素材感・名入れの仕上がりをご確認いただけます。
+            お見積りと一緒に、枡の面に合わせて組んだ仕上がりイメージ（レイアウト画像）をお送りします。
+            <br />
+            イメージと金額を見てからご注文を判断いただけるので、社内で回覧してから決めることもできます。
           </p>
 
           <div
@@ -613,13 +587,13 @@ export default function BusinessPage() {
           >
             <div className="space-y-4">
               {[
-                { label: 'サンプル数量', val: '1〜2個' },
-                { label: 'サンプル代', val: '実費（量産ご注文時に差し引き）' },
-                { label: '納期', val: '約1〜2週間' },
+                { label: '費用', val: '無料（お見積りと一緒にお送りします）' },
+                { label: 'お送りするもの', val: '仕上がりイメージ（レイアウト画像）と金額・納期の目安' },
+                { label: 'ご用意いただくもの', val: 'ロゴデータ、または入れたい文章だけで構いません' },
                 { label: '対応加工', val: '無地・焼印・レーザー刻印すべて対応' },
               ].map((item) => (
                 <div key={item.label} className="flex gap-4 text-sm">
-                  <span className="shrink-0 w-28 font-medium text-xs" style={{ color: 'var(--color-muted)' }}>
+                  <span className="shrink-0 w-32 font-medium text-xs" style={{ color: 'var(--color-muted)' }}>
                     {item.label}
                   </span>
                   <span className="text-xs">{item.val}</span>
@@ -628,59 +602,14 @@ export default function BusinessPage() {
             </div>
           </div>
 
-          <Link href="/custom?type=sample" className="btn-accent">
-            サンプルを依頼する
+          <Link href="#quote" className="btn-accent">
+            見積りと仕上がりイメージを依頼する
           </Link>
         </div>
       </section>
 
-      <div className="divider mx-auto max-w-5xl" />
-
-      {/* ━━━ ご注文の流れ ━━━ */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-3xl mx-auto px-6">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
-            Flow
-          </p>
-          <h2 className="section-title text-center mb-16">ご注文の流れ</h2>
-
-          <div className="space-y-0">
-            {orderSteps.map((s, i) => (
-              <div
-                key={s.step}
-                className="relative pb-10"
-                style={{
-                  borderLeft: i < orderSteps.length - 1 ? '1px solid var(--color-border)' : 'none',
-                  marginLeft: '15px',
-                  paddingLeft: '32px',
-                }}
-              >
-                <div
-                  className="flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium shrink-0"
-                  style={{
-                    background: 'var(--color-accent)',
-                    color: '#fff',
-                    position: 'absolute',
-                    left: '-16px',
-                    top: 0,
-                  }}
-                >
-                  {s.step}
-                </div>
-                <div>
-                  <p className="font-medium mb-1">{s.title}</p>
-                  <p className="text-sm mb-1" style={{ color: 'var(--color-muted)' }}>
-                    {s.desc}
-                  </p>
-                  <p className="text-[10px]" style={{ color: 'var(--color-accent)' }}>
-                    {s.detail}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ━━━ ご依頼の流れ ━━━ */}
+      <OrderFlow heading="ご依頼の流れ" />
 
       {/* ━━━ FAQ ━━━ */}
       <section className="py-20 md:py-28">
@@ -718,20 +647,12 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* ━━━ お見積りフォーム ━━━ */}
-      <section id="form" className="py-20 md:py-24">
-        <div className="max-w-2xl mx-auto px-6">
-          <h2 className="section-title mb-4 text-center">無料お見積り・ご相談</h2>
-          <p
-            className="text-[13px] text-center mb-10 leading-[1.9]"
-            style={{ color: 'var(--color-muted)' }}
-          >
-            サイズ・数量・デザインなど、決まっていない項目は空欄で構いません。
-            サンプルのご依頼も、その他ご要望欄にご記入ください。お見積りは無料です。
-          </p>
-          <OrderMadeForm formType="business" />
-        </div>
-      </section>
+      {/* ━━━ 30秒かんたん見積り ━━━ */}
+      <QuickQuote
+        formType="business"
+        heading="30秒かんたん見積り"
+        lead="用途・サイズ・数量・加工を選んで送るだけ。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。希望納期や分納などの詳細は、お問い合わせフォームからもご相談いただけます。"
+      />
     </>
   )
 }
