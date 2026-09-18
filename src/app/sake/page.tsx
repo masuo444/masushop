@@ -4,13 +4,14 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { masuSizes, faqItems } from '@/lib/masu-data'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
+import RelatedMasu from '@/components/ui/RelatedMasu'
 
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: '枡と日本酒 — もっきりの作法と楽しみ方',
+  title: '枡酒・もっきりとは｜枡で日本酒を飲む作法とおすすめの枡',
   description:
-    '枡で日本酒を飲むとなぜ美味しいのか。ヒノキチオールやフィトンチッドの科学的根拠、もっきり（盛り切り）の作法とマナー、サイズ別の選び方、枡の塩の伝統まで詳しく解説します。',
+    'もっきり（盛り切り）は枡の中に置いたグラスに日本酒を溢れるまで注ぐ居酒屋の提供スタイル。語源・飲み方の手順・枡の塩の作法・ヒノキの香りで美味しくなる理由と、自宅のもっきりに向く八勺枡・一合枡の選び方を解説します。',
   keywords: [
     '枡 日本酒',
     'もっきり',
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
     '枡の塩',
   ].join(','),
   openGraph: {
-    title: '枡と日本酒 — もっきりの作法と楽しみ方',
+    title: '枡酒・もっきりとは｜枡で日本酒を飲む作法とおすすめの枡',
     description:
-      'ヒノキの香りが日本酒の味わいを引き立てる理由、もっきりの正しい作法、サイズ別の選び方を詳しく解説。',
+      'もっきりの定義・語源・飲み方の手順、ヒノキの香りが日本酒の味わいを引き立てる理由、自宅のもっきりに向く枡の選び方を解説。',
     url: `${baseUrl}/sake`,
     type: 'article',
     siteName: siteConfig.name,
@@ -40,9 +41,9 @@ export const metadata: Metadata = {
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: '枡と日本酒 — もっきりの作法と楽しみ方',
+  headline: '枡酒・もっきりとは｜枡で日本酒を飲む作法とおすすめの枡',
   description:
-    '枡で日本酒を飲むとなぜ美味しいのか。ヒノキの香り成分による科学的根拠、もっきりの作法、枡の塩の伝統まで解説。',
+    'もっきり（盛り切り）の定義と飲み方、ヒノキの香り成分による科学的根拠、枡の塩の伝統、自宅のもっきりに向く枡の選び方まで解説。',
   author: { '@type': 'Organization', name: siteConfig.name },
   publisher: { '@type': 'Organization', name: siteConfig.name },
   mainEntityOfPage: `${baseUrl}/sake`,
@@ -88,10 +89,14 @@ export default function SakePage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-        <h1 className="section-title mt-4">枡と日本酒 — ヒノキの香りで味わう一杯</h1>
-        <p className="mt-6 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
-          ヒノキの枡に注がれた日本酒は、グラスでは味わえない特別な美味しさを持っています。<br />
-          その理由、もっきりの作法、枡酒の楽しみ方を解説します。
+        <h1 className="section-title mt-4">枡と日本酒 — もっきり・枡酒の作法</h1>
+        <p data-speakable className="mt-6 text-sm leading-[2] max-w-2xl mx-auto text-[var(--foreground)]">
+          もっきり（盛り切り）は、枡の中に置いたグラスに日本酒を溢れるまで注ぐ、居酒屋や日本酒バーの提供スタイルです。
+          グラスから溢れた分は枡で受け、グラスを飲み終えたあとに枡へ残った酒をヒノキの香りとともに味わいます。
+          使われる枡は<Link href="/products/hasshaku" className="underline">八勺枡（144ml）</Link>と<Link href="/products/ichigo" className="underline">一合枡（180ml）</Link>が定番で、一杯あたり一合前後を注ぐ店が多く見られます。
+        </p>
+        <p className="mt-4 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
+          このページでは、枡で飲むと美味しい理由、もっきりの飲み方、枡の塩の作法、自宅でもっきりを楽しむための枡の選び方を解説します。
         </p>
       </section>
 
@@ -128,7 +133,7 @@ export default function SakePage() {
             枡で日本酒を飲んだとき、多くの人が「いつもより美味しい」と感じます。これは単なる雰囲気の効果ではなく、ヒノキの成分による科学的な裏付けがあります。
           </p>
           <p>
-            ヒノキに含まれる代表的な香り成分が「ヒノキチオール」と「フィトンチッド」です。ヒノキチオールは強い抗菌作用を持つ成分で、歯磨き粉や化粧品にも使われています。フィトンチッドは植物が自らを守るために放出する揮発性物質で、森林浴のリラックス効果の正体とされています。
+            ヒノキに含まれる代表的な香り成分が「<Link href="/glossary#hinokitiol" className="underline">ヒノキチオール</Link>」と「<Link href="/glossary#phytoncide" className="underline">フィトンチッド</Link>」です。ヒノキチオールは強い抗菌作用を持つ成分で、歯磨き粉や化粧品にも使われています。フィトンチッドは植物が自らを守るために放出する揮発性物質で、森林浴のリラックス効果の正体とされています。
           </p>
           <p>
             枡に日本酒を注ぐと、液体の温度とアルコールの作用でこれらの香り成分が枡の木肌から揮発します。日本酒のフルーティーな吟醸香やまろやかな米の旨味に、ヒノキの清涼感のある香りが加わることで、複雑で奥行きのある味わいが生まれるのです。
@@ -137,7 +142,7 @@ export default function SakePage() {
             さらに、枡の木肌が持つ微細な凹凸にも注目すべき効果があります。日本酒が木肌に触れることで、ごくわずかに空気が含まれ、酒が「開く」状態になります。ワインをデキャンタージュするのと似た原理で、香りが立ちやすくなり、味わいがまろやかに感じられるのです。
           </p>
           <p>
-            また、木の器で飲むという行為そのものが、五感を通じた体験を豊かにします。手に伝わる木のぬくもり、唇に触れる角の感触、目に映る木目の美しさ——こうした感覚的な要素が相まって、枡で飲む日本酒を特別な体験にしています。
+            また、木の器で飲むという行為そのものが、五感を通じた体験を豊かにします。手に伝わる木のぬくもり、唇に触れる角の感触、目に映る木目の美しさ——こうした感覚的な要素が相まって、枡で飲む日本酒を特別な体験にしています。当店の枡はすべて<Link href="/products" className="underline">国産ヒノキの無垢材</Link>で、香りをそのまま楽しめる無加工の枡のほか、繰り返し使う方向けの<Link href="/coating" className="underline">特殊コーティング</Link>も選べます。
           </p>
         </div>
       </section>
@@ -168,10 +173,10 @@ export default function SakePage() {
 
           <h3 className="text-base font-medium mt-8 mb-4">八勺枡がよく使われる理由</h3>
           <p>
-            もっきりに最もよく使われるのは八勺枡（76×76×51mm、容量144ml）です。この理由はサイズ感の絶妙さにあります。八勺枡は、一般的なグラス（5〜7オンス）を中に置いたときにちょうど良い余白があり、溢れた日本酒を受け止めつつも、テーブルの上で扱いやすいサイズです。
+            もっきりに最もよく使われるのは<Link href="/products/hasshaku" className="underline">八勺枡</Link>（76×76×51mm、容量144ml）です。この理由はサイズ感の絶妙さにあります。八勺枡は、一般的なグラス（5〜7オンス）を中に置いたときにちょうど良い余白があり、溢れた日本酒を受け止めつつも、テーブルの上で扱いやすいサイズです。
           </p>
           <p>
-            一合枡（85×85×56mm）を使うお店もありますが、やや大きいため、グラスとの間に隙間ができすぎたり、持ち上げたときの安定感に欠けることがあります。八勺枡は、グラスとの一体感とテーブル上での収まりの良さから、もっきりの定番として定着しています。
+            <Link href="/products/ichigo" className="underline">一合枡</Link>（85×85×56mm）を使うお店もありますが、やや大きいため、グラスとの間に隙間ができすぎたり、持ち上げたときの安定感に欠けることがあります。八勺枡は、グラスとの一体感とテーブル上での収まりの良さから、もっきりの定番として定着しています。2つのサイズの差は寸法で9mm、容量で36ml。全サイズの寸法は<Link href="/products/sizes" className="underline">枡のサイズ一覧</Link>で比較できます。
           </p>
 
           <h3 className="text-base font-medium mt-8 mb-4">もっきりの楽しみ方・マナー</h3>
@@ -216,7 +221,7 @@ export default function SakePage() {
             それ以前の枡は、あくまで米や穀物を量る計量器であり、酒器として日常的に使われていたわけではありませんでした。しかし、1959年（昭和34年）の計量法施行で尺貫法が商取引から姿を消すと、枡の用途は大きく転換します。計量器としての需要が消滅する一方で、「粋な酒の飲み方」としての枡酒が人気を博し、枡は第二の人生を歩み始めたのです。
           </p>
           <p>
-            昭和の高度経済成長期には、接待や宴会の文化とともに枡酒の需要が拡大しました。正月の祝い酒を枡で飲む習慣、結婚式での鏡開き後に枡で乾杯するスタイルなど、「枡＝祝い事・めでたい席の器」というイメージが確立されていきました。
+            昭和の高度経済成長期には、接待や宴会の文化とともに枡酒の需要が拡大しました。正月の祝い酒を枡で飲む習慣、結婚式での<Link href="/glossary#kagami-biraki" className="underline">鏡開き</Link>後に枡で乾杯するスタイルなど、「枡＝祝い事・めでたい席の器」というイメージが確立されていきました。計量器から酒器への転身の経緯は<Link href="/history" className="underline">枡の歴史</Link>で詳しく解説しています。
           </p>
           <p>
             近年では、日本酒ブームの世界的な広がりとともに、海外でも枡酒が注目されています。日本を訪れる外国人観光客にとって、枡で日本酒を飲む体験は日本文化を象徴する「ここでしかできない体験」として人気を集めています。
@@ -238,7 +243,9 @@ export default function SakePage() {
           {sakeSizes.map((size) => (
             <div key={size.id} className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
               <p className="serif text-lg font-light mb-1">
-                {size.name}
+                <Link href={`/products/${size.id}`} className="hover:underline">
+                  {size.name}
+                </Link>
               </p>
               <p className="text-[10px] tracking-wide text-[var(--color-muted)] mb-4">
                 {size.reading} / {size.capacity}
@@ -246,13 +253,78 @@ export default function SakePage() {
               <p className="text-xs leading-[2] text-[var(--color-muted)] mb-3">
                 外寸: {size.size}
               </p>
-              <p className="text-xs leading-[2] text-[var(--foreground)]">
+              <p className="text-xs leading-[2] text-[var(--foreground)] mb-4">
                 {size.id === 'goshaku' && '少量をゆっくり味わいたい方に。おちょこより大きく、ぐい呑み感覚で使える粋なサイズ。繊細な吟醸酒や大吟醸酒を少しずつ楽しむのに最適です。'}
                 {size.id === 'hasshaku' && 'もっきりの定番サイズ。居酒屋でグラスの下に敷いて溢れさせるスタイルにぴったり。直接飲む場合も、程よい量で一杯を楽しめます。'}
                 {size.id === 'ichigo' && '日本酒一合（180ml）がぴったり入る最も定番のサイズ。自宅で晩酌を楽しむ方、名入れギフトとして贈る方に最も選ばれています。'}
               </p>
+              <Link href={`/products/${size.id}`} className="text-xs underline" style={{ color: 'var(--color-accent)' }}>
+                {size.name}の詳細を見る →
+              </Link>
             </div>
           ))}
+        </div>
+      </section>
+
+      <div className="divider max-w-4xl mx-auto" />
+
+      {/* 自宅でもっきり */}
+      <section className="max-w-3xl mx-auto px-6 py-20">
+        <h2 className="serif text-2xl font-light mb-8">
+          自宅でもっきりを楽しむ枡の選び方
+        </h2>
+        <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
+          <p>
+            もっきりは、枡とグラスがあれば自宅でも再現できます。ポイントは「グラスを中に置ける枡」を選ぶことです。候補になるのは八勺枡と一合枡の2サイズで、用途によって選び分けます。
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+            <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
+              <p className="serif text-lg font-light mb-2">
+                <Link href="/products/hasshaku" className="hover:underline">八勺枡（144ml）</Link>
+              </p>
+              <p className="text-xs leading-[2] text-[var(--color-muted)]">
+                居酒屋と同じ収まりで楽しみたい方に。グラスとの一体感があり、テーブルの上で扱いやすいサイズです。飲食店の業務用としてまとめて導入されることも多く、屋号を焼印した枡でお店の雰囲気を出せます。
+              </p>
+              <Link href="/products/hasshaku" className="mt-3 inline-block text-xs underline" style={{ color: 'var(--color-accent)' }}>
+                八勺枡の詳細 →
+              </Link>
+            </div>
+            <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
+              <p className="serif text-lg font-light mb-2">
+                <Link href="/products/ichigo" className="hover:underline">一合枡（180ml）</Link>
+              </p>
+              <p className="text-xs leading-[2] text-[var(--color-muted)]">
+                もっきりだけでなく、枡に直接注いで一合を量る飲み方や、名入れギフトとしても使いたい方に。蓋やクリアケース・白箱に対応するのはこのサイズだけです。
+              </p>
+              <Link href="/products/ichigo" className="mt-3 inline-block text-xs underline" style={{ color: 'var(--color-accent)' }}>
+                一合枡の詳細 →
+              </Link>
+            </div>
+          </div>
+          <h3 className="text-base font-medium mt-8 mb-4">自宅もっきりの手順</h3>
+          <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded my-6">
+            <ol className="space-y-3 text-sm leading-[2]">
+              <li className="flex gap-3">
+                <span className="text-[var(--color-muted)] flex-shrink-0">1.</span>
+                枡の中に収まる小ぶりのグラスを用意し、枡の中央に置きます。
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[var(--color-muted)] flex-shrink-0">2.</span>
+                グラスの縁まで注いだら、そのまま続けて日本酒が枡に溢れ落ちるまで注ぎます。
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[var(--color-muted)] flex-shrink-0">3.</span>
+                グラスを飲み終えたら、枡に溜まった酒を角から飲みます。お好みで枡の角に粗塩を少量盛ると、甘みと旨味が引き立ちます。
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[var(--color-muted)] flex-shrink-0">4.</span>
+                使用後はすぐに水で内側を洗い、底を上にして自然乾燥させます。詳しくは<Link href="/care" className="underline">枡のお手入れ方法</Link>をご覧ください。
+              </li>
+            </ol>
+          </div>
+          <p>
+            名前や記念日を刻んだ枡で晩酌をしたい方、贈り物にしたい方は<Link href="/original" className="underline">オリジナル枡（1個から）</Link>を、飲食店でまとめて導入する場合は<Link href="/business" className="underline">法人向けのご案内</Link>をご覧ください。名入れ方法の違いは<Link href="/products/engraving" className="underline">焼印とレーザー刻印の比較</Link>にまとめています。
+          </p>
         </div>
       </section>
 
@@ -337,6 +409,14 @@ export default function SakePage() {
           </div>
         </section>
       )}
+
+      <div className="divider max-w-4xl mx-auto" />
+
+      <RelatedMasu
+        ids={['hasshaku', 'ichigo', 'goshaku']}
+        heading="日本酒に使う枡"
+        lead="もっきりには八勺枡、一合を量るなら一合枡、少量なら五勺枡。名入れはどのサイズも1個からご相談いただけます。"
+      />
 
       <div className="divider max-w-4xl mx-auto" />
 
