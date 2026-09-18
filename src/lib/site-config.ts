@@ -7,6 +7,14 @@ const siteConfig = {
   adminEmail: process.env.ADMIN_EMAIL || '',
   // Minimum order for standard masu (plain/unbranded)
   standardMasuMinOrder: 10,
+  /**
+   * 名入れ枡の「1回のご注文」の最低額（円・総額表示）。1個あたりの単価ではない。
+   * デザイン作成・仕上がりイメージ込み、送料別。税抜4,000円＝税込4,400円。
+   * 表示はすべて src/lib/pricing.ts 経由で出すので、金額・税表記はここを変えれば全ページに反映される。
+   */
+  orderMinPrice: 4400,
+  orderMinPriceTaxLabel: '税込',
+  orderMinPriceExcludingTax: 4000,
 }
 
 export default siteConfig

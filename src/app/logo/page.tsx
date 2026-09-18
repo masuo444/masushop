@@ -57,7 +57,7 @@ const methodComparison = [
 const dataCases = [
   {
     title: 'ロゴデータをお持ちの場合',
-    desc: 'そのままお送りください。枡の面の大きさと木目を見ながら、位置と大きさを組んでレイアウトをご提案します。修正は何度でも無料です。',
+    desc: 'そのままお送りください。枡の面の大きさと木目を見ながら、位置と大きさを組んでレイアウトをご提案します。ご注文前に、お見積りと一緒に仕上がりイメージを無料でお送りします。',
   },
   {
     title: 'ロゴデータが見つからない場合',
@@ -113,8 +113,8 @@ const flow = [
   },
   {
     step: '03',
-    title: 'レイアウトのご確認',
-    desc: '枡のどの面に、どの大きさで入れるかを組んでお送りします。修正は何度でも無料です。納得いただいてから製作に入ります。',
+    title: '仕上がりイメージのご確認・ご注文',
+    desc: '枡のどの面に、どの大きさで入れるかを組んだ仕上がりイメージを、お見積りと一緒に無料でお送りします。イメージと金額を見てからご注文を判断いただき、製作に入ります。',
   },
   {
     step: '04',
@@ -265,9 +265,9 @@ export default function LogoPage() {
 
         <div className="divider max-w-4xl mx-auto" />
 
-        {/* 仕上がりサンプル */}
+        {/* 仕上がり例 */}
         <section className="max-w-4xl mx-auto px-6 py-16">
-          <h2 className="section-title mb-4 text-center">刻印の仕上がりサンプル</h2>
+          <h2 className="section-title mb-4 text-center">刻印の仕上がり例</h2>
           <p
             className="lead text-center mb-10"
           >
@@ -276,7 +276,7 @@ export default function LogoPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Image
               src="/images/works/ishiwa-ashiyu-front.jpg"
-              alt="レーザー刻印でロゴを入れた一合枡のサンプル — 正面"
+              alt="レーザー刻印でロゴを入れた一合枡の仕上がり例 — 正面"
               width={1448}
               height={1086}
               className="w-full rounded-sm"

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 const faqItems = [
   {
     q: '周年記念品の枡は何個から注文できますか？',
-    a: '10個から承ります。1個からのサンプル製作も可能ですので、まずは仕上がりをご確認ください。',
+    a: '10個から承ります。ご注文前に、お見積りと一緒に仕上がりイメージ（レイアウト画像）を無料でお送りしますので、まずはイメージをご確認ください。',
   },
   {
     q: '社名とロゴを両方入れることはできますか？',
@@ -228,10 +228,10 @@ export default function AnniversaryPage() {
           </h2>
           <div className="grid sm:grid-cols-5 gap-4">
             {[
-              { step: '01', title: 'お見積り', desc: 'サイズ・数量・加工方法をお伝えください' },
-              { step: '02', title: 'デザイン確認', desc: 'レイアウトをご提案。修正は何度でも無料' },
-              { step: '03', title: 'サンプル確認', desc: '実物で仕上がりを確認（任意）' },
-              { step: '04', title: '量産・製作', desc: '一つずつ丁寧に製作' },
+              { step: '01', title: 'ご相談', desc: 'サイズ・数量・加工方法をお伝えください' },
+              { step: '02', title: '見積り＋仕上がりイメージ', desc: 'レイアウト画像を無料でお送りします' },
+              { step: '03', title: 'ご注文確定', desc: 'イメージと金額を見てから判断' },
+              { step: '04', title: '製作', desc: '一つずつ丁寧に製作' },
               { step: '05', title: '検品・納品', desc: '全品検品し梱包してお届け' },
             ].map((s) => (
               <div key={s.step} className="text-center">

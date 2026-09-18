@@ -150,7 +150,7 @@ export default function ProductsPage() {
           <div>
             <p className="text-sm font-medium mb-1">法人・大量注文のお客様</p>
             <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
-              100個以上で数量割引あり。サンプル作成・請求書払いにも対応しています。
+              10個から数量割引あり。注文前の仕上がりイメージ（無料）・請求書払いにも対応しています。
             </p>
           </div>
           <Link

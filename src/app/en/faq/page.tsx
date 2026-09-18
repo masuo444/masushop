@@ -113,8 +113,8 @@ const faqCategories = [
         a: 'Yes. We ship masu worldwide. All masu are carefully wrapped in hinoki wood shavings (a natural cushioning material) and packed securely for international transit. Contact us for shipping quotes and delivery times to your region.',
       },
       {
-        q: 'Can I order samples before placing a bulk order?',
-        a: 'Yes. We offer 1-2 sample pieces so you can evaluate the quality, size, and engraving before committing to a larger order. Contact us to request samples.',
+        q: 'Can I see what the engraving will look like before ordering?',
+        a: 'Yes. Before you order, we send a free visual mockup of your design together with the quote, so you can decide after seeing it. No artwork files are required; plain text is enough to start.',
       },
     ],
   },

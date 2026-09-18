@@ -76,7 +76,6 @@ function CustomPageInner() {
     if (purpose) updates.purpose = purpose
     if (quantity) updates.quantity = quantity
     if (size) updates.masuSize = size
-    if (type === 'sample') updates.notes = 'サンプル作成を希望します。'
     if (type === 'packaging') {
       updates.notes = '一合枡専用パッケージ（クリアケース・白箱）について相談したいです。'
     }

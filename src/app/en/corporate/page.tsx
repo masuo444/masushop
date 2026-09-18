@@ -51,7 +51,7 @@ const useCases = [
 const faqData = [
   {
     q: 'What\u2019s the minimum order?',
-    a: '10 units for plain cups, 1 unit for samples.',
+    a: '10 units for plain cups. Engraved one-off pieces can be ordered from 1 unit.',
   },
   {
     q: 'Can each cup have a different design?',
@@ -72,11 +72,11 @@ const preOrderChecks = [
   },
   {
     q: 'Do we need to supply artwork files?',
-    a: 'No. Send a photo of your logo on a business card, envelope or signage and we will rebuild the artwork. We can also start from plain text. Revisions are free, as many rounds as you need.',
+    a: 'No. Send a photo of your logo on a business card, envelope or signage and we will rebuild the artwork. We can also start from plain text. Before you order, we send a free visual mockup of your design together with the quote, so you can decide after seeing it.',
   },
   {
-    q: 'Can we approve a physical sample first?',
-    a: 'Yes. We produce samples on request so you can check engraving depth and placement on the actual product before we run the full order.',
+    q: 'Can we see the design before committing?',
+    a: 'Yes. Before you order, we send a free visual mockup of your design together with the quote. You can check placement and sizing on the cup face, circulate it internally, and decide after seeing it.',
   },
   {
     q: 'Can each unit carry different text?',
@@ -98,8 +98,8 @@ const preOrderChecks = [
 
 const steps = [
   { number: '1', title: 'Tell us what you need', description: 'Size, quantity, design \u2014 the basics.' },
-  { number: '2', title: 'We create a proof', description: 'Revisions are free.' },
-  { number: '3', title: 'Approve a sample', description: 'Optional but recommended.' },
+  { number: '2', title: 'Quote + free mockup', description: 'We send a visual mockup with your quote.' },
+  { number: '3', title: 'Confirm your order', description: 'Decide after seeing it. Invoice billing available.' },
   { number: '4', title: 'We produce, inspect, and ship', description: 'Worldwide delivery.' },
 ]
 
@@ -120,8 +120,8 @@ export default function EnCorporatePage() {
         description="Four steps to branded Japanese wooden cups for your business."
         steps={[
           { name: 'Contact us', text: 'Tell us your size, quantity, and design needs.' },
-          { name: 'Approve the proof', text: 'We create a design layout — revisions are free.' },
-          { name: 'Review a sample', text: 'Optional: approve a physical sample before production.' },
+          { name: 'Quote and free mockup', text: 'Before you order, we send a free visual mockup of your design together with the quote.' },
+          { name: 'Confirm your order', text: 'Decide after seeing the mockup and the price. Invoice billing is available for companies.' },
           { name: 'Production and delivery', text: 'We produce, inspect, and ship worldwide in 2-4 weeks.' },
         ]}
       />
@@ -149,13 +149,13 @@ export default function EnCorporatePage() {
             >
               Get a Quote
             </Link>
-            <Link
-              href="/en/contact?subject=Sample+Request"
+            <a
+              href="#how-it-works"
               className="inline-block px-8 py-3 text-sm font-medium rounded-sm border"
               style={{ borderColor: 'rgba(255,255,255,0.5)', color: '#fff' }}
             >
-              Request Samples
-            </Link>
+              How It Works
+            </a>
           </div>
         </div>
       </section>
@@ -243,13 +243,13 @@ export default function EnCorporatePage() {
           </div>
 
           <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-            Both methods work on all 7 sizes. Samples available before you commit.
+            Both methods work on all 7 sizes. A free visual mockup comes with every quote, before you commit.
           </p>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
+      <section id="how-it-works" className="py-16 md:py-20 scroll-mt-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="section-title mb-12">How It Works</h2>
 
@@ -292,8 +292,8 @@ export default function EnCorporatePage() {
               className="p-5 rounded-sm text-center"
               style={{ background: 'var(--color-subtle)', border: '1px solid var(--color-border)' }}
             >
-              <p className="font-medium mb-1">Samples</p>
-              <p className="text-sm" style={{ color: 'var(--color-muted)' }}>1&ndash;2 units for evaluation</p>
+              <p className="font-medium mb-1">Before you order</p>
+              <p className="text-sm" style={{ color: 'var(--color-muted)' }}>Free visual mockup with your quote</p>
             </div>
             <div
               className="p-5 rounded-sm text-center"
@@ -306,7 +306,7 @@ export default function EnCorporatePage() {
         </div>
       </section>
 
-      {/* Real work sample */}
+      {/* Recent work */}
       <section className="py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="section-title mb-4 text-center">Recent Work</h2>
