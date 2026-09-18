@@ -1,8 +1,12 @@
 import Link from 'next/link'
 import { getAllReviews, getAverageRating, getReviewCount } from '@/lib/reviews'
 import ReviewCard from '@/components/ui/ReviewCard'
+import SurveyReviewCard from '@/components/voice/SurveyReviewCard'
+import { getApprovedReviews } from '@/lib/approved-reviews'
 
-export default function ReviewSection() {
+export default async function ReviewSection() {
+  // 購入者アンケートで掲載に同意・承認されたものを新しい順に最大3件
+  const surveyReviews = (await getApprovedReviews()).slice(0, 3)
   const allReviews = getAllReviews()
   const avgRating = getAverageRating()
   const count = getReviewCount()
@@ -34,6 +38,14 @@ export default function ReviewSection() {
           <span style={{ color: 'var(--color-accent)' }}>{'★'.repeat(Math.round(avgRating))}</span>
           {avgRating}（{count}件のレビュー）
         </p>
+
+        {surveyReviews.length > 0 && (
+          <div className="grid gap-4 mb-8">
+            {surveyReviews.map((review) => (
+              <SurveyReviewCard key={review.id} review={review} />
+            ))}
+          </div>
+        )}
 
         {/* Review cards */}
         <div>

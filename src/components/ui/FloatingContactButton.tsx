@@ -28,6 +28,8 @@ export default function FloatingContactButton() {
 
   // 遷移先そのものでは出さない（フォーム画面で重ねて出す意味がないため）
   if (pathname === href) return null
+  // 購入者アンケート・印刷用カード・管理画面では見積りの導線を出さない
+  if (pathname.startsWith('/voice') || pathname.startsWith('/admin')) return null
   if (visibleFor === pathname) return null
 
   return (

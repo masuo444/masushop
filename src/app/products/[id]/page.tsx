@@ -6,6 +6,15 @@ import { masuSizes, sizeDetails } from '@/lib/masu-data'
 import { getReviewsByProduct } from '@/lib/reviews'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import SurveyReviewCard from '@/components/voice/SurveyReviewCard'
+import {
+  averageRating,
+  getApprovedReviewsBySize,
+  productReviewJsonLd,
+} from '@/lib/approved-reviews'
+
+// 購入者アンケートの承認分を反映するため、1時間ごとに作り直す（承認時は即時）
+export const revalidate = 3600
 
 const baseUrl = siteConfig.url
 type ProductPageProps = { params: Promise<{ id: string }> }
@@ -61,6 +70,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         ) / 10
       : null
 
+  // 構造化データの評価は、このサイズの承認済み購入者アンケートだけから作る
+  // （src/lib/reviews.ts の掲載文は構造化データに入れない）
+  const surveyReviews = await getApprovedReviewsBySize(product.id)
+  const surveyRating = averageRating(surveyReviews)
+
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -112,6 +126,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       '@type': 'WebPage',
       '@id': `${baseUrl}/products/${product.id}`,
     },
+    ...productReviewJsonLd(product.id, surveyReviews),
   }
 
   return (
@@ -438,6 +453,27 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </Link>
               {' '}をご覧ください。用途からのご相談も承ります。
             </p>
+          </section>
+        )}
+
+        {surveyReviews.length > 0 && (
+          <section className="mt-16" aria-labelledby="survey-reviews-title">
+            <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3">
+              <h2 id="survey-reviews-title" className="serif text-2xl">
+                {product.name}を購入された方の感想
+              </h2>
+              <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+                <span className="text-base font-medium" style={{ color: 'var(--color-accent)' }}>
+                  {surveyRating}
+                </span>
+                {' / 5.0'}（購入者アンケート{surveyReviews.length}件）
+              </p>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              {surveyReviews.map((review) => (
+                <SurveyReviewCard key={review.id} review={review} />
+              ))}
+            </div>
           </section>
         )}
 

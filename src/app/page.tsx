@@ -8,6 +8,9 @@ import Differentiators from '@/components/ui/Differentiators'
 
 const displayedFaqItems = faqItems.slice(0, 5)
 
+// お客様の声の欄に購入者アンケートの承認分を出すため、1時間ごとに作り直す（承認時は即時）
+export const revalidate = 3600
+
 
 export default function HomePage() {
   const baseUrl = siteConfig.url

@@ -5,6 +5,11 @@ import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 import ReviewCard from '@/components/ui/ReviewCard'
 import siteConfig from '@/lib/site-config'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import SurveyReviewCard from '@/components/voice/SurveyReviewCard'
+import { getApprovedReviews } from '@/lib/approved-reviews'
+
+// 購入者アンケートの承認分を反映するため、1時間ごとに作り直す（承認時は即時に作り直す）
+export const revalidate = 3600
 
 const avgRating = getAverageRating()
 const reviewCount = getReviewCount()
@@ -39,7 +44,8 @@ function StarRating({ rating }: { rating: number }) {
   )
 }
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const surveyReviews = await getApprovedReviews()
   const allReviews = getAllReviews()
   const avgRatingValue = getAverageRating()
   const count = getReviewCount()
@@ -69,6 +75,22 @@ export default function ReviewsPage() {
           <h1 className="section-title">お客様の声</h1>
         </div>
       </section>
+
+      {surveyReviews.length > 0 && (
+        <section className="mx-auto max-w-5xl px-6 pt-16" aria-labelledby="survey-reviews-title">
+          <h2 id="survey-reviews-title" className="serif text-xl mb-2">
+            購入者アンケートより
+          </h2>
+          <p className="text-[13px] leading-[1.9] mb-8" style={{ color: 'var(--color-muted)' }}>
+            ご購入いただいた方へのアンケートで、サイト掲載に同意いただいた感想です（{surveyReviews.length}件）。
+          </p>
+          <div className="grid gap-5 md:grid-cols-2">
+            {surveyReviews.map((review) => (
+              <SurveyReviewCard key={review.id} review={review} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Aggregate summary */}
       <section className="mx-auto max-w-5xl px-6 py-16">
