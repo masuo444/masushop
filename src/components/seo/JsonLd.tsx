@@ -188,16 +188,13 @@ export function ItemListJsonLd({
     '@type': 'ItemList',
     name,
     numberOfItems: items.length,
+    // 価格のない Product を並べると Search Console で「商品スニペットの無効なアイテム」になるため、
+    // 各商品ページへの URL を並べる一覧（概要ページ向けの形式）にする
     itemListElement: items.map((item) => ({
       '@type': 'ListItem',
       position: item.position,
-      item: {
-        '@type': 'Product',
-        name: item.name,
-        url: item.url,
-        ...(item.image && { image: item.image }),
-        ...(item.description && { description: item.description }),
-      },
+      name: item.name,
+      url: item.url,
     })),
   }
   return (

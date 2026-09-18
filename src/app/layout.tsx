@@ -92,19 +92,7 @@ const organizationJsonLd = {
   slogan: '一三〇〇年の技、一つの枡に。',
   areaServed: 'JP',
   knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸'],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: '枡商品カタログ',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '三勺枡', description: '54ml ヒノキ枡' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '五勺枡', description: '100ml ヒノキ枡' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '八勺枡', description: '144ml ヒノキ枡' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '一合枡', description: '180ml ヒノキ枡' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '二合半枡', description: '450ml ヒノキ枡' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '五合枡', description: '900ml ヒノキ枡' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: '一升枡', description: '1800ml ヒノキ枡' } },
-    ],
-  },
+
 }
 
 const localBusinessJsonLd = {
