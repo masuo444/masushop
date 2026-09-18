@@ -350,7 +350,7 @@ export default function OrderMadeForm({
           className="text-[11px] mt-4 leading-[1.9]"
           style={{ color: 'var(--color-muted)' }}
         >
-          ご相談・お見積りは無料です。しつこい営業はいたしません。
+          ご相談・お見積りは無料です。
           <br />
           メールでのご相談は {siteConfig.contactEmail} でも承ります。
         </p>

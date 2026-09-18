@@ -498,7 +498,7 @@ export default function QuickQuote({
                       {orderMinPriceShort}／デザイン作成・仕上がりイメージ込み
                     </p>
                     <p className="text-[11px] mt-2 leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
-                      ご相談・お見積りは無料です。しつこい営業はいたしません。
+                      ご相談・お見積りは無料です。
                       <br />
                       詳しく書いて相談したい方は{' '}
                       <Link href="/custom" className="underline underline-offset-4">
