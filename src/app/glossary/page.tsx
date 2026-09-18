@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
+import RelatedMasu from '@/components/ui/RelatedMasu'
 
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: '枡用語辞典 — 枡に関する用語・単位・文化を解説',
+  title: '枡・升・桝の違いと枡用語辞典｜勺・合・升・京枡・もっきり',
   description:
-    '枡（ます）に関する用語を50音順で解説。枡・升・桝の違い、勺・合・升の単位、もっきり、あられ組、焼印など、枡にまつわる専門用語から文化まで。',
+    '「升」は容積の単位、「枡」は木の器を指す国字、「桝」は異体字。勺・合・升の容量、京枡、枡座、もっきり、鏡開き、あられ組、焼印など、枡にまつわる用語を分野別に定義します。',
   keywords:
     '枡 とは,升 読み方,合 単位,勺 単位,もっきり 意味,あられ組,焼印 枡,枡 用語,枡 辞典,枡 種類,枡 サイズ,枡 単位,枡 文化,枡 歴史,ヒノキ 枡,フィトンチッド,枡酒,鏡開き 枡,節分 枡',
   alternates: { canonical: `${baseUrl}/glossary`, languages: { ja: `${baseUrl}/glossary`, en: `${baseUrl}/en/glossary` } },
@@ -24,6 +25,8 @@ type GlossaryTerm = {
   category: string
   definition: string
   related: string[]
+  /** 用語に対応するページ（商品ページ・解説ページ）があれば案内する */
+  link?: { href: string; label: string }
 }
 
 const categories = [
@@ -44,6 +47,17 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '国産ヒノキ（檜）で作られる日本の伝統的な木製の器。約1300年前から穀物や液体の計量器として使われ、現在では日本酒の酒器、ギフト、インテリア、企業ノベルティとして幅広く親しまれている。漢字では「枡」「升」「桝」の3通りの表記がある。「枡」は「木」と「升」を組み合わせた国字（日本で作られた漢字）で、木製の計量器そのものを表す。「升」は最も古い漢字で一升・一合などの単位にも使われる。「桝」は建築分野で排水桝などにも使われる表記。一般的に木製の器としては「枡」の表記が最も広く用いられている。',
     related: ['ichigo-masu', 'goshaku-masu', 'masu-no-engi'],
+    link: { href: '/products', label: '国産ヒノキ枡の商品一覧を見る' },
+  },
+  {
+    id: 'kyomasu',
+    term: '京枡（きょうます）',
+    reading: 'きょうます',
+    category: 'types',
+    definition:
+      '京都で使われていた枡を起源とする、日本の標準枡。豊臣秀吉が1582年からの太閤検地で計量の基準として全国に統一し、江戸幕府も1669年（寛文9年）に改めて公式標準と定めた。規格は「方4寸9分、深さ2寸7分」（約148.5mm四方、深さ約81.8mm）で、容量は一升＝約1.8リットル。現在の一升・一合の基準はこの京枡に由来する。',
+    related: ['issho-masu', 'shou', 'masuza'],
+    link: { href: '/history', label: '太閤検地と京枡の歴史を読む' },
   },
   {
     id: 'ichigo-masu',
@@ -53,6 +67,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '容量180ml（外寸85×85×56mm）の枡。日本酒一合分がぴったり入る最も標準的なサイズで、日本酒の酒器、名入れギフト、企業記念品、節分の豆入れなど、最も幅広い用途に使われる定番の枡。牛乳瓶1本分とほぼ同じ容量。',
     related: ['gou', 'masu', 'goshaku-masu'],
+    link: { href: '/products/ichigo', label: '一合枡の商品ページ' },
   },
   {
     id: 'goshaku-masu',
@@ -62,6 +77,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '容量100ml（外寸67×67×47mm）の枡。一合枡よりひと回り小さく、少量の日本酒をゆっくり味わいたい方や、おちょこ代わりに最適。結婚祝いのペア枡や引き出物のプチギフトとしても人気が高いサイズ。',
     related: ['shaku', 'ichigo-masu', 'masu'],
+    link: { href: '/products/goshaku', label: '五勺枡の商品ページ' },
   },
   {
     id: 'hasshaku-masu',
@@ -71,6 +87,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '容量144ml（外寸76×76×51mm）の枡。居酒屋や日本酒バーで「もっきり」スタイルに使われることが多いサイズ。グラスを枡の中に置き、日本酒を溢れさせて注ぐ提供方法にちょうどよい大きさ。乾杯枡や記念品としても使われる。',
     related: ['shaku', 'mokkiri', 'ichigo-masu'],
+    link: { href: '/products/hasshaku', label: '八勺枡の商品ページ' },
   },
   {
     id: 'sanjaku-masu',
@@ -80,6 +97,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '容量54ml（外寸56×56×39mm）の枡。全サイズの中で最も小さく、おちょこ約1杯分の容量。インテリアの飾り枡、アクセサリー入れ、ミニギフトとして人気。手のひらに収まるかわいらしいサイズ感が特徴。',
     related: ['shaku', 'masu', 'goshaku-masu'],
+    link: { href: '/products/sanjaku', label: '三勺枡の商品ページ' },
   },
   {
     id: 'nigohan-masu',
@@ -89,6 +107,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '容量450ml（外寸117×117×75mm）の枡。ペットボトル約半分の容量で、小物入れやペン立て、ディスプレイ用途に適した中型サイズ。節分の豆入れとしても手頃な大きさ。',
     related: ['gou', 'gogo-masu', 'masu'],
+    link: { href: '/products/nigohan', label: '二合半枡の商品ページ' },
   },
   {
     id: 'gogo-masu',
@@ -98,6 +117,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '容量900ml（外寸135×135×92mm）の枡。一升瓶の半分の容量で、節分の豆まきに最も一般的に使われるサイズ。家族分の豆がしっかり入り、手で持って撒きやすい。インテリアや鏡開きにも使われる。',
     related: ['gou', 'setsubun', 'issho-masu'],
+    link: { href: '/products/gogo', label: '五合枡の商品ページ' },
   },
   {
     id: 'issho-masu',
@@ -107,6 +127,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '容量1800ml（外寸170×170×92mm）の枡。一升瓶1本分がぴったり入る最も大きなサイズ。鏡開きやイベント、大型ディスプレイに使用される。神社や寺院の節分祭でも使われる迫力のある枡。',
     related: ['shou', 'kagami-biraki', 'masu'],
+    link: { href: '/products/issho', label: '一升枡の商品ページ' },
   },
 
   // ===== 単位 =====
@@ -127,6 +148,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '日本の伝統的な体積の単位で、1合＝180ml。枡や日本酒の基準となる最も重要な単位。米1合＝約150gで、炊くとお茶碗約2杯分になる。日本酒1合は一般的な徳利1本分。「一合枡」はこの1合がぴったり入るサイズとして最も広く使われている。1合＝10勺＝0.1升。',
     related: ['shaku', 'shou', 'ichigo-masu'],
+    link: { href: '/products/sizes', label: '全7サイズの容量・寸法を比較する' },
   },
   {
     id: 'shou',
@@ -163,8 +185,19 @@ const glossaryTerms: GlossaryTerm[] = [
     reading: 'やきいん',
     category: 'techniques',
     definition:
-      '約400度に熱した銅版を木の表面に押し付けて文字やデザインを焼き付ける伝統的な名入れ技法。焦げ茶色の味わいある仕上がりが特徴で、白黒（単色）のみだが温かみのある風合いが人気。大量生産に向いており、一度版を作れば高速に加工できるため、企業ノベルティや記念品に広く使われる。',
-    related: ['laser', 'masu'],
+      '約400度に熱した銅版を木の表面に押し付けて文字やデザインを焼き付ける伝統的な名入れ技法。焦げ茶色の味わいある仕上がりが特徴で、白黒（単色）のみだが温かみのある風合いが人気。大量生産に向いており、一度版を作れば高速に加工できるため、企業ノベルティや記念品に広く使われる。江戸時代には枡座が公認した枡の証として焼印が押されていた。',
+    related: ['laser', 'masuza', 'masu'],
+    link: { href: '/products/engraving', label: '焼印とレーザー刻印の比較を見る' },
+  },
+  {
+    id: 'masuza',
+    term: '枡座（ますざ）',
+    reading: 'ますざ',
+    category: 'techniques',
+    definition:
+      '江戸幕府が1669年（寛文9年）に設けた、枡の製造・検定を管理する機関。江戸の日本橋に置かれ、全国で使われる枡の寸法と品質を一元管理した。枡座が公認した枡には焼印が押され、焼印のない枡の使用は禁止された。現代の計量器検定制度の原型といえる。',
+    related: ['kyomasu', 'yakiin', 'shou'],
+    link: { href: '/history', label: '江戸時代の枡座について読む' },
   },
   {
     id: 'laser',
@@ -174,6 +207,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       'レーザー光線で木の表面を彫刻する名入れ方法。焼印では表現できない細密なデザイン、濃淡表現、写真、QRコードなどの高精度な刻印が可能。白黒のみだが繊細なグラデーション表現ができる。少量〜中量の製作に向いており、1個からのオーダーにも対応しやすい。',
     related: ['yakiin', 'masu'],
+    link: { href: '/original', label: '名入れ枡を1個から作る' },
   },
   {
     id: 'moruder',
@@ -203,6 +237,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '「盛り切り」が語源とされる、居酒屋や日本酒バーでの日本酒の提供スタイル。グラスを枡の中に置き、グラスから溢れるまで日本酒を注ぐ。枡に溜まった日本酒も楽しめるため「お得感」があり、日本酒ファンに人気の飲み方。八勺枡や一合枡が使われることが多い。',
     related: ['masu-zake', 'hasshaku-masu', 'ichigo-masu'],
+    link: { href: '/sake', label: 'もっきりの飲み方と枡の選び方を読む' },
   },
   {
     id: 'masu-zake',
@@ -221,6 +256,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       '祝い事の席で酒樽の蓋（鏡）を木槌で割り開く儀式。開運や前途を祝う意味があり、結婚披露宴、企業の周年記念、竣工式、スポーツの優勝祝賀会などで行われる。割り開いた樽酒を参加者に振る舞う際には、名入れ一合枡や八勺枡が乾杯用に配布されることが多い。',
     related: ['issho-masu', 'ichigo-masu', 'masu-zake'],
+    link: { href: '/business/ceremony', label: '式典・鏡開きの枡について' },
   },
   {
     id: 'setsubun',
@@ -268,6 +304,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       'ヒノキに含まれる天然の芳香成分のひとつ。強い抗菌・抗真菌作用を持ち、ヒノキ特有の香りの元となる物質。枡で日本酒を飲む際、この成分が微かに溶け出すことで日本酒にまろやかさを加えると言われている。化粧品や食品保存料としても利用される。',
     related: ['hinoki', 'phytoncide', 'masu-zake'],
+    link: { href: '/care', label: 'ヒノキ枡のお手入れ方法を見る' },
   },
 ]
 
@@ -315,9 +352,11 @@ export default function GlossaryPage() {
         style={{ background: 'var(--color-subtle)' }}
       >
         <div className="max-w-3xl mx-auto px-6">
-          <h1 className="section-title mb-6">枡用語辞典</h1>
-          <p data-speakable style={{ color: 'var(--color-muted)' }} className="text-sm leading-relaxed">
-            枡に関する用語・単位・文化を網羅的に解説します
+          <h1 className="section-title mb-6">枡用語辞典 — 枡・升・桝の違いから</h1>
+          <p data-speakable className="lead" style={{ color: 'var(--foreground)' }}>
+            「升」は容積の単位（1升＝約1.8リットル）、「枡」は木へんを付けて木の器そのものを指す国字、「桝」は同じ意味の異体字です。
+            このページでは、<a href="#cat-units" className="underline">勺・合・升の単位</a>、<a href="#kyomasu" className="underline">京枡</a>や<a href="#mokkiri" className="underline">もっきり</a>など、枡にまつわる用語を分野別に定義します。
+            各サイズの寸法・容量は<Link href="/products/sizes" className="underline">枡のサイズ一覧</Link>にまとめています。
           </p>
         </div>
       </section>
@@ -437,6 +476,17 @@ export default function GlossaryPage() {
                     >
                       {term.definition}
                     </p>
+                    {term.link && (
+                      <p style={{ marginBottom: '0.75rem' }}>
+                        <Link
+                          href={term.link.href}
+                          className="text-xs underline"
+                          style={{ color: 'var(--color-accent)' }}
+                        >
+                          {term.link.label} →
+                        </Link>
+                      </p>
+                    )}
                     {term.related.length > 0 && (
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
                         <span
@@ -476,6 +526,14 @@ export default function GlossaryPage() {
           </section>
         )
       })}
+
+      <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
+
+      <RelatedMasu
+        ids={['ichigo', 'hasshaku', 'goshaku', 'issho']}
+        heading="用語に出てきた枡"
+        lead="一合・八勺・五勺・一升。用語辞典で触れた代表的なサイズです。すべて国産ヒノキ、名入れは1個からご相談いただけます。"
+      />
 
       <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
 

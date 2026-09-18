@@ -5,8 +5,33 @@ import { masuSizes, selectionGuide, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import RelatedMasu from '@/components/ui/RelatedMasu'
 
 const baseUrl = siteConfig.url
+
+// 「おすすめサイズ」の文言から該当する商品ページを引く
+const sizeLinksInText: { name: string; id: string }[] = [
+  { name: '三勺枡', id: 'sanjaku' },
+  { name: '五勺枡', id: 'goshaku' },
+  { name: '八勺枡', id: 'hasshaku' },
+  { name: '一合枡', id: 'ichigo' },
+  { name: '二合半枡', id: 'nigohan' },
+  { name: '五合枡', id: 'gogo' },
+  { name: '一升枡', id: 'issho' },
+]
+
+function linkSizeNames(text: string) {
+  const pattern = new RegExp(`(${sizeLinksInText.map((s) => s.name).join('|')})`, 'g')
+  return text.split(pattern).map((part, i) => {
+    const match = sizeLinksInText.find((s) => s.name === part)
+    if (!match) return <span key={i}>{part}</span>
+    return (
+      <Link key={i} href={`/products/${match.id}`} className="underline">
+        {part}
+      </Link>
+    )
+  })
+}
 
 export const metadata: Metadata = {
   title: '枡の選び方ガイド — 用途・サイズ別おすすめ',
@@ -78,7 +103,8 @@ export default function GuidePage() {
               まず結論
             </p>
             <p className="text-sm leading-relaxed">
-              枡選びのポイントは「用途」と「サイズ」。日本酒には一合枡（180ml）、節分には五合枡（900ml）、ギフトには名入れ五勺枡がおすすめです。
+              枡選びのポイントは「用途」と「サイズ」。日本酒には<Link href="/products/ichigo" className="underline">一合枡（180ml）</Link>、節分には<Link href="/products/gogo" className="underline">五合枡（900ml）</Link>、ギフトには名入れ<Link href="/products/goshaku" className="underline">五勺枡</Link>がおすすめです。
+              全7サイズの寸法・容量は<Link href="/products/sizes" className="underline">枡のサイズ一覧</Link>、名入れ方法の違いは<Link href="/products/engraving" className="underline">焼印とレーザー刻印の比較</Link>にまとめています。
             </p>
           </div>
         </div>
@@ -110,7 +136,7 @@ export default function GuidePage() {
                   <tr key={i} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td className="py-4 px-4 font-medium whitespace-nowrap">{item.purpose}</td>
                     <td className="py-4 px-4" style={{ color: 'var(--color-accent)' }}>
-                      {item.recommended}
+                      {linkSizeNames(item.recommended)}
                     </td>
                     <td className="py-4 px-4" style={{ color: 'var(--color-muted)' }}>
                       {item.reason}
@@ -131,7 +157,7 @@ export default function GuidePage() {
               >
                 <p className="font-medium mb-2">{item.purpose}</p>
                 <p className="text-sm mb-2" style={{ color: 'var(--color-accent)' }}>
-                  {item.recommended}
+                  {linkSizeNames(item.recommended)}
                 </p>
                 <p className="text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
                   {item.reason}
@@ -173,7 +199,9 @@ export default function GuidePage() {
                 {masuSizes.map((s) => (
                   <tr key={s.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td className="py-4 px-3 font-medium">
-                      {s.name}
+                      <Link href={`/products/${s.id}`} className="hover:underline" style={{ color: 'var(--color-accent)' }}>
+                        {s.name}
+                      </Link>
                       <span
                         className="block text-xs mt-0.5"
                         style={{ color: 'var(--color-muted)' }}
@@ -205,7 +233,11 @@ export default function GuidePage() {
               >
                 <div className="flex items-baseline justify-between mb-3">
                   <div>
-                    <p className="font-medium">{s.name}</p>
+                    <p className="font-medium">
+                      <Link href={`/products/${s.id}`} className="underline" style={{ color: 'var(--color-accent)' }}>
+                        {s.name}
+                      </Link>
+                    </p>
                     <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
                       {s.reading}
                     </p>
@@ -239,7 +271,7 @@ export default function GuidePage() {
           <div className="mb-12">
             <h3 className="text-lg font-medium mb-6">枡の単位解説 — 勺・合・升の関係</h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--color-muted)' }}>
-              枡のサイズは日本の伝統的な体積の単位で表されます。基準は「合（ごう）」で、1合＝180mlです。
+              枡のサイズは日本の伝統的な体積の単位で表されます。基準は「合（ごう）」で、1合＝180mlです。単位の由来は<Link href="/glossary#gou" className="underline">枡用語辞典</Link>、京枡から現在の一升に至る経緯は<Link href="/history" className="underline">枡の歴史</Link>をご覧ください。
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm" style={{ borderCollapse: 'collapse' }}>
@@ -402,6 +434,10 @@ export default function GuidePage() {
             ))}
           </div>
 
+          <p className="text-sm leading-relaxed mb-10" style={{ color: 'var(--color-muted)' }}>
+            仕上がりの写真、版の要否、サイズ別の刻印面の大きさは<Link href="/products/engraving" className="underline" style={{ color: 'var(--color-accent)' }}>枡の名入れ方法（焼印・レーザー刻印の比較）</Link>で詳しく比較しています。名入れは<Link href="/original" className="underline" style={{ color: 'var(--color-accent)' }}>1個から</Link>、企業ロゴは<Link href="/logo" className="underline" style={{ color: 'var(--color-accent)' }}>ロゴ入れ</Link>のページをご覧ください。
+          </p>
+
           {/* 用途別おすすめ */}
           <h3 className="text-lg font-medium mb-6">用途別おすすめ加工方法</h3>
           <div className="grid md:grid-cols-2 gap-6">
@@ -433,8 +469,14 @@ export default function GuidePage() {
         </div>
       </section>
 
+      <RelatedMasu
+        ids={['ichigo', 'goshaku', 'hasshaku', 'gogo']}
+        heading="まず検討したい4サイズ"
+        lead="日本酒・ギフトには一合枡と五勺枡、もっきりには八勺枡、節分には五合枡。迷ったら一合枡を基準に選ぶのがおすすめです。"
+      />
+
       {/* FAQ */}
-      <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
+      <section id="faq" className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="section-title mb-12">よくある質問</h2>
           <div className="space-y-0">
@@ -462,6 +504,11 @@ export default function GuidePage() {
               </details>
             ))}
           </div>
+          <p className="mt-8 text-sm" style={{ color: 'var(--color-muted)' }}>
+            お手入れ・配送・決済など、すべての質問は
+            <Link href="/faq" className="underline mx-1" style={{ color: 'var(--color-accent)' }}>よくある質問</Link>
+            にまとめています。
+          </p>
         </div>
       </section>
 

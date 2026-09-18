@@ -5,13 +5,14 @@ import siteConfig from '@/lib/site-config'
 import { careGuide, faqItems } from '@/lib/masu-data'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import RelatedMasu from '@/components/ui/RelatedMasu'
 
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: '枡のお手入れ方法 — 長持ちさせる3つのポイント',
+  title: 'ヒノキ枡の手入れ方法｜洗い方・乾かし方・カビ防止の3ポイント',
   description:
-    '枡（ます）のお手入れ方法を詳しく解説。使用後の洗い方、保管方法、カビ・ヤニの対処法、洗剤の選び方まで。ヒノキ枡を長く美しく使い続けるための3つのポイントをまとめました。',
+    'ヒノキ枡の手入れは、使用後すぐ水洗い→底を上にして自然乾燥→湿気と直射日光を避けて保管の3点。無加工の枡に食器用洗剤は使わず塩や重曹で、食洗機・電子レンジは不可。カビ・ヤニの対処法、ウレタン加工枡の洗い方も解説します。',
   keywords: [
     '枡 お手入れ',
     '枡 洗い方',
@@ -25,9 +26,9 @@ export const metadata: Metadata = {
     '木枡 洗い方',
   ].join(','),
   openGraph: {
-    title: '枡のお手入れ方法 — 長持ちさせる3つのポイント',
+    title: 'ヒノキ枡の手入れ方法｜洗い方・乾かし方・カビ防止の3ポイント',
     description:
-      '枡の洗い方、保管方法、カビ・ヤニの対処法を詳しく解説。ヒノキ枡を長く美しく使い続けるための完全ガイド。',
+      '使用後すぐ水洗い→底を上にして自然乾燥→湿気と直射日光を避けて保管。カビ・ヤニの対処法、洗剤の選び方まで解説。',
     url: `${baseUrl}/care`,
     type: 'article',
     siteName: siteConfig.name,
@@ -76,10 +77,13 @@ export default function CarePage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-        <h1 className="section-title mt-4">枡のお手入れ方法</h1>
-        <p className="mt-6 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
-          ヒノキの枡は正しくお手入れすれば、何年も美しく使い続けることができます。<br />
-          3つのポイントを押さえて、枡を長持ちさせましょう。
+        <h1 className="section-title mt-4">ヒノキ枡のお手入れ方法（洗い方・保管・カビ対策）</h1>
+        <p data-speakable className="mt-6 text-sm leading-[2] max-w-2xl mx-auto text-[var(--foreground)]">
+          ヒノキ枡の手入れは、①使用後すぐに内側と飲み口を水で洗う、②底を上にして自然乾燥させる、③直射日光と湿気を避けて保管する、の3点です。
+          無加工の枡に食器用洗剤は使わず、塩や重曹で洗います。食洗機・乾燥機・電子レンジは使えません。
+        </p>
+        <p className="mt-4 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
+          正しくお手入れすれば、ヒノキの枡は何年も美しく使い続けることができます。洗い方・保管方法・カビやヤニの対処法を順に解説します。
         </p>
       </section>
 
@@ -126,10 +130,10 @@ export default function CarePage() {
               {careGuide.sections[0].content}
             </p>
             <p>
-              ヒノキに含まれる「ヒノキチオール」や「フィトンチッド」は天然の抗菌・防カビ成分です。これらの成分がヒノキ枡に殺菌作用をもたらしているため、新品の枡を特別に消毒する必要はありません。ヒノキが古くから神社仏閣の建材として重用されてきた理由のひとつが、この優れた抗菌性にあります。
+              ヒノキに含まれる「<Link href="/glossary#hinokitiol" className="underline">ヒノキチオール</Link>」や「<Link href="/glossary#phytoncide" className="underline">フィトンチッド</Link>」は天然の抗菌・防カビ成分です。これらの成分がヒノキ枡に殺菌作用をもたらしているため、新品の枡を特別に消毒する必要はありません。ヒノキが古くから神社仏閣の建材として重用されてきた理由のひとつが、この優れた抗菌性にあります。
             </p>
             <p>
-              初めて使う際にヒノキの香りが強く感じられる場合は、枡に水を入れて数分間なじませた後に捨て、乾燥させてからお使いいただくと、香りが穏やかになります。ただし、この香りこそがヒノキ枡の魅力でもありますので、お好みに合わせて調整してください。
+              初めて使う際にヒノキの香りが強く感じられる場合は、枡に水を入れて数分間なじませた後に捨て、乾燥させてからお使いいただくと、香りが穏やかになります。ただし、この香りこそがヒノキ枡の魅力でもありますので、お好みに合わせて調整してください。枡で日本酒を飲む手順や<Link href="/sake" className="underline">もっきりの作法</Link>は別ページで解説しています。
             </p>
           </div>
         </section>
@@ -217,6 +221,9 @@ export default function CarePage() {
                 </p>
               </div>
             </div>
+            <p>
+              日本酒や飲み物を繰り返し入れる枡には、水や汚れを弾いてお手入れを楽にする<Link href="/coating" className="underline">特殊コーティング加工</Link>をご注文時に選べます。
+            </p>
           </div>
         </section>
 
@@ -275,7 +282,7 @@ export default function CarePage() {
           </h2>
           <div className="space-y-4 text-sm leading-[2.2] text-[var(--foreground)]">
             <p>
-              枡の梱包に使われているヒノキの削り節（かんな屑）は、捨てずに活用できます。天然ヒノキの香りと抗菌成分を暮らしに取り入れる、3つの活用法をご紹介します。
+              枡の梱包に使われているヒノキの削り節（かんな屑）は、捨てずに活用できます。当店の<Link href="/products" className="underline">枡</Link>も、この削り節を緩衝材にして梱包しています。天然ヒノキの香りと抗菌成分を暮らしに取り入れる、3つの活用法をご紹介します。
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
               <div className="bg-[var(--color-subtle)] border border-[var(--color-border)] p-6 rounded">
@@ -327,10 +334,18 @@ export default function CarePage() {
 
       <div className="divider max-w-4xl mx-auto" />
 
+      <RelatedMasu
+        ids={['ichigo', 'hasshaku', 'goshaku']}
+        heading="お手入れして長く使う枡"
+        lead="日常使いの酒器として選ばれることが多い3サイズ。名入れした枡も、お手入れ方法は同じです。"
+      />
+
+      <div className="divider max-w-4xl mx-auto" />
+
       {/* CTA */}
       <section className="max-w-3xl mx-auto px-6 py-20 text-center">
         <p className="text-sm text-[var(--color-muted)] leading-[2] mb-8">
-          正しいお手入れで、ヒノキ枡を一生の道具に。
+          正しいお手入れで、ヒノキ枡を一生の道具に。名前を刻んだ<Link href="/original" className="underline">オリジナル枡</Link>も、名入れ方法の違いは<Link href="/products/engraving" className="underline">焼印とレーザー刻印の比較</Link>をご覧ください。
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link href="/products" className="btn-primary">

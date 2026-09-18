@@ -1,10 +1,24 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { faqItems } from '@/lib/masu-data'
+import { faqItems, masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import ReviewSection from '@/components/ui/ReviewSection'
 import Differentiators from '@/components/ui/Differentiators'
+
+export const metadata: Metadata = {
+  title: { absolute: '枡の専門店 MASU-STORE｜国産ヒノキ枡を名入れ1個から・法人10個から' },
+  description:
+    '国産ヒノキの枡を全7サイズ（三勺54ml〜一升1,800ml）。焼印・レーザー刻印の名入れ、特殊コーティング、蓋・パッケージに対応。1個からの一点もの、法人ノベルティ・周年記念・鏡開きは見積り無料、通常1〜2営業日以内にご返信します。',
+  alternates: { canonical: siteConfig.url, languages: { ja: siteConfig.url, en: `${siteConfig.url}/en` } },
+  openGraph: {
+    title: '枡の専門店 MASU-STORE｜国産ヒノキ枡を名入れ1個から・法人10個から',
+    description:
+      '国産ヒノキの枡を全7サイズ。焼印・レーザー刻印の名入れは1個から、法人ノベルティ・周年記念は10個から。見積り無料。',
+    url: siteConfig.url,
+  },
+}
 
 const displayedFaqItems = faqItems.slice(0, 5)
 
@@ -250,6 +264,78 @@ export default function HomePage() {
       {/* ===== お客様の声 ===== */}
       <ReviewSection />
 
+      {/* ===== サイズから選ぶ ===== */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem', background: 'var(--color-subtle)' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <h2 className="serif section-title" style={{ marginBottom: '0.75rem', textAlign: 'center' }}>
+            全7サイズから選ぶ
+          </h2>
+          <p className="lead text-center" style={{ marginBottom: '2.5rem' }}>
+            三勺（54ml）から一升（1,800ml）まで、すべて国産ヒノキ。
+            日本酒には一合枡、もっきりには八勺枡、節分には五合枡、鏡開きには一升枡が定番です。
+          </p>
+          <div
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}
+            className="max-md:!grid-cols-2"
+          >
+            {masuSizes.map((m) => (
+              <Link
+                key={m.id}
+                href={`/products/${m.id}`}
+                className="transition-colors hover:bg-[var(--color-accent-light)]"
+                style={{
+                  background: 'var(--background)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 2,
+                  padding: '1.25rem 1.125rem',
+                  display: 'block',
+                }}
+              >
+                <p className="serif" style={{ fontSize: '1.125rem', marginBottom: '0.25rem' }}>
+                  {m.name}
+                </p>
+                <p className="text-[11px]" style={{ color: 'var(--color-accent)', marginBottom: '0.5rem', letterSpacing: '0.1em' }}>
+                  {m.capacity}
+                </p>
+                <p className="text-[13px]" style={{ color: 'var(--color-muted)' }}>
+                  {m.size}
+                  <br />
+                  {m.capacityNote}
+                </p>
+              </Link>
+            ))}
+            <Link
+              href="/products/sizes"
+              className="transition-colors hover:bg-[var(--color-accent-light)]"
+              style={{
+                border: '1px solid var(--color-accent)',
+                background: 'var(--color-accent-light)',
+                borderRadius: 2,
+                padding: '1.25rem 1.125rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <p className="serif" style={{ fontSize: '1.125rem', marginBottom: '0.25rem', color: 'var(--color-accent)' }}>
+                サイズ比較表
+              </p>
+              <p className="text-[13px]" style={{ color: 'var(--color-muted)' }}>
+                寸法・容量・用途を一覧で比較し、用途別の選び方を解説
+              </p>
+            </Link>
+          </div>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2.5rem' }}>
+            <Link href="/products" className="btn-primary">
+              商品一覧を見る
+            </Link>
+            <Link href="/products/engraving" className="btn-outline">
+              名入れ方法（焼印・レーザー）
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ===== ご購入について ===== */}
       <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
@@ -280,7 +366,7 @@ export default function HomePage() {
                 無垢の枡
               </h3>
               <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
-                10個から注文可能。全7サイズ対応。名入れ（焼印・レーザー刻印）にも対応。まとめ買いほどお得です。100個以上のご注文やお見積りはお問い合わせフォームからご相談ください。
+                10個から注文可能。<Link href="/products" style={{ textDecoration: 'underline' }}>全7サイズ</Link>対応。<Link href="/products/engraving" style={{ textDecoration: 'underline' }}>名入れ（焼印・レーザー刻印）</Link>にも対応。まとめ買いほどお得です。100個以上のご注文やお見積りはお問い合わせフォームからご相談ください。
               </p>
               <p style={{ fontSize: '0.85rem', lineHeight: 1.9, color: 'var(--color-muted)', marginBottom: '2rem' }}>
                 1個からの名入れ・記念品をご希望の方は{' '}
@@ -383,7 +469,7 @@ export default function HomePage() {
             ))}
           </div>
           <div style={{ marginTop: '2.5rem' }}>
-            <Link href="/guide#faq" className="btn-outline">
+            <Link href="/faq" className="btn-outline">
               質問をすべて見る
             </Link>
           </div>
