@@ -1,54 +1,18 @@
+import Image from 'next/image'
+import styles from './Differentiators.module.css'
+
 const points = [
-  {
-    label: '1個から',
-    title: '1個からお作りします',
-    desc: '名入れをする一点ものは1個から承ります。「1個だけ頼めるところが見つからない」という理由でご相談いただくことがよくあります。無地の枡をまとめて買う場合は10個からです。',
-  },
-  {
-    label: 'データ不要',
-    title: 'メッセージを送るだけで、デザインまで',
-    desc: '入れたい文章・お名前・日付をお送りいただければ、書体選び・レイアウト・配置までこちらで組みます。デザインデータをご用意いただく必要はありません。ご注文を決める前に、お見積りと一緒に仕上がりイメージを無料でお送りします。イメージを見てからご注文を判断できます。',
-  },
-  {
-    label: '国産ヒノキ',
-    title: '国産ヒノキに、職人の手で',
-    desc: '印刷した既製品ではなく、1300年使われてきた木の器そのものに刻みます。手に取ったときのヒノキの香りと木目が、贈り物としての価値を決めます。',
-  },
+  { label: '1個から', title: 'たったひとつの、贈りもの。', desc: 'お名前やメッセージを刻んだ、一点ものの枡。大切な人への贈りものも、自分だけの一品も、1個からお作りします。', note: '名入れは1個から。無地の枡は10個から。' },
+  { label: 'データ不要', title: '言葉を送る。想いが形になる。', desc: '入れたい文章・お名前・日付を送るだけ。書体選びからレイアウトまで、デザインは私たちにお任せください。', note: 'お見積りと仕上がりイメージは、ご注文前に無料で。' },
+  { label: '国産ヒノキ', title: '木のぬくもりに、職人の技を。', desc: '国産ヒノキの香りと、一つずつ異なる木目。職人が丁寧に名入れを施し、手に取るたびに愛着が深まる一品に仕上げます。', note: '1300年受け継がれてきた、日本の木の器。' },
 ]
 
-export default function Differentiators({
-  heading = 'この3つが、選ばれている理由です',
-  className = '',
-}: {
-  heading?: string
-  className?: string
-}) {
-  return (
-    <section className={`max-w-4xl mx-auto px-6 py-16 ${className}`}>
-      <h2 className="section-title mb-10 text-center">{heading}</h2>
-      <div className="grid gap-5 md:grid-cols-3">
-        {points.map((point) => (
-          <div
-            key={point.label}
-            className="rounded-sm p-6"
-            style={{
-              background: 'var(--color-subtle)',
-              border: '1px solid var(--color-border)',
-            }}
-          >
-            <p
-              className="text-[11px] tracking-[0.18em] mb-3"
-              style={{ color: 'var(--color-accent)' }}
-            >
-              {point.label}
-            </p>
-            <h3 className="serif text-lg mb-3">{point.title}</h3>
-            <p className="text-sm leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
-              {point.desc}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
+export default function Differentiators({ heading = 'この3つが、選ばれている理由です', className = '' }: { heading?: string; className?: string }) {
+  return <section id="reasons" className={`${styles.section} ${className}`} aria-labelledby="reasons-title">
+    <header className={styles.header}><p className={styles.eyebrow}>WHY MASU-STORE</p><h2 id="reasons-title" className="section-title">{heading === 'この3つが、選ばれている理由です' ? <><span>この3つが、</span><span>選ばれている理由です</span></> : heading}</h2></header>
+    <div className={styles.grid}>{points.map((point,index)=><article className={styles.card} key={point.label}>
+      <div className={styles.visual}><span className={styles.number}>0{index+1}</span><Image src={`/images/reasons/${['single-masu','design-masu','hinoki-masu'][index]}.webp`} alt="" width={900} height={600} sizes="(max-width: 767px) 100vw, 33vw" className={styles.illustration}/><span className={styles.label}>{point.label}</span></div>
+      <div className={styles.copy}><h3>{point.title}</h3><p>{point.desc}</p><p className={styles.note}>{point.note}</p></div>
+    </article>)}</div>
+  </section>
 }

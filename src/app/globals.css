@@ -36,7 +36,10 @@ body {
 }
 
 /* Links */
-a { color: inherit; }
+/* Keep the default below utility colors such as text-white. */
+@layer base {
+  a { color: inherit; }
+}
 
 /* Buttons — elegant, not template-y */
 .btn-primary {
@@ -255,3 +258,42 @@ details summary::marker {
     overflow-x: visible;
   }
 }
+
+/* Small usability improvements; preserve the existing visual design. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.home-hero a:focus-visible { outline-color: #FAFAF7; }
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.site-main section[id] { scroll-margin-top: 100px; }
+.site-main details[open] summary > span:last-child { transform: rotate(45deg); }
+@media (max-width: 767px) {
+  .home-hero-grid { padding-top: 1.5rem !important; gap: 1.5rem !important; }
+  .home-hero-title { font-size: 1.375rem !important; letter-spacing: 0 !important; }
+  .home-hero-choices > a { padding: .875rem !important; }
+  .home-hero-choices .serif { font-size: 1rem !important; }
+  .home-hero-price { text-align: left; }
+}
+@media (max-width: 359px) {
+  .home-hero-choices { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Product selection cards share the homepage's understated warm palette. */
+.product-size-card { background: var(--color-subtle) !important; }
+.product-size-card:hover, .product-size-card:focus-visible { border-color: var(--color-accent) !important; }
+.product-size-card dl > div { padding: 5px 0; }
+.product-size-card dt { min-width: 2.5em; }

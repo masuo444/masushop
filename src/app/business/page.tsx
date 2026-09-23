@@ -24,15 +24,6 @@ export const metadata: Metadata = {
 }
 
 // ── 数量別単価テーブル（税別） ──
-const volumePricing = [
-  { size: '三勺枡', capacity: '54ml', p10: 500, p50: 475, p100: 450, p300: 425 },
-  { size: '五勺枡', capacity: '100ml', p10: 600, p50: 570, p100: 540, p300: 510 },
-  { size: '八勺枡', capacity: '144ml', p10: 700, p50: 665, p100: 630, p300: 595 },
-  { size: '一合枡', capacity: '180ml', p10: 800, p50: 760, p100: 720, p300: 680 },
-  { size: '二合半枡', capacity: '450ml', p10: 1200, p50: 1140, p100: 1080, p300: 1020 },
-  { size: '五合枡', capacity: '900ml', p10: 1800, p50: 1710, p100: 1620, p300: 1530 },
-  { size: '一升枡', capacity: '1800ml', p10: 2500, p50: 2375, p100: 2250, p300: 2125 },
-]
 
 // ── 納期 ──
 const deliveryTimelines = [
@@ -262,7 +253,7 @@ export default function BusinessPage() {
               className="inline-block px-8 py-4 text-xs tracking-[0.15em] uppercase font-medium rounded-sm transition-opacity hover:opacity-85"
               style={{ background: '#fff', color: 'var(--color-accent)' }}
             >
-              30秒でかんたん見積り
+              無料で見積りを依頼
             </Link>
             <a
               href="#flow"
@@ -330,103 +321,6 @@ export default function BusinessPage() {
       </section>
 
       <div className="divider mx-auto max-w-5xl" />
-
-      {/* ━━━ 数量別価格表 ━━━ */}
-      <section id="pricing" className="py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
-            Volume Pricing
-          </p>
-          <h2 className="section-title text-center mb-4">数量別価格表</h2>
-          <p className="text-xs text-center mb-12 leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-            まとめ買いほどお得に。500個以上は個別にお見積りいたします。
-            <br />
-            表示価格は枡本体の税別単価です。名入れ・コーティング等のオプションは別途。
-          </p>
-
-          <div className="overflow-x-auto table-cards-wrap">
-            <table className="w-full text-sm table-cards" style={{ borderCollapse: 'collapse' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
-                  <th className="text-left py-3 pr-3 text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    サイズ
-                  </th>
-                  <th className="text-center py-3 px-3 text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    10〜49個
-                  </th>
-                  <th className="text-center py-3 px-3 text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    50〜99個
-                  </th>
-                  <th
-                    className="text-center py-3 px-3 text-xs font-medium rounded-t-sm"
-                    style={{ color: 'var(--color-accent)', background: 'var(--color-accent-light)' }}
-                  >
-                    100〜299個
-                  </th>
-                  <th className="text-center py-3 px-3 text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    300〜499個
-                  </th>
-                  <th className="text-center py-3 px-3 text-xs font-medium" style={{ color: 'var(--color-muted)' }}>
-                    500個〜
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {volumePricing.map((row) => (
-                  <tr key={row.size} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td className="py-3 pr-3">
-                      <span className="text-xs font-medium">{row.size}</span>
-                      <span className="text-[10px] ml-1" style={{ color: 'var(--color-muted)' }}>
-                        {row.capacity}
-                      </span>
-                    </td>
-                    <td className="text-center py-3 px-3 text-xs" data-label="10〜49個">&yen;{row.p10.toLocaleString()}</td>
-                    <td className="text-center py-3 px-3 text-xs" data-label="50〜99個">&yen;{row.p50.toLocaleString()}</td>
-                    <td
-                      className="text-center py-3 px-3 text-xs font-medium"
-                      style={{ color: 'var(--color-accent)', background: 'var(--color-accent-light)' }}
-                      data-label="100〜299個"
-                    >
-                      &yen;{row.p100.toLocaleString()}
-                    </td>
-                    <td className="text-center py-3 px-3 text-xs" data-label="300〜499個">
-                      &yen;{row.p300.toLocaleString()}
-                    </td>
-                    <td
-                      className="text-center py-3 px-3 text-xs"
-                      style={{ color: 'var(--color-muted)' }}
-                      data-label="500個以上"
-                    >
-                      別途見積
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="mt-6 space-y-1">
-            {[
-              '名入れ（焼印・レーザー刻印）：内容と数量に応じてお見積り',
-              'コーティング：+¥800/個',
-              '蓋オプション：三勺枡 +¥800/個、一合枡 +¥1,000/個',
-            ].map((note) => (
-              <p key={note} className="text-[11px] leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-                ※ {note}
-              </p>
-            ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
-            <Link href="#quote" className="btn-accent">
-              この数量でお見積り
-            </Link>
-            <Link href="/business/catalog" className="btn-outline">
-              PDFカタログを見る
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* ━━━ 導入事例 ━━━ */}
       <section
@@ -647,10 +541,10 @@ export default function BusinessPage() {
         </div>
       </section>
 
-      {/* ━━━ 30秒かんたん見積り ━━━ */}
+      {/* ━━━ かんたん見積り依頼 ━━━ */}
       <QuickQuote
         formType="business"
-        heading="30秒かんたん見積り"
+        heading="かんたん見積り依頼"
         lead="用途・サイズ・数量・加工を選んで送るだけ。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。希望納期や分納などの詳細は、お問い合わせフォームからもご相談いただけます。"
       />
     </>

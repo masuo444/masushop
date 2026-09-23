@@ -26,11 +26,11 @@ export const metadata: Metadata = {
 const baseUrl = siteConfig.url
 
 const purposeGroups = [
-  { label: '日本酒', purpose: '日本酒' },
-  { label: 'ギフト', purpose: 'ギフト' },
-  { label: 'ノベルティ', purpose: 'ノベルティ' },
-  { label: '行事', purpose: '行事' },
-  { label: 'インテリア', purpose: 'インテリア' },
+  { label: '日本酒', purpose: '日本酒', id: 'sake' },
+  { label: 'ギフト', purpose: 'ギフト', id: 'gifts' },
+  { label: 'ノベルティ', purpose: 'ノベルティ', id: 'corporate' },
+  { label: '行事', purpose: '行事', id: 'events' },
+  { label: 'インテリア', purpose: 'インテリア', id: 'interior' },
 ]
 
 function StarRating({ rating }: { rating: number }) {
@@ -178,7 +178,8 @@ export default async function ReviewsPage() {
           {purposeGroups.map((g) => {
             const groupCount = allReviews.filter((r) => r.purpose === g.purpose).length
             return (
-              <span
+              <a
+                href={`#${g.id}`}
                 key={g.purpose}
                 style={{
                   fontSize: '0.75rem',
@@ -189,7 +190,7 @@ export default async function ReviewsPage() {
                 }}
               >
                 {g.label}（{groupCount}）
-              </span>
+              </a>
             )
           })}
         </div>
@@ -214,7 +215,7 @@ export default async function ReviewsPage() {
         if (groupReviews.length === 0) return null
 
         return (
-          <section key={group.purpose} className="mx-auto max-w-5xl px-6 py-12">
+          <section id={group.id} key={group.purpose} className="mx-auto max-w-5xl px-6 py-12">
             <h2
               className="serif"
               style={{
@@ -228,7 +229,7 @@ export default async function ReviewsPage() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
                 gap: '1.5rem',
               }}
             >

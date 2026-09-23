@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { faqItems, masuSizes } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
-import { orderMinPriceNote } from '@/lib/pricing'
+import { orderMinPriceText } from '@/lib/pricing'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import ReviewSection from '@/components/ui/ReviewSection'
 import Differentiators from '@/components/ui/Differentiators'
@@ -51,6 +51,7 @@ export default function HomePage() {
 
       {/* ===== HERO ===== */}
       <section
+        className="home-hero"
         style={{
           background: '#2C2420',
           color: '#FAFAF7',
@@ -66,7 +67,7 @@ export default function HomePage() {
             gap: 'clamp(2rem, 5vw, 5rem)',
             alignItems: 'center',
           }}
-          className="max-md:!grid-cols-1 max-md:!text-center"
+          className="home-hero-grid max-md:!grid-cols-1 max-md:!text-center"
         >
           <div>
             <p
@@ -80,7 +81,7 @@ export default function HomePage() {
               国産ヒノキ枡の専門店 MASU-STORE
             </p>
             <h1
-              className="serif"
+              className="serif home-hero-title"
               data-speakable
               style={{
                 fontSize: 'clamp(1.5rem, 2.6vw, 2rem)',
@@ -125,7 +126,7 @@ export default function HomePage() {
             {/* 入口を2つに分ける */}
             <div
               style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', maxWidth: 480 }}
-              className="max-md:!mx-auto max-sm:!grid-cols-1"
+              className="home-hero-choices max-md:!mx-auto"
             >
               <Link
                 href="/original"
@@ -159,19 +160,22 @@ export default function HomePage() {
               </Link>
             </div>
             <p
-              className="text-[13px] max-md:!mx-auto"
+              className="home-hero-price text-[13px] max-md:!mx-auto"
               style={{ color: '#C8C1B8', marginTop: '1rem', maxWidth: 480, lineHeight: 1.8 }}
             >
-              {orderMinPriceNote}
+              <strong className="font-medium" style={{ color: '#FAFAF7' }}>名入れのご注文は {orderMinPriceText}</strong>
+              <br />
+              デザイン作成と仕上がりイメージ込み。データのご用意は不要です。2個目以降は割安になります。
             </p>
           </div>
           <div className="max-md:!order-first">
             <Image
-              src="/images/masu-crest.jpg"
-              alt="国産ヒノキ枡 — 枡の専門店 MASU-STORE"
-              width={600}
-              height={600}
+              src="/images/masu-hero-generated.webp"
+              alt="植物柄を刻んだヒノキ枡のイメージ"
+              width={1200}
+              height={800}
               priority
+              sizes="(max-width: 767px) 190px, 440px"
               className="max-md:!max-w-[190px]"
               style={{
                 width: '100%',
@@ -214,49 +218,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== 30秒かんたん見積り ===== */}
+      {/* ===== かんたん見積り依頼 ===== */}
       <QuickQuote />
-
-      {/* ===== 制作事例 ===== */}
-      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 1.5rem', background: 'var(--color-subtle)' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <h2 className="serif section-title" style={{ marginBottom: '0.75rem', textAlign: 'center' }}>
-            制作事例
-          </h2>
-          <p className="lead text-center" style={{ marginBottom: '2.5rem' }}>
-            石和源泉 足湯ひろば様の枡です（掲載許可をいただいています）。
-            レーザー刻印なら、ロゴの線も木目とともにこの精度で刻めます。
-          </p>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '1rem',
-            }}
-            className="max-sm:!grid-cols-1"
-          >
-            {[
-              { src: '/images/works/ishiwa-ashiyu-front.jpg', alt: 'レーザー刻印を施した一合枡 — 正面', w: 1448, h: 1086 },
-              { src: '/images/works/ishiwa-ashiyu-detail.jpg', alt: 'レーザー刻印の彫りの質感 — 木目とともに再現', w: 1536, h: 1024 },
-              { src: '/images/works/ishiwa-ashiyu-hand.jpg', alt: '手のひらに載る一合枡のサイズ感', w: 1448, h: 1086 },
-            ].map((img) => (
-              <Image
-                key={img.src}
-                src={img.src}
-                alt={img.alt}
-                width={img.w}
-                height={img.h}
-                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 2 }}
-              />
-            ))}
-          </div>
-          <p style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link href="/logo" style={{ textDecoration: 'underline', color: 'var(--color-accent)', fontSize: '0.9375rem' }}>
-              ロゴ入れの詳細を見る →
-            </Link>
-          </p>
-        </div>
-      </section>
 
       {/* ===== ご依頼の流れ ===== */}
       <OrderFlow background="plain" />
@@ -391,7 +354,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== ご購入について ===== */}
-      <section style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
+      <section id="purchase" style={{ padding: 'clamp(4rem, 8vw, 7rem) 1.5rem' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
           <h2
             className="serif section-title"
@@ -409,6 +372,7 @@ export default function HomePage() {
           >
             {/* 無垢の枡 */}
             <div>
+              <Image src="/images/purchase/plain-masu.webp" alt="" width={1000} height={667} sizes="(max-width: 767px) 100vw, 450px" style={{ width: '100%', height: 'auto', aspectRatio: '3 / 2', objectFit: 'contain', borderRadius: 3, marginBottom: '1.5rem' }} />
               <h3
                 className="serif"
                 style={{
@@ -452,6 +416,7 @@ export default function HomePage() {
 
             {/* オリジナル枡 */}
             <div>
+              <Image src="/images/purchase/custom-masu.webp" alt="" width={1000} height={667} sizes="(max-width: 767px) 100vw, 450px" style={{ width: '100%', height: 'auto', aspectRatio: '3 / 2', objectFit: 'contain', borderRadius: 3, marginBottom: '1.5rem' }} />
               <h3
                 className="serif"
                 style={{
@@ -551,7 +516,7 @@ export default function HomePage() {
           >
             お見積り・ご相談
           </h2>
-          <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: '#A09A92', marginBottom: '2.5rem' }}>
+          <p style={{ fontSize: '0.9rem', lineHeight: 1.9, color: '#C8C1B8', marginBottom: '2.5rem' }}>
             入れたい文章と個数の目安だけで構いません。
             <br />
             お見積りと一緒に、仕上がりイメージを無料でお送りします。
@@ -562,7 +527,7 @@ export default function HomePage() {
               className="btn-primary"
               style={{ background: '#FAFAF7', color: '#2C2420' }}
             >
-              30秒でかんたん見積り
+              無料で見積りを依頼
             </Link>
             <Link
               href="/custom"

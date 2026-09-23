@@ -21,6 +21,7 @@ const enNavLinks: NavLink[] = [
   { href: '/en/sake-cups', label: 'Sake Cups' },
   { href: '/en/gifts', label: 'Gifts' },
   { href: '/en/corporate', label: 'Corporate' },
+  { href: '/en/shipping', label: 'Shipping' },
   { href: '/en/guide', label: 'Guide' },
   { href: '/en/faq', label: 'FAQ' },
 ]
@@ -43,7 +44,7 @@ export default function Header() {
   const isEnglish = isEnglishPath(pathname)
   const navLinks = isEnglish ? enNavLinks : jaNavLinks
   const homeHref = isEnglish ? '/en' : '/'
-  const contactHref = isEnglish ? '/en/contact' : '/custom'
+  const contactHref = isEnglish ? '/en/contact' : pathname === '/' ? '#quote' : '/custom'
   const contactLabel = isEnglish ? 'Contact' : '無料で見積り'
   const menuLabel = isEnglish ? 'Menu' : 'メニュー'
 
@@ -51,6 +52,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
   const productsRef = useRef<HTMLDivElement>(null)
   const productsMenuId = useId()
   const mobileProductsMenuId = useId()
@@ -68,6 +71,30 @@ export default function Header() {
       document.body.style.overflow = ''
     }
     return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+      if (event.key !== 'Tab') return
+      const links = Array.from(mobileMenuRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [])
+        .filter((element) => element.tabIndex >= 0 && element.getClientRects().length > 0)
+      const first = menuButtonRef.current
+      const last = links.at(-1)
+      if (event.shiftKey && document.activeElement === first && last) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last && first) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
   // ドロップダウン：外側クリックと Esc で閉じる
@@ -113,7 +140,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8" aria-label="メインナビゲーション">
+          <nav className="hidden xl:flex items-center gap-8" aria-label="メインナビゲーション">
             {navLinks.map((link) => {
               if (!isEnglish && link.href === '/products') {
                 return (
@@ -135,7 +162,7 @@ export default function Header() {
                       </Link>
                       <button
                         type="button"
-                        className="p-1 text-[var(--foreground)]/50 hover:text-[var(--foreground)] transition-colors"
+                        className="min-w-11 min-h-11 flex items-center justify-center p-1 text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors"
                         aria-label="商品一覧のメニューを開く"
                         aria-haspopup="true"
                         aria-expanded={productsOpen}
@@ -255,7 +282,7 @@ export default function Header() {
           </nav>
 
           {/* Mobile: menu */}
-          <div className="lg:hidden flex items-center gap-3">
+          <div className="xl:hidden flex items-center gap-3">
             <Link
               href={contactHref}
               className="text-xs px-4 py-2 rounded-sm font-medium transition-opacity hover:opacity-85 whitespace-nowrap"
@@ -264,7 +291,8 @@ export default function Header() {
               {contactLabel}
             </Link>
             <button
-              className="p-2 text-[var(--foreground)]/50"
+              className="min-w-11 min-h-11 flex items-center justify-center p-2 text-[var(--foreground)]/70"
+              ref={menuButtonRef}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuLabel}
               aria-expanded={menuOpen}
@@ -285,10 +313,12 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`fixed inset-0 top-16 md:top-20 z-40 lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 top-16 md:top-20 z-40 xl:hidden transition-opacity duration-300 ${
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
+        ref={mobileMenuRef}
         aria-hidden={!menuOpen}
+        inert={!menuOpen}
       >
         <div className="absolute inset-0 bg-black/20" onClick={() => setMenuOpen(false)} />
         <div
@@ -312,7 +342,7 @@ export default function Header() {
                       </Link>
                       <button
                         type="button"
-                        className="p-2 text-[var(--foreground)]/50"
+                        className="min-w-11 min-h-11 flex items-center justify-center p-2 text-[var(--foreground)]/70"
                         aria-label="サイズ別の商品ページを表示"
                         aria-expanded={mobileProductsOpen}
                         aria-controls={mobileProductsMenuId}

@@ -9,13 +9,16 @@ import RelatedMasu from '@/components/ui/RelatedMasu'
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: '枡酒・もっきりとは｜枡で日本酒を飲む作法とおすすめの枡',
+  title: '枡酒とは｜もっきりとの違い・枡で日本酒を飲む作法とおすすめの枡',
   description:
-    'もっきり（盛り切り）は枡の中に置いたグラスに日本酒を溢れるまで注ぐ居酒屋の提供スタイル。語源・飲み方の手順・枡の塩の作法・ヒノキの香りで美味しくなる理由と、自宅のもっきりに向く八勺枡・一合枡の選び方を解説します。',
+    '枡酒（ますざけ）とは、木の枡に日本酒を注いで飲むこと。枡に置いたグラスから溢れさせる「もっきり」との違い、飲み方の手順、枡の塩の作法、ヒノキの香りで香りが変わる理由、そして枡酒におすすめのサイズ（八勺枡144ml・一合枡180ml）を、枡の専門店が解説します。',
   keywords: [
+    '枡酒',
+    '枡酒とは',
+    'ます酒',
     '枡 日本酒',
     'もっきり',
-    '枡酒',
+    '日本酒 枡 おすすめ',
     '枡 飲み方',
     'もっきり 作法',
     '枡 日本酒 なぜ美味しい',
@@ -41,7 +44,7 @@ export const metadata: Metadata = {
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: '枡酒・もっきりとは｜枡で日本酒を飲む作法とおすすめの枡',
+  headline: '枡酒とは｜もっきりとの違い・枡で日本酒を飲む作法とおすすめの枡',
   description:
     'もっきり（盛り切り）の定義と飲み方、ヒノキの香り成分による科学的根拠、枡の塩の伝統、自宅のもっきりに向く枡の選び方まで解説。',
   author: { '@type': 'Organization', name: siteConfig.name },
@@ -89,11 +92,14 @@ export default function SakePage() {
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-        <h1 className="section-title mt-4">枡と日本酒 — もっきり・枡酒の作法</h1>
+        <h1 className="section-title mt-4">枡酒とは — 枡で日本酒を飲む作法</h1>
         <p data-speakable className="mt-6 text-sm leading-[2] max-w-2xl mx-auto text-[var(--foreground)]">
-          もっきり（盛り切り）は、枡の中に置いたグラスに日本酒を溢れるまで注ぐ、居酒屋や日本酒バーの提供スタイルです。
-          グラスから溢れた分は枡で受け、グラスを飲み終えたあとに枡へ残った酒をヒノキの香りとともに味わいます。
-          使われる枡は<Link href="/products/hasshaku" className="underline">八勺枡（144ml）</Link>と<Link href="/products/ichigo" className="underline">一合枡（180ml）</Link>が定番で、一杯あたり一合前後を注ぐ店が多く見られます。
+          枡酒（ますざけ）とは、木の枡に日本酒を注いで飲むことです。国産ヒノキの枡に注ぐと、木の香りが日本酒の香りに重なり、同じ酒でもグラスとは違う味わいになります。祝いの席や鏡開きで枡が使われるのは、枡が「増す」に通じる縁起物だからです。
+        </p>
+        <p className="mt-4 text-sm leading-[2] max-w-2xl mx-auto text-[var(--foreground)]">
+          よく混同される「もっきり（盛り切り）」は、枡の中に置いたグラスに日本酒を溢れるまで注ぐ、居酒屋や日本酒バーの提供スタイルのこと。<strong>枡に直接注ぐのが枡酒、枡に置いたグラスに注いで溢れさせるのがもっきり</strong>です。
+          もっきりでは、グラスから溢れた分を枡で受け、グラスを飲み終えたあとに枡へ残った酒をヒノキの香りとともに味わいます。
+          どちらにも使われるのは<Link href="/products/hasshaku" className="underline">八勺枡（144ml）</Link>と<Link href="/products/ichigo" className="underline">一合枡（180ml）</Link>で、一杯あたり一合前後を注ぐ店が多く見られます。
         </p>
         <p className="mt-4 text-sm text-[var(--color-muted)] leading-[2] max-w-2xl mx-auto">
           このページでは、枡で飲むと美味しい理由、もっきりの飲み方、枡の塩の作法、自宅でもっきりを楽しむための枡の選び方を解説します。
@@ -234,10 +240,14 @@ export default function SakePage() {
       {/* サイズ別おすすめ */}
       <section className="max-w-3xl mx-auto px-6 py-20">
         <h2 className="serif text-2xl font-light mb-8">
-          日本酒用途のサイズ別おすすめ
+          日本酒におすすめの枡 — サイズ別の選び方
         </h2>
-        <p className="text-sm leading-[2.2] text-[var(--foreground)] mb-8">
-          日本酒を枡で楽しむなら、五勺枡・八勺枡・一合枡の3サイズが候補になります。飲むシーンや好みに合わせてお選びください。
+        <p data-speakable className="text-sm leading-[2.2] text-[var(--foreground)] mb-4">
+          日本酒を枡で飲むなら、<strong>初めての1つは一合枡（180ml）</strong>が確実です。日本酒一合がちょうど入り、もっきりにも直接注ぐ枡酒にも使えます。
+          少量をゆっくり味わいたいなら五勺枡（90ml）、居酒屋のもっきりを再現したいなら八勺枡（144ml）を選んでください。
+        </p>
+        <p className="text-sm leading-[2.2] text-[var(--color-muted)] mb-8">
+          いずれも国産ヒノキ。名入れは1個から承っています（デザイン料込み4,400円〜・税込）。お酒を毎日注ぐ場合は、においや色が移りにくい<Link href="/coating" className="underline">特殊コーティング</Link>もお選びいただけます。
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {sakeSizes.map((size) => (

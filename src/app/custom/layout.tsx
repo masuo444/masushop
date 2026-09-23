@@ -27,8 +27,8 @@ export default function CustomLayout({
   return (
     <>
       <BreadcrumbJsonLd items={[
-        { name: 'ホーム', href: '/' },
-        { name: '名入れ・オーダーメイド', href: '/custom' },
+        { name: 'ホーム', href: baseUrl },
+        { name: '名入れ・オーダーメイド', href: `${baseUrl}/custom` },
       ]} />
       {children}
     </>

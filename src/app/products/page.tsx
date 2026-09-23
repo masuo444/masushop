@@ -51,10 +51,11 @@ export default function ProductsPage() {
         style={{ borderBottom: '1px solid var(--color-border)' }}
       >
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <h1 className="section-title mb-6">国産ヒノキ枡 全7サイズ 商品一覧</h1>
+          <h1 className="section-title mb-6"><span className="inline-block">国産ヒノキ枡</span>{' '}<span className="inline-block">全7サイズ 商品一覧</span></h1>
           <p data-speakable className="lead">
-            取り扱う枡は三勺（54ml）・五勺（100ml）・八勺（144ml）・一合（180ml）・二合半（450ml）・五合（900ml）・一升（1,800ml）の7サイズ。すべて国産ヒノキです。
-            無地の枡は10個から、名入れは1個からご相談いただけます。下のカードから寸法・用途をご確認のうえ、サイズ・数量・名入れの有無をお知らせください。
+            三勺（54ml）から一升（1,800ml）まで、すべて国産ヒノキ。
+            無地は10個から、名入れは1個からご相談いただけます。
+            容量・寸法・用途を見比べて、お使いになる場面に合う枡をお選びください。
           </p>
         </div>
       </section>
@@ -74,14 +75,15 @@ export default function ProductsPage() {
             <Link
               key={m.id}
               href={`/products/${m.id}`}
-              className="block rounded-sm p-6 transition-colors hover:bg-[var(--color-subtle)]"
+              className="product-size-card block rounded-sm p-6 transition-colors"
               style={{ border: '1px solid var(--color-border)', background: 'var(--background)' }}
             >
-              <p className="serif text-lg mb-1">{m.name}</p>
+              <p className="text-xs tracking-[.12em] mb-3" style={{color:'var(--color-accent)'}}>{m.capacity}</p>
+              <h3 className="serif text-xl mb-2">{m.name}</h3>
               <p className="text-xs mb-3" style={{ color: 'var(--color-muted)' }}>
                 {m.reading} ／ {m.capacity}（{m.capacityNote}）
               </p>
-              <dl className="mb-3 text-xs" style={{ color: 'var(--color-muted)' }}>
+              <dl className="mb-3 text-sm leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
                 <div className="flex gap-2">
                   <dt>外寸</dt>
                   <dd>{m.size}</dd>
@@ -97,7 +99,7 @@ export default function ProductsPage() {
                   </div>
                 )}
               </dl>
-              <p className="text-xs leading-relaxed mb-4">{m.description}</p>
+              <p className="text-sm leading-[1.9] mb-4">{m.description}</p>
               <span className="text-xs underline" style={{ color: 'var(--color-accent)' }}>
                 {m.name}の詳細・お見積り →
               </span>

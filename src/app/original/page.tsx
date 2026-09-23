@@ -202,7 +202,7 @@ export default function OriginalPage() {
               className="inline-block px-8 py-3 text-sm text-white rounded-sm"
               style={{ backgroundColor: 'var(--color-accent)' }}
             >
-              30秒でかんたん見積り（無料）
+              無料で見積りを依頼
             </Link>
             <p
               className="text-[11px] mt-4"
@@ -371,10 +371,10 @@ export default function OriginalPage() {
         {/* Flow */}
         <OrderFlow heading="ご相談から完成まで" />
 
-        {/* 30秒かんたん見積り */}
+        {/* かんたん見積り依頼 */}
         <QuickQuote
           formType="original"
-          lead="4つ選んで送るだけ。「こんなことできますか？」の段階でも構いません。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+          lead="4項目の選択と連絡先の入力で依頼できます。「こんなことできますか？」の段階でも構いません。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
         />
 
         {/* FAQ */}

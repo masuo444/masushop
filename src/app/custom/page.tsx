@@ -53,7 +53,7 @@ const initialFormData: FormData = {
 
 export default function CustomPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<section className="px-6 py-20 text-center"><h1 className="section-title mb-4">名入れ・オーダーメイド枡</h1><p className="text-sm leading-8">お見積り・ご相談は無料です。フォームを読み込んでいます。</p></section>}>
       <CustomPageInner />
     </Suspense>
   )
@@ -172,7 +172,7 @@ function CustomPageInner() {
   }
 
   const labelClass = 'block text-sm font-medium mb-2'
-  const inputClass = 'w-full px-4 py-3 rounded-sm text-sm outline-none transition-colors focus:border-[var(--color-accent)]'
+  const inputClass = 'w-full px-4 py-3 rounded-sm text-base md:text-sm outline-none transition-colors focus:border-[var(--color-accent)]'
 
   return (
     <>
@@ -192,7 +192,8 @@ function CustomPageInner() {
       {/* Form */}
       <section className="py-16 md:py-20">
         <div className="max-w-2xl mx-auto px-6">
-          <form onSubmit={handleSubmit} className="space-y-12">
+          <div className="p-5 mb-8 rounded-sm text-sm leading-[1.9]" style={{background:'var(--color-accent-light)'}}><p className="font-medium mb-2">まずは無料で、お見積り・仕上がり確認。</p><p>送信だけで注文は確定しません。必須項目はお名前・メールアドレス・数量です。数量が未定の場合は「未定」とご入力ください。</p></div>
+          <form onSubmit={handleSubmit} className="space-y-12" aria-busy={isSubmitting}>
             {/* Contact Info */}
             <div>
               <h2 className="text-lg font-medium mb-6">お客様情報</h2>
@@ -204,6 +205,7 @@ function CustomPageInner() {
                   <input
                     type="text"
                     id="companyName"
+                    autoComplete="organization"
                     name="companyName"
                     value={formData.companyName}
                     onChange={handleChange}
@@ -219,6 +221,7 @@ function CustomPageInner() {
                   <input
                     type="text"
                     id="name"
+                    autoComplete="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -235,6 +238,7 @@ function CustomPageInner() {
                   <input
                     type="email"
                     id="email"
+                    autoComplete="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -251,6 +255,7 @@ function CustomPageInner() {
                   <input
                     type="tel"
                     id="phone"
+                    autoComplete="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
@@ -327,13 +332,13 @@ function CustomPageInner() {
                 </div>
 
                 {/* 名入れ方法 radio */}
-                <div>
-                  <p className={labelClass}>名入れ方法</p>
-                  <div className="grid grid-cols-3 gap-3">
+                <fieldset>
+                  <legend className={labelClass}>名入れ方法</legend>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {['焼印', 'レーザー', '相談したい'].map((method) => (
                       <label
                         key={method}
-                        className="flex items-center gap-2 p-3 rounded-sm cursor-pointer text-sm transition-colors"
+                        className="flex items-center gap-2 p-3 rounded-sm cursor-pointer text-sm transition-colors focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[var(--color-accent)]"
                         style={{
                           border:
                             formData.printMethod === method
@@ -373,7 +378,7 @@ function CustomPageInner() {
                       </label>
                     ))}
                   </div>
-                </div>
+                </fieldset>
 
                 <div>
                   <label htmlFor="printContent" className={labelClass}>
@@ -402,7 +407,7 @@ function CustomPageInner() {
                     onChange={handleChange}
                     className={inputClass}
                     style={inputStyle}
-                    placeholder="例：2024年12月末まで、3週間以内、急ぎではない"
+                    placeholder="例：使用日の1週間前まで、3週間以内、急ぎではない"
                   />
                 </div>
               </div>
@@ -435,6 +440,7 @@ function CustomPageInner() {
             {/* Error */}
             {error && (
               <div
+                role="alert"
                 className="p-4 rounded-sm text-sm"
                 style={{ background: '#FEF2F2', color: '#991B1B', border: '1px solid #FECACA' }}
               >

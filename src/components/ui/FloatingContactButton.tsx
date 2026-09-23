@@ -11,7 +11,7 @@ export default function FloatingContactButton() {
   const [visibleFor, setVisibleFor] = useState<string | null>(null)
 
   const isEnglish = pathname.startsWith('/en')
-  const href = isEnglish ? '/en/contact' : '/custom'
+  const href = isEnglish ? '/en/contact' : pathname === '/' ? '#quote' : '/custom'
   const label = isEnglish ? 'Contact Us' : '無料で見積り'
 
   // 商品詳細ページ（/products/ichigo など）はスマホで下部固定バーを出すので、このボタンは重ねない
@@ -49,7 +49,7 @@ export default function FloatingContactButton() {
     <a
       href={href}
       className={`fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-105 hover:brightness-90 p-3 gap-2 sm:px-5 sm:py-3 ${
-        isProductDetail ? 'max-md:hidden' : ''
+        isProductDetail || pathname === '/' ? 'max-md:hidden' : ''
       }`}
       style={{ background: 'var(--color-accent)', color: '#fff' }}
     >

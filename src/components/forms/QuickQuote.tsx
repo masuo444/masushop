@@ -9,7 +9,7 @@ import { trackLead } from '@/lib/conversion'
 import { orderMinPriceShort } from '@/lib/pricing'
 
 /**
- * 「30秒かんたん見積り」
+ * 「かんたん見積り依頼」
  * 1画面1問のステップ形式で、用途・サイズ・個数・加工を選んで連絡先を送るだけ。
  * 送信先は既存の /api/contact（formType: 'quick-quote'）。
  */
@@ -63,8 +63,8 @@ const stepTitles = [
 export default function QuickQuote({
   id = 'quote',
   defaultSize = '',
-  heading = '30秒かんたん見積り',
-  lead = '4つ選んで送るだけ。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。',
+  heading = 'かんたん見積り依頼',
+  lead = '4項目の選択と連絡先の入力で依頼できます。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。',
   formType = 'quick-quote',
   className = '',
 }: {
@@ -101,6 +101,10 @@ export default function QuickQuote({
   useEffect(() => {
     if (!touched) return
     headingRef.current?.focus({ preventScroll: true })
+    const top = headingRef.current?.getBoundingClientRect().top
+    if (top !== undefined && (top < 110 || top > window.innerHeight * 0.65)) {
+      headingRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' })
+    }
   }, [step, touched])
 
   const goTo = (next: number) => {
@@ -109,9 +113,16 @@ export default function QuickQuote({
   }
 
   const choose = (key: keyof Answers, value: string) => {
-    setAnswers((prev) => ({ ...prev, [key]: value }))
+    setAnswers((prev) => ({
+      ...prev,
+      [key]: value,
+      ...(key === 'quantity' && ['1個', '2〜9個'].includes(value) && prev.method === '名入れなし'
+        ? { method: '' } : {}),
+    }))
     goTo(step + 1)
   }
+
+  const belowPlainMinimum = ['1個', '2〜9個'].includes(answers.quantity)
 
   const currentValue = (['purpose', 'size', 'quantity', 'method'] as const)[step]
   const hasCurrent = step < 4 && Boolean(answers[currentValue])
@@ -124,6 +135,11 @@ export default function QuickQuote({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (isSubmitting) return
+    if (belowPlainMinimum && answers.method === '名入れなし') {
+      goTo(3)
+      return
+    }
     setIsSubmitting(true)
     setError('')
     try {
@@ -165,7 +181,7 @@ export default function QuickQuote({
   }
 
   const optionClass =
-    'w-full min-h-14 px-4 py-3 rounded-sm text-left text-sm transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]'
+    'w-full min-h-14 px-4 py-3 rounded-sm text-left text-sm transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] disabled:opacity-50 disabled:cursor-not-allowed'
   const optionStyle = (selected: boolean) => ({
     border: selected ? '1px solid var(--color-accent)' : '1px solid var(--color-border)',
     background: selected ? 'var(--color-accent-light)' : 'var(--background)',
@@ -192,7 +208,7 @@ export default function QuickQuote({
           className="text-[11px] tracking-[0.18em] text-center mb-3"
           style={{ color: 'var(--color-accent)' }}
         >
-          FREE QUOTE
+          FREE QUOTE REQUEST
         </p>
         <h2 id={`${id}-title`} className="section-title text-center mb-4">
           {heading}
@@ -226,7 +242,7 @@ export default function QuickQuote({
               <div className="flex items-center justify-between mb-2">
                 <p className="text-[11px] tracking-[0.1em]" style={{ color: 'var(--color-muted)' }}>
                   <span aria-live="polite">
-                    {step + 1} / {STEP_COUNT}
+                    {step + 1} / {STEP_COUNT}　{['用途', 'サイズ', '個数', '名入れ', '連絡先'][step]}
                   </span>
                 </p>
                 {step > 0 && (
@@ -262,11 +278,20 @@ export default function QuickQuote({
                 ref={headingRef}
                 tabIndex={-1}
                 className="serif text-xl md:text-2xl font-normal mb-6 outline-none"
-                style={{ color: 'var(--foreground)' }}
+                style={{ color: 'var(--foreground)', scrollMarginTop: 180 }}
               >
                 {stepTitles[step]}
               </h3>
 
+              {step < 4 && <p className="text-[11px] mb-5" style={{ color: 'var(--color-muted)' }}>選ぶと次の質問に進みます。あとから変更できます。</p>}
+              {step === 1 && (
+                <div className="flex items-center gap-4 mb-5 p-3" style={{ background: 'var(--color-subtle)' }}>
+                  <div className="text-[11px]">
+                    <p>一合枡は180ml、外寸85×85×56mm。迷ったら「相談したい」をお選びください。</p>
+                    <a href="/products/sizes" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 inline-block py-2">全サイズを比較する（別タブ） ↗</a>
+                  </div>
+                </div>
+              )}
               {/* 1. 用途 */}
               {step === 0 && (
                 <div className="grid gap-3 sm:grid-cols-2" role="group" aria-label="用途">
@@ -347,13 +372,14 @@ export default function QuickQuote({
                       key={m.value}
                       type="button"
                       onClick={() => choose('method', m.value)}
+                      disabled={m.value === '名入れなし' && belowPlainMinimum}
                       className={optionClass}
                       style={optionStyle(answers.method === m.value)}
                       aria-pressed={answers.method === m.value}
                     >
                       <span className="block">{m.label}</span>
                       <span className="block text-[13px]" style={{ color: 'var(--color-muted)' }}>
-                        {m.note}
+                        {m.value === '名入れなし' && belowPlainMinimum ? '無地は10個から。個数を変更してください。' : m.note}
                       </span>
                     </button>
                   ))}
@@ -479,7 +505,7 @@ export default function QuickQuote({
                   </div>
 
                   {error && (
-                    <p className="text-[13px]" style={{ color: '#c0392b' }}>
+                    <p role="alert" className="text-[13px]" style={{ color: '#c0392b' }}>
                       {error}{' '}
                       <a href={`mailto:${siteConfig.contactEmail}`} className="underline">
                         {siteConfig.contactEmail}
@@ -499,7 +525,7 @@ export default function QuickQuote({
                       {orderMinPriceShort}／デザイン作成・仕上がりイメージ込み
                     </p>
                     <p className="text-[11px] mt-2 leading-[1.9]" style={{ color: 'var(--color-muted)' }}>
-                      ご相談・お見積りは無料です。
+                      この送信では注文は確定しません。ご相談・お見積りは無料です。
                     </p>
                   </div>
                 </form>

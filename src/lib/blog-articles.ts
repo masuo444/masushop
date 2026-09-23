@@ -3099,10 +3099,19 @@ const articles: BlogArticle[] = [
 ]
 
 // ===== Helper Functions =====
+// 2026-09: Googleが「クロール済み・インデックス未登録」とした記事のうち、
+// 既存の本ページと内容が重なるものは next.config.ts で301し、一覧・sitemapからも外す。
+const retiredSlugs = new Set([
+  'masu-naire-guide',   // → /products/engraving
+  'masu-gift-guide',    // → /gift
+  'masu-novelty',       // → /business/novelty
+  'masu-wedding',       // → /business/ceremony
+])
+
 export function getArticleBySlug(slug: string): BlogArticle | undefined {
   return articles.find((article) => article.slug === slug)
 }
 
 export function getAllArticles(): BlogArticle[] {
-  return articles
+  return articles.filter((article) => !retiredSlugs.has(article.slug))
 }

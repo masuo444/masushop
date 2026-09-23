@@ -6,11 +6,11 @@ import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/J
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: 'Japanese Wooden Sake Cups — The Authentic Way to Drink Sake',
+  title: 'Masu: The Japanese Wooden Sake Cup — What It Is & How to Drink From One',
   description:
-    "Discover why Japanese sake connoisseurs have used hinoki wooden cups for over 1,000 years. The wood's natural aroma transforms every sip. Handcrafted in Gifu, Japan.",
+    "A masu is the square wooden box cup the Japanese have drunk sake from for over 1,000 years. What it is, how to drink from one, which size to buy, and how to get one engraved and shipped worldwide from Japan.",
   keywords:
-    'Japanese sake cup, wooden sake cup, sake accessories, best sake cup, how to drink sake, sake set, hinoki sake cup, traditional sake cup, sake gift set, sake tasting',
+    'masu, masu cup, japanese sake cup, wooden sake cup, sake box cup, japanese measuring box, hinoki sake cup, how to drink sake, sake gift, buy masu japan, engraved masu, ship masu worldwide',
   alternates: {
     canonical: `${baseUrl}/en/sake-cups`,
     languages: { ja: `${baseUrl}/sake`, en: `${baseUrl}/en/sake-cups` },
@@ -82,14 +82,27 @@ export default function SakeCupsPage() {
           The Authentic Sake Experience
         </p>
         <h1 className="section-title mt-4" style={{ lineHeight: 1.5 }}>
-          The Cup That Changes How You Taste Sake
+          The Masu — Japan&rsquo;s Wooden Sake Cup
         </h1>
         <p
+          data-speakable
           className="mt-6 text-sm leading-[2] max-w-2xl mx-auto"
+          style={{ color: 'var(--foreground)' }}
+        >
+          A <strong>masu</strong> is a square cup made of Japanese hinoki cypress, joined at the
+          corners without nails. It began as a box for measuring rice — one <em>go</em>, 180ml —
+          and became the vessel Japan drinks sake from on New Year, at weddings and at the counter
+          of an izakaya. The wood is the point: hinoki gives off a clean forest aroma that meets the
+          sake as you raise the cup.
+        </p>
+        <p
+          className="mt-4 text-sm leading-[2] max-w-2xl mx-auto"
           style={{ color: 'var(--color-muted)' }}
         >
-          For over a thousand years, Japan&rsquo;s finest sake has been sipped from hinoki cypress
-          cups. Not because of tradition alone — because the wood makes it taste better.
+          We are a masu specialist in Japan. We engrave them, from one piece, and ship worldwide.
+          {' '}
+          <Link href="/en/contact" className="underline">Tell us what you need</Link> and we will
+          send a quote with a preview of the engraving before you order.
         </p>
       </section>
 

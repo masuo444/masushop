@@ -12,9 +12,9 @@ import { getAllArticles } from '@/lib/blog-articles'
  * ページを大きく書き換えたときは、ここの日付も更新する。
  */
 const pageUpdatedAt: Record<string, string> = {
-  '/': '2026-09-18',
+  '/': '2026-09-19',
   '/blog': '2026-03-13',
-  '/business': '2026-09-08',
+  '/business': '2026-09-19',
   '/business/anniversary': '2026-09-08',
   '/business/catalog': '2026-09-05',
   '/business/ceremony': '2026-09-01',
@@ -22,7 +22,7 @@ const pageUpdatedAt: Record<string, string> = {
   '/business/oem': '2026-09-08',
   '/care': '2026-09-18',
   '/coating': '2026-09-05',
-  '/custom': '2026-09-06',
+  '/custom': '2026-09-19',
   '/en': '2026-09-06',
   '/en/blog/japanese-gift-ideas': '2026-03-13',
   '/en/blog/sake-drinking-guide': '2026-03-13',
@@ -35,20 +35,21 @@ const pageUpdatedAt: Record<string, string> = {
   '/en/glossary': '2026-03-13',
   '/en/guide': '2026-03-13',
   '/en/history': '2026-03-13',
-  '/en/sake-cups': '2026-03-13',
+  '/en/sake-cups': '2026-09-23',
+  '/en/shipping': '2026-09-23',
   '/faq': '2026-09-18',
   '/finder': '2026-03-13',
   '/gift': '2026-09-08',
   '/glossary': '2026-09-18',
   '/guide': '2026-09-18',
   '/history': '2026-09-18',
-  '/logo': '2026-09-08',
-  '/original': '2026-09-08',
-  '/products': '2026-09-18',
+  '/logo': '2026-09-19',
+  '/original': '2026-09-19',
+  '/products': '2026-09-19',
   '/products/engraving': '2026-09-18',
   '/products/sizes': '2026-09-18',
-  '/reviews': '2026-03-13',
-  '/sake': '2026-09-18',
+  '/reviews': '2026-09-19',
+  '/sake': '2026-09-23',
 }
 
 // 商品詳細ページはサイズ別解説を追加した日
@@ -274,6 +275,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: lastModified('/en/corporate'),
       changeFrequency: 'monthly',
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/en/shipping`,
+      lastModified: lastModified('/en/shipping'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/en/contact`,

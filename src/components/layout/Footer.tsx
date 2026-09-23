@@ -49,6 +49,7 @@ const enFooterLinks = {
   'Shop & Order': [
     { href: '/en/gifts', label: 'Gifts' },
     { href: '/en/corporate', label: 'Corporate Orders' },
+    { href: '/en/shipping', label: 'International Shipping' },
     { href: '/en/contact', label: 'Request a Quote' },
     { href: '/en/faq', label: 'FAQ' },
   ],
