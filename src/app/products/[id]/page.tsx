@@ -129,6 +129,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       '@type': 'WebPage',
       '@id': `${baseUrl}/products/${product.id}`,
     },
+    // Search Console の「商品スニペット」は offers / review / aggregateRating のいずれかを必須とする。
+    // 名入れの最低注文金額（サイト表示と同じ 4,400円・税込）を下限価格として明示する。
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'JPY',
+      lowPrice: siteConfig.orderMinPrice,
+      offerCount: 1,
+      availability: 'https://schema.org/InStock',
+      url: `${baseUrl}/products/${product.id}`,
+      seller: {
+        '@type': 'Organization',
+        name: 'MASU-STORE',
+        url: siteConfig.url,
+      },
+    },
     ...productReviewJsonLd(product.id, surveyReviews),
   }
 
