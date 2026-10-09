@@ -1,11 +1,25 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server'
 import { isAdminConfigured, isAuthorizedAdmin } from '@/lib/admin-auth'
+import { detectAiBot, recordAiBotVisit } from '@/lib/ai-bots'
 
 /**
- * 管理画面の入口で Basic 認証をかける（Next.js 16 では middleware.ts ではなく proxy.ts）。
- * ADMIN_PASSWORD が未設定のときは、管理画面そのものが無いものとして 404 を返す。
+ * Next.js 16 では middleware.ts ではなく proxy.ts。
+ * - 公開ページ: AIのクローラーが読みに来たら記録する（表示は何も変えない）
+ * - 管理画面: Basic 認証をかける。ADMIN_PASSWORD が未設定なら管理画面そのものが無いものとして 404
  */
-export function proxy(request: NextRequest) {
+export function proxy(request: NextRequest, event: NextFetchEvent) {
+  const { pathname } = request.nextUrl
+  const isAdmin = /^\/(api\/)?admin(\/|$)/.test(pathname)
+  if (!isAdmin) {
+    const bot = detectAiBot(request.headers.get('user-agent') || '')
+    if (bot) event.waitUntil(recordAiBotVisit(bot.name, pathname))
+    return NextResponse.next()
+  }
+
+  return guardAdmin(request)
+}
+
+function guardAdmin(request: NextRequest) {
   if (!isAdminConfigured()) {
     return new NextResponse('Not Found', {
       status: 404,
@@ -30,5 +44,14 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/admin/:path*'],
+  matcher: [
+    '/admin/:path*',
+    '/api/admin/:path*',
+    '/llms.txt',
+    '/llms-full.txt',
+    '/robots.txt',
+    '/sitemap.xml',
+    // 公開ページ（API・Next.jsの内部ファイル・画像などの拡張子付きファイルは除く）
+    '/((?!api/|_next/|_vercel/|.*\\.[a-zA-Z0-9]+$).*)',
+  ],
 }

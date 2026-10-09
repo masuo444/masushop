@@ -1,5 +1,6 @@
 import { get, list } from '@vercel/blob'
 import { AI_SOURCE_GA_REGEX, detectAiSource } from '@/lib/ai-sources'
+import { BOT_KIND_JA, hasBotStore, readAiBotVisits, type BotKind, type BotVisit } from '@/lib/ai-bots'
 import { getGoogleAccessToken, hasGoogleCredentials } from '@/lib/google-auth'
 
 /**
@@ -268,6 +269,47 @@ function describeReferrer(referrer?: string) {
 
 const pageLabel = (path: string) => (path === '/' ? 'トップページ（/）' : path)
 
+function sumBy(visits: BotVisit[], key: (v: BotVisit) => string) {
+  const totals = new Map<string, number>()
+  for (const v of visits) totals.set(key(v), (totals.get(key(v)) ?? 0) + v.count)
+  return [...totals.entries()].sort((a, b) => b[1] - a[1])
+}
+
+function renderBotSection(day: BotVisit[], month: BotVisit[]) {
+  const kinds: BotKind[] = ['answer', 'search', 'training']
+  const countOf = (visits: BotVisit[], kind: BotKind) =>
+    visits.filter((v) => v.kind === kind).reduce((sum, v) => sum + v.count, 0)
+  const answerDay = day.filter((v) => v.kind === 'answer')
+  const answerMonth = month.filter((v) => v.kind === 'answer')
+  return (
+    `<p style="font-size:12px;color:#888;margin:0 0 8px;">人ではなく、AIのプログラムがページを読みに来た回数。「質問に答えるために読みに来た」は、誰かがAIに質問し、AIがその答えを作るためにこのサイトを開いたもの（AIに紹介されている度合いの目安）。</p>` +
+    table(
+      ['種類', '昨日', '直近28日'],
+      kinds.map((kind) => [BOT_KIND_JA[kind], num(countOf(day, kind)), num(countOf(month, kind))]),
+    ) +
+    '<p style="font-size:12px;color:#888;margin:12px 0 4px;">質問に答えるために読まれたページ（直近28日）</p>' +
+    (answerMonth.length
+      ? table(
+          ['ページ', '昨日', '28日'],
+          sumBy(answerMonth, (v) => v.path)
+            .slice(0, 15)
+            .map(([path, count]) => [
+              esc(pageLabel(path)),
+              num(answerDay.filter((v) => v.path === path).reduce((sum, v) => sum + v.count, 0)),
+              num(count),
+            ]),
+        )
+      : '<p style="color:#888;font-size:13px;">まだ記録はありません。</p>') +
+    '<p style="font-size:12px;color:#888;margin:12px 0 4px;">AI別（直近28日）</p>' +
+    table(
+      ['AI', '回数'],
+      sumBy(month, (v) => v.bot)
+        .slice(0, 12)
+        .map(([bot, count]) => [esc(bot), num(count)]),
+    )
+  )
+}
+
 const DEVICE_JA: Record<string, string> = { mobile: 'スマホ', desktop: 'PC', tablet: 'タブレット' }
 const EVENT_JA: Record<string, string> = {
   generate_lead: '見積り・問い合わせの送信',
@@ -280,7 +322,8 @@ export async function buildDailyReport(date: string) {
   const notes: string[] = []
   const gscDate = shiftDate(date, -2) // Search Console は2〜3日遅れて確定する
 
-  const [ga, gsc, inquiries] = await Promise.all([
+  const botDates = Array.from({ length: 28 }, (_, i) => shiftDate(date, -i))
+  const [ga, gsc, inquiries, botDays] = await Promise.all([
     hasGoogleCredentials()
       ? fetchGa(date).catch((error) => {
           notes.push(`アクセス解析（GA4）を取得できませんでした: ${String(error).slice(0, 200)}`)
@@ -297,6 +340,12 @@ export async function buildDailyReport(date: string) {
       notes.push(`問い合わせの控えを読めませんでした: ${String(error).slice(0, 200)}`)
       return null
     }),
+    hasBotStore()
+      ? readAiBotVisits(botDates).catch((error) => {
+          notes.push(`AIの閲覧記録を読めませんでした: ${String(error).slice(0, 200)}`)
+          return null
+        })
+      : null,
   ])
 
   const parts: string[] = []
@@ -410,6 +459,10 @@ export async function buildDailyReport(date: string) {
             : ''),
       ),
     )
+  }
+
+  if (botDays) {
+    parts.push(section('AIが読みに来たページ', renderBotSection(botDays[0], botDays.flat())))
   }
 
   if (inquiries) {
