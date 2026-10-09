@@ -10,7 +10,7 @@ import { getGoogleAccessToken, hasGoogleCredentials } from '@/lib/google-auth'
  */
 
 const GA4_PROPERTY = '552274675'
-const GSC_SITE = 'sc-domain:masu.fomus.jp'
+export const GSC_SITE = 'sc-domain:masu.fomus.jp'
 const DAY_MS = 24 * 60 * 60 * 1000
 const JST_OFFSET_MS = 9 * 60 * 60 * 1000
 
@@ -19,14 +19,14 @@ export function jstDate(offsetDays: number, base = Date.now()) {
   return new Date(base + JST_OFFSET_MS + offsetDays * DAY_MS).toISOString().slice(0, 10)
 }
 
-function shiftDate(date: string, days: number) {
+export function shiftDate(date: string, days: number) {
   return new Date(Date.parse(`${date}T00:00:00Z`) + days * DAY_MS).toISOString().slice(0, 10)
 }
 
 // ---------- GA4 ----------
 
 type GaRow = { dimensionValues?: { value: string }[]; metricValues?: { value: string }[] }
-type GaQuery = {
+export type GaQuery = {
   dimensions?: string[]
   metrics: string[]
   limit?: number
@@ -37,7 +37,7 @@ type GaQuery = {
   days?: number
 }
 
-async function runGaReport(token: string, date: string, query: GaQuery) {
+export async function runGaReport(token: string, date: string, query: GaQuery) {
   const body: Record<string, unknown> = {
     dateRanges: [{ startDate: shiftDate(date, 1 - (query.days ?? 1)), endDate: date }],
     dimensions: (query.dimensions ?? []).map((name) => ({ name })),
@@ -165,19 +165,19 @@ async function fetchGsc(date: string) {
 
 // ---------- 問い合わせの控え ----------
 
-type StoredInquiry = {
+export type StoredInquiry = {
   receivedAt: string
   contact?: { name?: string; company?: string }
   order?: { quantity?: string; purpose?: string; size?: string }
   context?: Record<string, string>
 }
 
-async function fetchInquiries(date: string) {
+export async function fetchInquiries(date: string, days = 1) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) return null
   // 控えのパスはUTC日付。日本時間の1日はUTCの2日にまたがる
-  const start = Date.parse(`${date}T00:00:00+09:00`)
-  const end = start + DAY_MS
-  const prefixes = [shiftDate(date, -1), date].map(
+  const end = Date.parse(`${date}T00:00:00+09:00`) + DAY_MS
+  const start = end - days * DAY_MS
+  const prefixes = Array.from({ length: days + 1 }, (_, i) => shiftDate(date, -i)).map(
     (d) => `contact-submissions/${d.replaceAll('-', '/')}/`,
   )
   const blobs = (await Promise.all(prefixes.map((prefix) => list({ prefix })))).flatMap(
@@ -196,7 +196,7 @@ async function fetchInquiries(date: string) {
 
 // ---------- HTML ----------
 
-function esc(value: unknown) {
+export function esc(value: unknown) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
