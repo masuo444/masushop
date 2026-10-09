@@ -37,6 +37,9 @@ export type Attribution = {
   lastVisitAt: string
   visitCount: string
   pageTrail: string
+  visitDurationSec: string
+  screenSize: string
+  language: string
 }
 
 const empty: Attribution = {
@@ -51,6 +54,9 @@ const empty: Attribution = {
   lastVisitAt: '',
   visitCount: '',
   pageTrail: '',
+  visitDurationSec: '',
+  screenSize: '',
+  language: '',
 }
 
 function currentTouch(): Touch {
@@ -139,6 +145,11 @@ export function getAttribution(): Attribution & { submittedFrom: string } {
       lastVisitAt: stored.last.at,
       visitCount: String(stored.visitCount),
       pageTrail: trail,
+      visitDurationSec: String(
+        Math.round((Date.now() - new Date(stored.last.at).getTime()) / 1000),
+      ),
+      screenSize: `${window.screen.width}x${window.screen.height}`,
+      language: navigator.language || '',
       submittedFrom,
     }
   } catch {

@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Script from 'next/script'
 import { usePathname } from 'next/navigation'
 import { captureAttribution } from '@/lib/attribution'
+import { trackInteractions } from '@/lib/interaction-tracking'
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID
 const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID
@@ -18,6 +19,8 @@ export default function Analytics() {
   useEffect(() => {
     captureAttribution(pathname)
   }, [pathname])
+
+  useEffect(() => trackInteractions(), [])
 
   return (
     <>

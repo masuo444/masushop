@@ -45,6 +45,11 @@ type ContactSubmission = {
     lastVisitAt: string
     visitCount: string
     pageTrail: string
+    visitDurationSec: string
+    screenSize: string
+    language: string
+    device: string
+    location: string
   }
 }
 
@@ -62,12 +67,56 @@ function formatJst(iso: string) {
   return date.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
 }
 
+/** 秒数を「12分30秒」の形にする */
+function formatDuration(raw: string) {
+  const sec = Number(raw)
+  if (!Number.isFinite(sec) || sec < 0) return raw
+  return sec >= 60 ? `${Math.floor(sec / 60)}分${sec % 60}秒` : `${sec}秒`
+}
+
 /** 初回訪問から問い合わせまでの経過を「当日」「3日」のように返す */
 function daysBetween(fromIso: string, toIso: string) {
   const ms = new Date(toIso).getTime() - new Date(fromIso).getTime()
   if (Number.isNaN(ms)) return '不明'
   const days = Math.floor(ms / (24 * 60 * 60 * 1000))
   return days < 1 ? '当日' : `${days}日`
+}
+
+/** User-Agent を「iPhone / Safari」のような管理メール向けの短い表記にする */
+function describeDevice(ua: string) {
+  if (!ua) return ''
+  const os =
+    /iPhone/.test(ua) ? 'iPhone'
+    : /iPad/.test(ua) ? 'iPad'
+    : /Android/.test(ua) ? (/Mobile/.test(ua) ? 'Androidスマホ' : 'Androidタブレット')
+    : /Windows/.test(ua) ? 'Windows'
+    : /Macintosh/.test(ua) ? 'Mac'
+    : 'その他'
+  const browser =
+    /Line\//.test(ua) ? 'LINE内ブラウザ'
+    : /Instagram/.test(ua) ? 'Instagram内ブラウザ'
+    : /FBAN|FBAV/.test(ua) ? 'Facebook内ブラウザ'
+    : /Edg\//.test(ua) ? 'Edge'
+    : /CriOS|Chrome\//.test(ua) ? 'Chrome'
+    : /Safari\//.test(ua) ? 'Safari'
+    : /Firefox\//.test(ua) ? 'Firefox'
+    : 'その他'
+  return `${os} / ${browser}`
+}
+
+/** Vercel が付けるおおよその地域（IPから推定。市区町村は外れることがある） */
+function describeLocation(headers: Headers) {
+  const decode = (value: string | null) => {
+    if (!value) return ''
+    try {
+      return decodeURIComponent(value)
+    } catch {
+      return value
+    }
+  }
+  return [headers.get('x-vercel-ip-country'), decode(headers.get('x-vercel-ip-country-region')), decode(headers.get('x-vercel-ip-city'))]
+    .filter(Boolean)
+    .join(' / ')
 }
 
 class ContactValidationError extends Error {}
@@ -98,7 +147,7 @@ function readText(
   return normalized
 }
 
-function parseSubmission(body: unknown): ContactSubmission {
+function parseSubmission(body: unknown, headers: Headers): ContactSubmission {
   if (!body || typeof body !== 'object' || Array.isArray(body)) {
     throw new ContactValidationError('入力内容の形式が正しくありません。')
   }
@@ -155,6 +204,11 @@ function parseSubmission(body: unknown): ContactSubmission {
       lastVisitAt: readText(values, ['lastVisitAt'], 60),
       visitCount: readText(values, ['visitCount'], 10),
       pageTrail: readText(values, ['pageTrail'], 5_000),
+      visitDurationSec: readText(values, ['visitDurationSec'], 10),
+      screenSize: readText(values, ['screenSize'], 20),
+      language: readText(values, ['language'], 20),
+      device: describeDevice(headers.get('user-agent') || ''),
+      location: describeLocation(headers),
     },
   }
 }
@@ -215,7 +269,7 @@ export async function POST(request: Request) {
   let submission: ContactSubmission
 
   try {
-    submission = parseSubmission(await request.json())
+    submission = parseSubmission(await request.json(), request.headers)
   } catch (error) {
     if (error instanceof ContactValidationError) {
       return NextResponse.json({ error: error.message }, { status: 400 })
@@ -327,6 +381,9 @@ ${submission.context.firstVisitAt ? `<tr><td style="padding:8px 0;color:#888;">�
 ${submission.context.visitCount ? `<tr><td style="padding:8px 0;color:#888;">訪問回数</td><td style="padding:8px 0;">${escapeHtml(submission.context.visitCount)}回</td></tr>` : ''}
 ${Number(submission.context.visitCount) > 1 ? `<tr><td style="padding:8px 0;color:#888;">今回の入口</td><td style="padding:8px 0;">${escapeHtml(submission.context.lastLandingPage)}</td></tr><tr><td style="padding:8px 0;color:#888;">今回の参照元</td><td style="padding:8px 0;">${escapeHtml(submission.context.lastReferrer || '直接アクセス / 不明')}</td></tr>` : ''}
 ${submission.context.utmSource ? `<tr><td style="padding:8px 0;color:#888;">UTM</td><td style="padding:8px 0;">${escapeHtml([submission.context.utmSource, submission.context.utmMedium, submission.context.utmCampaign].filter(Boolean).join(' / '))}</td></tr>` : ''}
+${submission.context.visitDurationSec ? `<tr><td style="padding:8px 0;color:#888;">今回の滞在</td><td style="padding:8px 0;">${escapeHtml(formatDuration(submission.context.visitDurationSec))}</td></tr>` : ''}
+${submission.context.device ? `<tr><td style="padding:8px 0;color:#888;">端末</td><td style="padding:8px 0;">${escapeHtml([submission.context.device, submission.context.screenSize, submission.context.language].filter(Boolean).join(' / '))}</td></tr>` : ''}
+${submission.context.location ? `<tr><td style="padding:8px 0;color:#888;">地域（推定）</td><td style="padding:8px 0;">${escapeHtml(submission.context.location)}</td></tr>` : ''}
 ${submission.context.pageTrail ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">見たページの流れ（直近30件）</td></tr><tr><td colspan="2" style="padding:8px 0;white-space:pre-wrap;font-size:13px;">${escapeHtml(submission.context.pageTrail)}</td></tr>` : ''}
 </table>
 </div></div>`,
