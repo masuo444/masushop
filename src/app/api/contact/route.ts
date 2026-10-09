@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 import siteConfig from '@/lib/site-config'
 import { masuSizes } from '@/lib/masu-data'
 import { quantityBucket, isHighValue } from '@/lib/conversion'
+import { detectAiSource } from '@/lib/ai-sources'
 
 type DeliveryStatus = 'pending' | 'sent' | 'failed' | 'not_configured'
 
@@ -50,6 +51,7 @@ type ContactSubmission = {
     language: string
     device: string
     location: string
+    aiSource: string
   }
 }
 
@@ -209,6 +211,7 @@ function parseSubmission(body: unknown, headers: Headers): ContactSubmission {
       language: readText(values, ['language'], 20),
       device: describeDevice(headers.get('user-agent') || ''),
       location: describeLocation(headers),
+      aiSource: '',
     },
   }
 }
@@ -281,6 +284,15 @@ export async function POST(request: Request) {
       { status: 400 },
     )
   }
+
+  const { context } = submission
+  context.aiSource = detectAiSource(
+    context.referrer,
+    context.utmSource,
+    context.landingPage,
+    context.lastReferrer,
+    context.lastLandingPage,
+  )
 
   const pathname = backupPath(submission)
 
@@ -376,6 +388,7 @@ ${notes ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #e
 <tr><td style="padding:8px 0;color:#888;">フォーム</td><td style="padding:8px 0;">${escapeHtml(submission.context.formType)}</td></tr>
 ${submission.context.submittedFrom ? `<tr><td style="padding:8px 0;color:#888;">送信ページ</td><td style="padding:8px 0;">${escapeHtml(submission.context.submittedFrom)}</td></tr>` : ''}
 ${submission.context.landingPage ? `<tr><td style="padding:8px 0;color:#888;">初回の入口</td><td style="padding:8px 0;">${escapeHtml(submission.context.landingPage)}</td></tr>` : ''}
+${submission.context.aiSource ? `<tr><td style="padding:8px 0;color:#888;">AI経由</td><td style="padding:8px 0;font-weight:bold;">${escapeHtml(submission.context.aiSource)}</td></tr>` : ''}
 <tr><td style="padding:8px 0;color:#888;">初回の参照元</td><td style="padding:8px 0;">${escapeHtml(submission.context.referrer || '直接アクセス / 不明')}</td></tr>
 ${submission.context.firstVisitAt ? `<tr><td style="padding:8px 0;color:#888;">初回訪問</td><td style="padding:8px 0;">${escapeHtml(formatJst(submission.context.firstVisitAt))}（問い合わせまで${daysBetween(submission.context.firstVisitAt, submission.receivedAt)}）</td></tr>` : ''}
 ${submission.context.visitCount ? `<tr><td style="padding:8px 0;color:#888;">訪問回数</td><td style="padding:8px 0;">${escapeHtml(submission.context.visitCount)}回</td></tr>` : ''}

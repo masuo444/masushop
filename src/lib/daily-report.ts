@@ -1,4 +1,5 @@
 import { get, list } from '@vercel/blob'
+import { AI_SOURCE_GA_REGEX, detectAiSource } from '@/lib/ai-sources'
 import { getGoogleAccessToken, hasGoogleCredentials } from '@/lib/google-auth'
 
 /**
@@ -29,11 +30,15 @@ type GaQuery = {
   metrics: string[]
   limit?: number
   eventNames?: string[]
+  /** 指定すると sessionSource がAIのセッションだけに絞る */
+  aiOnly?: boolean
+  /** 1日ではなく、この日数分さかのぼった期間で集計する */
+  days?: number
 }
 
 async function runGaReport(token: string, date: string, query: GaQuery) {
   const body: Record<string, unknown> = {
-    dateRanges: [{ startDate: date, endDate: date }],
+    dateRanges: [{ startDate: shiftDate(date, 1 - (query.days ?? 1)), endDate: date }],
     dimensions: (query.dimensions ?? []).map((name) => ({ name })),
     metrics: query.metrics.map((name) => ({ name })),
     limit: query.limit ?? 10,
@@ -41,11 +46,20 @@ async function runGaReport(token: string, date: string, query: GaQuery) {
   if (query.metrics.length && query.dimensions?.length) {
     body.orderBys = [{ metric: { metricName: query.metrics[0] }, desc: true }]
   }
+  const filters: Record<string, unknown>[] = []
   if (query.eventNames) {
-    body.dimensionFilter = {
-      filter: { fieldName: 'eventName', inListFilter: { values: query.eventNames } },
-    }
+    filters.push({ filter: { fieldName: 'eventName', inListFilter: { values: query.eventNames } } })
   }
+  if (query.aiOnly) {
+    filters.push({
+      filter: {
+        fieldName: 'sessionSource',
+        stringFilter: { matchType: 'PARTIAL_REGEXP', value: AI_SOURCE_GA_REGEX, caseSensitive: false },
+      },
+    })
+  }
+  if (filters.length === 1) body.dimensionFilter = filters[0]
+  if (filters.length > 1) body.dimensionFilter = { andGroup: { expressions: filters } }
   const response = await fetch(
     `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY}:runReport`,
     {
@@ -107,7 +121,20 @@ async function fetchGa(date: string) {
         eventNames: ['cta_click', 'contact_click'],
       }),
     ])
-  return { today, prevDay, lastWeek, channels, sources, landings, pages, devices, countries, actions, ctas }
+  const [aiSources, aiLandings, aiMonth, aiLeads] = await Promise.all([
+    runGaReport(token, date, { dimensions: ['sessionSource'], metrics: ['sessions', 'engagedSessions'], aiOnly: true }),
+    runGaReport(token, date, { dimensions: ['sessionSource', 'landingPagePlusQueryString'], metrics: ['sessions'], aiOnly: true }),
+    runGaReport(token, date, { dimensions: ['sessionSource'], metrics: ['sessions'], aiOnly: true, days: 28 }),
+    runGaReport(token, date, {
+      dimensions: ['sessionSource'],
+      metrics: ['eventCount'],
+      eventNames: ['generate_lead'],
+      aiOnly: true,
+      days: 28,
+    }),
+  ])
+  const ai = { aiSources, aiLandings, aiMonth, aiLeads }
+  return { today, prevDay, lastWeek, channels, sources, landings, pages, devices, countries, actions, ctas, ai }
 }
 
 // ---------- Search Console ----------
@@ -223,6 +250,8 @@ const CHANNEL_JA: Record<string, string> = {
 /** 参照元URLを「Google検索」のような短い名前にする */
 function describeReferrer(referrer?: string) {
   if (!referrer) return '直接 / 不明'
+  const ai = detectAiSource(referrer)
+  if (ai) return ai
   try {
     const host = new URL(referrer).hostname.replace(/^www\./, '')
     if (/(^|\.)google\./.test(host)) return 'Google検索'
@@ -304,6 +333,37 @@ export async function buildDailyReport(date: string) {
           table(['参照元 / 種類', '訪問'], ga.sources.map((r) => [esc(r.dims[0]), num(r.values[0])])),
       ),
     )
+    const aiName = (source: string) => detectAiSource(source) || source
+    const aiTotal = ga.ai.aiSources.reduce((sum, r) => sum + r.values[0], 0)
+    const aiMonthTotal = ga.ai.aiMonth.reduce((sum, r) => sum + r.values[0], 0)
+    const aiMonthLeads = ga.ai.aiLeads.reduce((sum, r) => sum + r.values[0], 0)
+    parts.push(
+      section(
+        `AIから来た訪問 ${num(aiTotal)}件`,
+        `<p style="font-size:12px;color:#888;margin:0 0 8px;">ChatGPT・Perplexity・Gemini などで紹介されて来た人。直近28日の合計：${num(aiMonthTotal)}訪問 / 問い合わせ${num(aiMonthLeads)}件（Googleの「AIによる概要」経由は通常の検索と区別できないため含まない）</p>` +
+          (ga.ai.aiSources.length
+            ? table(
+                ['AI', '訪問', 'しっかり見た'],
+                ga.ai.aiSources.map((r) => [esc(aiName(r.dims[0])), num(r.values[0]), num(r.values[1])]),
+              ) +
+              '<p style="font-size:12px;color:#888;margin:12px 0 4px;">AIから入ったページ</p>' +
+              table(
+                ['ページ', '訪問'],
+                ga.ai.aiLandings.map((r) => [
+                  `${esc(r.dims[1])}<br><span style="color:#888;font-size:12px;">${esc(aiName(r.dims[0]))}</span>`,
+                  num(r.values[0]),
+                ]),
+              )
+            : '') +
+          (ga.ai.aiMonth.length
+            ? '<p style="font-size:12px;color:#888;margin:12px 0 4px;">直近28日のAI別</p>' +
+              table(
+                ['AI', '訪問'],
+                ga.ai.aiMonth.map((r) => [esc(aiName(r.dims[0])), num(r.values[0])]),
+              )
+            : ''),
+      ),
+    )
     parts.push(
       section(
         '入口になったページ',
@@ -370,6 +430,7 @@ export async function buildDailyReport(date: string) {
                   .join(' ')
                 const order = [item.order?.quantity, item.order?.purpose].filter(Boolean).join(' / ')
                 const route = [
+                  ['AI経由', c.aiSource],
                   ['参照元', describeReferrer(c.referrer)],
                   ['入口', c.landingPage && pageLabel(c.landingPage)],
                   ['送信', c.submittedFrom && pageLabel(c.submittedFrom)],
