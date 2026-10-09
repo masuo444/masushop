@@ -6,6 +6,7 @@ import siteConfig from '@/lib/site-config'
 import { getAllArticles, getArticleBySlug } from '@/lib/blog-articles'
 import type { ArticleSection } from '@/lib/blog-articles'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
 
@@ -279,7 +280,7 @@ export default async function BlogArticlePage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
       />
 
       {/* Breadcrumb */}

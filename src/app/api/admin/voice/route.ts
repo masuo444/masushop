@@ -54,6 +54,14 @@ function revalidateReviewPages(sizes: string[]) {
 
 export async function POST(request: Request) {
   if (!isAuthorizedAdmin(request.headers.get('authorization'))) return unauthorized()
+  // 他のサイトから管理者のブラウザ経由で操作させる攻撃（CSRF）を防ぐ
+  const origin = request.headers.get('origin')
+  if (
+    (origin && origin !== new URL(request.url).origin) ||
+    !request.headers.get('content-type')?.includes('application/json')
+  ) {
+    return NextResponse.json({ error: '許可されていない操作です。' }, { status: 403, headers: noStore })
+  }
 
   let id: string
   let action: string

@@ -4,8 +4,9 @@ import siteConfig from '@/lib/site-config'
 import { masuSizes } from '@/lib/masu-data'
 import { quantityBucket, isHighValue } from '@/lib/conversion'
 import { detectAiSource } from '@/lib/ai-sources'
+import { clientIp, withinLimit } from '@/lib/rate-limit'
 
-type DeliveryStatus = 'pending' | 'sent' | 'failed' | 'not_configured'
+type DeliveryStatus = 'pending' | 'sent' | 'failed' | 'not_configured' | 'skipped_limit'
 
 type ContactSubmission = {
   id: string
@@ -268,11 +269,43 @@ async function sendEmail(
   }
 }
 
+// 問い合わせ1件の本文はせいぜい数KB。これを大きく超えるものは読まずに断る
+const MAX_BODY_BYTES = 50_000
+// 同じ接続元からの送信は、10分に5件・1日に20件まで
+const PER_IP_LIMITS = [
+  { window: 10 * 60, limit: 5 },
+  { window: 24 * 60 * 60, limit: 20 },
+]
+// お客様への自動返信は、サイト全体で1日50通まで（他人のアドレス宛てに大量送信される悪用を防ぐ）
+const AUTO_REPLY_DAILY_LIMIT = 50
+
 export async function POST(request: Request) {
   let submission: ContactSubmission
 
+  if (Number(request.headers.get('content-length') || 0) > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: '送信内容が大きすぎます。' }, { status: 413 })
+  }
+
+  const ip = clientIp(request.headers)
+  for (const { window, limit } of PER_IP_LIMITS) {
+    if (!(await withinLimit(`contact:${window}:${ip}`, limit, window))) {
+      console.warn('Contact rate limit exceeded', { window })
+      return NextResponse.json(
+        {
+          error:
+            '短時間に送信が集中したため、受付を一時停止しています。お手数ですが時間をおいて再度お試しいただくか、contact@fomus.jpへ直接ご連絡ください。',
+        },
+        { status: 429 },
+      )
+    }
+  }
+
   try {
-    submission = parseSubmission(await request.json(), request.headers)
+    const raw = await request.text()
+    if (raw.length > MAX_BODY_BYTES) {
+      return NextResponse.json({ error: '送信内容が大きすぎます。' }, { status: 413 })
+    }
+    submission = parseSubmission(JSON.parse(raw), request.headers)
   } catch (error) {
     if (error instanceof ContactValidationError) {
       return NextResponse.json({ error: error.message }, { status: 400 })
@@ -415,6 +448,15 @@ ${submission.context.pageTrail ? `<tr><td colspan="2" style="padding:12px 0 4px;
       },
       { status: 503 },
     )
+  }
+
+  // 管理者には届いているので受付は完了。自動返信だけ、1日の上限を超えたら送らない
+  if (!(await withinLimit('contact-autoreply-daily', AUTO_REPLY_DAILY_LIMIT, 24 * 60 * 60))) {
+    console.warn('Contact auto-reply daily limit reached', submission.id)
+    submission.delivery.customer = 'skipped_limit'
+    submission.status = 'completed'
+    await persist()
+    return NextResponse.json({ success: true, submissionId: submission.id })
   }
 
   try {

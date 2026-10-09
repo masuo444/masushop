@@ -3,6 +3,7 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
 import { getAllArticles } from '@/lib/blog-articles'
+import { jsonLd } from '@/lib/json-ld'
 
 export const metadata: Metadata = {
   title: '枡コラム — 枡に関する知識・情報',
@@ -80,7 +81,7 @@ export default function BlogPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(collectionJsonLd) }}
       />
 
       {/* Hero */}

@@ -5,6 +5,7 @@ import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import RelatedMasu from '@/components/ui/RelatedMasu'
+import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
 
@@ -61,7 +62,7 @@ export default function HistoryPage() {
       <SpeakableJsonLd url={`${baseUrl}/history`} cssSelectors={['[data-speakable]', '.section-title']} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
       />
 
       <Breadcrumb items={[{ label: 'ホーム', href: '/' }, { label: '枡の歴史' }]} />

@@ -45,3 +45,4 @@ generate-images.py
 regenerate-images.py
 画像/
 gen-original.py
+**/.next/

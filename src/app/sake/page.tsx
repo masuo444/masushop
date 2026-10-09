@@ -5,6 +5,7 @@ import siteConfig from '@/lib/site-config'
 import { masuSizes, faqItems } from '@/lib/masu-data'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import RelatedMasu from '@/components/ui/RelatedMasu'
+import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
 
@@ -77,7 +78,7 @@ export default function SakePage() {
       <SpeakableJsonLd url={`${baseUrl}/sake`} cssSelectors={['[data-speakable]', '.section-title']} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
       />
       <FAQJsonLd items={sakeFaqItems} />
 

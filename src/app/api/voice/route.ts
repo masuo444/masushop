@@ -15,6 +15,7 @@ import { generateVoiceDraft } from '@/lib/voice-draft'
 import { reserveAiDraftQuota } from '@/lib/voice-store'
 import { notifyAdminOfVoice } from '@/lib/voice-notify'
 import { loadVoiceRecord, saveVoiceRecord } from '@/lib/voice-store'
+import { clientIp, withinLimit } from '@/lib/rate-limit'
 
 /** これより大きいリクエストは読まない（アンケートの回答が20KBを超えることはない） */
 const MAX_BODY_BYTES = 20_000
@@ -194,6 +195,14 @@ export async function POST(request: Request) {
   let answers: VoiceAnswers
   let email: string
   let ref: string
+
+  // 同じ接続元からの送信は10分に10件まで（管理者への通知メールと保存の乱用を防ぐ）
+  if (!(await withinLimit(`voice:${clientIp(request.headers)}`, 10, 10 * 60))) {
+    return NextResponse.json(
+      { error: '短時間に送信が集中しています。時間をおいて再度お試しください。' },
+      { status: 429 },
+    )
+  }
 
   try {
     values = await readBody(request)

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import RelatedMasu from '@/components/ui/RelatedMasu'
+import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
 
@@ -343,7 +344,7 @@ export default function GlossaryPage() {
       <SpeakableJsonLd url={`${baseUrl}/glossary`} cssSelectors={['[data-speakable]', '.section-title']} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(definedTermSetJsonLd) }}
       />
 
       {/* ===== HERO ===== */}

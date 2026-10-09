@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import siteConfig from '@/lib/site-config'
+import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
 
@@ -51,8 +52,8 @@ const websiteJsonLd = {
 export default function EnLayout({ children }: { children: React.ReactNode }) {
   return (
     <div lang="en">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(orgJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd) }} />
 
       {children}
     </div>

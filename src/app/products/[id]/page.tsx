@@ -15,6 +15,7 @@ import {
   getApprovedReviewsBySize,
   productReviewJsonLd,
 } from '@/lib/approved-reviews'
+import { jsonLd } from '@/lib/json-ld'
 
 // 購入者アンケートの承認分を反映するため、1時間ごとに作り直す（承認時は即時）
 export const revalidate = 3600
@@ -158,7 +159,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(productJsonLd) }}
       />
 
       {/* パンくず */}

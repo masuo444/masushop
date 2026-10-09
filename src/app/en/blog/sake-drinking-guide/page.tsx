@@ -7,6 +7,7 @@ import {
   SpeakableJsonLd,
 } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
 
@@ -83,7 +84,7 @@ export default function SakeDrinkingGuidePage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
       />
       <SpeakableJsonLd
         url={`${baseUrl}/en/blog/sake-drinking-guide`}
