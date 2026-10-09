@@ -39,6 +39,12 @@ type ContactSubmission = {
     utmSource: string
     utmMedium: string
     utmCampaign: string
+    firstVisitAt: string
+    lastLandingPage: string
+    lastReferrer: string
+    lastVisitAt: string
+    visitCount: string
+    pageTrail: string
   }
 }
 
@@ -47,6 +53,21 @@ function resolveSizeLabel(raw: string) {
   if (!raw) return ''
   const match = masuSizes.find((m) => m.id === raw || m.name === raw)
   return match ? match.name : raw
+}
+
+/** ISO日時を管理メール向けの日本時間表記にする */
+function formatJst(iso: string) {
+  const date = new Date(iso)
+  if (Number.isNaN(date.getTime())) return iso
+  return date.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
+}
+
+/** 初回訪問から問い合わせまでの経過を「当日」「3日」のように返す */
+function daysBetween(fromIso: string, toIso: string) {
+  const ms = new Date(toIso).getTime() - new Date(fromIso).getTime()
+  if (Number.isNaN(ms)) return '不明'
+  const days = Math.floor(ms / (24 * 60 * 60 * 1000))
+  return days < 1 ? '当日' : `${days}日`
 }
 
 class ContactValidationError extends Error {}
@@ -128,6 +149,12 @@ function parseSubmission(body: unknown): ContactSubmission {
       utmSource: readText(values, ['utmSource'], 200),
       utmMedium: readText(values, ['utmMedium'], 200),
       utmCampaign: readText(values, ['utmCampaign'], 200),
+      firstVisitAt: readText(values, ['firstVisitAt'], 60),
+      lastLandingPage: readText(values, ['lastLandingPage'], 500),
+      lastReferrer: readText(values, ['lastReferrer'], 500),
+      lastVisitAt: readText(values, ['lastVisitAt'], 60),
+      visitCount: readText(values, ['visitCount'], 10),
+      pageTrail: readText(values, ['pageTrail'], 5_000),
     },
   }
 }
@@ -294,9 +321,13 @@ ${notes ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #e
 <tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">流入経路</td></tr>
 <tr><td style="padding:8px 0;color:#888;">フォーム</td><td style="padding:8px 0;">${escapeHtml(submission.context.formType)}</td></tr>
 ${submission.context.submittedFrom ? `<tr><td style="padding:8px 0;color:#888;">送信ページ</td><td style="padding:8px 0;">${escapeHtml(submission.context.submittedFrom)}</td></tr>` : ''}
-${submission.context.landingPage ? `<tr><td style="padding:8px 0;color:#888;">最初に見たページ</td><td style="padding:8px 0;">${escapeHtml(submission.context.landingPage)}</td></tr>` : ''}
-<tr><td style="padding:8px 0;color:#888;">参照元</td><td style="padding:8px 0;">${escapeHtml(submission.context.referrer || '直接アクセス / 不明')}</td></tr>
+${submission.context.landingPage ? `<tr><td style="padding:8px 0;color:#888;">初回の入口</td><td style="padding:8px 0;">${escapeHtml(submission.context.landingPage)}</td></tr>` : ''}
+<tr><td style="padding:8px 0;color:#888;">初回の参照元</td><td style="padding:8px 0;">${escapeHtml(submission.context.referrer || '直接アクセス / 不明')}</td></tr>
+${submission.context.firstVisitAt ? `<tr><td style="padding:8px 0;color:#888;">初回訪問</td><td style="padding:8px 0;">${escapeHtml(formatJst(submission.context.firstVisitAt))}（問い合わせまで${daysBetween(submission.context.firstVisitAt, submission.receivedAt)}）</td></tr>` : ''}
+${submission.context.visitCount ? `<tr><td style="padding:8px 0;color:#888;">訪問回数</td><td style="padding:8px 0;">${escapeHtml(submission.context.visitCount)}回</td></tr>` : ''}
+${Number(submission.context.visitCount) > 1 ? `<tr><td style="padding:8px 0;color:#888;">今回の入口</td><td style="padding:8px 0;">${escapeHtml(submission.context.lastLandingPage)}</td></tr><tr><td style="padding:8px 0;color:#888;">今回の参照元</td><td style="padding:8px 0;">${escapeHtml(submission.context.lastReferrer || '直接アクセス / 不明')}</td></tr>` : ''}
 ${submission.context.utmSource ? `<tr><td style="padding:8px 0;color:#888;">UTM</td><td style="padding:8px 0;">${escapeHtml([submission.context.utmSource, submission.context.utmMedium, submission.context.utmCampaign].filter(Boolean).join(' / '))}</td></tr>` : ''}
+${submission.context.pageTrail ? `<tr><td colspan="2" style="padding:12px 0 4px;border-top:1px solid #eee;color:#888;font-size:12px;">見たページの流れ（直近30件）</td></tr><tr><td colspan="2" style="padding:8px 0;white-space:pre-wrap;font-size:13px;">${escapeHtml(submission.context.pageTrail)}</td></tr>` : ''}
 </table>
 </div></div>`,
     })

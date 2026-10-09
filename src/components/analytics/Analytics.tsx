@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Script from 'next/script'
+import { usePathname } from 'next/navigation'
 import { captureAttribution } from '@/lib/attribution'
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID
@@ -12,9 +13,11 @@ const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID
  * ローカル開発やプレビューでは自動的に無効になる。
  */
 export default function Analytics() {
+  const pathname = usePathname()
+
   useEffect(() => {
-    captureAttribution()
-  }, [])
+    captureAttribution(pathname)
+  }, [pathname])
 
   return (
     <>
