@@ -220,6 +220,25 @@ const CHANNEL_JA: Record<string, string> = {
   Email: 'メール',
   Unassigned: '不明',
 }
+/** 参照元URLを「Google検索」のような短い名前にする */
+function describeReferrer(referrer?: string) {
+  if (!referrer) return '直接 / 不明'
+  try {
+    const host = new URL(referrer).hostname.replace(/^www\./, '')
+    if (/(^|\.)google\./.test(host)) return 'Google検索'
+    if (/(^|\.)yahoo\./.test(host)) return 'Yahoo!検索'
+    if (/bing\.com$/.test(host)) return 'Bing検索'
+    if (/instagram\.com$/.test(host)) return 'Instagram'
+    if (/facebook\.com$/.test(host)) return 'Facebook'
+    if (/(^|\.)(x|twitter|t)\.(com|co)$/.test(host)) return 'X'
+    return host
+  } catch {
+    return referrer
+  }
+}
+
+const pageLabel = (path: string) => (path === '/' ? 'トップページ（/）' : path)
+
 const DEVICE_JA: Record<string, string> = { mobile: 'スマホ', desktop: 'PC', tablet: 'タブレット' }
 const EVENT_JA: Record<string, string> = {
   generate_lead: '見積り・問い合わせの送信',
@@ -322,9 +341,11 @@ export async function buildDailyReport(date: string) {
           (ga.ctas.length
             ? '<p style="font-size:12px;color:#888;margin:12px 0 4px;">押されたボタン</p>' +
               table(
-                ['ボタン', '行き先', '押したページ', '回数'],
-                ga.ctas.map((r) => [esc(r.dims[0]), esc(r.dims[1]), esc(r.dims[2]), num(r.values[0])]),
-                3,
+                ['ボタン', '回数'],
+                ga.ctas.map((r) => [
+                  `${esc(r.dims[0])}<br><span style="color:#888;font-size:12px;">${esc(pageLabel(r.dims[2]))} → ${esc(r.dims[1])}</span>`,
+                  num(r.values[0]),
+                ]),
               )
             : ''),
       ),
@@ -336,33 +357,34 @@ export async function buildDailyReport(date: string) {
       section(
         `問い合わせ ${inquiries.length}件`,
         inquiries.length
-          ? table(
-              ['時刻', 'お客様', '数量・用途', '経路'],
-              inquiries.map((item) => {
+          ? inquiries
+              .map((item) => {
                 const c = item.context ?? {}
                 const time = new Date(item.receivedAt).toLocaleTimeString('ja-JP', {
                   timeZone: 'Asia/Tokyo',
                   hour: '2-digit',
                   minute: '2-digit',
                 })
-                const route = [
-                  c.landingPage && `入口 ${c.landingPage}`,
-                  `参照元 ${c.referrer || '直接 / 不明'}`,
-                  c.visitCount && `${c.visitCount}回目の訪問`,
-                  c.submittedFrom && `送信 ${c.submittedFrom}`,
-                ]
+                const who = [item.contact?.company, item.contact?.name && `${item.contact.name}様`]
                   .filter(Boolean)
-                  .map((line) => esc(line))
-                  .join('<br>')
-                return [
-                  time,
-                  esc([item.contact?.company, item.contact?.name && `${item.contact.name}様`].filter(Boolean).join(' ')),
-                  esc([item.order?.quantity, item.order?.purpose].filter(Boolean).join(' / ')),
-                  route,
+                  .join(' ')
+                const order = [item.order?.quantity, item.order?.purpose].filter(Boolean).join(' / ')
+                const route = [
+                  ['参照元', describeReferrer(c.referrer)],
+                  ['入口', c.landingPage && pageLabel(c.landingPage)],
+                  ['送信', c.submittedFrom && pageLabel(c.submittedFrom)],
+                  ['訪問', c.visitCount && `${c.visitCount}回目`],
                 ]
-              }),
-              9,
-            )
+                  .filter(([, value]) => value)
+                  .map(([label, value]) => `<span style="color:#888;">${label}</span> ${esc(value)}`)
+                  .join('<br>')
+                return `<div style="padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:14px;line-height:1.7;">
+<div style="font-weight:bold;">${esc(time)}　${esc(who)}</div>
+${order ? `<div>${esc(order)}</div>` : ''}
+<div style="font-size:13px;margin-top:4px;">${route}</div>
+</div>`
+              })
+              .join('\n')
           : '<p style="color:#888;font-size:13px;">昨日の問い合わせはありませんでした。</p>',
       ),
     )
