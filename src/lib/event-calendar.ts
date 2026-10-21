@@ -17,6 +17,8 @@ export type CalendarEvent = {
   href: string
   linkLabel: string
   business?: boolean
+  /** 繁忙期などで締め切りが決まっている行事（計算より優先して表示） */
+  orderBy?: { normal: string; large: string; note: string }
 }
 
 export const CALENDAR_PERIOD = '2026年11月〜2027年10月'
@@ -25,7 +27,7 @@ export const calendarEvents: CalendarEvent[] = [
   { date: '2026-12-10', when: '12月初旬〜20日ごろ', name: 'お歳暮・年末のご挨拶', use: '取引先への年末の贈り物', href: '/blog/oseibo-onenga-torihikisaki', linkLabel: '取引先への年末年始の贈り物', business: true },
   { date: '2027-01-05', when: '1月1日〜7日ごろ（松の内）', name: 'お年賀・年始のご挨拶', use: '取引先への年始の手土産・社名入りの記念品', href: '/blog/oseibo-onenga-torihikisaki', linkLabel: '取引先への年末年始の贈り物', business: true },
   { date: '2027-01-11', when: '1月11日ごろ（地域差あり）', name: '鏡開き・新年会・賀詞交歓会', use: '樽酒の振る舞い、乾杯用の枡、参加者への記念品', href: '/blog/shinnenkai-enshutsu', linkLabel: '新年会・賀詞交歓会の演出', business: true },
-  { date: '2027-02-03', when: '2月3日', name: '節分', use: '豆まき用の枡（五合枡が定番）、店舗・寺社の行事', href: '/setsubun', linkLabel: '節分の枡（豆まきの枡の選び方）' },
+  { date: '2027-02-03', when: '2月3日', name: '節分', use: '豆まき用の枡（五合枡が定番）、店舗・寺社の行事', href: '/setsubun', linkLabel: '節分の枡（豆まきの枡の選び方）', orderBy: { normal: '12月上旬', large: '12月上旬', note: '節分の前は枡の繁忙期のため、数量に関わらず12月上旬までにご注文ください' } },
   { date: '2027-03-15', when: '3月中旬〜下旬', name: '卒業・卒団', use: '学校・部活・チームの記念品、先生や監督へのお礼', href: '/blog/sotsugyo-kinenhin', linkLabel: '卒業記念品・卒団記念品の選び方' },
   { date: '2027-03-25', when: '3月下旬', name: '異動・転勤・退職の送別', use: '部署一同からのプレゼント、退職記念品', href: '/blog/soubetsu-present', linkLabel: '送別会のプレゼント' },
   { date: '2027-04-01', when: '4月1日前後', name: '入社・創立記念・新年度', use: '新入社員への記念品、創立記念日の記念品', href: '/business/anniversary', linkLabel: '周年記念品' , business: true },
@@ -44,6 +46,7 @@ function formatJa(date: Date) {
 
 /** 相談の目安（通常・大口）。行事の4週間前と5週間前 */
 export function consultBy(event: CalendarEvent) {
+  if (event.orderBy) return { normal: event.orderBy.normal, large: event.orderBy.large }
   const base = new Date(`${event.date}T00:00:00Z`)
   return {
     normal: formatJa(new Date(base.getTime() - 28 * DAY)),

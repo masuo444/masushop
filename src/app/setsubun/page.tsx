@@ -20,8 +20,9 @@ const SETSUBUN = {
   date: '2027-02-03',
   dateLabel: '2027年2月3日（水）',
   ehou: '北北西やや北',
-  consultBy: '1月6日ごろ',
-  consultByLarge: '12月30日ごろ',
+  // 節分の前は枡の繁忙期。製作の枠が埋まるため、ご注文の締め切りは12月上旬（数量に関わらず）
+  orderBy: '2026年12月上旬',
+  consultFrom: '11月中',
 }
 
 export const metadata: Metadata = {
@@ -92,7 +93,7 @@ const faq = [
   },
   {
     q: `節分に間に合わせるには、いつまでに注文すればいいですか？`,
-    a: `名入れの製作は約3週間が目安です。仕上がりの確認と配送を含め、${SETSUBUN.year}年の節分（2月3日）に間に合わせるなら${SETSUBUN.consultBy}まで、100個以上なら${SETSUBUN.consultByLarge}までのご相談が目安です。年末年始を挟むため、12月中旬までのご相談が安心です。`,
+    a: `節分の前は枡の繁忙期です。${SETSUBUN.year}年の節分（2月3日）に間に合わせるには、${SETSUBUN.orderBy}までにご注文ください（数量に関わらず）。仕上がりイメージの確認に数日かかるため、${SETSUBUN.consultFrom}のご相談をおすすめします。`,
   },
   {
     q: '豆も一緒に買えますか？',
@@ -145,6 +146,12 @@ export default function SetsubunPage() {
       </section>
 
       {/* 2. 頼める条件 */}
+      <aside className="max-w-3xl mx-auto px-6 mb-8" aria-label="節分のご注文締め切り" data-track-view="notice:setsubun-deadline">
+        <p className="rounded-sm px-5 py-4 text-sm leading-[1.9]" style={{ background: 'var(--color-accent-light)', borderLeft: '3px solid var(--color-accent)', color: 'var(--foreground)' }}>
+          <strong>{SETSUBUN.year}年の節分用のご注文は、{SETSUBUN.orderBy}までにお願いします。</strong>
+          節分の前は枡の繁忙期のため、ふだんより早く製作の枠が埋まります。ご相談は{SETSUBUN.consultFrom}がおすすめです。
+        </p>
+      </aside>
       <OfferBlock trackId="setsubun" className="-mt-4 md:-mt-8 relative" />
 
       {/* 3. 今年の基本 */}
@@ -341,9 +348,9 @@ export default function SetsubunPage() {
           <table className="w-full text-sm" style={{ borderCollapse: 'collapse' }}>
             <tbody>
               {[
+                [`${SETSUBUN.year}年の節分のご注文締め切り`, `${SETSUBUN.orderBy}まで`],
+                ['ご相談のおすすめ時期', `${SETSUBUN.consultFrom}（仕上がりイメージの確認に数日かかるため）`],
                 ['名入れの製作期間', '約3週間（100個以上は3〜4週間）'],
-                [`${SETSUBUN.year}年の節分に間に合わせる相談の目安`, `${SETSUBUN.consultBy}まで`],
-                ['100個以上の場合', `${SETSUBUN.consultByLarge}まで`],
               ].map(([k, v]) => (
                 <tr key={k} style={{ borderBottom: '1px solid var(--color-border)' }}>
                   <th scope="row" className="py-3 pr-4 text-left font-medium align-top" style={th}>{k}</th>
@@ -354,7 +361,7 @@ export default function SetsubunPage() {
           </table>
         </div>
         <p className="mt-4 text-sm leading-[2]" style={th}>
-          節分の前は年末年始を挟むため、実際には<strong style={{ color: 'var(--foreground)' }}>12月中旬までのご相談</strong>が安心です。
+          節分の前は<strong style={{ color: 'var(--foreground)' }}>枡の繁忙期</strong>で、製作の枠が早く埋まります。ふだんの納期（約3週間）より早く、<strong style={{ color: 'var(--foreground)' }}>{SETSUBUN.orderBy}までのご注文</strong>をお願いしています。
           ほかの行事の目安は<Link href="/calendar" className="underline mx-1" style={{ color: 'var(--color-accent)' }}>記念品の行事カレンダー</Link>にまとめています。
         </p>
       </section>

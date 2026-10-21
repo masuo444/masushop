@@ -34,7 +34,7 @@ const faq = [
   },
   {
     q: '年末年始や年度末は混みますか？',
-    a: '12月（お歳暮・お年賀・新年会）と2〜3月（卒業・送別・異動）は、記念品のご相談が集中しやすい時期です。この時期は目安より早めのご相談をおすすめします。',
+    a: '節分の前（12月〜1月）は枡の繁忙期で、節分用のご注文は12月上旬までにお願いしています。お歳暮・お年賀・新年会と重なる12月、卒業・送別・異動の2〜3月もご相談が集中しやすいため、目安より早めのご相談をおすすめします。',
   },
   {
     q: '1個だけでも頼めますか？',
@@ -98,8 +98,11 @@ export default function CalendarPage() {
                       </Link>
                     </td>
                     <td className="px-4 py-4 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }} data-label="使われ方">{e.use}</td>
-                    <td className="px-4 py-4 whitespace-nowrap" data-label="相談の目安">{by.normal}ごろまで</td>
-                    <td className="px-4 py-4 whitespace-nowrap" style={{ color: 'var(--color-muted)' }} data-label="大口（100個〜）">{by.large}ごろまで</td>
+                    <td className="px-4 py-4 whitespace-nowrap" data-label="相談の目安">
+                      {e.orderBy ? <strong>{by.normal}までに注文</strong> : `${by.normal}ごろまで`}
+                      {e.orderBy && <span className="block text-[11px] whitespace-normal mt-1" style={{ color: 'var(--color-accent)' }}>{e.orderBy.note}</span>}
+                    </td>
+                    <td className="px-4 py-4 whitespace-nowrap" style={{ color: 'var(--color-muted)' }} data-label="大口（100個〜）">{e.orderBy ? `${by.large}までに注文` : `${by.large}ごろまで`}</td>
                   </tr>
                 )
               })}
@@ -107,7 +110,7 @@ export default function CalendarPage() {
           </table>
         </div>
         <p className="mt-5 text-xs leading-relaxed" style={{ color: 'var(--color-muted)' }}>
-          ※ 行事の日付は一般的な目安です（お年賀の時期や鏡開きの日は地域によって異なります）。相談の目安は、行事の日の約4週間前（大口は約5週間前）として計算しています。
+          ※ 行事の日付は一般的な目安です（お年賀の時期や鏡開きの日は地域によって異なります）。相談の目安は、行事の日の約4週間前（大口は約5週間前）として計算しています。節分は枡の繁忙期のため、例外として12月上旬がご注文の締め切りです。
         </p>
       </section>
 
@@ -118,7 +121,7 @@ export default function CalendarPage() {
         <ol className="space-y-5 text-sm leading-[2]">
           <li><strong>1. 入れる文章は、決まっていなくても先に相談する。</strong> 「社名と年号くらい」で構いません。仕上がりイメージを見ながら決めた方が早く進みます。</li>
           <li><strong>2. 人数分の名前を入れるなら、名簿の確認に時間を見る。</strong> 卒業・送別・表彰などで1個ずつ名前を変える場合、誤字の確認に数日かかります。</li>
-          <li><strong>3. 繁忙期は早めに。</strong> 12月と2〜3月は相談が集中します。目安より1〜2週間早いと安心です。</li>
+          <li><strong>3. 繁忙期は早めに。</strong> 節分の前（12月〜1月）は枡の繁忙期で、節分用のご注文は12月上旬が締め切りです。2〜3月（卒業・送別）も相談が集中するため、目安より1〜2週間早いと安心です。</li>
         </ol>
       </section>
 
