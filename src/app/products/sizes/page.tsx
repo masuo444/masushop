@@ -4,6 +4,8 @@ import { masuSizes, faqItems } from '@/lib/masu-data'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import OfferBlock from '@/components/ui/OfferBlock'
+import QuickQuote from '@/components/forms/QuickQuote'
 
 const baseUrl = siteConfig.url
 
@@ -79,6 +81,9 @@ export default function SizesPage() {
           </p>
         </div>
       </section>
+
+      {/* 頼める条件（1回目の画面で言い切る） */}
+      <OfferBlock trackId="sizes" className="-mt-4 md:-mt-10 relative" />
 
       {/* 比較表 */}
       <section className="max-w-5xl mx-auto px-6 py-16">
@@ -198,6 +203,15 @@ export default function SizesPage() {
       </section>
 
       <div className="divider max-w-5xl mx-auto" />
+
+      {/* その場で見積り（サイズを調べに来た人が、そのまま名入れを相談できるように） */}
+      <QuickQuote
+        id="offer-quote"
+        formType="quick-quote-sizes"
+        heading="サイズが決まったら、名入れを相談する"
+        lead="用途・サイズ・個数を選ぶだけ。名入れは1個から。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
+        className="bg-[var(--color-subtle)]"
+      />
 
       {/* FAQ */}
       <section className="max-w-3xl mx-auto px-6 py-16">

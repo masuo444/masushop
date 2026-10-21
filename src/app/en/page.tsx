@@ -26,6 +26,18 @@ export const metadata: Metadata = {
 
 const faq = [
   {
+    q: 'Can I order just one engraved cup?',
+    a: 'Yes. Engraved (personalized) masu can be ordered from a single piece. Plain, unengraved masu start from 10 pieces. Larger quantities are quoted per order, and the unit price goes down as the quantity goes up.',
+  },
+  {
+    q: 'Do I need to prepare design data?',
+    a: 'No. Just send us the text you want — names, dates, a message — and we set the typeface and layout for you. Logos can be recreated from a photo of a business card or sign. Before you order, we email you a free quote together with a preview image of the finished design.',
+  },
+  {
+    q: 'How much does an engraved masu cost?',
+    a: `An engraved order starts from ¥${siteConfig.orderMinPrice.toLocaleString('en-US')} per order (tax included, shipping extra), including design and the preview image. Additional pieces with the same design cost less. Shipping overseas is quoted by destination.`,
+  },
+  {
     q: 'What makes a wooden sake cup better than glass?',
     a: 'Hinoki (Japanese cypress) naturally infuses sake with a delicate woody aroma that enhances the flavor — something glass and ceramic cannot do. The wood contains phytoncide, a compound that creates a forest-bathing-like calming effect. Japanese sake connoisseurs have preferred hinoki cups for over a thousand years for this reason.',
   },

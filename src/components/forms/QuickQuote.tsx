@@ -7,6 +7,16 @@ import siteConfig from '@/lib/site-config'
 import { getAttribution } from '@/lib/attribution'
 import { trackLead } from '@/lib/conversion'
 import { orderMinPriceShort } from '@/lib/pricing'
+import { trackSiteEvent } from '@/lib/interaction-tracking'
+
+function gtagEvent(name: string, params: Record<string, unknown>) {
+  const gtag = (window as unknown as { gtag?: (c: string, n: string, p?: Record<string, unknown>) => void }).gtag
+  try {
+    gtag?.('event', name, params)
+  } catch {
+    // 計測の失敗で操作を妨げない
+  }
+}
 
 /**
  * 「かんたん見積り依頼」
@@ -108,6 +118,11 @@ export default function QuickQuote({
   }, [step, touched])
 
   const goTo = (next: number) => {
+    if (next > step) {
+      // 何問目まで答えたか（どこで離れるかを見るため）
+      trackSiteEvent('quote_step', `${formType}:${step + 1}`)
+      gtagEvent('quote_step', { form_id: `${formType}:${step + 1}` })
+    }
     setTouched(true)
     setStep(Math.min(Math.max(next, 0), STEP_COUNT - 1))
   }
@@ -202,6 +217,7 @@ export default function QuickQuote({
       id={id}
       className={`py-20 md:py-24 scroll-mt-20 ${className}`}
       aria-labelledby={`${id}-title`}
+      data-track-view={`form:${formType}`}
     >
       <div className="max-w-2xl mx-auto px-6">
         <p
@@ -402,7 +418,7 @@ export default function QuickQuote({
 
               {/* 5. 連絡先 */}
               {step === 4 && (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5" data-track-form={formType}>
                   {/* 選んだ内容の確認（押すとその質問に戻れる） */}
                   <ul
                     className="flex flex-wrap gap-2 mb-2"

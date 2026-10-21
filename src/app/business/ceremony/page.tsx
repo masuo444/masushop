@@ -3,6 +3,9 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import OfferBlock from '@/components/ui/OfferBlock'
+import QuickQuote from '@/components/forms/QuickQuote'
+import { orderMinPriceText } from '@/lib/pricing'
 
 const baseUrl = siteConfig.url
 
@@ -23,6 +26,22 @@ export const metadata: Metadata = {
 }
 
 const faqItems = [
+  {
+    q: '式典の記念品として、枡は何個から頼めますか？',
+    a: '名入れの枡は1個から、無地の枡は10個からお受けしています。参加人数に合わせた数量でお見積りし、数量が多いほど1個あたりの単価は下がります。',
+  },
+  {
+    q: 'デザインデータがなくても依頼できますか？',
+    a: 'はい。式典名・日付・社名などの文章を送っていただければ、書体とレイアウトはこちらで組みます。ロゴも名刺や看板の画像から起こして刻印できます。ご注文の前に、お見積りと一緒に仕上がりイメージを無料でお送りします。',
+  },
+  {
+    q: '請求書払いはできますか？',
+    a: 'はい。法人のお客様は請求書払い（月末締め翌月末払い）に対応しています。銀行振込・クレジットカードもご利用いただけます。',
+  },
+  {
+    q: '少ない数でも名入れできますか？価格の目安は？',
+    a: `1個から名入れできます。名入れのご注文は1回につき ${orderMinPriceText}が目安で、デザイン作成と仕上がりイメージを含みます。2個目以降は割安になります。`,
+  },
   {
     q: '鏡開きの樽は取り扱っていますか？',
     a: '当店では枡のみの取り扱いとなります。鏡開き用の樽は酒造メーカーや樽専門店にご相談ください。枡のみのご注文も大歓迎です。',
@@ -84,6 +103,9 @@ export default function CeremonyPage() {
             式典を「体験」として記憶に刻む、枡のある祝いの場をご提案します。
           </p>
         </section>
+
+        {/* 頼める条件（1回目の画面で言い切る） */}
+        <OfferBlock variant="business" trackId="ceremony" className="pb-16" />
 
         {/* Use scenes */}
         <section className="bg-[var(--color-subtle)] py-20">
@@ -224,6 +246,14 @@ export default function CeremonyPage() {
             </p>
           </div>
         </section>
+
+        {/* その場で見積り */}
+        <QuickQuote
+          id="offer-quote"
+          formType="quick-quote-ceremony"
+          heading="式典・記念品のかんたん見積り"
+          lead="用途・サイズ・個数を選んで連絡先を入れるだけ。式典の日程や名入れの文章は、分かる範囲で構いません。通常1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+        />
 
         {/* FAQ */}
         <section className="max-w-3xl mx-auto px-6 py-20">

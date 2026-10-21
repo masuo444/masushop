@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import OfferBlock from '@/components/ui/OfferBlock'
+import QuickQuote from '@/components/forms/QuickQuote'
 import { notFound } from 'next/navigation'
 import siteConfig from '@/lib/site-config'
 import { getAllArticles, getArticleBySlug } from '@/lib/blog-articles'
@@ -237,6 +239,8 @@ export default async function BlogArticlePage({
   const article = getArticleBySlug(slug)
   if (!article) notFound()
 
+  // 法人向けの記事には法人向けの条件（請求書払い・ロゴ）を出す
+  const isBusinessArticle = /法人|イベント/.test(article.category)
   const allArticles = getAllArticles()
   const relatedArticles = allArticles
     .filter((a) => a.slug !== article.slug)
@@ -320,6 +324,13 @@ export default async function BlogArticlePage({
         </div>
       </section>
 
+      {/* 頼める条件（記事を読む前に、1個から頼めること・価格・流れを伝える） */}
+      <OfferBlock
+        variant={isBusinessArticle ? 'business' : 'personal'}
+        trackId={`blog-${article.slug}`.slice(0, 50)}
+        className="pb-12"
+      />
+
       {/* Hero Image */}
       {article.heroImage && (
         <div className="mx-auto max-w-4xl px-6 pb-12">
@@ -343,7 +354,14 @@ export default async function BlogArticlePage({
         <ArticleContent sections={article.content} />
       </article>
 
-      <div className="divider" />
+      {/* 読み終えたところで、そのまま見積り */}
+      <QuickQuote
+        id="offer-quote"
+        formType="quick-quote-blog"
+        heading={isBusinessArticle ? '法人・式典のかんたん見積り' : '名入れの枡を、1個から相談する'}
+        lead="用途・サイズ・個数を選んで連絡先を入れるだけ。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
+        className="bg-[var(--color-subtle)]"
+      />
 
       {/* Related Articles */}
       <section className="mx-auto max-w-3xl px-6 py-16">

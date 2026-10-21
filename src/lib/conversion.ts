@@ -6,7 +6,9 @@
  * 集計できるようにするため、送信時にイベントを送る。
  */
 
-type Gtag = (command: string, eventName: string, params?: Record<string, unknown>) => void
+import { trackSiteEvent } from '@/lib/interaction-tracking'
+
+type Gtag =(command: string, eventName: string, params?: Record<string, unknown>) => void
 
 /**
  * 自由入力の数量を集計しやすい区分に丸める。
@@ -44,10 +46,12 @@ export function trackLead(params: {
   submittedFrom?: string
 }) {
   if (typeof window === 'undefined') return
+  const bucket = quantityBucket(params.quantity)
+  // 自前の記録にも残す（GA4が読み込まれていない・ブロックされている場合も数える）
+  trackSiteEvent('lead', `${params.formType}:${bucket}`.slice(0, 60))
+
   const gtag = (window as unknown as { gtag?: Gtag }).gtag
   if (typeof gtag !== 'function') return
-
-  const bucket = quantityBucket(params.quantity)
 
   try {
     gtag('event', 'generate_lead', {

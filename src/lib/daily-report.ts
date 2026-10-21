@@ -2,6 +2,16 @@ import { get, list } from '@vercel/blob'
 import { AI_SOURCE_GA_REGEX, detectAiSource } from '@/lib/ai-sources'
 import { BOT_KIND_JA, hasBotStore, readAiBotVisits, type BotKind, type BotVisit } from '@/lib/ai-bots'
 import { getGoogleAccessToken, hasGoogleCredentials } from '@/lib/google-auth'
+import { hasEventStore, readSiteEvents, type SiteEventRow } from '@/lib/site-events-store'
+import {
+  FUNNEL_HEAD,
+  QUOTE_STEP_HEAD,
+  ctaTargets,
+  pageFunnel,
+  quoteSteps,
+  segmentFunnel,
+  totalOf,
+} from '@/lib/site-events-report'
 
 /**
  * 毎朝の「前日1日分」レポート。GA4（アクセス）・Search Console（検索ワード）・
@@ -318,12 +328,66 @@ const EVENT_JA: Record<string, string> = {
   contact_click: 'メール・電話・LINEのクリック',
 }
 
+/** 同じAIが参照元の書き方違いで2行に分かれないよう、AIの名前でまとめる */
+function mergeByAiName(rows: { dims: string[]; values: number[] }[]) {
+  const merged = new Map<string, number[]>()
+  for (const r of rows) {
+    const name = detectAiSource(r.dims[0]) || r.dims[0]
+    const prev = merged.get(name)
+    merged.set(name, prev ? prev.map((v, i) => v + (r.values[i] ?? 0)) : [...r.values])
+  }
+  return [...merged.entries()]
+    .sort((a, b) => b[1][0] - a[1][0])
+    .map(([name, values]) => ({ dims: [name], values }))
+}
+
+const small = (text: string) => `<p style="font-size:12px;color:#888;margin:12px 0 4px;">${text}</p>`
+
+function renderSiteEvents(day: SiteEventRow[], week: SiteEventRow[], month: SiteEventRow[]) {
+  const n = (rows: SiteEventRow[], event: string) => num(totalOf(rows, event))
+  const funnelRows = (rows: [string, ...number[]][], label: (v: string) => string) =>
+    rows.map(([name, ...values]) => [esc(label(name)), ...values.map(num)])
+  return (
+    `<p style="font-size:12px;color:#888;margin:0 0 8px;">サイト自身で数えた記録（広告ブロッカーなどでGA4が取りこぼす分も入る）。数字は「その行動をした訪問の数」。</p>` +
+    table(
+      ['行動', '昨日', '7日', '28日'],
+      [
+        ['ページを開いた', n(day, 'view'), n(week, 'view'), n(month, 'view')],
+        ['15秒以上見た', n(day, 'engaged'), n(week, 'engaged'), n(month, 'engaged')],
+        ['下まで読んだ（75%）', n(day, 'scroll'), n(week, 'scroll'), n(month, 'scroll')],
+        ['条件の案内・見積りフォームを見た', n(day, 'offer_view'), n(week, 'offer_view'), n(month, 'offer_view')],
+        ['見積り・相談のボタンを押した', n(day, 'cta'), n(week, 'cta'), n(month, 'cta')],
+        ['かんたん見積りの1問目に答えた', ...[day, week, month].map((r) => num(r.filter((x) => x.event === 'quote_step' && x.label.endsWith(':1')).reduce((s, x) => s + x.count, 0)))],
+        ['フォームに入力し始めた', n(day, 'form_start'), n(week, 'form_start'), n(month, 'form_start')],
+        ['送信した', n(day, 'lead'), n(week, 'lead'), n(month, 'lead')],
+      ],
+    ) +
+    small('流入元別の流れ（直近28日）') +
+    table(['流入元', ...FUNNEL_HEAD], funnelRows(segmentFunnel(month), (v) => v)) +
+    small('ページ別の流れ（直近28日・開いた数の多い順）') +
+    table(['ページ', ...FUNNEL_HEAD], funnelRows(pageFunnel(month), pageLabel)) +
+    (quoteSteps(month).length
+      ? small('かんたん見積り：どこまで進んだか（直近28日）') +
+        table(['フォーム', ...QUOTE_STEP_HEAD], funnelRows(quoteSteps(month), (v) => v))
+      : '') +
+    (ctaTargets(month).length
+      ? small('押されたボタンの行き先（直近28日）') +
+        table(
+          ['押したページ → 行き先', '回数'],
+          ctaTargets(month)
+            .slice(0, 12)
+            .map(([path, target, count]) => [`${esc(pageLabel(path))} → ${esc(target)}`, num(count)]),
+        )
+      : '')
+  )
+}
+
 export async function buildDailyReport(date: string) {
   const notes: string[] = []
   const gscDate = shiftDate(date, -2) // Search Console は2〜3日遅れて確定する
 
   const botDates = Array.from({ length: 28 }, (_, i) => shiftDate(date, -i))
-  const [ga, gsc, inquiries, botDays] = await Promise.all([
+  const [ga, gsc, inquiries, botDaysRaw, eventDays] = await Promise.all([
     hasGoogleCredentials()
       ? fetchGa(date).catch((error) => {
           notes.push(`アクセス解析（GA4）を取得できませんでした: ${String(error).slice(0, 200)}`)
@@ -346,7 +410,15 @@ export async function buildDailyReport(date: string) {
           return null
         })
       : null,
+    hasEventStore()
+      ? readSiteEvents(botDates).catch((error) => {
+          notes.push(`サイト内の行動記録を読めませんでした: ${String(error).slice(0, 200)}`)
+          return null
+        })
+      : null,
   ])
+  // 動作確認用のパス（/__aibot-test など）は数えない
+  const botDays = botDaysRaw?.map((visits) => visits.filter((v) => !v.path.startsWith('/__'))) ?? null
 
   const parts: string[] = []
 
@@ -383,6 +455,8 @@ export async function buildDailyReport(date: string) {
       ),
     )
     const aiName = (source: string) => detectAiSource(source) || source
+    ga.ai.aiSources = mergeByAiName(ga.ai.aiSources)
+    ga.ai.aiMonth = mergeByAiName(ga.ai.aiMonth)
     const aiTotal = ga.ai.aiSources.reduce((sum, r) => sum + r.values[0], 0)
     const aiMonthTotal = ga.ai.aiMonth.reduce((sum, r) => sum + r.values[0], 0)
     const aiMonthLeads = ga.ai.aiLeads.reduce((sum, r) => sum + r.values[0], 0)
@@ -457,6 +531,15 @@ export async function buildDailyReport(date: string) {
                 ]),
               )
             : ''),
+      ),
+    )
+  }
+
+  if (eventDays) {
+    parts.push(
+      section(
+        'サイト内の行動の流れ',
+        renderSiteEvents(eventDays[0], eventDays.slice(0, 7).flat(), eventDays.flat()),
       ),
     )
   }

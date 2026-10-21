@@ -122,7 +122,7 @@ export default function OrderMadeForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" data-track-form="order-made">
       {/* 最初に見えるのは3項目だけ。残りは任意ブロックに畳んで、送信のハードルを下げる。 */}
       <div className="grid sm:grid-cols-2 gap-6">
         <div>

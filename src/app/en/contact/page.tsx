@@ -169,7 +169,7 @@ function ContactForm() {
       {/* Form */}
       <section className="py-16 md:py-20">
         <div className="max-w-2xl mx-auto px-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6" data-track-form="en-contact">
             {/* Name & Email side by side */}
             <div className="grid sm:grid-cols-2 gap-5">
               <div>

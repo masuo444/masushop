@@ -3,6 +3,8 @@ import { hasBotStore, readAiBotVisits } from '@/lib/ai-bots'
 import { GSC_SITE, esc, fetchInquiries, runGaReport, shiftDate } from '@/lib/daily-report'
 import { getGoogleAccessToken, hasGoogleCredentials } from '@/lib/google-auth'
 import { quantityBucket } from '@/lib/conversion'
+import { hasEventStore, readSiteEvents } from '@/lib/site-events-store'
+import { FUNNEL_HEAD, QUOTE_STEP_HEAD, ctaTargets, pageFunnel, quoteSteps, segmentFunnel } from '@/lib/site-events-report'
 
 /**
  * 毎週月曜の「問い合わせを増やすための改善アドバイス」。
@@ -18,7 +20,9 @@ const SITE_RULES = `
 ## サイトの概要
 - masu.fomus.jp「枡の専門店 MASU-STORE」。国産ヒノキ枡の名入れ・オーダーメイド専門店。運営は合同会社FOMUS
 - 目的は問い合わせ（お見積り・オーダーメイド相談）の獲得。受注は1個の一点ものから法人の大口まで
-- 問い合わせ導線は2本：/custom（法人・大口の見積り）と /order-made（一点もの・1個から）。/business は法人向けの入口
+- 問い合わせの入口：/custom（通常の見積りフォーム。個人の1個から法人の大口まで受ける）、/original（1個からのオーダーメイド記念品の案内とかんたん見積り）、各ページの「かんたん見積り」（ページ内のステップ式フォーム。/・/original・/products/[id]・/products/sizes・/business・/business/ceremony・ブログ記事に設置）。/business は法人向けの入口
+- /order-made と /order は /original に統合済み（自動転送）。/order-made の表示が0なのは正常なので、指摘しない
+- /products/sizes・/business/ceremony・ブログ記事の冒頭には「頼める条件」の案内ブロック（1個から・価格・データ不要・無料の仕上がりイメージ・納期）がある
 - 日本語がメイン、/en に英語版（海外発送対応）
 
 ## 提供内容の事実（これ以外を約束する提案はしない）
@@ -234,6 +238,7 @@ async function collectData(date: string) {
       const days = await readAiBotVisits(Array.from({ length: 28 }, (_, i) => shiftDate(date, -i)))
       const totals = new Map<string, number>()
       for (const v of days?.flat() ?? []) {
+        if (v.path.startsWith('/__')) continue // 動作確認用のパス
         const key = `${v.kind}\t${v.bot}\t${v.path}`
         totals.set(key, (totals.get(key) ?? 0) + v.count)
       }
@@ -246,6 +251,23 @@ async function collectData(date: string) {
       ]
     } catch (error) {
       notes.push(`AIクローラー記録: ${String(error).slice(0, 200)}`)
+    }
+  }
+
+  if (hasEventStore()) {
+    try {
+      const days = await readSiteEvents(Array.from({ length: 28 }, (_, i) => shiftDate(date, -i)))
+      const month = days?.flat() ?? []
+      if (month.length) {
+        data['サイト内の行動_説明'] =
+          'サイト自身で数えた記録（GA4より取りこぼしが少ない）。数字は「その行動をした訪問の数」。条件を見た=頼める条件の案内ブロックかかんたん見積りフォームが画面に半分以上出た／見積り開始=かんたん見積りの1問目に答えた・または通常フォームに入力し始めた'
+        data['サイト内の行動_流入元別_28日'] = [['流入元', ...FUNNEL_HEAD], ...segmentFunnel(month)]
+        data['サイト内の行動_ページ別_28日'] = [['ページ', ...FUNNEL_HEAD], ...pageFunnel(month, 25)]
+        data['かんたん見積りの段階別_28日'] = [['フォーム', ...QUOTE_STEP_HEAD], ...quoteSteps(month)]
+        data['押されたボタンの行き先_自前計測_28日'] = [['押したページ', '行き先', '回数'], ...ctaTargets(month).slice(0, 30)]
+      }
+    } catch (error) {
+      notes.push(`サイト内の行動記録: ${String(error).slice(0, 200)}`)
     }
   }
 

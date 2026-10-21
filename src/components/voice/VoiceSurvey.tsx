@@ -319,7 +319,7 @@ export default function VoiceSurvey() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-10" noValidate data-track-form="voice">
       {/* 人には見えない入力欄（機械的な送信の判別用） */}
       <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
         <label htmlFor="voice-website">Website</label>

@@ -193,7 +193,7 @@ function CustomPageInner() {
       <section className="py-16 md:py-20">
         <div className="max-w-2xl mx-auto px-6">
           <div className="p-5 mb-8 rounded-sm text-sm leading-[1.9]" style={{background:'var(--color-accent-light)'}}><p className="font-medium mb-2">まずは無料で、お見積り・仕上がり確認。</p><p>送信だけで注文は確定しません。必須項目はお名前・メールアドレス・数量です。数量が未定の場合は「未定」とご入力ください。</p></div>
-          <form onSubmit={handleSubmit} className="space-y-12" aria-busy={isSubmitting}>
+          <form onSubmit={handleSubmit} className="space-y-12" aria-busy={isSubmitting} data-track-form="custom">
             {/* Contact Info */}
             <div>
               <h2 className="text-lg font-medium mb-6">お客様情報</h2>
