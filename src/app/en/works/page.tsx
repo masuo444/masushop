@@ -38,6 +38,7 @@ const worksJsonLd = {
       name: KURA_MASTER.en.title,
       description: KURA_MASTER.en.lead,
       dateCreated: String(KURA_MASTER.edition),
+      image: `${baseUrl}${KURA_MASTER.image.src}`,
       material: 'Japanese hinoki cypress',
       creator: { '@type': 'Organization', name: siteConfig.nameEn, url: `${baseUrl}/en` },
       about: {
@@ -85,8 +86,27 @@ export default function EnWorksPage() {
             {KURA_MASTER.en.title}
           </h2>
           <p className="text-[15px] leading-[2] mb-6" style={{ color: 'var(--foreground)' }}>
-            {KURA_MASTER.en.lead}
+            {KURA_MASTER.en.lead} {KURA_MASTER.en.use}
           </p>
+          <figure className="mb-6">
+            <Image
+              src={KURA_MASTER.image.src}
+              alt={KURA_MASTER.en.imageAlt}
+              width={KURA_MASTER.image.width}
+              height={KURA_MASTER.image.height}
+              sizes="(max-width: 768px) 100vw, 720px"
+              className="w-full max-w-md mx-auto rounded-sm"
+              priority
+            />
+            <figcaption className="text-[12px] text-center mt-3" style={{ color: 'var(--color-muted)' }}>
+              On display at the venue ({KURA_MASTER.en.method.toLowerCase()})
+            </figcaption>
+          </figure>
+          <dl className="grid grid-cols-[7em_1fr] gap-y-2 text-[14px] mb-6">
+            <dt style={{ color: 'var(--color-muted)' }}>Used for</dt><dd>Display at the venue; keepsakes for award-winning breweries</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>Engraving</dt><dd>{KURA_MASTER.en.detail}</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>Material</dt><dd>Japanese hinoki cypress</dd>
+          </dl>
           <div className="rounded-sm p-6 md:p-7 mb-6" style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}>
             <h3 className="text-[13px] tracking-[0.08em] mb-3" style={{ color: 'var(--color-muted)' }}>
               About Kura Master

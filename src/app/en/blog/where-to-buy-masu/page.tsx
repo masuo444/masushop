@@ -232,7 +232,7 @@ export default function WhereToBuyMasuPage() {
         <div className="max-w-3xl mx-auto px-6">
           <p className="text-[11px] tracking-[0.18em] mb-2" style={{ color: 'var(--color-accent)' }}>FEATURED WORK — PARIS {KURA_MASTER.edition}</p>
           <h2 className="serif text-xl font-light mb-4" style={{ color: 'var(--foreground)' }}>{KURA_MASTER.en.title}</h2>
-          <p className="text-sm leading-[2] mb-4" style={{ color: 'var(--color-muted)' }}>{KURA_MASTER.en.lead} {KURA_MASTER.en.about}</p>
+          <p className="text-sm leading-[2] mb-4" style={{ color: 'var(--color-muted)' }}>{KURA_MASTER.en.lead} {KURA_MASTER.en.use} {KURA_MASTER.en.about}</p>
           <Link href="/en/works" className="text-sm underline underline-offset-4" style={{ color: 'var(--color-accent)' }}>See our work →</Link>
         </div>
       </section>

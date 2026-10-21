@@ -12,13 +12,13 @@ const baseUrl = siteConfig.url
 export const metadata: Metadata = {
   title: '法人のお客様 — 枡のノベルティ・記念品 | 大口注文・数量割引対応',
   description:
-    '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー刻印加工。ロゴや文章を送るだけでデザインはお任せ。ご注文前に見積りと仕上がりイメージを無料でお送りします。10個から数量割引・請求書払い対応。納期2〜4週間。',
+    '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。全7サイズの国産ヒノキ枡に焼印・レーザー刻印加工。ロゴや文章を送るだけでデザインはお任せ。ご注文前に見積りと仕上がりイメージを無料でお送りします。名入れは1個から、数量割引・請求書払い対応。納期2〜4週間。',
   keywords:
     '枡 ノベルティ,枡 自社ブランド,枡 企業ギフト,枡 記念品 法人,枡 卸,枡 名入れ 法人,枡 周年記念,枡 株主優待,枡 大口注文,枡 数量割引,枡 請求書払い',
   alternates: { canonical: `${baseUrl}/business`, languages: { ja: `${baseUrl}/business`, en: `${baseUrl}/en/corporate` } },
   openGraph: {
     title: '法人のお客様 — 枡のノベルティ・記念品',
-    description: '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。ご注文前に見積りと仕上がりイメージを無料でお送りします。10個から数量割引・請求書払い対応。',
+    description: '法人向け枡のノベルティ・記念品の製作。企業ロゴ・社名の名入れ対応。ご注文前に見積りと仕上がりイメージを無料でお送りします。名入れは1個から、数量割引・請求書払い対応。',
     type: 'website',
     images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
@@ -229,7 +229,7 @@ export default function BusinessPage() {
             ご注文前に、お見積りと仕上がりイメージを無料でお送りします。
           </p>
           <p className="text-[13px] mb-10" style={{ opacity: 0.8 }}>
-            10個から・数量割引あり・請求書払い（月末締め翌月末払い）可
+            名入れ1個から・数量割引あり・請求書払い（月末締め翌月末払い）可
           </p>
           <p className="text-[13px] mb-8" style={{ opacity: 0.75 }}>
             <Link href="/logo" className="underline underline-offset-4">
@@ -277,7 +277,7 @@ export default function BusinessPage() {
             {[
               { num: '70年+', label: '枡づくりの実績' },
               { num: '全7サイズ', label: '国産ヒノキ枡' },
-              { num: '10個〜', label: '小ロット対応' },
+              { num: '名入れ1個〜', label: '小ロット対応' },
               { num: '2週間〜', label: '最短納期' },
             ].map((stat) => (
               <div key={stat.label}>

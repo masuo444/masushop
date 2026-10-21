@@ -38,6 +38,7 @@ const worksJsonLd = {
       name: KURA_MASTER.ja.title,
       description: KURA_MASTER.ja.lead,
       dateCreated: String(KURA_MASTER.edition),
+      image: `${baseUrl}${KURA_MASTER.image.src}`,
       material: '国産ヒノキ',
       creator: { '@type': 'Organization', name: siteConfig.name, url: baseUrl },
       about: {
@@ -88,7 +89,27 @@ export default function WorksPage() {
           </h2>
           <p className="text-[15px] leading-[2.1] mb-6" style={{ color: 'var(--foreground)' }}>
             {KURA_MASTER.ja.lead}
+            {KURA_MASTER.ja.use}
           </p>
+          <figure className="mb-6">
+            <Image
+              src={KURA_MASTER.image.src}
+              alt={KURA_MASTER.ja.imageAlt}
+              width={KURA_MASTER.image.width}
+              height={KURA_MASTER.image.height}
+              sizes="(max-width: 768px) 100vw, 720px"
+              className="w-full max-w-md mx-auto rounded-sm"
+              priority
+            />
+            <figcaption className="text-[12px] text-center mt-3" style={{ color: 'var(--color-muted)' }}>
+              会場に展示された記念枡（{KURA_MASTER.ja.method}）
+            </figcaption>
+          </figure>
+          <dl className="grid grid-cols-[6em_1fr] gap-y-2 text-[14px] mb-6">
+            <dt style={{ color: 'var(--color-muted)' }}>使われ方</dt><dd>会場での展示、受賞蔵への記念品</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>名入れ</dt><dd>{KURA_MASTER.ja.detail}</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>素材</dt><dd>国産ヒノキ</dd>
+          </dl>
           <div className="rounded-sm p-6 md:p-7 mb-6" style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}>
             <h3 className="text-[13px] tracking-[0.08em] mb-3" style={{ color: 'var(--color-muted)' }}>
               Kura Master とは
@@ -109,7 +130,7 @@ export default function WorksPage() {
             </p>
           </div>
           <p className="text-[14px] leading-[2]" style={{ color: 'var(--color-muted)' }}>
-            日本酒の本場の外で、日本酒を讃える場の記念品として枡が選ばれました。
+            日本酒を讃える場で、受賞した酒蔵へ贈る記念品として枡が選ばれました。
             大会・式典・周年の記念枡は、名入れの内容と数量に合わせてお見積りします。
           </p>
         </div>
