@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import siteConfig from '@/lib/site-config'
 import { getAllArticles, getArticleBySlug } from '@/lib/blog-articles'
 import type { ArticleSection } from '@/lib/blog-articles'
-import { BreadcrumbJsonLd } from '@/components/seo/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
 import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
@@ -248,9 +248,17 @@ export default async function BlogArticlePage({
   // 法人向けの記事には法人向けの条件（請求書払い・ロゴ）を出す
   const isBusinessArticle = /法人|イベント/.test(article.category)
   const allArticles = getAllArticles()
-  const relatedArticles = allArticles
-    .filter((a) => a.slug !== article.slug)
-    .slice(0, 3)
+  // 関連記事は同じカテゴリを優先し、足りない分を新しい順で補う
+  const others = allArticles.filter((a) => a.slug !== article.slug)
+  const byNewest = (a: { updatedAt: string }, b: { updatedAt: string }) => b.updatedAt.localeCompare(a.updatedAt)
+  const relatedArticles = [
+    ...others.filter((a) => a.category === article.category).sort(byNewest),
+    ...others.filter((a) => a.category !== article.category).sort(byNewest),
+  ].slice(0, 3)
+  // 本文の「よくある質問」を FAQPage の構造化データにも出す（AI・検索に引用されやすくする）
+  const faqItems = article.content
+    .filter((s) => s.type === 'faq' && s.q && s.a)
+    .map((s) => ({ q: s.q as string, a: s.a as string }))
 
   const articleJsonLd = {
     '@context': 'https://schema.org',
@@ -292,6 +300,7 @@ export default async function BlogArticlePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
       />
+      {faqItems.length > 0 && <FAQJsonLd items={faqItems} />}
 
       {/* Breadcrumb */}
       <nav

@@ -89,6 +89,11 @@ export default function OfferBlock({
             詳しく書いて相談する
           </Link>
         </div>
+        <p className="mt-4 text-[12px]">
+          <Link href="/calendar" className="underline underline-offset-4" style={{ color: 'var(--color-muted)' }}>
+            行事ごとの「いつまでに相談すれば間に合うか」を見る →
+          </Link>
+        </p>
       </div>
     </aside>
   )

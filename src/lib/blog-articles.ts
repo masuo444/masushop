@@ -1,3 +1,8 @@
+import { article as oseiboOnenga } from '@/lib/articles/oseibo-onenga-torihikisaki'
+import { article as shinnenkaiEnshutsu } from '@/lib/articles/shinnenkai-enshutsu'
+import { article as sotsugyoKinenhin } from '@/lib/articles/sotsugyo-kinenhin'
+import { article as soubetsuPresent } from '@/lib/articles/soubetsu-present'
+
 // ===== Blog Article Types =====
 export interface ArticleSection {
   type: 'heading' | 'paragraph' | 'list' | 'table' | 'callout' | 'faq'
@@ -3097,6 +3102,9 @@ const articles: BlogArticle[] = [
     ],
   },
 ]
+
+// 季節の需要に合わせた記事（2026-10 追加。1記事1ファイルで管理）
+articles.push(oseiboOnenga, shinnenkaiEnshutsu, sotsugyoKinenhin, soubetsuPresent)
 
 // ===== Helper Functions =====
 // 2026-09: Googleが「クロール済み・インデックス未登録」とした記事のうち、

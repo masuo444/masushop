@@ -25,6 +25,7 @@ const footerLinks = {
     { href: '/logo', label: 'ロゴ入れ' },
     { href: '/custom', label: '名入れのお見積り' },
     { href: '/gift', label: 'ギフトガイド' },
+    { href: '/calendar', label: '記念品の行事カレンダー' },
     { href: '/works', label: '制作実績（Kura Master 10周年記念枡など）' },
     { href: '/reviews', label: 'お客様の声' },
   ],

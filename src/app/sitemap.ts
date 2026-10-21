@@ -51,6 +51,7 @@ const pageUpdatedAt: Record<string, string> = {
   '/reviews': '2026-09-19',
   '/sake': '2026-09-23',
   '/works': '2026-10-21',
+  '/calendar': '2026-10-21',
   '/en/works': '2026-10-21',
   '/en/blog/where-to-buy-masu': '2026-10-21',
   '/en/blog/custom-engraved-masu': '2026-10-21',
@@ -187,6 +188,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/business/oem`,
       lastModified: lastModified('/business/oem'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/calendar`,
+      lastModified: lastModified('/calendar'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
