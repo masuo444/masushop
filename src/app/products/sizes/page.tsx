@@ -40,7 +40,7 @@ const sizeFaqItems = faqItems.filter((item) => item.category === 'サイズ')
 const faqLinks: Record<string, { href: string; label: string }> = {
   '一合枡の大きさはどのくらいですか？': { href: '/products/ichigo', label: '一合枡の商品ページ' },
   '日本酒を飲むのに最適なサイズは？': { href: '/sake', label: '枡と日本酒 — もっきりの作法' },
-  '節分の豆まきに使う枡のサイズは？': { href: '/products/gogo', label: '五合枡の商品ページ' },
+  '節分の豆まきに使う枡のサイズは？': { href: '/setsubun', label: '節分の枡（サイズ・豆まきの作法）' },
   '鏡開きに使う枡のサイズは？': { href: '/business/ceremony', label: '式典・鏡開きの枡' },
 }
 

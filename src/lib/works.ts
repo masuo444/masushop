@@ -38,3 +38,11 @@ export const KURA_MASTER = {
     imageAlt: 'Kura Master 10th anniversary masu: hinoki cups laser-engraved with the logo and “10e Anniversaire”, stacked on display at the awards ceremony at the Residence of the Ambassador of Japan in France',
   },
 } as const
+
+/**
+ * ご注文いただいている業種（社名は出さない約束。用途・数量・感想は未確認なので書かない）
+ */
+export const CLIENT_TYPES = {
+  ja: ['大手化学メーカー', '大手ホテル', 'カフェ'],
+  en: ['a major chemical manufacturer', 'a major hotel', 'cafés'],
+} as const

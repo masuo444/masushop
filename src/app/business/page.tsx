@@ -6,6 +6,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import QuickQuote from '@/components/forms/QuickQuote'
 import OrderFlow from '@/components/ui/OrderFlow'
 import WorksHighlight from '@/components/ui/WorksHighlight'
+import { CLIENT_TYPES, KURA_MASTER } from '@/lib/works'
 
 const baseUrl = siteConfig.url
 
@@ -32,40 +33,6 @@ const deliveryTimelines = [
   { type: '焼印入り枡', lead: '約3週間', note: '初回は版の製作に+3〜5営業日' },
   { type: 'レーザー刻印入り枡', lead: '約3週間', note: 'データ確認後の着手' },
   { type: '大口注文（300個以上）', lead: '約4週間', note: '数量・時期により変動。要ご相談' },
-]
-
-// ── 導入事例 ──
-const caseStudies = [
-  {
-    company: '法人のお客様',
-    person: 'N.様',
-    product: '一合枡（焼印入り）× 100個',
-    purpose: '創業30周年の記念品',
-    quote:
-      '焼印の仕上がりが非常に美しく、取引先に配ったところ大変好評でした。納期も相談に乗っていただき、スムーズに準備できました。',
-    result: '取引先との関係強化に貢献。翌年の周年イベントでもリピート注文。',
-    rating: 5,
-  },
-  {
-    company: '法人のお客様',
-    person: 'W.様',
-    product: '一合枡（レーザー刻印）× 200個',
-    purpose: '展示会の来場者向けノベルティ',
-    quote:
-      '木製品は珍しいので足を止めてくれる方が多く、ブースの集客にも貢献してくれました。QRコードもレーザーできれいに刻印できました。',
-    result: 'ブース来場者数が前年比130%に。名刺交換数も大幅増加。',
-    rating: 4,
-  },
-  {
-    company: '地域団体のお客様',
-    person: 'K.様',
-    product: '一合枡（レーザー刻印）× 50個',
-    purpose: '地域イベントの記念品',
-    quote:
-      '地域の祭りで振る舞い酒用として注文しました。ロゴをレーザー刻印で入れていただき、参加者にそのまま記念品としてお持ち帰りいただきました。',
-    result: '参加者満足度が大幅向上。SNSでの投稿も多数。',
-    rating: 5,
-  },
 ]
 
 // ── 選ばれる理由 ──
@@ -336,54 +303,34 @@ export default function BusinessPage() {
           <p className="text-[10px] tracking-[0.4em] uppercase text-center mb-4" style={{ color: 'var(--color-accent)' }}>
             Case Studies
           </p>
-          <h2 className="section-title text-center mb-16">導入事例</h2>
+          <h2 className="section-title text-center mb-6">導入実績</h2>
+          <p className="lead text-center mb-12 max-w-2xl mx-auto">
+            酒類・飲食に限らず、業種を問わず枡をご注文いただいています。
+          </p>
 
-          <div className="space-y-8">
-            {caseStudies.map((cs, i) => (
-              <div
-                key={i}
-                className="rounded-sm overflow-hidden"
-                style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}
-              >
-                <div className="p-8 md:p-10">
-                  {/* Header */}
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
-                    <div>
-                      <p className="text-xs mb-1" style={{ color: 'var(--color-accent)' }}>
-                        {cs.purpose}
-                      </p>
-                      <h3 className="text-base font-medium">{cs.company}</h3>
-                    </div>
-                    <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
-                      {cs.product}
-                    </p>
-                  </div>
-
-                  {/* Quote */}
-                  <div
-                    className="rounded-sm p-6 mb-6"
-                    style={{ background: 'var(--color-subtle)', borderLeft: '3px solid var(--color-accent)' }}
-                  >
-                    <p className="text-sm leading-[2] italic" style={{ color: 'var(--foreground)' }}>
-                      &ldquo;{cs.quote}&rdquo;
-                    </p>
-                    <p className="text-xs mt-3" style={{ color: 'var(--color-muted)' }}>
-                      — {cs.person}
-                    </p>
-                  </div>
-
-                  {/* Result */}
-                  <div className="flex items-start gap-2">
-                    <span className="text-xs font-medium shrink-0 mt-[1px]" style={{ color: 'var(--color-accent)' }}>
-                      成果：
-                    </span>
-                    <p className="text-xs leading-relaxed" style={{ color: 'var(--foreground)' }}>
-                      {cs.result}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="grid gap-6 md:grid-cols-[1fr_1fr]">
+            <div className="rounded-sm p-8" style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}>
+              <p className="text-xs mb-2" style={{ color: 'var(--color-accent)' }}>大会・周年記念</p>
+              <h3 className="text-base font-medium mb-3">{KURA_MASTER.ja.title}</h3>
+              <p className="text-[13px] leading-[1.9] mb-4" style={{ color: 'var(--color-muted)' }}>
+                {KURA_MASTER.ja.lead}{KURA_MASTER.ja.use}{KURA_MASTER.ja.detail}
+              </p>
+              <Link href="/works" className="text-xs underline underline-offset-4" style={{ color: 'var(--color-accent)' }}>
+                制作実績を見る →
+              </Link>
+            </div>
+            <div className="rounded-sm p-8" style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}>
+              <p className="text-xs mb-2" style={{ color: 'var(--color-accent)' }}>企業・ホテル・飲食店</p>
+              <h3 className="text-base font-medium mb-3">業種を問わずご注文いただいています</h3>
+              <ul className="text-[13px] leading-[2]" style={{ color: 'var(--foreground)' }}>
+                {CLIENT_TYPES.ja.map((c) => (
+                  <li key={c}>・{c}</li>
+                ))}
+              </ul>
+              <p className="text-[12px] leading-[1.8] mt-4" style={{ color: 'var(--color-muted)' }}>
+                お客様の社名は公開していません。ご注文の内容に近い事例は、お問い合わせの際にご案内します。
+              </p>
+            </div>
           </div>
 
           <p className="text-xs text-center mt-8" style={{ color: 'var(--color-muted)' }}>
