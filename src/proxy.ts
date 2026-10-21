@@ -17,6 +17,16 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl
   const isAdmin = /^\/(api\/)?admin(\/|$)/.test(pathname)
   if (!isAdmin) {
+    // 「/glossary枡用語辞典」のように、リンク文字がURLにくっついた壊れたリンク（Search Consoleで404として検出）を
+    // 本来のページへ転送する。英数字のパスの直後に日本語などが続くものだけを対象にする
+    const decoded = safeDecode(pathname)
+    const broken = decoded.match(/^(\/[a-z0-9\-/]*[a-z0-9])[^\x00-\x7F].*$/)
+    if (broken) {
+      const url = request.nextUrl.clone()
+      url.pathname = broken[1]
+      url.search = ''
+      return NextResponse.redirect(url, 301)
+    }
     const bot = detectAiBot(request.headers.get('user-agent') || '')
     // 実在しそうなパスだけ数える（ボットを名乗った偽アクセスで記録を水増しされないように）
     if (bot && RECORDABLE_PATH.test(pathname)) event.waitUntil(recordAiBotVisit(bot.name, pathname))
@@ -24,6 +34,14 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
   }
 
   return guardAdmin(request)
+}
+
+function safeDecode(pathname: string) {
+  try {
+    return decodeURIComponent(pathname)
+  } catch {
+    return pathname
+  }
 }
 
 async function guardAdmin(request: NextRequest) {
