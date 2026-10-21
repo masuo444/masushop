@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
+import WorksHighlight from '@/components/ui/WorksHighlight'
 
 const baseUrl = siteConfig.url
 
@@ -373,6 +374,8 @@ export default function EnHomePage() {
       </section>
 
       <div className="divider mx-auto max-w-3xl" />
+
+      <WorksHighlight lang="en" />
 
       {/* Section 6: FAQ */}
       <section className="mx-auto max-w-3xl px-6 py-20 md:py-28">

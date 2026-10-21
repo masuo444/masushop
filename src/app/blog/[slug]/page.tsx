@@ -45,7 +45,13 @@ export async function generateMetadata({
       }),
     },
     twitter: { card: 'summary_large_image' },
-    alternates: { canonical: `${baseUrl}/blog/${article.slug}` },
+    alternates: {
+      canonical: `${baseUrl}/blog/${article.slug}`,
+      // 英語版がある記事は対応づける（検索エンジンに言語違いの同じ内容と伝える）
+      ...(article.slug === 'masu-doko-de-kaeru' && {
+        languages: { ja: `${baseUrl}/blog/${article.slug}`, en: `${baseUrl}/en/blog/where-to-buy-masu` },
+      }),
+    },
   }
 }
 

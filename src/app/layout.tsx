@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import siteConfig from '@/lib/site-config'
+import { KURA_MASTER } from '@/lib/works'
 import FloatingContactButton from '@/components/ui/FloatingContactButton'
 import HtmlLang from '@/components/layout/HtmlLang'
 import Analytics from '@/components/analytics/Analytics'
@@ -91,8 +92,10 @@ const organizationJsonLd = {
     url: 'https://www.fomus.jp/',
   },
   slogan: '一三〇〇年の技、一つの枡に。',
-  areaServed: 'JP',
-  knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸'],
+  // 海外発送に対応しているため、対象地域は世界
+  areaServed: 'Worldwide',
+  knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸', 'masu', 'wooden sake cup', 'hinoki masu', 'custom engraved masu'],
+  subjectOf: { '@type': 'CreativeWork', name: KURA_MASTER.ja.title, url: `${baseUrl}/works` },
 
 }
 
@@ -114,11 +117,8 @@ const localBusinessJsonLd = {
     '@type': 'PostalAddress',
     addressCountry: 'JP',
   },
-  areaServed: {
-    '@type': 'Country',
-    name: 'Japan',
-  },
-  knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸'],
+  areaServed: 'Worldwide',
+  knowsAbout: ['枡', 'ヒノキ枡', '木製枡', '名入れ枡', '日本の伝統工芸', 'masu', 'wooden sake cup', 'hinoki masu'],
 }
 
 const websiteJsonLd = {

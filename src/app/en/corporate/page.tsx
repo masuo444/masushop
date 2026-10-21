@@ -4,6 +4,7 @@ import Image from 'next/image'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd, HowToJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import WorksHighlight from '@/components/ui/WorksHighlight'
 
 const baseUrl = siteConfig.url
 
@@ -193,6 +194,8 @@ export default function EnCorporatePage() {
           </div>
         </div>
       </section>
+
+      <WorksHighlight lang="en" />
 
       {/* Use Cases */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>

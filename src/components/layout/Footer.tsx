@@ -25,6 +25,7 @@ const footerLinks = {
     { href: '/logo', label: 'ロゴ入れ' },
     { href: '/custom', label: '名入れのお見積り' },
     { href: '/gift', label: 'ギフトガイド' },
+    { href: '/works', label: '制作実績（Kura Master 10周年記念枡など）' },
     { href: '/reviews', label: 'お客様の声' },
   ],
   法人のお客様: [
@@ -49,11 +50,13 @@ const enFooterLinks = {
   'Shop & Order': [
     { href: '/en/gifts', label: 'Gifts' },
     { href: '/en/corporate', label: 'Corporate Orders' },
+    { href: '/en/works', label: 'Our Work' },
     { href: '/en/shipping', label: 'International Shipping' },
     { href: '/en/contact', label: 'Request a Quote' },
     { href: '/en/faq', label: 'FAQ' },
   ],
   Reading: [
+    { href: '/en/blog/where-to-buy-masu', label: 'Where to Buy Masu' },
     { href: '/en/blog/japanese-gift-ideas', label: 'Japanese Gift Ideas' },
     { href: '/en/blog/sake-drinking-guide', label: 'How to Drink Sake' },
     { href: '/en/blog/wooden-vs-glass-sake-cups', label: 'Wood vs Glass Cups' },

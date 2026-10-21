@@ -5,6 +5,7 @@ import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import QuickQuote from '@/components/forms/QuickQuote'
 import OrderFlow from '@/components/ui/OrderFlow'
+import WorksHighlight from '@/components/ui/WorksHighlight'
 
 const baseUrl = siteConfig.url
 
@@ -265,6 +266,9 @@ export default function BusinessPage() {
           </div>
         </div>
       </section>
+
+      {/* ━━━ 主な制作実績 ━━━ */}
+      <WorksHighlight />
 
       {/* ━━━ 数字で見る実績 ━━━ */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
