@@ -2,6 +2,10 @@ import { article as oseiboOnenga } from '@/lib/articles/oseibo-onenga-torihikisa
 import { article as shinnenkaiEnshutsu } from '@/lib/articles/shinnenkai-enshutsu'
 import { article as sotsugyoKinenhin } from '@/lib/articles/sotsugyo-kinenhin'
 import { article as soubetsuPresent } from '@/lib/articles/soubetsu-present'
+import { article as anniversaryKinenhin } from '@/lib/articles/masu-anniversary-kinenhin'
+import { article as setsubunEvent } from '@/lib/articles/setsubun-event-kikaku'
+import { article as shunenMongon } from '@/lib/articles/shunen-mongon-rei'
+import { article as shunenEvent } from '@/lib/articles/shunen-event-kikaku'
 
 // ===== Blog Article Types =====
 export interface ArticleSection {
@@ -2263,121 +2267,6 @@ const articles: BlogArticle[] = [
     ],
   },
 
-  // ---------- 周年記念品に枡が選ばれる理由 ----------
-  {
-    slug: 'masu-anniversary-kinenhin',
-    title: '周年記念品に枡が選ばれる理由｜企業事例5選【2026年版】',
-    description:
-      '企業の周年記念品に枡が選ばれる理由を、実際の導入事例5社とともに解説。10周年・50周年・100周年の記念品選びのポイント、予算別おすすめプラン、発注から納品までの流れを紹介。',
-    keywords:
-      '周年記念品,周年記念品 枡,企業 周年記念 ギフト,創立記念品 おすすめ,10周年 記念品,50周年 記念品,100周年 記念品,法人 記念品 名入れ',
-    publishedAt: '2026-03-17T09:00:00+09:00',
-    updatedAt: '2026-03-17T09:00:00+09:00',
-    category: '法人向け',
-    readingTime: '10分',
-    content: [
-      {
-        type: 'paragraph',
-        text: '「周年記念品、何を選べばいいのかわからない」「取引先に喜ばれる記念品を探している」——そんな企業担当者の方に、近年注目を集めている記念品があります。それが国産ヒノキの「枡（ます）」です。枡は「益す」に通じ、「益々繁栄」という縁起の良いメッセージを込められることから、企業の周年記念品として人気が高まっています。この記事では、枡が選ばれる5つの理由と、実際に導入した企業5社の事例をご紹介します。',
-      },
-      {
-        type: 'heading',
-        heading: '周年記念品に枡が選ばれる5つの理由',
-      },
-      {
-        type: 'list',
-        items: [
-          '「益々繁栄」の縁起物 — 枡は「益す（ますます）」に通じ、取引先への贈り物として「貴社の益々のご発展を」という想いを自然に伝えられます。ボールペンやタオルでは表現できない、日本の言葉遊びを活かした粋な記念品です',
-          '五感に訴える特別感 — 箱を開けた瞬間に広がるヒノキの香り、なめらかな木肌の手触り、美しい木目の視覚。五感に訴える記念品は「もらった瞬間の驚き」を生み、記憶に深く刻まれます',
-          '実用性が高く、捨てられない — 日本酒の酒器はもちろん、ペン立て・小物入れ・キャンドルホルダーとしても活躍。デスクに置かれることで、企業ブランドとの接触頻度が日常的に高まります',
-          'SDGs・サステナブルな選択 — 国産ヒノキは再生可能な天然素材。プラスチック製ノベルティと異なり、環境配慮をアピールできます。CSR報告書への記載も容易です',
-          '他社との差別化 — 周年記念品の定番はカタログギフトやクオカード。枡を選ぶだけで「センスのある会社」という印象を与え、取引先との会話のきっかけにもなります',
-        ],
-      },
-      {
-        type: 'heading',
-        heading: '導入事例①：精密機器メーカー（創業50周年）',
-      },
-      {
-        type: 'paragraph',
-        text: '従業員300名の精密機器メーカーが、創業50周年記念品として一合枡500個を発注。焼印で社名・ロゴ・「50th Anniversary」を刻印しました。取引先100社と全社員に配布したところ、「こんな記念品は初めて」「ヒノキの香りが素晴らしい」と大変好評。翌年の社内表彰にもリピート注文をいただきました。費用は1個あたり約1,000円（焼印込み）で、カタログギフト（1個3,000〜5,000円）と比較して大幅にコストを抑えながら、満足度は大きく上回ったとのことです。',
-      },
-      {
-        type: 'heading',
-        heading: '導入事例②：IT企業（設立10周年）',
-      },
-      {
-        type: 'paragraph',
-        text: '従業員80名のIT企業が、設立10周年を記念して五勺枡120個を発注。レーザー刻印でロゴとQRコードを入れ、QRコードから社史ページに遷移できるようにしました。「デジタルとアナログの融合」というコンセプトが社員にも取引先にも刺さり、SNSでの投稿が多数。10周年パーティーでの乾杯にも使用し、「枡で乾杯」がパーティーのハイライトになりました。',
-      },
-      {
-        type: 'heading',
-        heading: '導入事例③：老舗旅館（創業100周年）',
-      },
-      {
-        type: 'paragraph',
-        text: '創業100周年を迎えた老舗旅館が、一合枡1,000個を発注。焼印で家紋・屋号・「百年感謝」を刻印し、宿泊客への記念品として客室に設置しました。持ち帰り率はほぼ100%で、SNSでの投稿も多数。「旅の思い出が形として残る」と宿泊客から大変好評で、旅館の口コミ評価の向上にも貢献しました。',
-      },
-      {
-        type: 'heading',
-        heading: '導入事例④：会計事務所（設立30周年）',
-      },
-      {
-        type: 'paragraph',
-        text: '顧問先200社を抱える会計事務所が、設立30周年記念品として一合枡200個を発注。レーザー刻印で事務所名と「感謝」の文字を入れ、年末の挨拶回りで手渡しました。「お酒好きなので嬉しい」「こういう気の利いた記念品は珍しい」と顧問先から好評で、年始の挨拶状でも記念品に触れてくれる企業が多かったそうです。',
-      },
-      {
-        type: 'heading',
-        heading: '導入事例⑤：地域NPO（活動20周年）',
-      },
-      {
-        type: 'paragraph',
-        text: '地域のまちづくりNPOが、活動20周年記念の地域イベントで一合枡50個を発注。レーザー刻印でロゴを入れ、振る舞い酒の酒器兼記念品として配布しました。「地域の伝統工芸品で乾杯できるのがいい」と参加者から好評で、イベントの満足度調査でも記念品が高評価項目のトップに。予算を抑えながらも特別感のあるイベントを実現できました。',
-      },
-      {
-        type: 'heading',
-        heading: '予算別おすすめプラン',
-      },
-      {
-        type: 'table',
-        headers: ['予算（1個あたり）', 'おすすめ構成', '向いている場面'],
-        rows: [
-          ['〜¥700', '五勺枡 + 焼印', '社員向け・大量配布（100個以上）'],
-          ['¥700〜¥1,200', '一合枡 + 焼印 or レーザー', '取引先向け・VIP向け（最も人気）'],
-          ['¥1,200〜¥2,000', '一合枡 + レーザー + コーティング', '特別な取引先・役員向け'],
-          ['¥2,000〜', '一合枡 + レーザー + コーティング + 化粧箱', '最上位のギフト・少数精鋭向け'],
-        ],
-      },
-      {
-        type: 'heading',
-        heading: '発注から納品までの流れ',
-      },
-      {
-        type: 'list',
-        items: [
-          'お見積り依頼 — サイズ・数量・加工方法・希望納期をお伝えください。即日〜翌営業日にお見積りをお返しします',
-          'お見積り＋仕上がりイメージ — ロゴデータや文章を元にレイアウトを組み、お見積りと一緒に仕上がりイメージを無料でお送りします',
-          'ご注文確定 — イメージと金額を見てからご注文を判断。請求書払いもご相談いただけます',
-          '量産・製作 — 一つずつ丁寧に製作。納期は名入れ枡で約3週間が目安です',
-          '検品・納品 — 全品検品し梱包してお届け。複数箇所への分納にも対応します',
-        ],
-      },
-      {
-        type: 'callout',
-        variant: 'tip',
-        text: '周年記念品のご相談は、当店MASU-STOREまでお気軽にお問い合わせください。サイズ選びからデザインのご提案、納品まで専門スタッフがワンストップで対応いたします。まずは無料お見積りからどうぞ。',
-      },
-      {
-        type: 'heading',
-        heading: 'まとめ',
-      },
-      {
-        type: 'paragraph',
-        text: '周年記念品に枡を選ぶ企業が増えている背景には、「縁起の良さ」「五感に訴える特別感」「高い実用性」「サステナビリティ」「他社との差別化」という5つの明確な理由があります。1個500円〜という手頃な価格から始められ、企業ロゴの名入れにも対応。受け取った方のデスクに長く置かれることで、企業ブランドの認知を持続的に高めてくれる記念品です。次の周年の節目に、「益々繁栄」の想いを込めた枡を検討してみてはいかがでしょうか。',
-      },
-    ],
-  },
-
   // ---------- 展示会ノベルティの選び方 ----------
   {
     slug: 'tenjikai-novelty-erabikata',
@@ -3105,6 +2994,8 @@ const articles: BlogArticle[] = [
 
 // 季節の需要に合わせた記事（2026-10 追加。1記事1ファイルで管理）
 articles.push(oseiboOnenga, shinnenkaiEnshutsu, sotsugyoKinenhin, soubetsuPresent)
+// 節分・周年記念を押さえる記事（2026-10 追加・書き直し）
+articles.push(anniversaryKinenhin, setsubunEvent, shunenMongon, shunenEvent)
 
 // ===== Helper Functions =====
 // 2026-09: Googleが「クロール済み・インデックス未登録」とした記事のうち、
@@ -3114,6 +3005,7 @@ const retiredSlugs = new Set([
   'masu-gift-guide',    // → /gift
   'masu-novelty',       // → /business/novelty
   'masu-wedding',       // → /business/ceremony
+  'masu-setsubun',      // → /setsubun（2026-10 統合）
 ])
 
 export function getArticleBySlug(slug: string): BlogArticle | undefined {

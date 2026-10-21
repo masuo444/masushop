@@ -35,6 +35,8 @@ const nextConfig: NextConfig = {
       { source: '/blog/masu-gift-guide', destination: '/gift', permanent: true },
       { source: '/blog/masu-novelty', destination: '/business/novelty', permanent: true },
       { source: '/blog/masu-wedding', destination: '/business/ceremony', permanent: true },
+      // 2026-10: 節分の記事を、毎年使う節分のページ /setsubun に統合
+      { source: '/blog/masu-setsubun', destination: '/setsubun', permanent: true },
     ]
   },
   images: {

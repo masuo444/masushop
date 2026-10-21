@@ -5,6 +5,7 @@ import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, FAQJsonLd, SpeakableJsonLd, HowToJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import WorksHighlight from '@/components/ui/WorksHighlight'
+import { CLIENT_TYPES, KURA_MASTER } from '@/lib/works'
 
 const baseUrl = siteConfig.url
 
@@ -365,30 +366,14 @@ export default function EnCorporatePage() {
       {/* Social Proof */}
       <section className="py-16 md:py-20" style={{ background: 'var(--color-subtle)' }}>
         <div className="max-w-3xl mx-auto px-6">
-          <div className="space-y-8">
-            <blockquote
-              className="p-6 rounded-sm"
-              style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}
-            >
-              <p className="text-sm leading-relaxed mb-3" style={{ fontStyle: 'italic' }}>
-                &ldquo;We ordered 100 logo-engraved cups for our 30th anniversary. Clients called them &lsquo;the best corporate gift they&apos;d received.&rsquo;&rdquo;
-              </p>
-              <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
-                &mdash; Manufacturing company
-              </p>
-            </blockquote>
-            <blockquote
-              className="p-6 rounded-sm"
-              style={{ background: 'var(--background)', border: '1px solid var(--color-border)' }}
-            >
-              <p className="text-sm leading-relaxed mb-3" style={{ fontStyle: 'italic' }}>
-                &ldquo;The wooden cups were the star of our trade show booth. People stopped to touch them.&rdquo;
-              </p>
-              <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
-                &mdash; Tech company
-              </p>
-            </blockquote>
-          </div>
+          <h2 className="section-title mb-6 text-center">Who orders from us</h2>
+          <p className="text-sm leading-[2] text-center" style={{ color: 'var(--foreground)' }}>
+            Companies in every industry — not only sake and food. Our clients include {CLIENT_TYPES.en.join(', ')}.
+            We do not publish client names; ask us for an example close to your project.
+          </p>
+          <p className="text-sm leading-[2] text-center mt-4" style={{ color: 'var(--color-muted)' }}>
+            {KURA_MASTER.en.lead} {KURA_MASTER.en.use}
+          </p>
         </div>
       </section>
 
