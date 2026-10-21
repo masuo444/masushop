@@ -43,8 +43,9 @@ const worksJsonLd = {
       creator: { '@type': 'Organization', name: siteConfig.nameEn, url: `${baseUrl}/en` },
       about: {
         '@type': 'Event',
-        name: `Kura Master ${KURA_MASTER.edition}`,
-        location: { '@type': 'Place', name: 'Paris', address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressCountry: 'FR' } },
+        name: `Kura Master ${KURA_MASTER.edition} Awards Ceremony`,
+        startDate: KURA_MASTER.ceremonyDate,
+        location: { '@type': 'Place', name: KURA_MASTER.en.venue, address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressCountry: 'FR' } },
         url: KURA_MASTER.url,
       },
     },
@@ -99,11 +100,11 @@ export default function EnWorksPage() {
               priority
             />
             <figcaption className="text-[12px] text-center mt-3" style={{ color: 'var(--color-muted)' }}>
-              On display at the ambassador’s residence in France ({KURA_MASTER.en.method.toLowerCase()})
+              On display at the awards ceremony, the Residence of the Ambassador of Japan in France ({KURA_MASTER.en.method.toLowerCase()})
             </figcaption>
           </figure>
           <dl className="grid grid-cols-[7em_1fr] gap-y-2 text-[14px] mb-6">
-            <dt style={{ color: 'var(--color-muted)' }}>Used for</dt><dd>Display at the ambassador’s residence in France; keepsakes for award-winning breweries</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>Used for</dt><dd>Display at the awards ceremony (30 September 2026, {KURA_MASTER.en.venue}); keepsakes for award-winning breweries</dd>
             <dt style={{ color: 'var(--color-muted)' }}>Engraving</dt><dd>{KURA_MASTER.en.detail}</dd>
             <dt style={{ color: 'var(--color-muted)' }}>Material</dt><dd>Japanese hinoki cypress</dd>
           </dl>

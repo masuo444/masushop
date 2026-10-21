@@ -43,8 +43,9 @@ const worksJsonLd = {
       creator: { '@type': 'Organization', name: siteConfig.name, url: baseUrl },
       about: {
         '@type': 'Event',
-        name: `Kura Master ${KURA_MASTER.edition}`,
-        location: { '@type': 'Place', name: 'Paris', address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressCountry: 'FR' } },
+        name: `Kura Master ${KURA_MASTER.edition} 授賞式`,
+        startDate: KURA_MASTER.ceremonyDate,
+        location: { '@type': 'Place', name: KURA_MASTER.ja.venue, address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressCountry: 'FR' } },
         url: KURA_MASTER.url,
       },
     },
@@ -102,11 +103,11 @@ export default function WorksPage() {
               priority
             />
             <figcaption className="text-[12px] text-center mt-3" style={{ color: 'var(--color-muted)' }}>
-              フランスの大使公邸に展示された記念枡（{KURA_MASTER.ja.method}）
+              在フランス日本国大使公邸での授賞式に展示された記念枡（{KURA_MASTER.ja.method}）
             </figcaption>
           </figure>
           <dl className="grid grid-cols-[6em_1fr] gap-y-2 text-[14px] mb-6">
-            <dt style={{ color: 'var(--color-muted)' }}>使われ方</dt><dd>フランスの大使公邸での展示、受賞蔵への記念品</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>使われ方</dt><dd>{KURA_MASTER.ja.ceremonyLabel}での展示、受賞蔵への記念品</dd>
             <dt style={{ color: 'var(--color-muted)' }}>名入れ</dt><dd>{KURA_MASTER.ja.detail}</dd>
             <dt style={{ color: 'var(--color-muted)' }}>素材</dt><dd>国産ヒノキ</dd>
           </dl>
