@@ -102,11 +102,11 @@ export default function WorksPage() {
               priority
             />
             <figcaption className="text-[12px] text-center mt-3" style={{ color: 'var(--color-muted)' }}>
-              会場に展示された記念枡（{KURA_MASTER.ja.method}）
+              フランスの大使公邸に展示された記念枡（{KURA_MASTER.ja.method}）
             </figcaption>
           </figure>
           <dl className="grid grid-cols-[6em_1fr] gap-y-2 text-[14px] mb-6">
-            <dt style={{ color: 'var(--color-muted)' }}>使われ方</dt><dd>会場での展示、受賞蔵への記念品</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>使われ方</dt><dd>フランスの大使公邸での展示、受賞蔵への記念品</dd>
             <dt style={{ color: 'var(--color-muted)' }}>名入れ</dt><dd>{KURA_MASTER.ja.detail}</dd>
             <dt style={{ color: 'var(--color-muted)' }}>素材</dt><dd>国産ヒノキ</dd>
           </dl>

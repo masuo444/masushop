@@ -99,11 +99,11 @@ export default function EnWorksPage() {
               priority
             />
             <figcaption className="text-[12px] text-center mt-3" style={{ color: 'var(--color-muted)' }}>
-              On display at the venue ({KURA_MASTER.en.method.toLowerCase()})
+              On display at the ambassador’s residence in France ({KURA_MASTER.en.method.toLowerCase()})
             </figcaption>
           </figure>
           <dl className="grid grid-cols-[7em_1fr] gap-y-2 text-[14px] mb-6">
-            <dt style={{ color: 'var(--color-muted)' }}>Used for</dt><dd>Display at the venue; keepsakes for award-winning breweries</dd>
+            <dt style={{ color: 'var(--color-muted)' }}>Used for</dt><dd>Display at the ambassador’s residence in France; keepsakes for award-winning breweries</dd>
             <dt style={{ color: 'var(--color-muted)' }}>Engraving</dt><dd>{KURA_MASTER.en.detail}</dd>
             <dt style={{ color: 'var(--color-muted)' }}>Material</dt><dd>Japanese hinoki cypress</dd>
           </dl>
