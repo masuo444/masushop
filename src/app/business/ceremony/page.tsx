@@ -5,7 +5,6 @@ import { BreadcrumbJsonLd, FAQJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import OfferBlock from '@/components/ui/OfferBlock'
 import QuickQuote from '@/components/forms/QuickQuote'
-import { orderMinPriceText } from '@/lib/pricing'
 
 const baseUrl = siteConfig.url
 
@@ -39,8 +38,8 @@ const faqItems = [
     a: 'はい。法人のお客様は請求書払い（月末締め翌月末払い）に対応しています。銀行振込・クレジットカードもご利用いただけます。',
   },
   {
-    q: '少ない数でも名入れできますか？価格の目安は？',
-    a: `1個から名入れできます。名入れのご注文は1回につき ${orderMinPriceText}が目安で、デザイン作成と仕上がりイメージを含みます。2個目以降は割安になります。`,
+    q: '価格はいくらですか？',
+    a: '枡のサイズ・数量・名入れの内容・納期によって変わるため、式典ごとにお見積りしています。お見積りと仕上がりイメージは無料です。参加人数と日程をお知らせください。',
   },
   {
     q: '鏡開きの樽は取り扱っていますか？',
@@ -205,45 +204,20 @@ export default function CeremonyPage() {
           </div>
         </section>
 
-        {/* Pricing */}
+        {/* 価格はお見積り */}
         <section className="bg-[var(--color-subtle)] py-20">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="serif text-xl font-medium text-center mb-12" style={{ color: 'var(--foreground)' }}>
-              式典用枡の価格目安
+          <div className="max-w-3xl mx-auto px-6 text-center">
+            <h2 className="serif text-xl font-medium mb-6" style={{ color: 'var(--foreground)' }}>
+              価格はお見積りでご案内します
             </h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-[13px]" style={{ borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr>
-                    {['構成', '50個', '100個', '300個'].map((h) => (
-                      <th key={h} className="text-left p-3 border-b border-[var(--color-border)]" style={{ color: 'var(--foreground)' }}>
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ['五勺枡（無地）', '¥570/個', '¥540/個', '¥510/個'],
-                    ['五勺枡（名入れ）', '¥720/個', '¥690/個', '¥660/個'],
-                    ['一合枡（無地）', '¥760/個', '¥720/個', '¥680/個'],
-                    ['一合枡（名入れ）', '¥910/個', '¥870/個', '¥830/個'],
-                    ['一合枡（名入れ+コーティング）', '¥1,710/個', '¥1,670/個', '¥1,630/個'],
-                  ].map((row) => (
-                    <tr key={row[0]}>
-                      {row.map((cell, i) => (
-                        <td key={i} className="p-3 border-b border-[var(--color-border)]" style={{ color: i === 0 ? 'var(--foreground)' : 'var(--color-muted)' }}>
-                          {cell}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="text-[12px] mt-4" style={{ color: 'var(--color-muted)' }}>
-              ※ 価格は税別。名入れ（焼印・レーザー刻印）の費用は、内容と数量に応じて別途お見積りいたします。
+            <p className="text-[14px] leading-[2]" style={{ color: 'var(--color-muted)' }}>
+              枡のサイズ・数量・名入れの内容・納期によって変わるため、式典ごとにお見積りします。
+              <br className="hidden sm:inline" />
+              お見積りと仕上がりイメージは無料です。参加人数と式典の日程が分かれば、すぐにご案内できます。
             </p>
+            <a href="#offer-quote" className="btn-accent mt-8 inline-block" style={{ padding: '13px 28px', fontSize: '14px' }}>
+              無料でお見積りを依頼する
+            </a>
           </div>
         </section>
 
