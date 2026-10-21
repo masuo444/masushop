@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef, useId } from 'react'
-import { isEnglishPath } from '@/lib/locale'
+import { isForeignPath } from '@/lib/locale'
 import { masuSizes } from '@/lib/masu-data'
 import LanguageToggle from './LanguageToggle'
 
@@ -41,7 +41,7 @@ const productGuideLinks: NavLink[] = [
 
 export default function Header() {
   const pathname = usePathname()
-  const isEnglish = isEnglishPath(pathname)
+  const isEnglish = isForeignPath(pathname)
   const navLinks = isEnglish ? enNavLinks : jaNavLinks
   const homeHref = isEnglish ? '/en' : '/'
   const contactHref = isEnglish ? '/en/contact' : pathname === '/' ? '#quote' : '/custom'

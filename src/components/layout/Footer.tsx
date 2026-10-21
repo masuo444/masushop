@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import siteConfig from '@/lib/site-config'
-import { isEnglishPath } from '@/lib/locale'
+import { isForeignPath } from '@/lib/locale'
 import LanguageToggle from './LanguageToggle'
 
 const footerLinks = {
@@ -57,6 +57,7 @@ const enFooterLinks = {
   ],
   Reading: [
     { href: '/en/blog/where-to-buy-masu', label: 'Where to Buy Masu' },
+    { href: '/en/blog/custom-engraved-masu', label: 'Custom Engraved Masu' },
     { href: '/en/blog/japanese-gift-ideas', label: 'Japanese Gift Ideas' },
     { href: '/en/blog/sake-drinking-guide', label: 'How to Drink Sake' },
     { href: '/en/blog/wooden-vs-glass-sake-cups', label: 'Wood vs Glass Cups' },
@@ -90,7 +91,7 @@ const copy = {
 
 export default function Footer() {
   const pathname = usePathname()
-  const isEnglish = isEnglishPath(pathname)
+  const isEnglish = isForeignPath(pathname)
   const links = isEnglish ? enFooterLinks : footerLinks
   const t = isEnglish ? copy.en : copy.ja
 

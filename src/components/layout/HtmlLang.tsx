@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { isEnglishPath } from '@/lib/locale'
+import { isEnglishPath, isFrenchPath } from '@/lib/locale'
 
 /**
  * <html lang> を現在のページの言語に合わせる。
@@ -16,7 +16,7 @@ export default function HtmlLang() {
   const pathname = usePathname()
 
   useEffect(() => {
-    document.documentElement.lang = isEnglishPath(pathname) ? 'en' : 'ja'
+    document.documentElement.lang = isEnglishPath(pathname) ? 'en' : isFrenchPath(pathname) ? 'fr' : 'ja'
   }, [pathname])
 
   return null

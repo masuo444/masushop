@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { masuSizes } from '@/lib/masu-data'
+import { isForeignPath, isFrenchPath } from '@/lib/locale'
 
 export default function FloatingContactButton() {
   const pathname = usePathname()
@@ -10,9 +11,10 @@ export default function FloatingContactButton() {
   // 遷移時に同期的な setState でリセットする必要がない。
   const [visibleFor, setVisibleFor] = useState<string | null>(null)
 
-  const isEnglish = pathname.startsWith('/en')
+  const isFrench = isFrenchPath(pathname)
+  const isEnglish = isForeignPath(pathname)
   const href = isEnglish ? '/en/contact' : pathname === '/' ? '#quote' : '/custom'
-  const label = isEnglish ? 'Contact Us' : '無料で見積り'
+  const label = isFrench ? 'Devis gratuit' : isEnglish ? 'Contact Us' : '無料で見積り'
 
   // 商品詳細ページ（/products/ichigo など）はスマホで下部固定バーを出すので、このボタンは重ねない
   const isProductDetail = masuSizes.some((m) => pathname === `/products/${m.id}`)

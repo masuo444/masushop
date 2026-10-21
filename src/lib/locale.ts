@@ -17,6 +17,8 @@ const jaToEn: Record<string, string> = {
   '/business': '/en/corporate',
   '/custom': '/en/contact',
   '/products': '/en/sake-cups',
+  '/works': '/en/works',
+  '/products/engraving': '/en/blog/custom-engraved-masu',
   // 英語版がまだ無いページ（/logo, /order, /order-made, /original など）は
   // 意図的に載せていない。作ったらここに追記する。
 }
@@ -29,6 +31,7 @@ const enExtraToJa: Record<string, string> = {
   '/en/blog/japanese-gift-ideas': '/blog',
   '/en/blog/sake-drinking-guide': '/blog',
   '/en/blog/wooden-vs-glass-sake-cups': '/blog',
+  '/en/blog/where-to-buy-masu': '/blog/masu-doko-de-kaeru',
 }
 
 const enToJa: Record<string, string> = Object.entries(jaToEn).reduce<Record<string, string>>(
@@ -42,6 +45,16 @@ const enToJa: Record<string, string> = Object.entries(jaToEn).reduce<Record<stri
 
 export function isEnglishPath(pathname: string): boolean {
   return pathname === '/en' || pathname.startsWith('/en/')
+}
+
+/** フランス語のページ（/fr）。ヘッダー・フッターは英語版を使う */
+export function isFrenchPath(pathname: string): boolean {
+  return pathname === '/fr' || pathname.startsWith('/fr/')
+}
+
+/** 日本語以外のページ（ヘッダー・フッターを英語にする） */
+export function isForeignPath(pathname: string): boolean {
+  return isEnglishPath(pathname) || isFrenchPath(pathname)
 }
 
 /** 現在のパスに対応する、もう一方の言語のパスを返す */

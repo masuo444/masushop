@@ -53,6 +53,8 @@ const pageUpdatedAt: Record<string, string> = {
   '/works': '2026-10-21',
   '/en/works': '2026-10-21',
   '/en/blog/where-to-buy-masu': '2026-10-21',
+  '/en/blog/custom-engraved-masu': '2026-10-21',
+  '/fr': '2026-10-21',
 }
 
 // 商品詳細ページはサイズ別解説を追加した日
@@ -197,6 +199,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/en/works`,
       lastModified: lastModified('/en/works'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/en/blog/custom-engraved-masu`,
+      lastModified: lastModified('/en/blog/custom-engraved-masu'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/fr`,
+      lastModified: lastModified('/fr'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },

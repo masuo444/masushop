@@ -115,6 +115,21 @@ const faqCategories = [
       {
         q: 'Can I see what the engraving will look like before ordering?',
         a: 'Yes. Before you order, we send a free visual mockup of your design together with the quote, so you can decide after seeing it. No artwork files are required; plain text is enough to start.',
+      },      {
+        q: 'What is the minimum order?',
+        a: 'Engraved masu can be ordered from a single piece. Plain masu without engraving start from 10 pieces. There is no upper limit; for several hundred pieces we plan the production schedule with you.',
+      },
+      {
+        q: 'How much does a custom engraved masu cost?',
+        a: `An engraved order starts from ¥${siteConfig.orderMinPrice.toLocaleString('en-US')} per order (tax included, shipping extra), including the design work and a preview image. Additional pieces with the same design cost less. Larger and corporate orders are quoted by quantity.`,
+      },
+      {
+        q: 'Can companies pay by invoice?',
+        a: 'Yes. Companies can ask about invoice payment. Credit card and bank transfer are also available.',
+      },
+      {
+        q: 'Have you made masu for international events?',
+        a: 'Yes. We made the commemorative masu for the 10th anniversary of Kura Master, the sake competition founded in Paris. The laser-engraved 180 ml masu were displayed at the awards ceremony at the Residence of the Ambassador of Japan in France on 30 September 2026 and given to the award-winning breweries.',
       },
     ],
   },
