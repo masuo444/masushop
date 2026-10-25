@@ -358,6 +358,35 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </div>
         </div>
 
+        {product.hasLidOption && (
+          <section
+            className="mt-16 grid gap-6 rounded-sm p-6 md:grid-cols-[200px_1fr] md:items-center md:p-8"
+            style={{ border: '1px solid var(--color-border)' }}
+            aria-labelledby="lid-title"
+          >
+            <Image
+              src="/images/lid/lid-open.jpg"
+              alt={`蓋付きの${product.name}`}
+              width={1024}
+              height={1024}
+              sizes="(max-width: 768px) 100vw, 200px"
+              className="w-full rounded-sm"
+            />
+            <div>
+              <h2 id="lid-title" className="serif text-xl mb-3">
+                {product.name}は蓋付きにできます
+              </h2>
+              <p className="text-sm leading-[1.9] mb-4" style={{ color: 'var(--color-muted)' }}>
+                同じヒノキの蓋を付けると、アクセサリー入れやギフトボックスとして使える木の小箱になります。
+                無地なら1個から購入でき、名入れの蓋付き枡もお作りします。
+              </p>
+              <Link href="/futatsuki" className="text-sm underline underline-offset-4" style={{ color: 'var(--color-accent)' }}>
+                蓋付き枡を見る →
+              </Link>
+            </div>
+          </section>
+        )}
+
         {product.id === 'ichigo' && (
           <section
             className="mt-16 rounded-sm p-6 md:p-10"

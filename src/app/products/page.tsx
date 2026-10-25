@@ -95,7 +95,10 @@ export default function ProductsPage() {
                 {m.hasLidOption && (
                   <div className="flex gap-2">
                     <dt>蓋</dt>
-                    <dd>蓋付きオプションあり</dd>
+                    <dd>
+                      <Link href="/futatsuki" className="underline" style={{ color: 'var(--color-accent)' }}>蓋付き枡</Link>
+                      にできます
+                    </dd>
                   </div>
                 )}
               </dl>
@@ -183,7 +186,9 @@ export default function ProductsPage() {
         <p className="mt-6 text-center text-sm" style={{ color: 'var(--color-muted)' }}>
           オプション：
           <Link href="/coating" className="underline mx-1" style={{ color: 'var(--color-accent)' }}>特殊コーティング</Link>
-          ／ 蓋（三勺枡・一合枡）／
+          ／
+          <Link href="/futatsuki" className="underline mx-1" style={{ color: 'var(--color-accent)' }}>蓋（三勺枡・一合枡）</Link>
+          ／
           <Link href="/products/ichigo" className="underline mx-1" style={{ color: 'var(--color-accent)' }}>一合枡専用のクリアケース・白箱</Link>
           。届いた後の扱い方は
           <Link href="/care" className="underline mx-1" style={{ color: 'var(--color-accent)' }}>お手入れ方法</Link>

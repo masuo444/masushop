@@ -57,6 +57,8 @@ const pageUpdatedAt: Record<string, string> = {
   '/en/blog/where-to-buy-masu': '2026-10-21',
   '/en/blog/custom-engraved-masu': '2026-10-21',
   '/fr': '2026-10-21',
+  '/futatsuki': '2026-10-24',
+  '/en/lidded-masu': '2026-10-24',
 }
 
 // 商品詳細ページはサイズ別解説を追加した日
@@ -193,6 +195,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/futatsuki`,
+      lastModified: lastModified('/futatsuki'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/setsubun`,
       lastModified: lastModified('/setsubun'),
       changeFrequency: 'monthly',
@@ -316,6 +324,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/en/gifts`,
       lastModified: lastModified('/en/gifts'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/en/lidded-masu`,
+      lastModified: lastModified('/en/lidded-masu'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
