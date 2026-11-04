@@ -1,19 +1,19 @@
-import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { isAdminConfigured, isAuthorizedAdmin } from '@/lib/admin-auth'
-import { detectAiBot, recordAiBotVisit } from '@/lib/ai-bots'
 import { clientIp, withinLimit } from '@/lib/rate-limit'
 
-const RECORDABLE_PATH = /^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+){0,3})?$|^\/(?:llms|llms-full|robots)\.txt$|^\/sitemap\.xml$/
 // 管理画面のパスワードの失敗は、同じ接続元から15分に10回まで（総当たり対策）
 const ADMIN_FAIL_LIMIT = 10
 const ADMIN_FAIL_WINDOW_SEC = 15 * 60
 
 /**
  * Next.js 16 では middleware.ts ではなく proxy.ts。
- * - 公開ページ: AIのクローラーが読みに来たら記録する（表示は何も変えない）
+ * - 公開ページ: URLに日本語などがくっついた壊れたリンクだけを本来のページへ転送する
+ *   （2026-11-04 AIクローラー記録は撤去。全ページで proxy が動き Vercel の CPU を消費して無料枠超過→チーム停止になったため。
+ *    公開ページ全体を matcher に戻さないこと）
  * - 管理画面: Basic 認証をかける。ADMIN_PASSWORD が未設定なら管理画面そのものが無いものとして 404
  */
-export function proxy(request: NextRequest, event: NextFetchEvent) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const isAdmin = /^\/(api\/)?admin(\/|$)/.test(pathname)
   if (!isAdmin) {
@@ -27,9 +27,6 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
       url.search = ''
       return NextResponse.redirect(url, 301)
     }
-    const bot = detectAiBot(request.headers.get('user-agent') || '')
-    // 実在しそうなパスだけ数える（ボットを名乗った偽アクセスで記録を水増しされないように）
-    if (bot && RECORDABLE_PATH.test(pathname)) event.waitUntil(recordAiBotVisit(bot.name, pathname))
     return NextResponse.next()
   }
 
@@ -82,11 +79,7 @@ export const config = {
   matcher: [
     '/admin/:path*',
     '/api/admin/:path*',
-    '/llms.txt',
-    '/llms-full.txt',
-    '/robots.txt',
-    '/sitemap.xml',
-    // 公開ページ（API・Next.jsの内部ファイル・画像などの拡張子付きファイルは除く）
-    '/((?!api/|_next/|_vercel/|.*\\.[a-zA-Z0-9]+$).*)',
+    // 壊れたリンク（パーセントエンコードされた文字を含むURL）だけ。普通のページでは proxy を動かさない
+    '/((?!api/|_next/|_vercel/).*%.*)',
   ],
 }
