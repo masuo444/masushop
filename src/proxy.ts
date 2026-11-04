@@ -1,19 +1,21 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server'
 import { isAdminConfigured, isAuthorizedAdmin } from '@/lib/admin-auth'
+import { detectAiBot, recordAiBotVisit } from '@/lib/ai-bots'
 import { clientIp, withinLimit } from '@/lib/rate-limit'
 
 // 管理画面のパスワードの失敗は、同じ接続元から15分に10回まで（総当たり対策）
+const RECORDABLE_PATH = /^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+){0,3})?$|^\/(?:llms|llms-full|robots)\.txt$|^\/sitemap\.xml$/
 const ADMIN_FAIL_LIMIT = 10
 const ADMIN_FAIL_WINDOW_SEC = 15 * 60
 
 /**
  * Next.js 16 では middleware.ts ではなく proxy.ts。
- * - 公開ページ: URLに日本語などがくっついた壊れたリンクだけを本来のページへ転送する
- *   （2026-11-04 AIクローラー記録は撤去。全ページで proxy が動き Vercel の CPU を消費して無料枠超過→チーム停止になったため。
- *    公開ページ全体を matcher に戻さないこと）
+ * - 公開ページ: URLに日本語などがくっついた壊れたリンクを本来のページへ転送する。AIクローラーが読みに来たら記録する
+ *   （2026-11-04〜 人の閲覧では proxy を動かさない。全ページで動かして Vercel の CPU 無料枠を超え、チームが停止したため。
+ *    ボットの記録は matcher の has（User-Agent）で、ボットのアクセスの時だけ動く。公開ページ全体を無条件で matcher に戻さないこと）
  * - 管理画面: Basic 認証をかける。ADMIN_PASSWORD が未設定なら管理画面そのものが無いものとして 404
  */
-export function proxy(request: NextRequest) {
+export function proxy(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl
   const isAdmin = /^\/(api\/)?admin(\/|$)/.test(pathname)
   if (!isAdmin) {
@@ -27,6 +29,9 @@ export function proxy(request: NextRequest) {
       url.search = ''
       return NextResponse.redirect(url, 301)
     }
+    const bot = detectAiBot(request.headers.get('user-agent') || '')
+    // 実在しそうなパスだけ数える（ボットを名乗った偽アクセスで記録を水増しされないように）
+    if (bot && RECORDABLE_PATH.test(pathname)) event.waitUntil(recordAiBotVisit(bot.name, pathname))
     return NextResponse.next()
   }
 
@@ -81,5 +86,9 @@ export const config = {
     '/api/admin/:path*',
     // 壊れたリンク（パーセントエンコードされた文字を含むURL）だけ。普通のページでは proxy を動かさない
     '/((?!api/|_next/|_vercel/).*%.*)',
+    // AIクローラー・検索エンジンのアクセスの時だけ（人の閲覧では動かない）。
+    // config は静的に解析されるので値は直書き。ボット名は src/lib/ai-bots.ts の AI_BOTS と揃える
+    { source: '/((?!api/|_next/|_vercel/|.*\\.[a-zA-Z0-9]+$).*)', has: [{ type: 'header', key: 'user-agent', value: '.*(ChatGPT-User|Perplexity-User|Claude-User|MistralAI-User|DuckAssistBot|OAI-SearchBot|PerplexityBot|Claude-SearchBot|Googlebot|bingbot|Applebot|GPTBot|ClaudeBot|anthropic-ai|meta-externalagent|meta-externalfetcher|Amazonbot|Bytespider|CCBot|cohere-ai).*' }] },
+    { source: '/:file(llms\\.txt|llms-full\\.txt|robots\\.txt|sitemap\\.xml)', has: [{ type: 'header', key: 'user-agent', value: '.*(ChatGPT-User|Perplexity-User|Claude-User|MistralAI-User|DuckAssistBot|OAI-SearchBot|PerplexityBot|Claude-SearchBot|Googlebot|bingbot|Applebot|GPTBot|ClaudeBot|anthropic-ai|meta-externalagent|meta-externalfetcher|Amazonbot|Bytespider|CCBot|cohere-ai).*' }] },
   ],
 }
