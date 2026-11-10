@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'Japanese sake cup, wooden sake cup, hinoki sake cup, Japanese wooden cup, sake accessories, Japanese gift, Japanese crafts, wooden sake box, sake set, Japanese cypress cup, artisan sake cup',
   alternates: {
     canonical: `${baseUrl}/en`,
-    languages: { ja: baseUrl, en: `${baseUrl}/en` },
+    languages: { ja: baseUrl, en: `${baseUrl}/en`, fr: `${baseUrl}/fr` },
   },
   openGraph: {
     title: 'Japanese Wooden Sake Cups — Handcrafted Hinoki Masu',

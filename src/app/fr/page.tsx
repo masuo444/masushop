@@ -16,7 +16,7 @@ const minPrice = `${siteConfig.orderMinPrice.toLocaleString('fr-FR')} ¥`
  */
 
 export const metadata: Metadata = {
-  title: 'Masu japonais personnalisés — gravure dès une pièce, livraison en France | MASU-STORE',
+  title: { absolute: 'Masu japonais personnalisés — gravure dès une pièce, livraison en France | MASU-STORE' },
   description:
     'Masu en hinoki (cyprès japonais) gravés à votre nom ou logo, dès une seule pièce. Aperçu gratuit avant commande, livraison en France et dans le monde. Créateur des masu commémoratifs des 10 ans de Kura Master à Paris.',
   alternates: {

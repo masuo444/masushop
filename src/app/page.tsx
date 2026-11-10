@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: { absolute: '枡の専門店 MASU-STORE｜名入れ枡を1個から、仕上がりイメージ無料' },
   description:
     '国産ヒノキの枡を全7サイズ（三勺54ml〜一升1,800ml）。文章を送るだけで、デザインから仕上がり確認まで名入れ枡をまるごとお任せ。ご注文前に、お見積りと仕上がりイメージを無料でお送りします。1個から、法人は10個から。請求書払い・海外発送に対応。',
-  alternates: { canonical: siteConfig.url, languages: { ja: siteConfig.url, en: `${siteConfig.url}/en` } },
+  alternates: { canonical: siteConfig.url, languages: { ja: siteConfig.url, en: `${siteConfig.url}/en`, fr: `${siteConfig.url}/fr` } },
   openGraph: {
     title: '枡の専門店 MASU-STORE｜名入れ枡を1個から、仕上がりイメージ無料',
     description:

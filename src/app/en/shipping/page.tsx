@@ -14,7 +14,6 @@ export const metadata: Metadata = {
     'buy masu japan, order masu online, ship masu worldwide, japanese sake cup international shipping, engraved masu, custom masu order, wholesale masu, masu supplier japan',
   alternates: {
     canonical: `${baseUrl}/en/shipping`,
-    languages: { ja: `${baseUrl}/guide`, en: `${baseUrl}/en/shipping` },
   },
   openGraph: {
     title: 'Order Masu from Japan — International Shipping & Engraving',

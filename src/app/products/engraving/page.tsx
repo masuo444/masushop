@@ -15,7 +15,10 @@ export const metadata: Metadata = {
   description:
     '枡の名入れは焼印とレーザー刻印の2種類。焼印は約400度の銅版で押す伝統技法で社名・ロゴの量産向き、レーザー刻印は写真・QRコード・1個ずつ違う名前に対応。仕上がり・版の要否・向いている用途を比較表で解説。名入れは1個から、デザインデータ不要。',
   keywords: '枡 名入れ,枡 焼印,枡 ロゴ,枡 レーザー刻印,枡 名入れ 方法,枡 ロゴ入れ,枡 名入れ 1個から,名入れ枡',
-  alternates: { canonical: `${baseUrl}/products/engraving` },
+  alternates: {
+    canonical: `${baseUrl}/products/engraving`,
+    languages: { ja: `${baseUrl}/products/engraving`, en: `${baseUrl}/en/blog/custom-engraved-masu` },
+  },
   openGraph: {
     title: '枡の名入れ｜焼印・レーザー刻印の違いと選び方（1個から）',
     description:

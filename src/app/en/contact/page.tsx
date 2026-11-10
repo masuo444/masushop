@@ -340,7 +340,16 @@ function ContactForm() {
 
 export default function ContactPage() {
   return (
-    <Suspense>
+    <Suspense
+      fallback={
+        <section className="px-6 py-20 text-center">
+          <h1 className="section-title mb-4">Contact Us</h1>
+          <p className="text-sm leading-8">
+            Free quote and preview image. Most inquiries are answered within 2 business days. Loading the form…
+          </p>
+        </section>
+      }
+    >
       <ContactForm />
     </Suspense>
   )

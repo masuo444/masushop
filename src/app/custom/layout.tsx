@@ -16,7 +16,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [{ url: `${baseUrl}/opengraph-image`, width: 1200, height: 630 }],
   },
-  alternates: { canonical: `${baseUrl}/custom` },
+  alternates: {
+    canonical: `${baseUrl}/custom`,
+    languages: { ja: `${baseUrl}/custom`, en: `${baseUrl}/en/contact` },
+  },
 }
 
 export default function CustomLayout({

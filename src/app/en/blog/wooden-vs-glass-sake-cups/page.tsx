@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     'sake cup types, wooden sake cup, best sake cup, glass sake cup, ceramic sake cup, masu sake cup, ochoko, guinomi, sake cup comparison, sake cup material, hinoki sake cup',
   alternates: {
     canonical: `${baseUrl}/en/blog/wooden-vs-glass-sake-cups`,
-    languages: { ja: `${baseUrl}/blog`, en: `${baseUrl}/en/blog/wooden-vs-glass-sake-cups` },
   },
   openGraph: {
     title: 'Wooden vs Glass vs Ceramic Sake Cups — Which Is Best?',

@@ -18,7 +18,6 @@ export const metadata: Metadata = {
     'Japanese gift ideas, unique Japanese gifts, Japanese wedding gift, Japanese corporate gift, meaningful Japanese gifts, masu gift, furoshiki, Japanese incense, Japanese tea gift, Japanese chopsticks gift',
   alternates: {
     canonical: `${baseUrl}/en/blog/japanese-gift-ideas`,
-    languages: { ja: `${baseUrl}/blog`, en: `${baseUrl}/en/blog/japanese-gift-ideas` },
   },
   openGraph: {
     title: '7 Unique Japanese Gift Ideas That Actually Mean Something',

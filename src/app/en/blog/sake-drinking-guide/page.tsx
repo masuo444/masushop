@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     'how to drink sake, sake drinking guide, sake etiquette, sake temperature, sake cups, mokkiri, sake food pairing, Japanese drinking culture, warm sake, cold sake, sake serving',
   alternates: {
     canonical: `${baseUrl}/en/blog/sake-drinking-guide`,
-    languages: { ja: `${baseUrl}/blog`, en: `${baseUrl}/en/blog/sake-drinking-guide` },
   },
   openGraph: {
     title: 'How to Drink Sake Like the Japanese — A Complete Guide',
