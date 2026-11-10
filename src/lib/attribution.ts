@@ -73,15 +73,54 @@ function currentTouch(): Touch {
   }
 }
 
+// ブラウザの保存領域が使えない端末（Cookieを全てブロック、容量ゼロ等）でも、
+// ページを開いている間の分だけは残せるよう、メモリにも同じ内容を持つ。
+let memory: Stored | null = null
+let storageWorks = true
+
+function isStored(value: unknown): value is Stored {
+  const v = value as Stored | null
+  return Boolean(v && v.first?.at && v.last?.at && Array.isArray(v.pages) && Number.isFinite(v.visitCount))
+}
+
 function load(): Stored | null {
-  const raw = localStorage.getItem(STORAGE_KEY)
-  if (!raw) return null
-  const stored = JSON.parse(raw) as Stored
-  if (Date.now() - new Date(stored.first.at).getTime() > RETENTION_MS) {
-    localStorage.removeItem(STORAGE_KEY)
-    return null
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    storageWorks = true
+    if (!raw) return memory
+    const stored: unknown = JSON.parse(raw)
+    // 壊れた記録や古い形式は捨てて作り直す（残すと以後ずっと記録できなくなる）
+    if (!isStored(stored) || Date.now() - new Date(stored.first.at).getTime() > RETENTION_MS) {
+      localStorage.removeItem(STORAGE_KEY)
+      return null
+    }
+    return stored
+  } catch {
+    storageWorks = false
+    return memory
   }
-  return stored
+}
+
+function save(stored: Stored) {
+  memory = stored
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
+    storageWorks = true
+  } catch {
+    storageWorks = false
+  }
+}
+
+/** この訪問（タブ）で既に入口を記録したか。記録していなければ印を付ける */
+function isNewSession() {
+  try {
+    if (sessionStorage.getItem(SESSION_KEY)) return false
+    sessionStorage.setItem(SESSION_KEY, '1')
+    return true
+  } catch {
+    // 保存できない端末では、ページを読み込み直すまでを1回の訪問として扱う
+    return memory === null
+  }
 }
 
 /** ページを開くたびに呼ぶ。新しい訪問なら参照元を記録し、見たページを追記する。 */
@@ -89,35 +128,48 @@ export function captureAttribution(path: string) {
   if (typeof window === 'undefined') return
   try {
     let stored = load()
-    if (!sessionStorage.getItem(SESSION_KEY)) {
-      sessionStorage.setItem(SESSION_KEY, '1')
+    const newSession = isNewSession()
+    if (!stored) {
+      // 記録が無い。初めての訪問のほか、タブを開いたまま日数が経ち、
+      // Safari が保存領域だけを消した場合もここに来る（以前はここで記録を諦めていた）
       const touch = currentTouch()
-      stored = stored
-        ? { ...stored, last: touch, visitCount: stored.visitCount + 1 }
-        : { first: touch, last: touch, visitCount: 1, pages: [] }
+      stored = { first: touch, last: touch, visitCount: 1, pages: [] }
+    } else if (newSession) {
+      stored = { ...stored, last: currentTouch(), visitCount: stored.visitCount + 1 }
     }
-    if (!stored) return
     const previous = stored.pages[stored.pages.length - 1]
     if (previous?.path !== path || previous.visit !== stored.visitCount) {
-      stored.pages = [
-        ...stored.pages,
-        { path, at: new Date().toISOString(), visit: stored.visitCount },
-      ].slice(-MAX_PAGES)
+      stored = {
+        ...stored,
+        pages: [...stored.pages, { path, at: new Date().toISOString(), visit: stored.visitCount }].slice(-MAX_PAGES),
+      }
     }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
+    save(stored)
   } catch {
-    // プライベートモード等でストレージが使えなくても動作に影響させない
+    // 計測の失敗でページの動作に影響させない
   }
 }
 
 /** フォーム送信時に付与する計測情報を返す。 */
 export function getAttribution(): Attribution & { submittedFrom: string } {
-  const submittedFrom =
-    typeof window === 'undefined' ? '' : window.location.pathname
-  if (typeof window === 'undefined') return { ...empty, submittedFrom }
+  if (typeof window === 'undefined') return { ...empty, submittedFrom: '' }
+  const submittedFrom = window.location.pathname
+  // 保存した記録が読めなくても、端末の情報と送信ページは必ず返す
+  const base = { ...empty, submittedFrom }
   try {
-    const stored = load()
-    if (!stored) return { ...empty, submittedFrom }
+    base.screenSize = `${window.screen.width}x${window.screen.height}`
+    base.language = navigator.language || ''
+  } catch {
+    // 同上
+  }
+  try {
+    let stored = load()
+    if (!stored) {
+      // 送信の時点で記録が無ければ、いま分かる範囲（このページと参照元）で作る
+      captureAttribution(submittedFrom)
+      stored = memory
+    }
+    if (!stored) return base
     let lastVisit = 0
     const trail = stored.pages
       .map((page) => {
@@ -134,6 +186,7 @@ export function getAttribution(): Attribution & { submittedFrom: string } {
       })
       .join('\n')
     return {
+      ...base,
       landingPage: stored.first.landingPage,
       referrer: stored.first.referrer,
       utmSource: stored.first.utmSource,
@@ -144,15 +197,14 @@ export function getAttribution(): Attribution & { submittedFrom: string } {
       lastReferrer: stored.last.referrer,
       lastVisitAt: stored.last.at,
       visitCount: String(stored.visitCount),
-      pageTrail: trail,
+      pageTrail: storageWorks
+        ? trail
+        : `${trail}\n（この端末は履歴を保存できない設定のため、今回ページを開いてからの分だけです）`,
       visitDurationSec: String(
         Math.round((Date.now() - new Date(stored.last.at).getTime()) / 1000),
       ),
-      screenSize: `${window.screen.width}x${window.screen.height}`,
-      language: navigator.language || '',
-      submittedFrom,
     }
   } catch {
-    return { ...empty, submittedFrom }
+    return base
   }
 }
