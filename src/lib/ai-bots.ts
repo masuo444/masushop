@@ -1,3 +1,4 @@
+import { withinLimit } from '@/lib/rate-limit'
 /**
  * AIのクローラー・AIアシスタントがどのページを読みに来たかを日別に数える（AIO/AEOの効果測定）。
  * 保存先は Upstash Redis（Vercel Marketplace 経由・無料枠）。環境変数が無ければ何もしない。
@@ -68,11 +69,16 @@ async function pipeline(commands: (string | number)[][]) {
 
 const keyFor = (date: string) => `aibot:${date}`
 
+/** 1日に記録する閲覧の上限。普段は数百件なので、届くのは異常なアクセスのときだけ */
+const DAILY_RECORD_CAP = 20_000
+
 /** 1回の閲覧を記録する。失敗してもページ表示には影響させない */
 export async function recordAiBotVisit(botName: string, path: string) {
   const date = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
   const key = keyFor(date)
   try {
+    // 1日の記録件数に上限を置く（ボットを名乗る大量アクセスで保存先の無料枠を使い切らせない）
+    if (!(await withinLimit(`cap:aibot:${date}`, DAILY_RECORD_CAP, 2 * 24 * 60 * 60))) return
     await pipeline([
       ['HINCRBY', key, `${botName}\t${path.slice(0, 300)}`, 1],
       ['EXPIRE', key, RETENTION_SEC],

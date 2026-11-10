@@ -1,4 +1,5 @@
 import type { SiteEvent } from '@/lib/site-events'
+import { withinLimit } from '@/lib/rate-limit'
 
 /**
  * 自前の行動記録の保存と読み出し（サーバー専用）。
@@ -32,12 +33,17 @@ async function pipeline(commands: (string | number)[][]) {
 
 const keyFor = (date: string) => `ev:${date}`
 
+/** 1日に記録する行動の上限。普段の数十倍に置いてあり、届くのは異常な送信のときだけ */
+const DAILY_EVENT_CAP = 50_000
+
 export function jstToday() {
   return new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
 }
 
 export async function recordSiteEvent(e: { event: SiteEvent; path: string; label: string; segment: string }) {
   const key = keyFor(jstToday())
+  // 1日の記録件数に上限を置く（大量送信で保存先の無料枠を使い切らせない）
+  if (!(await withinLimit(`cap:ev:${jstToday()}`, DAILY_EVENT_CAP, 2 * 24 * 60 * 60))) return
   await pipeline([
     ['HINCRBY', key, [e.event, e.path, e.label, e.segment].join('\t'), 1],
     ['EXPIRE', key, RETENTION_SEC],

@@ -285,6 +285,14 @@ export async function PATCH(request: Request) {
   let finalText: string
   let consent: boolean
 
+  // 同じ接続元からの更新は10分に10件まで（承認待ちの通知メールを繰り返し送らせない）
+  if (!(await withinLimit(`voice-update:${clientIp(request.headers)}`, 10, 10 * 60))) {
+    return NextResponse.json(
+      { error: '短時間に送信が集中しています。時間をおいて再度お試しください。' },
+      { status: 429 },
+    )
+  }
+
   try {
     const values = await readBody(request)
     id = readText(values, ['id'], 40)
@@ -329,6 +337,9 @@ export async function PATCH(request: Request) {
     )
   }
 
+  // すでに同意つきで提出済みの回答を送り直しても、管理者への通知は繰り返さない
+  const alreadyNotified = record.status === 'submitted' && record.consent === true
+
   const now = new Date().toISOString()
   record.finalText = finalText
   record.consent = consent
@@ -346,7 +357,7 @@ export async function PATCH(request: Request) {
     )
   }
 
-  if (consent) await notifyAdminOfVoice(record, 'consented')
+  if (consent && !alreadyNotified) await notifyAdminOfVoice(record, 'consented')
 
   return NextResponse.json({ success: true })
 }
