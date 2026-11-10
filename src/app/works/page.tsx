@@ -183,7 +183,7 @@ export default function WorksPage() {
         id="offer-quote"
         formType="quick-quote-works"
         heading="記念の枡を、相談する"
-        lead="用途・サイズ・個数を選んで連絡先を入れるだけ。名入れは1個から、大会・式典・企業の大口にも対応します。通常1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+        lead="用途と個数を選んで、連絡先を入れるだけ。名入れは1個から、大会・式典・企業の大口にも対応します。通常1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
         className="bg-[var(--color-subtle)]"
       />
     </>

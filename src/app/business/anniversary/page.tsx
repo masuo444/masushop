@@ -605,7 +605,7 @@ export default function AnniversaryPage() {
           id="offer-quote"
           formType="quick-quote-anniversary"
           heading="周年記念品を相談する"
-          lead="用途・サイズ・個数を選んで連絡先を入れるだけ。周年の年号や社名、お渡しの日が分かる範囲で構いません。通常1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+          lead="用途と個数を選んで、連絡先を入れるだけ。周年の年号や社名、お渡しの日が分かる範囲で構いません。通常1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
           className="bg-[var(--color-subtle)]"
         />
 

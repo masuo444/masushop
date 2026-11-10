@@ -5,6 +5,8 @@ import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import RelatedMasu from '@/components/ui/RelatedMasu'
+import OfferBlock from '@/components/ui/OfferBlock'
+import QuickQuote from '@/components/forms/QuickQuote'
 import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
@@ -323,6 +325,9 @@ export default function HistoryPage() {
         </div>
       </section>
 
+      {/* 読み終えたところで、頼める条件を伝える */}
+      <OfferBlock trackId="history" className="pb-16" />
+
       <div className="divider max-w-4xl mx-auto" />
 
       <RelatedMasu
@@ -332,6 +337,15 @@ export default function HistoryPage() {
       />
 
       <div className="divider max-w-4xl mx-auto" />
+
+      {/* その場で見積り */}
+      <QuickQuote
+        id="offer-quote"
+        formType="quick-quote-history"
+        heading="名入れの枡を、1個から相談する"
+        lead="用途と個数を選んで、連絡先を入れるだけ。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
+        className="bg-[var(--color-subtle)]"
+      />
 
       {/* CTA */}
       <section className="max-w-3xl mx-auto px-6 py-20 text-center">

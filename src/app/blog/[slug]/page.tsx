@@ -374,7 +374,7 @@ export default async function BlogArticlePage({
         id="offer-quote"
         formType="quick-quote-blog"
         heading={isBusinessArticle ? '法人・式典のかんたん見積り' : '名入れの枡を、1個から相談する'}
-        lead="用途・サイズ・個数を選んで連絡先を入れるだけ。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
+        lead="用途と個数を選んで、連絡先を入れるだけ。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
         className="bg-[var(--color-subtle)]"
       />
 

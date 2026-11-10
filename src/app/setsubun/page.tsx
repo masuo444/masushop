@@ -418,7 +418,7 @@ export default function SetsubunPage() {
         id="offer-quote"
         formType="quick-quote-setsubun"
         heading="節分の枡を相談する"
-        lead="用途・サイズ・個数を選んで連絡先を入れるだけ。家族の名前入りの1個から、園・寺社・店舗の行事の大口まで。通常1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+        lead="用途と個数を選んで、連絡先を入れるだけ。家族の名前入りの1個から、園・寺社・店舗の行事の大口まで。通常1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
         className="bg-[var(--color-subtle)]"
       />
     </>

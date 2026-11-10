@@ -29,7 +29,8 @@ export const SEGMENT_LABEL: Record<string, string> = {
   direct: '直接・ブックマーク',
 }
 
-export const QUOTE_STEP_NAMES = ['用途', 'サイズ', '個数', '名入れ', '連絡先'] as const
+// 2026-11 に5画面から3画面へ減らした（サイズ・名入れ方法は連絡先の画面の任意項目）
+export const QUOTE_STEP_NAMES = ['用途', '個数', '連絡先'] as const
 
 // 実在しそうなパスだけ受け付ける（proxy.ts の AIクローラー記録と同じ考え方）
 const PATH_PATTERN = /^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+){0,3})?$/

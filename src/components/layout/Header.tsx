@@ -10,7 +10,7 @@ import LanguageToggle from './LanguageToggle'
 type NavLink = { href: string; label: string }
 
 const jaNavLinks: NavLink[] = [
-  { href: '/original', label: 'オーダーメイド' },
+  { href: '/original', label: '名入れ枡' },
   { href: '/logo', label: 'ロゴ入れ' },
   { href: '/products', label: '商品一覧' },
   { href: '/business', label: '法人の方' },

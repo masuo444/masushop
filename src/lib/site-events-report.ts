@@ -55,22 +55,23 @@ export function quoteSteps(rows: SiteEventRow[]) {
   for (const r of rows) {
     if (r.event === 'quote_step') {
       const [form, step] = r.label.split(':')
-      const counts = forms.get(form) ?? [0, 0, 0, 0, 0]
+      const counts = forms.get(form) ?? [0, 0, 0]
       const i = Number(step) - 1
-      if (i >= 0 && i < 4) counts[i] += r.count
+      // 3問目以降は、質問を減らす前（5画面のころ）の記録なので数えない
+      if (i >= 0 && i < 2) counts[i] += r.count
       forms.set(form, counts)
     }
     if (r.event === 'lead' && r.label.startsWith('quick-quote')) {
       const form = formOf(r.label)
-      const counts = forms.get(form) ?? [0, 0, 0, 0, 0]
-      counts[4] += r.count
+      const counts = forms.get(form) ?? [0, 0, 0]
+      counts[2] += r.count
       forms.set(form, counts)
     }
   }
   return [...forms.entries()].sort((a, b) => b[1][0] - a[1][0]).map(([form, counts]) => [form, ...counts] as [string, ...number[]])
 }
 
-export const QUOTE_STEP_HEAD = [...QUOTE_STEP_NAMES.slice(0, 4).map((n) => `${n}に回答`), '送信']
+export const QUOTE_STEP_HEAD = [...QUOTE_STEP_NAMES.slice(0, 2).map((n) => `${n}に回答`), '送信']
 
 /** 押されたボタン（行き先別） */
 export function ctaTargets(rows: SiteEventRow[]) {

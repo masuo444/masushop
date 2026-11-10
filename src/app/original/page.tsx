@@ -8,19 +8,19 @@ import Differentiators from '@/components/ui/Differentiators'
 import QuickQuote from '@/components/forms/QuickQuote'
 import OrderFlow from '@/components/ui/OrderFlow'
 import { orderFlowHowToSteps } from '@/lib/order-flow'
-import { orderMinPriceNote, orderMinPriceFaqAnswer } from '@/lib/pricing'
+import { orderMinPriceText, orderMinPriceFaqAnswer } from '@/lib/pricing'
 
 const baseUrl = siteConfig.url
 
 export const metadata: Metadata = {
-  title: 'オーダーメイドの記念品・名入れギフトを1個から',
+  title: '名入れ枡・オリジナル枡を1個から｜文章を送るだけ・仕上がりイメージ無料',
   description:
-    '退職祝い、還暦祝い、周年記念、開店祝い、結婚祝いに。名前・日付・メッセージを刻んだオーダーメイドの記念品を1個からお作りします。デザインデータは不要で、入れたい文章を送るだけで書体・レイアウトの制作までお引き受け。国産ヒノキの枡に刻む、世界に一つの贈り物です。',
+    `名入れ枡（オリジナル枡）を1個から。1回のご注文 ${orderMinPriceText}、デザイン作成込み。データは不要で、入れたい文章を送るだけ。ご注文前に仕上がりイメージを無料でお送りします。退職祝い・還暦祝い・結婚祝い・開店祝い・周年記念に、国産ヒノキの枡へ名前や日付、ロゴを刻みます。`,
   keywords:
     'オーダーメイド 記念品,名入れ ギフト,名入れ 記念品,オリジナル 記念品,名入れ プレゼント 1個から,オーダーメイド プレゼント,世界に一つ プレゼント,デザイン お任せ 名入れ,データなし 名入れ,退職祝い 記念品,還暦祝い 記念品,開店祝い ギフト,オリジナル枡,オリジナル枡 1個,オーダーメイド 枡,枡 名入れ 1個,枡 一点もの,特注 枡',
   alternates: { canonical: `${baseUrl}/original` },
   openGraph: {
-    title: 'オーダーメイドの記念品・名入れギフトを1個から',
+    title: '名入れ枡・オリジナル枡を1個から｜文章を送るだけ・仕上がりイメージ無料',
     description:
       '文章やメッセージを送るだけで、デザイン制作から名入れまでお任せ。オリジナル枡を1個からご相談いただけます。',
     type: 'website',
@@ -63,6 +63,15 @@ const scenes = [
     desc: '「何を贈るか決まっていない」段階のご相談で構いません。贈る相手とご予算、シーンをお聞かせいただければ、こちらからご提案します。',
   },
 ]
+
+/** 冒頭で言い切る条件。数字は pricing / llms.txt と同じ事実だけ */
+const heroFacts = [
+  ['価格', `1回のご注文 ${orderMinPriceText}。2個目以降は割安`],
+  ['数量', '名入れは1個から'],
+  ['デザイン', 'データ不要。デザイン作成込み'],
+  ['確認', 'ご注文前に仕上がりイメージを無料でお送りします'],
+  ['納期', '約2〜3週間が目安。海外発送にも対応'],
+] as const
 
 const capabilities = [
   {
@@ -175,47 +184,56 @@ export default function OriginalPage() {
           />
         </div>
 
-        {/* Hero */}
-        <section className="max-w-4xl mx-auto px-6 pt-12 pb-16 text-center">
-          <p className="text-[11px] tracking-[0.2em] text-[var(--color-accent)] mb-4">
-            ORIGINAL MASU
-          </p>
-          <h1
-            className="serif text-3xl md:text-4xl font-light leading-relaxed mb-6"
-            style={{ color: 'var(--foreground)' }}
-          >
-            オーダーメイドの記念品を、1個から。
-            <br />
-            デザインはこちらで。
-          </h1>
-          <p
-            className="text-[15px] leading-[2] max-w-2xl mx-auto"
-            style={{ color: 'var(--color-muted)' }}
-          >
-            入れたい文章やメッセージを送っていただければ、デザインの制作からお引き受けします。
-            書体もレイアウトもお任せください。国産ヒノキの枡に刻んで、
-            一個のご依頼からお作りします。
-          </p>
-          <div className="mt-10">
-            <Link
-              href="#quote"
-              className="inline-block px-8 py-3 text-sm text-white rounded-sm"
-              style={{ backgroundColor: 'var(--color-accent)' }}
-            >
-              無料で見積りを依頼
-            </Link>
-            <p
-              className="text-[11px] mt-4"
-              style={{ color: 'var(--color-muted)' }}
-            >
-              1個からOK ／ デザイン制作までお任せ ／ 注文前に仕上がりイメージ無料
-            </p>
-            <p
-              className="text-[13px] mt-3 max-w-xl mx-auto leading-[1.9]"
-              style={{ color: 'var(--color-muted)' }}
-            >
-              {orderMinPriceNote}
-            </p>
+        {/* Hero：開いた瞬間に「何を・いくらで・どう頼めるか」と実物が見えるようにする */}
+        <section className="max-w-5xl mx-auto px-6 pt-10 pb-16">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div>
+              <p className="text-[11px] tracking-[0.2em] text-[var(--color-accent)] mb-4">
+                ORIGINAL MASU
+              </p>
+              <h1
+                className="serif text-[28px] md:text-4xl font-light leading-[1.5] mb-5"
+                style={{ color: 'var(--foreground)' }}
+              >
+                名入れ枡・オリジナル枡を、
+                <br />
+                1個から。
+              </h1>
+              <p className="text-[15px] leading-[2] mb-6" style={{ color: 'var(--color-muted)' }}>
+                入れたい文章を送るだけ。書体もレイアウトもこちらで組みます。
+                退職・還暦・結婚・開店・周年の記念品に、国産ヒノキの枡へ刻んでお届けします。
+              </p>
+              <dl className="grid grid-cols-[4.5em_1fr] gap-x-4 gap-y-2 text-[14px] leading-[1.8] mb-7">
+                {heroFacts.map(([term, desc]) => (
+                  <div key={term} className="contents">
+                    <dt className="text-[12px] tracking-[0.08em] pt-[2px]" style={{ color: 'var(--color-muted)' }}>
+                      {term}
+                    </dt>
+                    <dd style={{ color: 'var(--foreground)' }}>{desc}</dd>
+                  </div>
+                ))}
+              </dl>
+              <Link href="#quote" className="btn-accent block sm:inline-block text-center">
+                見積りと仕上がりイメージを受け取る（無料）
+              </Link>
+              <p className="text-[12px] mt-3" style={{ color: 'var(--color-muted)' }}>
+                2つ選んで連絡先を入れるだけ。この時点では注文になりません。
+              </p>
+            </div>
+            <figure className="order-first md:order-none">
+              <Image
+                src="/images/works/ishiwa-ashiyu-front.jpg"
+                alt="ロゴと文字をレーザー刻印した国産ヒノキの一合枡（名入れ枡の仕上がり例）"
+                width={1448}
+                height={1086}
+                priority
+                sizes="(max-width: 768px) 100vw, 480px"
+                className="w-full rounded-sm aspect-[16/9] object-cover md:aspect-auto"
+              />
+              <figcaption className="text-[12px] mt-2 text-center" style={{ color: 'var(--color-muted)' }}>
+                仕上がり例：一合枡にレーザー刻印（石和源泉 足湯ひろば様）
+              </figcaption>
+            </figure>
           </div>
         </section>
 
@@ -374,7 +392,7 @@ export default function OriginalPage() {
         {/* かんたん見積り依頼 */}
         <QuickQuote
           formType="original"
-          lead="4項目の選択と連絡先の入力で依頼できます。「こんなことできますか？」の段階でも構いません。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
+          lead="用途と個数を選んで、連絡先を入れるだけ。「こんなことできますか？」の段階でも構いません。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。"
         />
 
         {/* FAQ */}

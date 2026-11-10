@@ -20,7 +20,9 @@ function gtagEvent(name: string, params: Record<string, unknown>) {
 
 /**
  * 「かんたん見積り依頼」
- * 1画面1問のステップ形式で、用途・サイズ・個数・加工を選んで連絡先を送るだけ。
+ * 用途と個数の2問を選び、連絡先を入れて送るだけ（3画面）。
+ * サイズと名入れ方法は最後の画面の任意項目で、選ばなければ「おまかせ（こちらから提案）」として届く。
+ * 以前は5画面あり、途中で離れる人が多かったため減らした。
  * 送信先は既存の /api/contact（formType: 'quick-quote'）。
  */
 
@@ -35,16 +37,16 @@ const purposeOptions = [
   'まだ決まっていない',
 ]
 
-const UNKNOWN_SIZE = 'unknown'
-
 const quantityOptions = ['1個', '2〜9個', '10〜49個', '50〜99個', '100〜299個', '300個以上']
 
 const methodOptions = [
   { value: 'レーザー刻印', label: 'レーザー名入れ', note: '写真・1個ずつ違う内容も' },
   { value: '焼印', label: '焼印', note: '伝統技法。同じロゴをまとめて' },
   { value: '名入れなし', label: '名入れなし', note: '無地の枡（10個から）' },
-  { value: '相談したい', label: '相談したい', note: '内容を見てご提案します' },
 ]
+
+/** サイズ・名入れ方法を選ばなかったときに届く文言 */
+const LEAVE_TO_US = 'おまかせ（提案希望）'
 
 type Answers = {
   purpose: string
@@ -60,13 +62,12 @@ type Contact = {
   printContent: string
 }
 
-const STEP_COUNT = 5
+const STEP_COUNT = 3
+const CONTACT_STEP = STEP_COUNT - 1
 
 const stepTitles = [
   'どんな用途でお使いですか？',
-  '枡のサイズは？',
   'おおよその個数は？',
-  '名入れの方法は？',
   'お見積りの送り先',
 ]
 
@@ -74,7 +75,7 @@ export default function QuickQuote({
   id = 'quote',
   defaultSize = '',
   heading = 'かんたん見積り依頼',
-  lead = '4項目の選択と連絡先の入力で依頼できます。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。',
+  lead = '用途と個数を選んで、連絡先を入れるだけ。サイズや名入れの方法はおまかせでも構いません。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。',
   formType = 'quick-quote',
   className = '',
 }: {
@@ -139,22 +140,14 @@ export default function QuickQuote({
 
   const belowPlainMinimum = ['1個', '2〜9個'].includes(answers.quantity)
 
-  const currentValue = (['purpose', 'size', 'quantity', 'method'] as const)[step]
-  const hasCurrent = step < 4 && Boolean(answers[currentValue])
-
-  const sizeLabel = (value: string) => {
-    if (value === UNKNOWN_SIZE) return 'サイズは相談したい'
-    const m = masuSizes.find((s) => s.id === value)
-    return m ? `${m.name}（${m.capacity}）` : ''
-  }
+  const currentValue = (['purpose', 'quantity'] as const)[step]
+  const hasCurrent = step < CONTACT_STEP && Boolean(answers[currentValue])
+  const plainNotAllowed = belowPlainMinimum && answers.method === '名入れなし'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (isSubmitting) return
-    if (belowPlainMinimum && answers.method === '名入れなし') {
-      goTo(3)
-      return
-    }
+    if (plainNotAllowed) return
     setIsSubmitting(true)
     setError('')
     try {
@@ -166,9 +159,9 @@ export default function QuickQuote({
           email: contact.email,
           companyName: contact.companyName,
           quantity: answers.quantity || '未定',
-          masuSize: answers.size === UNKNOWN_SIZE ? 'サイズは相談したい' : answers.size,
+          masuSize: answers.size || LEAVE_TO_US,
           purpose: answers.purpose,
-          printMethod: answers.method,
+          printMethod: answers.method || LEAVE_TO_US,
           printContent: contact.printContent,
           notes: 'かんたん見積りフォームからの送信です。お見積りと仕上がりイメージを希望します。',
           formType,
@@ -258,7 +251,7 @@ export default function QuickQuote({
               <div className="flex items-center justify-between mb-2">
                 <p className="text-[11px] tracking-[0.1em]" style={{ color: 'var(--color-muted)' }}>
                   <span aria-live="polite">
-                    {step + 1} / {STEP_COUNT}　{['用途', 'サイズ', '個数', '名入れ', '連絡先'][step]}
+                    {step + 1} / {STEP_COUNT}　{['用途', '個数', '連絡先'][step]}
                   </span>
                 </p>
                 {step > 0 && (
@@ -299,15 +292,7 @@ export default function QuickQuote({
                 {stepTitles[step]}
               </h3>
 
-              {step < 4 && <p className="text-[11px] mb-5" style={{ color: 'var(--color-muted)' }}>選ぶと次の質問に進みます。あとから変更できます。</p>}
-              {step === 1 && (
-                <div className="flex items-center gap-4 mb-5 p-3" style={{ background: 'var(--color-subtle)' }}>
-                  <div className="text-[11px]">
-                    <p>一合枡は180ml、外寸85×85×56mm。迷ったら「相談したい」をお選びください。</p>
-                    <a href="/products/sizes" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 inline-block py-2">全サイズを比較する（別タブ） ↗</a>
-                  </div>
-                </div>
-              )}
+              {step < CONTACT_STEP && <p className="text-[11px] mb-5" style={{ color: 'var(--color-muted)' }}>選ぶと次へ進みます。あとから変更できます。</p>}
               {/* 1. 用途 */}
               {step === 0 && (
                 <div className="grid gap-3 sm:grid-cols-2" role="group" aria-label="用途">
@@ -326,41 +311,8 @@ export default function QuickQuote({
                 </div>
               )}
 
-              {/* 2. サイズ */}
+              {/* 2. 個数 */}
               {step === 1 && (
-                <div className="grid gap-3 sm:grid-cols-2" role="group" aria-label="サイズ">
-                  {masuSizes.map((m) => (
-                    <button
-                      key={m.id}
-                      type="button"
-                      onClick={() => choose('size', m.id)}
-                      className={optionClass}
-                      style={optionStyle(answers.size === m.id)}
-                      aria-pressed={answers.size === m.id}
-                    >
-                      <span className="block">{m.name}</span>
-                      <span className="block text-[13px]" style={{ color: 'var(--color-muted)' }}>
-                        {m.capacity}・{m.capacityNote}
-                      </span>
-                    </button>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => choose('size', UNKNOWN_SIZE)}
-                    className={optionClass}
-                    style={optionStyle(answers.size === UNKNOWN_SIZE)}
-                    aria-pressed={answers.size === UNKNOWN_SIZE}
-                  >
-                    <span className="block">わからない・相談したい</span>
-                    <span className="block text-[13px]" style={{ color: 'var(--color-muted)' }}>
-                      用途に合うサイズをご提案します
-                    </span>
-                  </button>
-                </div>
-              )}
-
-              {/* 3. 個数 */}
-              {step === 2 && (
                 <div className="grid gap-3 grid-cols-2 sm:grid-cols-3" role="group" aria-label="個数">
                   {quantityOptions.map((q) => (
                     <button
@@ -380,30 +332,8 @@ export default function QuickQuote({
                 </div>
               )}
 
-              {/* 4. 加工 */}
-              {step === 3 && (
-                <div className="grid gap-3 sm:grid-cols-2" role="group" aria-label="名入れの方法">
-                  {methodOptions.map((m) => (
-                    <button
-                      key={m.value}
-                      type="button"
-                      onClick={() => choose('method', m.value)}
-                      disabled={m.value === '名入れなし' && belowPlainMinimum}
-                      className={optionClass}
-                      style={optionStyle(answers.method === m.value)}
-                      aria-pressed={answers.method === m.value}
-                    >
-                      <span className="block">{m.label}</span>
-                      <span className="block text-[13px]" style={{ color: 'var(--color-muted)' }}>
-                        {m.value === '名入れなし' && belowPlainMinimum ? '無地は10個から。個数を変更してください。' : m.note}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
-
               {/* 選択済みなら「次へ」で確定できる（商品ページからサイズ指定で来た場合など） */}
-              {step < 4 && hasCurrent && (
+              {step < CONTACT_STEP && hasCurrent && (
                 <div className="mt-6 text-right">
                   <button
                     type="button"
@@ -416,8 +346,8 @@ export default function QuickQuote({
                 </div>
               )}
 
-              {/* 5. 連絡先 */}
-              {step === 4 && (
+              {/* 3. 連絡先 */}
+              {step === CONTACT_STEP && (
                 <form onSubmit={handleSubmit} className="space-y-5" data-track-form={formType}>
                   {/* 選んだ内容の確認（押すとその質問に戻れる） */}
                   <ul
@@ -427,9 +357,7 @@ export default function QuickQuote({
                   >
                     {[
                       { label: answers.purpose, to: 0 },
-                      { label: sizeLabel(answers.size), to: 1 },
-                      { label: answers.quantity, to: 2 },
-                      { label: answers.method, to: 3 },
+                      { label: answers.quantity, to: 1 },
                     ]
                       .filter((c) => c.label)
                       .map((c) => (
@@ -520,6 +448,54 @@ export default function QuickQuote({
                     </p>
                   </div>
 
+                  {/* 任意：決まっていれば選ぶ。空のままなら、用途に合わせてこちらから提案する */}
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor={`${id}-size`} className={labelClass}>
+                        サイズ（任意）
+                      </label>
+                      <select
+                        id={`${id}-size`}
+                        value={answers.size}
+                        onChange={(e) => setAnswers((a) => ({ ...a, size: e.target.value }))}
+                        className={inputClass}
+                        style={inputStyle}
+                      >
+                        <option value="">おまかせ（用途に合わせて提案）</option>
+                        {masuSizes.map((m) => (
+                          <option key={m.id} value={m.id}>
+                            {m.name}（{m.capacity}）
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor={`${id}-method`} className={labelClass}>
+                        名入れの方法（任意）
+                      </label>
+                      <select
+                        id={`${id}-method`}
+                        value={answers.method}
+                        onChange={(e) => setAnswers((a) => ({ ...a, method: e.target.value }))}
+                        className={inputClass}
+                        style={inputStyle}
+                        aria-describedby={plainNotAllowed ? `${id}-method-note` : undefined}
+                      >
+                        <option value="">おまかせ（内容を見て提案）</option>
+                        {methodOptions.map((m) => (
+                          <option key={m.value} value={m.value}>
+                            {m.label}（{m.note}）
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  {plainNotAllowed && (
+                    <p id={`${id}-method-note`} role="alert" className="text-[13px]" style={{ color: '#c0392b' }}>
+                      無地の枡は10個からのご注文です。個数を変更するか、名入れの方法を選び直してください。
+                    </p>
+                  )}
+
                   {error && (
                     <p role="alert" className="text-[13px]" style={{ color: '#c0392b' }}>
                       {error}{' '}
@@ -532,7 +508,7 @@ export default function QuickQuote({
                   <div className="pt-2 text-center">
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || plainNotAllowed}
                       className="btn-accent w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? '送信中…' : '見積りと仕上がりイメージを受け取る（無料）'}

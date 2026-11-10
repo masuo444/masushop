@@ -41,7 +41,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     optionsSummary = '名入れ（焼印・レーザー）・特殊コーティング・蓋・専用パッケージ（クリアケース・白箱）対応。'
   }
 
-  const title = `${product.name} — 国産ヒノキ枡 ${product.capacity}`
+  // 「一合枡 名入れ」「一合枡 販売」のように、サイズ名で買いに来る人の検索語に合わせる
+  const title = `${product.name}（${product.capacity}）の販売・名入れ｜国産ヒノキ・1個から`
   const description = `${product.description} ${optionsSummary}`
 
   return {

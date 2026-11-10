@@ -142,7 +142,7 @@ export default function CalendarPage() {
         id="offer-quote"
         formType="quick-quote-calendar"
         heading="渡したい日から、逆算して相談する"
-        lead="用途・サイズ・個数を選んで連絡先を入れるだけ。ご要望欄に渡したい日を書いていただければ、間に合うかどうかも含めてお返事します。"
+        lead="用途と個数を選んで、連絡先を入れるだけ。ご要望欄に渡したい日を書いていただければ、間に合うかどうかも含めてお返事します。"
         className="bg-[var(--color-subtle)]"
       />
     </>

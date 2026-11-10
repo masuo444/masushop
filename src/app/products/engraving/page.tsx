@@ -298,7 +298,7 @@ export default function EngravingPage() {
       <div className="divider max-w-5xl mx-auto" />
 
       {/* 30秒かんたん見積り */}
-      <QuickQuote lead="用途・サイズ・個数・名入れ方法を選ぶだけ。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。" />
+      <QuickQuote lead="用途と個数を選んで、連絡先を入れるだけ。1〜2営業日以内に、お見積りと仕上がりイメージをお送りします。" />
 
       <div className="divider max-w-5xl mx-auto" />
 

@@ -6,6 +6,8 @@ import { careGuide, faqItems } from '@/lib/masu-data'
 import { BreadcrumbJsonLd, FAQJsonLd, HowToJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import RelatedMasu from '@/components/ui/RelatedMasu'
+import OfferBlock from '@/components/ui/OfferBlock'
+import QuickQuote from '@/components/forms/QuickQuote'
 
 const baseUrl = siteConfig.url
 
@@ -308,6 +310,9 @@ export default function CarePage() {
         </section>
       </div>
 
+      {/* 読み終えたところで、頼める条件を伝える */}
+      <OfferBlock trackId="care" className="pb-16" />
+
       <div className="divider max-w-4xl mx-auto" />
 
       {/* FAQ */}
@@ -341,6 +346,15 @@ export default function CarePage() {
       />
 
       <div className="divider max-w-4xl mx-auto" />
+
+      {/* その場で見積り */}
+      <QuickQuote
+        id="offer-quote"
+        formType="quick-quote-care"
+        heading="名前を刻んだ枡を、1個から相談する"
+        lead="用途と個数を選んで、連絡先を入れるだけ。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
+        className="bg-[var(--color-subtle)]"
+      />
 
       {/* CTA */}
       <section className="max-w-3xl mx-auto px-6 py-20 text-center">

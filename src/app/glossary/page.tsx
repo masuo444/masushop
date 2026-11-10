@@ -3,6 +3,8 @@ import Link from 'next/link'
 import siteConfig from '@/lib/site-config'
 import { BreadcrumbJsonLd, SpeakableJsonLd } from '@/components/seo/JsonLd'
 import RelatedMasu from '@/components/ui/RelatedMasu'
+import OfferBlock from '@/components/ui/OfferBlock'
+import QuickQuote from '@/components/forms/QuickQuote'
 import { jsonLd } from '@/lib/json-ld'
 
 const baseUrl = siteConfig.url
@@ -528,6 +530,9 @@ export default function GlossaryPage() {
         )
       })}
 
+      {/* 読み終えたところで、頼める条件を伝える */}
+      <OfferBlock trackId="glossary" className="pb-16" />
+
       <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
 
       <RelatedMasu
@@ -537,6 +542,15 @@ export default function GlossaryPage() {
       />
 
       <div className="divider" style={{ maxWidth: 960, margin: '0 auto' }} />
+
+      {/* その場で見積り */}
+      <QuickQuote
+        id="offer-quote"
+        formType="quick-quote-glossary"
+        heading="名入れの枡を、1個から相談する"
+        lead="用途と個数を選んで、連絡先を入れるだけ。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
+        className="bg-[var(--color-subtle)]"
+      />
 
       {/* ===== CTA ===== */}
       <section className="py-20 md:py-28 text-center">

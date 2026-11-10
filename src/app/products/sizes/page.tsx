@@ -209,7 +209,7 @@ export default function SizesPage() {
         id="offer-quote"
         formType="quick-quote-sizes"
         heading="サイズが決まったら、名入れを相談する"
-        lead="用途・サイズ・個数を選ぶだけ。名入れは1個から。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
+        lead="用途と個数を選んで、連絡先を入れるだけ。名入れは1個から。通常1〜2営業日以内に、お見積りと仕上がりイメージをメールでお送りします。"
         className="bg-[var(--color-subtle)]"
       />
 
