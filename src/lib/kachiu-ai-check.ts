@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 
 /**
- * KACHIU（kachiu.jp）が AI の答えに出てくるかを毎週しらべる。
+ * KACHIU（kachiu.jp）が AI の答えに出てくるかを月2回しらべる。
  * 人がAIに聞きそうな質問を Claude（ウェブ検索つき）に投げ、答えに KACHIU の名前が出るか・kachiu.jp を出典にしたかを記録する。
  * 1回あたり 10問 × 検索最大3回。費用の目安は1回100円前後（Opus 5.5・検索 $10/1000回）。
  * 枡の質問は入れない（枡は MASU-STORE で扱う方針・2026-11-22）。
@@ -110,7 +110,7 @@ export function buildAiCheckEmail(date: string, rows: AiCheckRow[]) {
   const subject = `【KACHIU AIでの見え方】${date}　${ok.length}問中 名前が出た ${mentioned}・kachiu.jpを出典に ${cited}`
   const html = `<div style="font-family:-apple-system,'Hiragino Sans',sans-serif;max-width:720px;margin:0 auto;color:#222;line-height:1.6;">
 <h1 style="font-size:18px;margin:0 0 4px;">KACHIU AIでの見え方（${esc(date)}）</h1>
-<p style="font-size:13px;color:#555;">人がAIに聞きそうな${rows.length}問を、ウェブ検索つきのAI（Claude）に毎週聞いて、答えにKACHIUが出るかを見ています。ChatGPTやPerplexityも、似た検索結果をもとに答えます。</p>
+<p style="font-size:13px;color:#555;">人がAIに聞きそうな${rows.length}問を、ウェブ検索つきのAI（Claude）に月2回聞いて、答えにKACHIUが出るかを見ています。ChatGPTやPerplexityも、似た検索結果をもとに答えます。</p>
 <p style="font-size:15px;"><b>名前が出た：${mentioned} / ${ok.length}問</b>　kachiu.jp を出典にした：${cited}問</p>
 <table style="border-collapse:collapse;width:100%;">
 <tr><th ${td}>質問</th><th ${td}>KACHIU</th><th ${td}>答えの一部</th></tr>
@@ -119,7 +119,7 @@ ${rows.map((r) => `<tr><td ${td}>${esc(r.question)}</td><td ${td}>${r.error ? '�
 <h2 style="font-size:15px;margin-top:24px;">AIが参考にしたサイト（多い順）</h2>
 <p style="font-size:12px;color:#666;">ここに KACHIU が載ると、AIの答えに出やすくなります。</p>
 <table style="border-collapse:collapse;">${top.map(([d, n]) => `<tr><td ${td}>${esc(d)}</td><td ${td}>${n}問</td></tr>`).join('')}</table>
-<p style="font-size:11px;color:#aaa;margin-top:32px;">MASU-STORE の仕組み（/api/cron/kachiu-ai-check）から毎週月曜に送られています。</p>
+<p style="font-size:11px;color:#aaa;margin-top:32px;">MASU-STORE の仕組み（/api/cron/kachiu-ai-check）から毎月2日と16日に送られています。</p>
 </div>`
   return { subject, html }
 }

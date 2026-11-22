@@ -5,7 +5,7 @@ import { buildAiCheckEmail, runKachiuAiCheck } from '@/lib/kachiu-ai-check'
 import siteConfig from '@/lib/site-config'
 
 /**
- * KACHIU が AI の答えに出るかの週次チェック。毎週月曜8時10分（日本時間）に Vercel Cron から呼ばれる。
+ * KACHIU が AI の答えに出るかの週次チェック。毎月2日と16日の8時10分（日本時間）に Vercel Cron から呼ばれる。
  * Claude API（ウェブ検索つき）を10回呼ぶ（1回あたり100円前後）。認証は日報と同じ CRON_SECRET。
  */
 
