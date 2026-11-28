@@ -15,14 +15,14 @@ export default function OrderThanksPage() {
       <p className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-accent)]">Order received</p>
       <h1 className="serif text-3xl font-light mt-2">Thank you for your order</h1>
       <p className="text-sm leading-[1.9] mt-6">
-        Your payment was successful and a receipt has been sent to your email by Stripe. Your masu will be packed
-        by hand and shipped from Japan by EMS within 2 business days.
+        Your payment was successful and a receipt has been sent to your email by Stripe. Your masu are made to order,
+        so making and dispatch usually take about 3 weeks (a little longer in busy seasons).
       </p>
 
       <div className="mt-10 border border-[var(--color-border)] rounded p-6 bg-white">
         <h2 className="text-sm tracking-[0.15em] uppercase">What happens next</h2>
         <ol className="text-sm leading-[1.9] mt-4 list-decimal pl-5 space-y-2">
-          <li>We pack your order and send it by EMS express mail (usually within 2 business days).</li>
+          <li>We make your masu to order and send them by EMS express mail (usually about 3 weeks after payment).</li>
           <li>We email you the EMS tracking number so you can follow your parcel.</li>
           <li>Delivery usually takes 5–10 days after shipping.</li>
         </ol>
