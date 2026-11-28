@@ -36,7 +36,8 @@ const pageUpdatedAt: Record<string, string> = {
   '/en/guide': '2026-03-13',
   '/en/history': '2026-03-13',
   '/en/sake-cups': '2026-09-23',
-  '/en/shipping': '2026-09-23',
+  '/en/shipping': '2026-11-28',
+  '/en/order': '2026-11-28',
   '/faq': '2026-09-18',
   '/finder': '2026-03-13',
   '/gift': '2026-09-08',
@@ -344,6 +345,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: lastModified('/en/shipping'),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/en/order`,
+      lastModified: lastModified('/en/order'),
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/en/contact`,

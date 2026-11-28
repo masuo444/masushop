@@ -50,6 +50,7 @@ const enFooterLinks = {
     { href: '/en/guide', label: 'Size Guide' },
   ],
   'Shop & Order': [
+    { href: '/en/order', label: 'Buy Online (Europe)' },
     { href: '/en/gifts', label: 'Gifts' },
     { href: '/en/corporate', label: 'Corporate Orders' },
     { href: '/en/works', label: 'Our Work' },

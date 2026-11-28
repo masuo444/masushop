@@ -19,6 +19,7 @@ const jaNavLinks: NavLink[] = [
 
 const enNavLinks: NavLink[] = [
   { href: '/en/sake-cups', label: 'Sake Cups' },
+  { href: '/en/order', label: 'Buy Online' },
   { href: '/en/gifts', label: 'Gifts' },
   { href: '/en/corporate', label: 'Corporate' },
   { href: '/en/shipping', label: 'Shipping' },

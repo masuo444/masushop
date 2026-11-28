@@ -110,6 +110,10 @@ export default function EnShippingPage() {
           one piece, plain masu at ten. Engraved orders are usually made within 2–3 weeks. Before you
           order, we send a quote and a preview image of the engraving, both free.
         </p>
+        <p className="mt-4 text-sm text-[var(--color-muted)]">
+          In Europe? Plain masu can be{' '}
+          <Link href="/en/order" className="underline">bought online from one piece</Link>.
+        </p>
         <div className="mt-8">
           <Link
             href="/en/contact"
@@ -129,7 +133,7 @@ export default function EnShippingPage() {
         <div className="border border-[var(--color-border)] rounded overflow-hidden">
           {[
             ['Ships to', 'Worldwide, from Japan'],
-            ['Minimum order', 'Engraved: 1 piece · Plain: 10 pieces'],
+            ['Minimum order', 'Engraved: 1 piece · Plain: 10 pieces (Europe: plain from 1 piece online)'],
             ['Production time', 'Engraved: 2–3 weeks · 100+ pieces: 3–4 weeks'],
             ['Engraving', 'Laser engraving and branding iron. Latin script, Japanese, Arabic, logos'],
             ['Material', 'Japanese hinoki cypress, made in Japan'],
