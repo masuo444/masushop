@@ -262,6 +262,7 @@ export default function WhereToBuyMasuPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/en/contact" className="btn-accent">Request a free quote</Link>
+            <Link href="/en/order" className="btn-outline">Buy online (Europe)</Link>
             <Link href="/en/shipping" className="btn-outline">International shipping</Link>
           </div>
         </div>
