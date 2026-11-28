@@ -360,6 +360,8 @@ function renderSiteEvents(day: SiteEventRow[], week: SiteEventRow[], month: Site
         ['かんたん見積りの1問目に答えた', ...[day, week, month].map((r) => num(r.filter((x) => x.event === 'quote_step' && x.label.endsWith(':1')).reduce((s, x) => s + x.count, 0)))],
         ['フォームに入力し始めた', n(day, 'form_start'), n(week, 'form_start'), n(month, 'form_start')],
         ['送信した', n(day, 'lead'), n(week, 'lead'), n(month, 'lead')],
+        ['オンライン購入へ進んだ（欧州）', n(day, 'checkout'), n(week, 'checkout'), n(month, 'checkout')],
+        ['オンライン購入が完了した（欧州）', n(day, 'purchase'), n(week, 'purchase'), n(month, 'purchase')],
       ],
     ) +
     small('流入元別の流れ（直近28日）') +

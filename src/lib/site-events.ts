@@ -16,6 +16,8 @@ export const SITE_EVENTS = {
   quote_step: 'かんたん見積りの各段階',
   form_start: 'フォームに入力し始めた',
   lead: '見積り・問い合わせを送信した',
+  checkout: 'オンライン購入（Stripe）へ進んだ',
+  purchase: 'オンライン購入が完了した',
 } as const
 
 export type SiteEvent = keyof typeof SITE_EVENTS
