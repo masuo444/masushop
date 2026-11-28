@@ -49,6 +49,7 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION || '',
+    other: { 'msvalidate.01': '5D81C9F1BA5D7F0DFF6755EF70303935' },
   },
   twitter: {
     card: 'summary_large_image',
