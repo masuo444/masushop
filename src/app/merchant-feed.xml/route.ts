@@ -13,10 +13,10 @@ export function GET() {
     .map((p) => {
       const shipping = SHIP_COUNTRIES.map(
         (c) =>
-          `<g:shipping><g:country>${c}</g:country><g:service>EMS</g:service><g:price>${SHIPPING_EUR} EUR</g:price><g:min_handling_time>0</g:min_handling_time><g:max_handling_time>2</g:max_handling_time><g:min_transit_time>5</g:min_transit_time><g:max_transit_time>10</g:max_transit_time></g:shipping>`,
+          `<g:shipping><g:country>${c}</g:country><g:service>EMS</g:service><g:price>${SHIPPING_EUR} EUR</g:price><g:min_handling_time>10</g:min_handling_time><g:max_handling_time>20</g:max_handling_time><g:min_transit_time>5</g:min_transit_time><g:max_transit_time>10</g:max_transit_time></g:shipping>`,
       ).join('')
       const title = `${p.schemaName.replace(' – ', ' – Plain ')}, handmade in Japan`
-      const desc = `${p.desc} Plain Japanese hinoki cypress masu, ${p.ml} ml, ${p.size.join(' × ')} mm. Handcrafted in Ogaki, Japan. Ships by EMS to EU countries, Switzerland and Norway (flat €45 per order, 1–${p.max} cups). 14-day returns.`
+      const desc = `${p.desc} Plain Japanese hinoki cypress masu, ${p.ml} ml, ${p.size.join(' × ')} mm. Made to order in Ogaki, Japan (usually about 3 weeks). Ships by EMS to EU countries, Switzerland and Norway (flat €45 per order, 1–${p.max} cups). 14-day returns.`
       return `<item>
 <g:id>EU-${p.id.toUpperCase()}</g:id>
 <g:title>${esc(title)}</g:title>
@@ -34,7 +34,7 @@ export function GET() {
 <g:product_length>${p.size[0]} mm</g:product_length>
 <g:product_width>${p.size[1]} mm</g:product_width>
 <g:product_height>${p.size[2]} mm</g:product_height>
-<g:max_handling_time>2</g:max_handling_time>
+<g:max_handling_time>20</g:max_handling_time>
 ${shipping}
 </item>`
     })

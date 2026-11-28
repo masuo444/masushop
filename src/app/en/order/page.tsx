@@ -26,8 +26,8 @@ const orderFaq = [
     a: 'The Ichigo masu (85 × 85 × 56 mm, 180 ml) is the standard sake cup in Japan and holds exactly one gō of sake. The Sanjaku mini masu (56 × 56 × 39 mm, 54 ml) is for small tastings or as a decorative object.',
   },
   {
-    q: 'How long does shipping from Japan to Europe take?',
-    a: 'We ship within 2 business days after payment. EMS (Japan Post express mail) usually arrives in Europe in about 5 to 10 days, with tracking.',
+    q: 'How long does it take to receive my masu?',
+    a: 'Every masu is made to order after payment. Making and dispatch usually take about 3 weeks, and it may take a little longer in busy seasons such as the year-end. EMS (Japan Post express mail) then usually arrives in Europe in about 5 to 10 days, with tracking. If you need your order by a certain date, please contact us before ordering.',
   },
   {
     q: 'Do I have to pay import tax or customs fees?',
@@ -72,7 +72,7 @@ const shippingDetails = {
   shippingDestination: [{ '@type': 'DefinedRegion', addressCountry: SHIP_COUNTRIES }],
   deliveryTime: {
     '@type': 'ShippingDeliveryTime',
-    handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 2, unitCode: 'DAY' },
+    handlingTime: { '@type': 'QuantitativeValue', minValue: 14, maxValue: 28, unitCode: 'DAY' },
     transitTime: { '@type': 'QuantitativeValue', minValue: 5, maxValue: 10, unitCode: 'DAY' },
   },
 }
@@ -139,7 +139,7 @@ export default function EnOrderPage() {
         <h1 className="section-title mt-4">Buy Japanese Wooden Sake Cups (Masu) Online</h1>
         <p className="mt-6 text-sm leading-[2] max-w-2xl mx-auto text-[var(--color-muted)]">
           Handcrafted hinoki masu from Ogaki, Japan — the town that makes about 80% of Japan&apos;s masu.
-          Choose your size, pay securely by card, and we ship by EMS express mail within 2 business days.
+          Choose your size, pay securely by card, and each masu is made to order and shipped by EMS express mail.
         </p>
       </section>
 
@@ -151,7 +151,8 @@ export default function EnOrderPage() {
         >
           <strong className="text-[var(--foreground)]">In short:</strong> MASU-STORE sells plain Japanese hinoki masu
           online — the Ichigo masu (180 ml, 85 × 85 × 56 mm) for €15.20 and the Sanjaku mini masu (54 ml, 56 × 56 × 39 mm)
-          for €12.10. Shipping by EMS to EU countries, Switzerland and Norway costs €45 per order and usually takes 5–10 days.
+          for €12.10. Shipping by EMS to EU countries, Switzerland and Norway costs €45 per order. Each masu is made to order (usually about 3 weeks), then
+          delivery takes 5–10 days.
         </p>
       </section>
 
@@ -207,7 +208,8 @@ export default function EnOrderPage() {
         <h2 className="serif text-2xl font-light mb-8">Shipping, payment &amp; returns</h2>
         <div className="border border-[var(--color-border)] rounded overflow-hidden">
           {[
-            ['Shipping', '€45 per order by EMS (Japan Post express mail) with tracking. Usually arrives in 5–10 days. We ship within 2 business days after payment.'],
+            ['Shipping', '€45 per order by EMS (Japan Post express mail) with tracking. Usually arrives in 5–10 days after dispatch.'],
+            ['Made to order', 'Each masu is made after your order. Making and dispatch usually take about 3 weeks, and may take a little longer in busy seasons. For delivery dates or other details, please contact us.'],
             ['Ships to', 'EU countries, Switzerland and Norway. For other countries, please request a quote.'],
             ['Payment', 'Credit card via Stripe. Enter your shipping address and phone number on the payment page.'],
             ['Returns', 'Unused items can be returned within 14 days of delivery (contact us first). Return shipping is paid by the customer. Damaged or defective items are replaced or refunded free of charge.'],
