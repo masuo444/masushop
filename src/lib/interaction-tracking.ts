@@ -135,6 +135,13 @@ export function trackInteractions() {
       trackSiteEvent('cta', kind)
       return
     }
+    // 欧州向けオンライン購入（Stripe決済リンク）へ進んだ
+    if (href.startsWith('https://buy.stripe.com/')) {
+      const product = anchor.dataset.product || 'unknown'
+      gtagSend('begin_checkout', { currency: 'EUR', items: [{ item_id: product }] })
+      trackSiteEvent('checkout', product)
+      return
+    }
     if (CTA_ANCHORS.test(href)) {
       gtagSend('cta_click', { link_text: linkText(anchor), link_url: href })
       trackSiteEvent('cta', href)

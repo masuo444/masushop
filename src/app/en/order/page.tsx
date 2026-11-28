@@ -186,6 +186,7 @@ export default function EnOrderPage() {
                 </p>
                 <a
                   href={p.stripe}
+                  data-product={p.id}
                   target="_blank"
                   rel="noopener"
                   className="block text-center px-6 py-3 text-xs tracking-[0.18em] uppercase rounded"
